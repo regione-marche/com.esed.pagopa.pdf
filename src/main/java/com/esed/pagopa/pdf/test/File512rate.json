@@ -1,0 +1,2237 @@
+[{
+        "tipoTemplate": "POSTE_",
+        "cutecute": "000TO",
+        "ente": "12345",
+        "idFlusso": "123",
+        "cBill": "54321",
+        "descrizioneEnte": "Comune di Ala di Stura -",
+        "gruppoAvvisi": "DOC_ITALIA",
+        "dataOra": "20201015235232",
+        "dataElaborazione": 1602798752857,
+        "progressivo": 0,
+        "listaDocumenti": [{
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000003",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000215818",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000002242",
+                "codiceIUV": "01205270000002242",
+                "codiceQRcode": "PAGOPA|002|301205270000002242|09000640012|0000215818",
+                "codiceBarcode": "(415)null(8020)301205270000002242(3902)215818",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "BNZLND34B45A877L",
+                    "nomeCognRagSoc": "BIONAZ LINDA",
+                    "indirizzo": "FRAZIONE CHEZ RONCOZ 29/F",
+                    "comune": "GIGNOD",
+                    "provincia": "AO",
+                    "cap": "11010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000215818",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000215818",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000002242",
+                        "codiceIUV": "01205270000002242",
+                        "codiceQRcode": "PAGOPA|002|301205270000002242|09000640012|0000215818",
+                        "codiceBarcode": "(415)null(8020)301205270000002242(3902)215818"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000001",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000184098",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000001737",
+                "codiceIUV": "01205270000001737",
+                "codiceQRcode": "PAGOPA|002|301205270000001737|09000640012|0000184098",
+                "codiceBarcode": "(415)null(8020)301205270000001737(3902)184098",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "BRLSND29L61H675Y",
+                    "nomeCognRagSoc": "BERLUC SECONDINA",
+                    "indirizzo": "FRAZ. LAVAL 6",
+                    "comune": "SAINT RHEMY",
+                    "provincia": "AO",
+                    "cap": "11010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000184098",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000184098",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000001737",
+                        "codiceIUV": "01205270000001737",
+                        "codiceQRcode": "PAGOPA|002|301205270000001737|09000640012|0000184098",
+                        "codiceBarcode": "(415)null(8020)301205270000001737(3902)184098"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000002",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000498300",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000001535",
+                "codiceIUV": "01205270000001535",
+                "codiceQRcode": "PAGOPA|002|301205270000001535|09000640012|0000498300",
+                "codiceBarcode": "(415)null(8020)301205270000001535(3902)498300",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "BRTGPP33C06B154W",
+                    "nomeCognRagSoc": "BERTONCELLI GIUSEPPE",
+                    "indirizzo": "C.SO BATTAGLIONE AOSTA 66/3",
+                    "comune": "AOSTA",
+                    "provincia": "AO",
+                    "cap": "11100",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000498300",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000498300",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000001535",
+                        "codiceIUV": "01205270000001535",
+                        "codiceQRcode": "PAGOPA|002|301205270000001535|09000640012|0000498300",
+                        "codiceBarcode": "(415)null(8020)301205270000001535(3902)498300"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000005",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000319213",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000001939",
+                "codiceIUV": "01205270000001939",
+                "codiceQRcode": "PAGOPA|002|301205270000001939|09000640012|0000319213",
+                "codiceBarcode": "(415)null(8020)301205270000001939(3902)319213",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "CHNRNT47S04A326T",
+                    "nomeCognRagSoc": "CHENAL RENATO",
+                    "indirizzo": "FRAZ. BARAVOT 6",
+                    "comune": "SARRE",
+                    "provincia": "AO",
+                    "cap": "11010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000319213",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000319213",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000001939",
+                        "codiceIUV": "01205270000001939",
+                        "codiceQRcode": "PAGOPA|002|301205270000001939|09000640012|0000319213",
+                        "codiceBarcode": "(415)null(8020)301205270000001939(3902)319213"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000004",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000435685",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000002040",
+                "codiceIUV": "01205270000002040",
+                "codiceQRcode": "PAGOPA|002|301205270000002040|09000640012|0000435685",
+                "codiceBarcode": "(415)null(8020)301205270000002040(3902)435685",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "CHRFNS29A66A326T",
+                    "nomeCognRagSoc": "CHARBONNIER FRANSINA",
+                    "indirizzo": "FRAZ. ARPUILLES-CAPOLUOGO 57/A",
+                    "comune": "AOSTA",
+                    "provincia": "AO",
+                    "cap": "11100",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000435685",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000435685",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000002040",
+                        "codiceIUV": "01205270000002040",
+                        "codiceQRcode": "PAGOPA|002|301205270000002040|09000640012|0000435685",
+                        "codiceBarcode": "(415)null(8020)301205270000002040(3902)435685"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000006",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000491332",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000001838",
+                "codiceIUV": "01205270000001838",
+                "codiceQRcode": "PAGOPA|002|301205270000001838|09000640012|0000491332",
+                "codiceBarcode": "(415)null(8020)301205270000001838(3902)491332",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "CRNVGN26S57A326E",
+                    "nomeCognRagSoc": "CORNAZ VIRGINIA",
+                    "indirizzo": "VIA SANT`ANSELMO 19",
+                    "comune": "AOSTA",
+                    "provincia": "AO",
+                    "cap": "11100",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000491332",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000491332",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000001838",
+                        "codiceIUV": "01205270000001838",
+                        "codiceQRcode": "PAGOPA|002|301205270000001838|09000640012|0000491332",
+                        "codiceBarcode": "(415)null(8020)301205270000001838(3902)491332"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000008",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000186416",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000002747",
+                "codiceIUV": "01205270000002747",
+                "codiceQRcode": "PAGOPA|002|301205270000002747|09000640012|0000186416",
+                "codiceBarcode": "(415)null(8020)301205270000002747(3902)186416",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "DFRLNE32M47G131I",
+                    "nomeCognRagSoc": "DE FRANCESCO ELENA",
+                    "indirizzo": "FRAZIONE CHEZ RONCOZ 29/F",
+                    "comune": "GIGNOD",
+                    "provincia": "AO",
+                    "cap": "11010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000186416",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000186416",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000002747",
+                        "codiceIUV": "01205270000002747",
+                        "codiceQRcode": "PAGOPA|002|301205270000002747|09000640012|0000186416",
+                        "codiceBarcode": "(415)null(8020)301205270000002747(3902)186416"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000007",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000082472",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000002949",
+                "codiceIUV": "01205270000002949",
+                "codiceQRcode": "PAGOPA|002|301205270000002949|09000640012|0000082472",
+                "codiceBarcode": "(415)null(8020)301205270000002949(3902)082472",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "DLGFGR64H25A326P",
+                    "nomeCognRagSoc": "DAL GRANDE FABIO GUERRINO",
+                    "indirizzo": "FRAZ. TERCINOD 6/001",
+                    "comune": "GIGNOD",
+                    "provincia": "AO",
+                    "cap": "11010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000082472",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000082472",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000002949",
+                        "codiceIUV": "01205270000002949",
+                        "codiceQRcode": "PAGOPA|002|301205270000002949|09000640012|0000082472",
+                        "codiceBarcode": "(415)null(8020)301205270000002949(3902)082472"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000009",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000231495",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000002545",
+                "codiceIUV": "01205270000002545",
+                "codiceQRcode": "PAGOPA|002|301205270000002545|09000640012|0000231495",
+                "codiceBarcode": "(415)null(8020)301205270000002545(3902)231495",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "DRNDFN24L59A326G",
+                    "nomeCognRagSoc": "DURAND DELFINA",
+                    "indirizzo": "LOCALITA EXCENEX 88",
+                    "comune": "AOSTA",
+                    "provincia": "AO",
+                    "cap": "11100",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000231495",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000231495",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000002545",
+                        "codiceIUV": "01205270000002545",
+                        "codiceQRcode": "PAGOPA|002|301205270000002545|09000640012|0000231495",
+                        "codiceBarcode": "(415)null(8020)301205270000002545(3902)231495"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000010",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000004870",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000000222",
+                "codiceIUV": "01205270000000222",
+                "codiceQRcode": "PAGOPA|002|301205270000000222|09000640012|0000004870",
+                "codiceBarcode": "(415)null(8020)301205270000000222(3902)004870",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "FRVGNN36L23D225Y",
+                    "nomeCognRagSoc": "FROVA GIOVANNI AMBROGIO",
+                    "indirizzo": "LOCALITA LES VAGERES 5",
+                    "comune": "BIONAZ",
+                    "provincia": "AO",
+                    "cap": "11010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000004870",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000004870",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000000222",
+                        "codiceIUV": "01205270000000222",
+                        "codiceQRcode": "PAGOPA|002|301205270000000222|09000640012|0000004870",
+                        "codiceBarcode": "(415)null(8020)301205270000000222(3902)004870"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000013",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000492449",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000000323",
+                "codiceIUV": "01205270000000323",
+                "codiceQRcode": "PAGOPA|002|301205270000000323|09000640012|0000492449",
+                "codiceBarcode": "(415)null(8020)301205270000000323(3902)492449",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "GLULNZ41S62A326Z",
+                    "nomeCognRagSoc": "GUALA LORENZINA",
+                    "indirizzo": "FRAZ. LE MOULIN 4",
+                    "comune": "GIGNOD",
+                    "provincia": "AO",
+                    "cap": "11010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000492449",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000492449",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000000323",
+                        "codiceIUV": "01205270000000323",
+                        "codiceQRcode": "PAGOPA|002|301205270000000323|09000640012|0000492449",
+                        "codiceBarcode": "(415)null(8020)301205270000000323(3902)492449"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000012",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000485255",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000000424",
+                "codiceIUV": "01205270000000424",
+                "codiceQRcode": "PAGOPA|002|301205270000000424|09000640012|0000485255",
+                "codiceBarcode": "(415)null(8020)301205270000000424(3902)485255",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "GNNDIA31H43F987B",
+                    "nomeCognRagSoc": "GIANINETTI IDA",
+                    "indirizzo": "FRAZ. POROSSAN-NEYVES 226",
+                    "comune": "AOSTA",
+                    "provincia": "AO",
+                    "cap": "11100",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000485255",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000485255",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000000424",
+                        "codiceIUV": "01205270000000424",
+                        "codiceQRcode": "PAGOPA|002|301205270000000424|09000640012|0000485255",
+                        "codiceBarcode": "(415)null(8020)301205270000000424(3902)485255"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000011",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000494063",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000000121",
+                "codiceIUV": "01205270000000121",
+                "codiceQRcode": "PAGOPA|002|301205270000000121|09000640012|0000494063",
+                "codiceBarcode": "(415)null(8020)301205270000000121(3902)494063",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "GRCTLI42M14H501X",
+                    "nomeCognRagSoc": "GERACI ITALO",
+                    "indirizzo": "VIA BRAMAFAM 14",
+                    "comune": "AOSTA",
+                    "provincia": "AO",
+                    "cap": "11100",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000494063",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000494063",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000000121",
+                        "codiceIUV": "01205270000000121",
+                        "codiceQRcode": "PAGOPA|002|301205270000000121|09000640012|0000494063",
+                        "codiceBarcode": "(415)null(8020)301205270000000121(3902)494063"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000014",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000268644",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000000828",
+                "codiceIUV": "01205270000000828",
+                "codiceQRcode": "PAGOPA|002|301205270000000828|09000640012|0000268644",
+                "codiceBarcode": "(415)null(8020)301205270000000828(3902)268644",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "GZZLVI36D52A452L",
+                    "nomeCognRagSoc": "GUIZZETTI LIVIA",
+                    "indirizzo": "LOCALITA CHEZ RONCOZ 29/F",
+                    "comune": "GIGNOD",
+                    "provincia": "AO",
+                    "cap": "11010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000268644",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000268644",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000000828",
+                        "codiceIUV": "01205270000000828",
+                        "codiceQRcode": "PAGOPA|002|301205270000000828|09000640012|0000268644",
+                        "codiceBarcode": "(415)null(8020)301205270000000828(3902)268644"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000016",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000391742",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000001030",
+                "codiceIUV": "01205270000001030",
+                "codiceQRcode": "PAGOPA|002|301205270000001030|09000640012|0000391742",
+                "codiceBarcode": "(415)null(8020)301205270000001030(3902)391742",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "LRSNTN45H07E873C",
+                    "nomeCognRagSoc": "LAROSA ANTONIO",
+                    "indirizzo": "PLAN FELINAZ 167",
+                    "comune": "CHARVENSOD",
+                    "provincia": "AO",
+                    "cap": "11100",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000391742",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000391742",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000001030",
+                        "codiceIUV": "01205270000001030",
+                        "codiceQRcode": "PAGOPA|002|301205270000001030|09000640012|0000391742",
+                        "codiceBarcode": "(415)null(8020)301205270000001030(3902)391742"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000017",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000206912",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000000929",
+                "codiceIUV": "01205270000000929",
+                "codiceQRcode": "PAGOPA|002|301205270000000929|09000640012|0000206912",
+                "codiceBarcode": "(415)null(8020)301205270000000929(3902)206912",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "MLDGPP37C31A326C",
+                    "nomeCognRagSoc": "MELIDONA GIUSEPPE",
+                    "indirizzo": "VIA A. BERTHET 13",
+                    "comune": "AOSTA",
+                    "provincia": "AO",
+                    "cap": "11100",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000206912",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000206912",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000000929",
+                        "codiceIUV": "01205270000000929",
+                        "codiceQRcode": "PAGOPA|002|301205270000000929|09000640012|0000206912",
+                        "codiceBarcode": "(415)null(8020)301205270000000929(3902)206912"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000015",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000422611",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000000727",
+                "codiceIUV": "01205270000000727",
+                "codiceQRcode": "PAGOPA|002|301205270000000727|09000640012|0000422611",
+                "codiceBarcode": "(415)null(8020)301205270000000727(3902)422611",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "MPRNGL39B17A326I",
+                    "nomeCognRagSoc": "IMPERIAL ANGELO",
+                    "indirizzo": "FRAZ. CLEMENCEY 5",
+                    "comune": "GIGNOD",
+                    "provincia": "AO",
+                    "cap": "11010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000422611",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000422611",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000000727",
+                        "codiceIUV": "01205270000000727",
+                        "codiceQRcode": "PAGOPA|002|301205270000000727|09000640012|0000422611",
+                        "codiceBarcode": "(415)null(8020)301205270000000727(3902)422611"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000018",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000086010",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000000626",
+                "codiceIUV": "01205270000000626",
+                "codiceQRcode": "PAGOPA|002|301205270000000626|09000640012|0000086010",
+                "codiceBarcode": "(415)null(8020)301205270000000626(3902)086010",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "NBYBRY48A23Z336Z",
+                    "nomeCognRagSoc": "NOBEY BADRY",
+                    "indirizzo": "C.SO SAINT-MARTIN DE CORLEANS 133",
+                    "comune": "GIGNOD",
+                    "provincia": "AO",
+                    "cap": "11010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000086010",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000086010",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000000626",
+                        "codiceIUV": "01205270000000626",
+                        "codiceQRcode": "PAGOPA|002|301205270000000626|09000640012|0000086010",
+                        "codiceBarcode": "(415)null(8020)301205270000000626(3902)086010"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000019",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000490672",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000000525",
+                "codiceIUV": "01205270000000525",
+                "codiceQRcode": "PAGOPA|002|301205270000000525|09000640012|0000490672",
+                "codiceBarcode": "(415)null(8020)301205270000000525(3902)490672",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "PLLNDR32A26L981S",
+                    "nomeCognRagSoc": "PAILLEX ANDREA",
+                    "indirizzo": "LOC. PRAXIMOND 76",
+                    "comune": "SAINT PIERRE",
+                    "provincia": "AO",
+                    "cap": "11010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000490672",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000490672",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000000525",
+                        "codiceIUV": "01205270000000525",
+                        "codiceQRcode": "PAGOPA|002|301205270000000525|09000640012|0000490672",
+                        "codiceBarcode": "(415)null(8020)301205270000000525(3902)490672"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000020",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000129381",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000001636",
+                "codiceIUV": "01205270000001636",
+                "codiceQRcode": "PAGOPA|002|301205270000001636|09000640012|0000129381",
+                "codiceBarcode": "(415)null(8020)301205270000001636(3902)129381",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "PLLNSI46E53A326H",
+                    "nomeCognRagSoc": "PAILLEX INES",
+                    "indirizzo": "FRAZIONE CHEZ RONCOZ 29/F",
+                    "comune": "GIGNOD",
+                    "provincia": "AO",
+                    "cap": "11010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000129381",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000129381",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000001636",
+                        "codiceIUV": "01205270000001636",
+                        "codiceQRcode": "PAGOPA|002|301205270000001636|09000640012|0000129381",
+                        "codiceBarcode": "(415)null(8020)301205270000001636(3902)129381"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000022",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000468717",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000001333",
+                "codiceIUV": "01205270000001333",
+                "codiceQRcode": "PAGOPA|002|301205270000001333|09000640012|0000468717",
+                "codiceBarcode": "(415)null(8020)301205270000001333(3902)468717",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "SCHRMN36D13H110M",
+                    "nomeCognRagSoc": "SCHIAVINA ROMANO",
+                    "indirizzo": "FRAZIONE CHEZ RONCOZ 29/F",
+                    "comune": "SAINT MARCEL",
+                    "provincia": "AO",
+                    "cap": "11020",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000468717",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000468717",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000001333",
+                        "codiceIUV": "01205270000001333",
+                        "codiceQRcode": "PAGOPA|002|301205270000001333|09000640012|0000468717",
+                        "codiceBarcode": "(415)null(8020)301205270000001333(3902)468717"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000021",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000427417",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000001434",
+                "codiceIUV": "01205270000001434",
+                "codiceQRcode": "PAGOPA|002|301205270000001434|09000640012|0000427417",
+                "codiceBarcode": "(415)null(8020)301205270000001434(3902)427417",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "SDNLSU26C60E306X",
+                    "nomeCognRagSoc": "SAUDIN LUISA",
+                    "indirizzo": "FRAZ. CHENAUX 1",
+                    "comune": "GIGNOD",
+                    "provincia": "AO",
+                    "cap": "11010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000427417",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000427417",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000001434",
+                        "codiceIUV": "01205270000001434",
+                        "codiceQRcode": "PAGOPA|002|301205270000001434|09000640012|0000427417",
+                        "codiceBarcode": "(415)null(8020)301205270000001434(3902)427417"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000023",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000280085",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000001232",
+                "codiceIUV": "01205270000001232",
+                "codiceQRcode": "PAGOPA|002|301205270000001232|09000640012|0000280085",
+                "codiceBarcode": "(415)null(8020)301205270000001232(3902)280085",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "SRNPTR27B27I874N",
+                    "nomeCognRagSoc": "SIRIANNI PIETRO",
+                    "indirizzo": "LOC. FOSSAL 1",
+                    "comune": "SARRE",
+                    "provincia": "AO",
+                    "cap": "11010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000280085",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000280085",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000001232",
+                        "codiceIUV": "01205270000001232",
+                        "codiceQRcode": "PAGOPA|002|301205270000001232|09000640012|0000280085",
+                        "codiceBarcode": "(415)null(8020)301205270000001232(3902)280085"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000025",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000287615",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000002848",
+                "codiceIUV": "01205270000002848",
+                "codiceQRcode": "PAGOPA|002|301205270000002848|09000640012|0000287615",
+                "codiceBarcode": "(415)null(8020)301205270000002848(3902)287615",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "TRMSLD47D15B192W",
+                    "nomeCognRagSoc": "TREMBLAN OSVALDO",
+                    "indirizzo": "LOC. DREGIER 28",
+                    "comune": "POLLEIN",
+                    "provincia": "AO",
+                    "cap": "11100",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000287615",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000287615",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000002848",
+                        "codiceIUV": "01205270000002848",
+                        "codiceQRcode": "PAGOPA|002|301205270000002848|09000640012|0000287615",
+                        "codiceBarcode": "(415)null(8020)301205270000002848(3902)287615"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000026",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000418399",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000002646",
+                "codiceIUV": "01205270000002646",
+                "codiceQRcode": "PAGOPA|002|301205270000002646|09000640012|0000418399",
+                "codiceBarcode": "(415)null(8020)301205270000002646(3902)418399",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "TRTBNG43A04G401F",
+                    "nomeCognRagSoc": "TROTTO GATTA BRUNO GIOVANNI",
+                    "indirizzo": "LocalitÃ  CAPOLUOGO 9",
+                    "comune": "VALPELLINE",
+                    "provincia": "AO",
+                    "cap": "11010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000418399",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000418399",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000002646",
+                        "codiceIUV": "01205270000002646",
+                        "codiceQRcode": "PAGOPA|002|301205270000002646|09000640012|0000418399",
+                        "codiceBarcode": "(415)null(8020)301205270000002646(3902)418399"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000024",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000248941",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000001131",
+                "codiceIUV": "01205270000001131",
+                "codiceQRcode": "PAGOPA|002|301205270000001131|09000640012|0000248941",
+                "codiceBarcode": "(415)null(8020)301205270000001131(3902)248941",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "TSEFNC39S53I927A",
+                    "nomeCognRagSoc": "TESO FRANCA",
+                    "indirizzo": "C.SO IVREA 74",
+                    "comune": "AOSTA",
+                    "provincia": "AO",
+                    "cap": "11100",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000248941",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000248941",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000001131",
+                        "codiceIUV": "01205270000001131",
+                        "codiceQRcode": "PAGOPA|002|301205270000001131|09000640012|0000248941",
+                        "codiceBarcode": "(415)null(8020)301205270000001131(3902)248941"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000027",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000290055",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000002444",
+                "codiceIUV": "01205270000002444",
+                "codiceQRcode": "PAGOPA|002|301205270000002444|09000640012|0000290055",
+                "codiceBarcode": "(415)null(8020)301205270000002444(3902)290055",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "VLLVND28E13E029X",
+                    "nomeCognRagSoc": "VALLET OVANDO",
+                    "indirizzo": "LOC. CARAVEX 4",
+                    "comune": "GIGNOD",
+                    "provincia": "AO",
+                    "cap": "11010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000290055",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000290055",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000002444",
+                        "codiceIUV": "01205270000002444",
+                        "codiceQRcode": "PAGOPA|002|301205270000002444|09000640012|0000290055",
+                        "codiceBarcode": "(415)null(8020)301205270000002444(3902)290055"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000028",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000138226",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000002343",
+                "codiceIUV": "01205270000002343",
+                "codiceQRcode": "PAGOPA|002|301205270000002343|09000640012|0000138226",
+                "codiceBarcode": "(415)null(8020)301205270000002343(3902)138226",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "VRDLRT32B41C319M",
+                    "nomeCognRagSoc": "VERDELLI ALBERTA",
+                    "indirizzo": "RUE BOURGEOIS 42",
+                    "comune": "COGNE",
+                    "provincia": "AO",
+                    "cap": "11012",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000138226",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000138226",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000002343",
+                        "codiceIUV": "01205270000002343",
+                        "codiceQRcode": "PAGOPA|002|301205270000002343|09000640012|0000138226",
+                        "codiceBarcode": "(415)null(8020)301205270000002343(3902)138226"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2019,
+                "numero": "20190000050000000029",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000304268",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085114",
+                "numAvvisoPagoPa": "301205270000002141",
+                "codiceIUV": "01205270000002141",
+                "codiceQRcode": "PAGOPA|002|301205270000002141|09000640012|0000304268",
+                "codiceBarcode": "(415)null(8020)301205270000002141(3902)304268",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "ZNTCLR32B50C743O",
+                    "nomeCognRagSoc": "ZONTA CLARA",
+                    "indirizzo": "VIA ROMA 21",
+                    "comune": "AOSTA",
+                    "provincia": "AO",
+                    "cap": "11100",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "123",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod settembre/ottobre 2019",
+                "listaTributi": [{
+                        "anno": 2019,
+                        "codiceTributo": "1   ",
+                        "importo": "000000000304268",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31012019",
+                        "importo": "000000000304268",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000002141",
+                        "codiceIUV": "01205270000002141",
+                        "codiceQRcode": "PAGOPA|002|301205270000002141|09000640012|0000304268",
+                        "codiceBarcode": "(415)null(8020)301205270000002141(3902)304268"
+                    }
+                ]
+            }
+        ],
+        "fileContent": [],
+        "numRecord": 0,
+        "societa": "00004",
+        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+        "fileName": "POSTE_PPA_000TO1234512320201015235232_000.txt"
+    }, {
+        "tipoTemplate": "POSTE_",
+        "cutecute": "000TO",
+        "ente": "12345",
+        "idFlusso": "145",
+        "cBill": "54321",
+        "descrizioneEnte": "Comune di Ala di Stura -",
+        "gruppoAvvisi": "DOC_ITALIA",
+        "dataOra": "20201015235232",
+        "dataElaborazione": 1602798752857,
+        "progressivo": 0,
+        "listaDocumenti": [{
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2020,
+                "numero": "20200000010000000009",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": " ",
+                "importoTotale": "000000000254265",
+                "fatturazioneElettronica": false,
+                "iban": "IT11F0760101200000012085115",
+                "numAvvisoPagoPa": "300206620000000111",
+                "codiceIUV": "00206620000000111",
+                "codiceQRcode": "PAGOPA|002|300206620000000111|09000640021|0000254265",
+                "codiceBarcode": "(415)null(8020)300206620000000111(3902)254265",
+                "chiaveEnte": "ANE0000033",
+                "causale": " ",
+                "debitore": {
+                    "codiceFiscale": "DRNDFN24L59A326G",
+                    "nomeCognRagSoc": "DURAND DELFINA",
+                    "indirizzo": "LOCALITA EXCENEX 88",
+                    "comune": "AOSTA",
+                    "provincia": "AO",
+                    "cap": "11100",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640021",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "145",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "01  ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Microcomunita di Gignod gennaio/febbraio 2020",
+                "listaTributi": [{
+                        "anno": 2020,
+                        "codiceTributo": "MA01",
+                        "importo": "000000000254265",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "15062020",
+                        "importo": "000000000254265",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "300206620000000111",
+                        "codiceIUV": "00206620000000111",
+                        "codiceQRcode": "PAGOPA|002|300206620000000111|09000640021|0000254265",
+                        "codiceBarcode": "(415)null(8020)300206620000000111(3902)254265"
+                    }
+                ]
+            }
+        ],
+        "fileContent": [],
+        "numRecord": 0,
+        "societa": "00004",
+        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+        "fileName": "POSTE_PPA_000TO1234514520201015235232_000.txt"
+    }, {
+        "tipoTemplate": "STANDARD_",
+        "cutecute": "000TO",
+        "ente": "06789",
+        "idFlusso": "138",
+        "cBill": "54321",
+        "descrizioneEnte": "Comune di prova -",
+        "gruppoAvvisi": "DOC_ITALIA",
+        "dataOra": "20201015235232",
+        "dataElaborazione": 1602798752857,
+        "progressivo": 0,
+        "listaDocumenti": [{
+                "codiceEnte": "06789",
+                "descrizioneEnte": "Comune di prova - ",
+                "anno": 2016,
+                "numero": "081012131414155",
+                "tipologiaServizio": "TAR",
+                "descrizioneServizio": "TARSU",
+                "importoTotale": "000000000003300",
+                "fatturazioneElettronica": false,
+                "iban": "IT123456789",
+                "numAvvisoPagoPa": "000206610000000125",
+                "codiceIUV": "206610000000125",
+                "codiceQRcode": "PAGOPA|002|000206610000000125|GCNGRG79L65E388O|0000003300",
+                "codiceBarcode": "(415)null(8020)000206610000000125(3902)003300",
+                "chiaveEnte": "ANE0000021",
+                "causale": "TASSA",
+                "debitore": {
+                    "codiceFiscale": "CNCLCU85A20I838S",
+                    "nomeCognRagSoc": "Test",
+                    "indirizzo": "test",
+                    "comune": "SERRADIFALCO",
+                    "provincia": "CL",
+                    "cap": "93010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "GCNGRG79L65E388O",
+                    "idDominio": "GCNGRG79L65E388O",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "138",
+                        "societa": "00004",
+                        "ccp": "3243243240000",
+                        "ccpIntest": "Soris Torino/P",
+                        "type": "896",
+                        "impServ": "01  ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "test1234",
+                "listaTributi": [{
+                        "anno": 2020,
+                        "codiceTributo": "123 ",
+                        "importo": "000000000002300",
+                        "note": "ccc"
+                    }, {
+                        "anno": 2020,
+                        "codiceTributo": "456 ",
+                        "importo": "000000000001000",
+                        "note": "fff"
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "18102016",
+                        "importo": "000000000003300",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "000206610000000125",
+                        "codiceIUV": "206610000000125  ",
+                        "codiceQRcode": "PAGOPA|002|000206610000000125|GCNGRG79L65E388O|0000003300",
+                        "codiceBarcode": "(415)null(8020)000206610000000125(3902)003300"
+                    }
+                ]
+            }
+        ],
+        "fileContent": [],
+        "numRecord": 0,
+        "societa": "00004",
+        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+        "fileName": "STANDARD_PPA_000TO0678913820201015235232_000.txt"
+    }, {
+        "tipoTemplate": "STANDARD_",
+        "cutecute": "000TO",
+        "ente": "06954",
+        "idFlusso": "129",
+        "cBill": "54321",
+        "descrizioneEnte": "Comune di Torino -",
+        "gruppoAvvisi": "DOC_ITALIA",
+        "dataOra": "20201015235232",
+        "dataElaborazione": 1602798752857,
+        "progressivo": 0,
+        "listaDocumenti": [{
+                "codiceEnte": "06954",
+                "descrizioneEnte": "Comune di Torino -  ",
+                "anno": 2016,
+                "numero": "081012131414155",
+                "tipologiaServizio": "TAR",
+                "descrizioneServizio": "TARSU",
+                "importoTotale": "000000000002300",
+                "fatturazioneElettronica": false,
+                "iban": "IT123456789",
+                "numAvvisoPagoPa": "111111111111111111",
+                "codiceIUV": "00017181700000004",
+                "codiceQRcode": "PAGOPA|002|111111111111111111||0000002300",
+                "codiceBarcode": "(415)null(8020)111111111111111111(3902)002300",
+                "chiaveEnte": "ANE0000009",
+                "causale": "TASSA",
+                "debitore": {
+                    "codiceFiscale": "CNCLCU85A20I838S",
+                    "nomeCognRagSoc": "Test",
+                    "indirizzo": "test",
+                    "comune": "DECIMOPUTZU",
+                    "provincia": "CA",
+                    "cap": "09010",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "",
+                    "idDominio": "02002380224     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "129",
+                        "societa": "00004",
+                        "ccp": "000061841391",
+                        "ccpIntest": "SORIS SPA SERV. RISCOSS. TARSU",
+                        "type": "896",
+                        "impServ": "01  ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "Test",
+                "listaTributi": [{
+                        "anno": 2020,
+                        "codiceTributo": "12  ",
+                        "importo": "000000000002300",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "18122016",
+                        "importo": "000000000002300",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "111111111111111111",
+                        "codiceIUV": "00017181700000004",
+                        "codiceQRcode": "PAGOPA|002|111111111111111111||0000002300",
+                        "codiceBarcode": "(415)null(8020)111111111111111111(3902)002300"
+                    }
+                ]
+            }
+        ],
+        "fileContent": [],
+        "numRecord": 0,
+        "societa": "00004",
+        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+        "fileName": "STANDARD_PPA_000TO0695412920201015235232_000.txt"
+    }, {
+        "tipoTemplate": "STANDARD_",
+        "cutecute": "000TO",
+        "ente": "12345",
+        "idFlusso": "124",
+        "cBill": "54321",
+        "descrizioneEnte": "Comune di Ala di Stura -",
+        "gruppoAvvisi": "DOC_ITALIA",
+        "dataOra": "20201015235232",
+        "dataElaborazione": 1602798752857,
+        "progressivo": 0,
+        "listaDocumenti": [{
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2020,
+                "numero": "20200000600000000068",
+                "tipologiaServizio": "SOV",
+                "descrizioneServizio": " ",
+                "importoTotale": "000000000777970",
+                "fatturazioneElettronica": false,
+                "iban": "IT53H0858731590000000870020",
+                "numAvvisoPagoPa": "000205700000000487",
+                "codiceIUV": "205700000000487",
+                "codiceQRcode": "PAGOPA|002|000205700000000487|09000640012|0000777970",
+                "codiceBarcode": "(415)null(8020)000205700000000487(3902)777970",
+                "chiaveEnte": "ANE0000033",
+                "causale": " ",
+                "debitore": {
+                    "codiceFiscale": "00076340074",
+                    "nomeCognRagSoc": "FUNIVIE PICCOLO SAN BERNARDO SPA",
+                    "indirizzo": "Fraz. Entrèves 149",
+                    "comune": "LA THUILE",
+                    "provincia": "AO",
+                    "cap": "11016",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "124",
+                        "societa": "00004",
+                        "ccp": null,
+                        "ccpIntest": null,
+                        "type": null,
+                        "impServ": "01  ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "SOVRACANONE BIM IMPIANTO LA THUILE 2020/2021",
+                "listaTributi": [{
+                        "anno": 2020,
+                        "codiceTributo": "SOV1",
+                        "importo": "000000000777970",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "30042020",
+                        "importo": "000000000777970",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "000205700000000487",
+                        "codiceIUV": "205700000000487  ",
+                        "codiceQRcode": "PAGOPA|002|000205700000000487|09000640012|0000777970",
+                        "codiceBarcode": "(415)null(8020)000205700000000487(3902)777970"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2020,
+                "numero": "20200000600000000084",
+                "tipologiaServizio": "SOV",
+                "descrizioneServizio": " ",
+                "importoTotale": "000000000521778",
+                "fatturazioneElettronica": false,
+                "iban": "IT53H0858731590000000870020",
+                "numAvvisoPagoPa": "000205700000000689",
+                "codiceIUV": "205700000000689",
+                "codiceQRcode": "PAGOPA|002|000205700000000689|09000640012|0000521778",
+                "codiceBarcode": "(415)null(8020)000205700000000689(3902)521778",
+                "chiaveEnte": "ANE0000033",
+                "causale": " ",
+                "debitore": {
+                    "codiceFiscale": "01013130073",
+                    "nomeCognRagSoc": "C.V.A. SPA",
+                    "indirizzo": "Via Stazione 31",
+                    "comune": "CHATILLON",
+                    "provincia": "AO",
+                    "cap": "11024",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "124",
+                        "societa": "00004",
+                        "ccp": null,
+                        "ccpIntest": null,
+                        "type": null,
+                        "impServ": "01  ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "CONGUAGLIO SOVRAC BIM IMP CHAMPAGNE II° 2020",
+                "listaTributi": [{
+                        "anno": 2020,
+                        "codiceTributo": "SOV2",
+                        "importo": "000000000521778",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "11072020",
+                        "importo": "000000000521778",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "000205700000000689",
+                        "codiceIUV": "205700000000689  ",
+                        "codiceQRcode": "PAGOPA|002|000205700000000689|09000640012|0000521778",
+                        "codiceBarcode": "(415)null(8020)000205700000000689(3902)521778"
+                    }
+                ]
+            }, {
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2020,
+                "numero": "20200000600000000069",
+                "tipologiaServizio": "SOV",
+                "descrizioneServizio": " ",
+                "importoTotale": "000000001471173",
+                "fatturazioneElettronica": false,
+                "iban": "IT53H0858731590000000870020",
+                "numAvvisoPagoPa": "000205700000000588",
+                "codiceIUV": "205700000000588",
+                "codiceQRcode": "PAGOPA|002|000205700000000588|09000640012|0001471173",
+                "codiceBarcode": "(415)null(8020)000205700000000588(3902)471173",
+                "chiaveEnte": "ANE0000033",
+                "causale": " ",
+                "debitore": {
+                    "codiceFiscale": "81006240071",
+                    "nomeCognRagSoc": "C.M.F. RÛ GRENZE E RÛ FABBRICA-VIERING",
+                    "indirizzo": "c/o Comune di Champdepraz Loc. Capoluogo 164",
+                    "comune": "CHAMPDEPRAZ",
+                    "provincia": "AO",
+                    "cap": "11029",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "09000640012",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "124",
+                        "societa": "00004",
+                        "ccp": null,
+                        "ccpIntest": null,
+                        "type": null,
+                        "impServ": "01  ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "SOVRACANONE BIM IMPIANTO TORRENTE CHALAMY 2020",
+                "listaTributi": [{
+                        "anno": 2020,
+                        "codiceTributo": "SOV1",
+                        "importo": "000000001471173",
+                        "note": ""
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "30042020",
+                        "importo": "000000001471173",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "000205700000000588",
+                        "codiceIUV": "205700000000588  ",
+                        "codiceQRcode": "PAGOPA|002|000205700000000588|09000640012|0001471173",
+                        "codiceBarcode": "(415)null(8020)000205700000000588(3902)471173"
+                    }
+                ]
+            }
+        ],
+        "fileContent": [],
+        "numRecord": 0,
+        "societa": "00004",
+        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+        "fileName": "STANDARD_PPA_000TO1234512420201015235232_000.txt"
+    }, {
+        "tipoTemplate": "STANDARD_",
+        "cutecute": "000TO",
+        "ente": "12345",
+        "idFlusso": "157",
+        "cBill": "54321",
+        "descrizioneEnte": "Comune di Ala di Stura -",
+        "gruppoAvvisi": "DOC_ITALIA",
+        "dataOra": "20201015235232",
+        "dataElaborazione": 1602798752857,
+        "progressivo": 0,
+        "listaDocumenti": [{
+                "codiceEnte": "12345",
+                "descrizioneEnte": "Comune di Ala di Stura - ",
+                "anno": 2020,
+                "numero": "20201015000000000001",
+                "tipologiaServizio": "MCA",
+                "descrizioneServizio": "MCA",
+                "importoTotale": "000000000025697",
+                "fatturazioneElettronica": false,
+                "iban": "IT09V0500001600CC0017232300",
+                "numAvvisoPagoPa": "301205270000002247",
+                "codiceIUV": "01205270000002247",
+                "codiceQRcode": "PAGOPA|002|301205270000002247||0000025697",
+                "codiceBarcode": "(415)null(8020)301205270000002247(3902)025697",
+                "chiaveEnte": "ANE0000033",
+                "causale": "MCA",
+                "debitore": {
+                    "codiceFiscale": "GCNGRG79L65E388O",
+                    "nomeCognRagSoc": "Giorgia Giacani",
+                    "indirizzo": "Via Pasquinelli 2A",
+                    "comune": "JESI",
+                    "provincia": "AN",
+                    "cap": "60035",
+                    "mail": "",
+                    "pec": "",
+                    "codiceFiscaleAlternativo": "",
+                    "idDominio": "01234567890     ",
+                    "flusso": {
+                        "cutecute": "000TO",
+                        "idFlusso": "157",
+                        "societa": "00004",
+                        "ccp": "1234567801",
+                        "ccpIntest": "prova",
+                        "type": "   ",
+                        "impServ": "MCA ",
+                        "cbill": "54321",
+                        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+                        "progressivoBollettino": 1
+                    }
+                },
+                "oggettoPagamento": "prova",
+                "listaTributi": [{
+                        "anno": 2020,
+                        "codiceTributo": "0001",
+                        "importo": "000000000005600",
+                        "note": "prova tributo 1"
+                    }, {
+                        "anno": 2020,
+                        "codiceTributo": "0002",
+                        "importo": "000000000010097",
+                        "note": "prova tributo 2"
+                    }, {
+                        "anno": 2020,
+                        "codiceTributo": "0003",
+                        "importo": "000000000010000",
+                        "note": "prova tributo 3"
+                    }
+                ],
+                "listaAvvisi": [{
+                        "dataScadenza": "31102020",
+                        "importo": "000000000006425",
+                        "progressivoBollettino": 1,
+                        "numeroAvviso": "301205270000002243",
+                        "codiceIUV": "01205270000002243",
+                        "codiceQRcode": "PAGOPA|002|301205270000002243||0000006425",
+                        "codiceBarcode": "(415)null(8020)301205270000002243(3902)006425"
+                    }, {
+                        "dataScadenza": "30112020",
+                        "importo": "000000000006424",
+                        "progressivoBollettino": 2,
+                        "numeroAvviso": "301205270000002244",
+                        "codiceIUV": "01205270000002244",
+                        "codiceQRcode": "PAGOPA|002|301205270000002244||0000006424",
+                        "codiceBarcode": "(415)null(8020)301205270000002244(3902)006424"
+                    }, {
+                        "dataScadenza": "31122020",
+                        "importo": "000000000006424",
+                        "progressivoBollettino": 3,
+                        "numeroAvviso": "301205270000002245",
+                        "codiceIUV": "01205270000002245",
+                        "codiceQRcode": "PAGOPA|002|301205270000002245||0000006424",
+                        "codiceBarcode": "(415)null(8020)301205270000002245(3902)006424"
+                    }, {
+                        "dataScadenza": "31012020",
+                        "importo": "000000000006424",
+                        "progressivoBollettino": 4,
+                        "numeroAvviso": "301205270000002246",
+                        "codiceIUV": "01205270000002246",
+                        "codiceQRcode": "PAGOPA|002|301205270000002246||0000006424",
+                        "codiceBarcode": "(415)null(8020)301205270000002246(3902)006424"
+                    }
+                ]
+            }
+        ],
+        "fileContent": [],
+        "numRecord": 0,
+        "societa": "00004",
+        "codiceAutorizzazione": "123CODAUTORIZZ4567890",
+        "fileName": "STANDARD_PPA_000TO1234515720201015235232_000.txt"
+    }
+]
