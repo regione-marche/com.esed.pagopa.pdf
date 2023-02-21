@@ -1848,7 +1848,7 @@ public class SalvaPDFRegMarche {
 		Canvas b2_2logoPosteCanvas = new Canvas(pdfCanvas, b2_2logoPoste);
 		b2_2logoPosteCanvas.add(asset.getLogo_poste_italiane().scaleToFit(112, 15));
 		b2_2logoPosteCanvas.close();
-//		LOGO ï¿½
+//		LOGO €
 		Rectangle b2_2logoEuro = new Rectangle(178, 164, 20, 20);
 		Canvas b2_2logoEuroCanvas = new Canvas(pdfCanvas, b2_2logoEuro);
 		b2_2logoEuroCanvas.add(asset.getLogo_euro_bollettino().scaleToFit(20, 20));
