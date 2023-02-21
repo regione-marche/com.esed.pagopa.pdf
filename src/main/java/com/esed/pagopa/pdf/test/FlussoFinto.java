@@ -8,7 +8,7 @@ import com.seda.payer.commons.geos.Flusso;
 public class FlussoFinto extends Flusso {
 
 	public FlussoFinto() {
-//		esempio su una proprietï¿½ semplice
+//		esempio su una proprietà semplice
 		CodiceEnte = "80009280274";
 		TipoStampa = "P"; //PG21X007
 //		esempio con un oggetto articolato
@@ -201,9 +201,9 @@ public class FlussoFinto extends Flusso {
 		bollettino999.Codeline1Boll = "999 - 1234 5678 9012 3456 123";
 		bollettino999.Descon60Boll = "999 - Comune del cavolo che ti Pare";	
 		
-// 		cosï¿½ per il resto dei dati necessari del gruppo
+// 		così per il resto dei dati necessari del gruppo
 //		fai la stessa cosa per i DatiAnagrafici (il poro cristo vessato dalle istituzioni)
-//		e per Bollettino, magari prova a mettere piï¿½ di qualche bollettino cosï¿½ proviamo l'uso dei vari modelli 
+//		e per Bollettino, magari prova a mettere più di qualche bollettino così proviamo l'uso dei vari modelli 
 		
 //		aggiungiamo gli elementi del documento a documento
 		documento1.addDatiAnagrafici(datiAnagrafici);

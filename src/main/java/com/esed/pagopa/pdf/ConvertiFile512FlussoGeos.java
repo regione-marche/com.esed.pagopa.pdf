@@ -116,7 +116,7 @@ public final class ConvertiFile512FlussoGeos {
 						usaDescTipologiaServizio ? doc512.descrizioneServizio: doc512.tipologiaServizio, //ufficio ente //TODO prendere descrizioneServizio in caso il usaDescTipServ sia true
 						null, //indirizzo 
 						null, //cap
-						null, //cittï¿½
+						null, //città
 						null, //provincia
 						doc512.debitore.flusso.cbill
 						);

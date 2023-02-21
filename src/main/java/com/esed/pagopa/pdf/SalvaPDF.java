@@ -59,20 +59,20 @@ public class SalvaPDF {
 //		int stato = 1;
 		ByteArrayOutputStream baos = null;
 
-//		il flusso puï¿½ contenere piï¿½ di un documento
-//		lavoriamne uno per volta
+//		il flusso può contenere più di un documento
+//		lavoriamone uno per volta
 		logger.info("flusso.Documentdata.size() = " + flusso.Documentdata.size());
 		for (int i = 0; i < flusso.Documentdata.size(); i++) {
 
 //			validaFlusso controlla i dati del flusso, 
 //			se sono corretti restituisce un array contenente la sequenza dei numeri progressivi dei bollettini, 
-//			se il numero di bollettini ï¿½ zero la stampa non parte
+//			se il numero di bollettini è zero la stampa non parte
 			logger.info("inizio Validazione");
 			logger.info("flusso.TipoStampa = " + flusso.TipoStampa);
 			int[] elencoBollettini = ValidaFlusso.validaFlusso(flusso.Documentdata.get(i), flusso.TipoStampa);
 			System.out.println("Validazione eseguita ");
 			logger.info("FINE Validazione");
-//			chiude il metodo con stato a 1 se il numero dei bollettini ï¿½ 0
+//			chiude il metodo con stato a 1 se il numero dei bollettini è 0
 			if (elencoBollettini.length < 1) {
 				logger.info("elencoBollettini.length Ã¨ 0");
 				return null;
@@ -282,7 +282,7 @@ public class SalvaPDF {
 //			se sono corretti restituisce un array contenente la sequenza dei numeri progressivi dei bollettini, 
 //			se il numero di bollettini Ã¨ zero la stampa non parte
 			int[] elencoBollettini = ValidaFlusso.validaFlusso(flusso.Documentdata.get(i), flusso.TipoStampa);
-//			chiude il metodo con stato a 1 se il numero dei bollettini ï¿½ 0
+//			chiude il metodo con stato a 1 se il numero dei bollettini è 0
 			if (elencoBollettini.length < 1) {
 				return stato;
 			}
@@ -306,7 +306,7 @@ public class SalvaPDF {
 //				}
 //				else {
 //					document.close();
-//					throw new ValidazioneException("Manca il bollettino rata unica (nï¿½ 999)");
+//					throw new ValidazioneException("Manca il bollettino rata unica (n. 999)");
 //				}
 				pagineAggiunteDocumento++;
 				
@@ -1671,7 +1671,7 @@ public class SalvaPDF {
 		Canvas b1_2logoPosteCanvas = new Canvas(pdfCanvas, b1_2logoPoste);
 		b1_2logoPosteCanvas.add(asset.getLogo_poste_italiane().scaleToFit(112, 15));
 		b1_2logoPosteCanvas.close();
-//		LOGO ï¿½
+//		LOGO €
 		Rectangle b1_2logoEuro = new Rectangle(178, 388, 20, 20);
 		Canvas b1_2logoEuroCanvas = new Canvas(pdfCanvas, b1_2logoEuro);
 		b1_2logoEuroCanvas.add(asset.getLogo_euro_bollettino().scaleToFit(20, 20));
@@ -1884,7 +1884,7 @@ public class SalvaPDF {
 		Canvas b2_2logoPosteCanvas = new Canvas(pdfCanvas, b2_2logoPoste);
 		b2_2logoPosteCanvas.add(asset.getLogo_poste_italiane().scaleToFit(112, 15));
 		b2_2logoPosteCanvas.close();
-//		LOGO ï¿½
+//		LOGO €
 		Rectangle b2_2logoEuro = new Rectangle(178, 164, 20, 20);
 		Canvas b2_2logoEuroCanvas = new Canvas(pdfCanvas, b2_2logoEuro);
 		b2_2logoEuroCanvas.add(asset.getLogo_euro_bollettino().scaleToFit(20, 20));
