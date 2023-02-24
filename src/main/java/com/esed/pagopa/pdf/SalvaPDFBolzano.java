@@ -42,7 +42,7 @@ public class SalvaPDFBolzano {
 			if (elencoBollettini.length < 1) {
 				return null;
 			}
-			//NOTA. Per adesso è consentita la stampa solo per avviso con rataunica ==> 2 bollettini 1 e 999
+			//NOTA. Per adesso � consentita la stampa solo per avviso con rataunica ==> 2 bollettini 1 e 999
 			if(elencoBollettini.length != 2) {
 				throw new ValidazioneException("Stampa abilitata solo per rata unica");
 			}
@@ -66,7 +66,7 @@ public class SalvaPDFBolzano {
 					document.close();
 					throw new ValidazioneException("Manca il bollettino rata unica (n° 999)");
 				}
-				//Se i bollettini sono 2 allora non c'è rateizzazione perchè è il numero 1 e il 999 entrambi con dati coincidenti
+				//Se i bollettini sono 2 allora non c'� rateizzazione perch� il numero 1 e il 999 entrambi con dati coincidenti
 				//se invece i bollettini sono almeno 3 il 999 contiene la rata unica e gli altri la rateizzazione
 				logger.info("Numero di bollettini nel documento: " + elencoBollettini.length);
 				if (elencoBollettini.length > 2) {
@@ -421,7 +421,7 @@ public class SalvaPDFBolzano {
 		String plocalita = " (" + documento.DatiAnagrafici .get(0).Provincia + ")"; // 2 + 2 + 1 = 5
 		String localita = documento.DatiAnagrafici.get(0).Citta;
 		//Nota. Campo indirizzo con 2 righe di 40 ch cadauno (bUnasolaRigaLocalita == false)
-		//      Ma che consente su una riga il nome della max località italiana che è 34 ch (bUnasolaRigaLocalita == true)
+		//      Ma che consente su una riga il nome della max localit� italiana che � 34 ch (bUnasolaRigaLocalita == true)
 		boolean bUnasolaRigaLocalita = true;
 		int maxLoc = 34;
 		if(bUnasolaRigaLocalita) {
@@ -670,10 +670,10 @@ public class SalvaPDFBolzano {
 			pdfCanvas.saveState().setFillColor(new DeviceRgb(228, 0, 228)).rectangle(importoDescriptionRectangle).fill();
 		importoDescriptionCanvas = new Canvas(pdfCanvas, importoDescriptionRectangle);
 		//inizio LP PG210070 - 20210806
-		//importoDescriptionText = new Text("L'importo è aggiornati automaticamente dal sistema e potrebbe subire variazioni per eventuali sgravi, note di credito, indennità di mora, sanzioni o interessi, ecc. Un operatore, il sito o l’app che userà Le potrebbero quindi chiedere una cifra diversa da quella qui indicata.").setFont(asset.getTitillium_regular());
+		//importoDescriptionText = new Text("L'importo � aggiornato automaticamente dal sistema e potrebbe subire variazioni per eventuali sgravi, note di credito, indennità di mora, sanzioni o interessi, ecc. Un operatore, il sito o l’app che userà Le potrebbero quindi chiedere una cifra diversa da quella qui indicata.").setFont(asset.getTitillium_regular());
 		//importoDescriptionP = new Paragraph().add(importoDescriptionText).setFontColor(ColorConstants.BLACK)
 		//		.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(10);
-		importoDescriptionText = new Text("L'importo è aggiornato automaticamente dal sistema e potrebbe subire variazioni per eventuali sgravi, note di credito, indennità di mora, sanzioni o interessi, ecc. Un operatore, il sito o l’app che userà Le potrebbero quindi chiedere una cifra diversa da quella qui indicata.\r\nAvviso predisposto in collaborazione con").setFont(asset.getTitillium_regular());
+		importoDescriptionText = new Text("L'importo � aggiornato automaticamente dal sistema e potrebbe subire variazioni per eventuali sgravi, note di credito, indennità di mora, sanzioni o interessi, ecc. Un operatore, il sito o l’app che userà Le potrebbero quindi chiedere una cifra diversa da quella qui indicata.\r\nAvviso predisposto in collaborazione con").setFont(asset.getTitillium_regular());
 		importoDescription2Text = new Text(" Alto Adige Riscossioni").setFont(asset.getTitillium_bold());
 		importoDescription3Text = new Text(".").setFont(asset.getTitillium_regular());
 		importoDescriptionP = new Paragraph().add(importoDescriptionText).add(importoDescription2Text).add(importoDescription3Text).setFontColor(ColorConstants.BLACK)

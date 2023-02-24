@@ -109,7 +109,7 @@ public class SalvaPDFRegMarche {
 					throw new ValidazioneException("Manca il bollettino rata unica (nÂ° 999)");
 				}
 				
-//				se i bollettini sono 2 allora non c'Ã¨ rateizzazione perchÃ© Ã¨ il numero 1 e il 999 entrambi con dati coincidenti
+//				se i bollettini sono 2 allora non c'è rateizzazione perchè il numero 1 e il 999 entrambi con dati coincidenti
 //				se invece i bollettini sono almeno 3 il 999 contiene la rata unica e gli altri la rateizzazione
 				logger.info("Numero di bollettini nel documento: " + elencoBollettini.length);
 				if (elencoBollettini.length > 2) {
@@ -250,7 +250,7 @@ public class SalvaPDFRegMarche {
 			int pagineAggiunteDocumento = 0;
 //			validaFlusso controlla i dati del flusso, 
 //			se sono corretti restituisce un array contenente la sequenza dei numeri progressivi dei bollettini, 
-//			se il numero di bollettini Ã¨ zero la stampa non parte
+//			se il numero di bollettini è zero la stampa non parte
 			int[] elencoBollettini = ValidaFlusso.validaFlussoRegMarche(flusso.Documentdata.get(i), flusso.TipoStampa);
 //			chiude il metodo con stato a 1 se il numero dei bollettini è 0
 			if (elencoBollettini.length < 1) {
@@ -280,7 +280,7 @@ public class SalvaPDFRegMarche {
 //				}
 				pagineAggiunteDocumento++;
 				
-//				se i bollettini sono 2 allora non c'Ã¨ rateizzazione perchÃ© Ã¨ il numero 1 e il 999 entrambi con dati coincidenti
+//				se i bollettini sono 2 allora non c'è rateizzazione perchè il numero 1 e il 999 entrambi con dati coincidenti
 //				se invece i bollettini sono almeno 3 il 999 contiene la rata unica e gli altri 2 la rateizzazione
 				logger.debug(elencoBollettini.length);
 				if (elencoBollettini.length > 2) {
@@ -706,7 +706,7 @@ public class SalvaPDFRegMarche {
 		// Importo Description
 		Rectangle importoDescriptionRectangle = new Rectangle(30, 408, 243, 58); //430
 		Canvas importoDescriptionCanvas = new Canvas(pdfCanvas, importoDescriptionRectangle);
-		Text importoDescriptionText = new Text("L'importo Ã¨ aggiornato automaticamente dal sistema e potrebbe subire variazioni per eventuali sgravi, note di credito, indennitÃ Â  di mora, sanzioni o interessi, ecc. Un operatore, il sito o l'app che userai ti potrebbero quindi chiedere una cifra diversa da quella indicata.").setFont(asset.getTitillium_regular());
+		Text importoDescriptionText = new Text("L'importo è aggiornato automaticamente dal sistema e potrebbe subire variazioni per eventuali sgravi, note di credito, indennità di mora, sanzioni o interessi, ecc. Un operatore, il sito o l'app che userai ti potrebbero quindi chiedere una cifra diversa da quella indicata.").setFont(asset.getTitillium_regular());
 		Paragraph importoDescriptionP = new Paragraph().add(importoDescriptionText).setFontColor(ColorConstants.BLACK)
 				.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(10);
 		importoDescriptionCanvas.add(importoDescriptionP);

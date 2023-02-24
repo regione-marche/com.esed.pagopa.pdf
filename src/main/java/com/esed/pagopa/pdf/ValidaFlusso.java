@@ -32,39 +32,39 @@ public class ValidaFlusso {
 		int[] elencoBollettini = null;
 //		Controllo dei campi vuoti
 //		if (flusso.CodiceEnte == null || flusso.CodiceEnte.length() == 0) {
-//			messaggiErrore += "-il campo Codice Ente Ã¨ vuoto \r\n";
+//			messaggiErrore += "-il campo Codice Ente è vuoto \r\n";
 //			errCounter++;
 //		}
 //		if (flusso.CodiceUtente == null || flusso.CodiceUtente.length() == 0) {
-//			messaggiErrore += "-il campo CodiceUtente Ã¨ vuoto \r\n";
+//			messaggiErrore += "-il campo CodiceUtente è vuoto \r\n";
 //			errCounter++;
 //		}
 //		if (flusso.CuteCute == null || flusso.CuteCute.length() == 0) {
-//			messaggiErrore += "-il campo CuteCute Ã¨ vuoto \r\n";
+//			messaggiErrore += "-il campo CuteCute è vuoto \r\n";
 //			errCounter++;
 //		}
 //		if (flusso.DataFornitura == null || flusso.DataFornitura.length() == 0) {
-//			messaggiErrore += "-il campo DataFornitura Ã¨ vuoto \r\n";
+//			messaggiErrore += "-il campo DataFornitura è vuoto \r\n";
 //			errCounter++;
 //		}
 //		if (flusso.idFlusso == null || flusso.idFlusso.length() == 0) {
-//			messaggiErrore += "-il campo idFlusso Ã¨ vuoto \r\n";
+//			messaggiErrore += "-il campo idFlusso è vuoto \r\n";
 //			errCounter++;
 //		}
 //		if (flusso.ProgZero == null || flusso.ProgZero.length() == 0) {
-//			messaggiErrore += "-il campo ProgZero Ã¨ vuoto \r\n";
+//			messaggiErrore += "-il campo ProgZero è vuoto \r\n";
 //			errCounter++;
 //		}
 //		if (flusso.Provenienza == null || flusso.Provenienza.length() == 0) {
-//			messaggiErrore += "-il campo Provenienza Ã¨ vuoto \r\n";
+//			messaggiErrore += "-il campo Provenienza è vuoto \r\n";
 //			errCounter++;
 //		}
 //		if (flusso.TipoStampa == null || flusso.TipoStampa.length() == 0) {
-//			messaggiErrore += "-il campo TipoStampa Ã¨ vuoto \r\n";
+//			messaggiErrore += "-il campo TipoStampa è vuoto \r\n";
 //			errCounter++;
 //		}
 //		if (flusso.VersioneZero == null || flusso.VersioneZero.length() == 0) {
-//			messaggiErrore += "-il campo VersioneZero Ã¨ vuoto \r\n";
+//			messaggiErrore += "-il campo VersioneZero è vuoto \r\n";
 //			errCounter++;
 //		}
 //		if (documento.Documentdata == null || documento.Documentdata.size() == 0) {
@@ -110,7 +110,7 @@ public class ValidaFlusso {
 		BigDecimal max = new BigDecimal("9999999999");
 		//PAGONET-418 25012023 - fine
 		if (documento.ImportoDocumento == null) {
-			messaggiErrore += "-il campo importo da pagare Ã¨ vuoto \r\n";
+			messaggiErrore += "-il campo importo da pagare è vuoto \r\n";
 			errCounter++;
 		} else if (new BigDecimal(documento.ImportoDocumento).compareTo(max) > 0) {
 			//PAGONET-418 25012023 - inizio
@@ -126,7 +126,7 @@ public class ValidaFlusso {
 		for (int j = 0; j < documento.DatiCreditore.size(); j++) {
 			
 			if (documento.DatiCreditore.get(j).Cf == null || documento.DatiCreditore.get(j).Cf.length() == 0) {
-				messaggiErrore += "-il Codice Fiscale dell'Ente Creditore Ã¨ mancante \r\n";
+				messaggiErrore += "-il Codice Fiscale dell'Ente Creditore è mancante \r\n";
 				errCounter++;
 			}else if (documento.DatiCreditore.get(j).Cf.length() > 16) {
 				messaggiErrore += "-il Codice Fiscale dell'Ente Creditore eccede i 16 caratteri \r\n";
@@ -135,7 +135,7 @@ public class ValidaFlusso {
 			
 			if (documento.DatiCreditore.get(j).Denominazione1 == null
 					|| documento.DatiCreditore.get(j).Denominazione1.length() == 0) {
-				messaggiErrore += "-la denominazione1 dell'Ente Creditore Ã¨ mancante \r\n";
+				messaggiErrore += "-la denominazione1 dell'Ente Creditore è mancante \r\n";
 				errCounter++;
 			//inizio LP PG200420 - Errori nel pdf dell'avviso
 			//} else if (documento.DatiCreditore.get(j).Denominazione1.length() > 50) {
@@ -147,7 +147,7 @@ public class ValidaFlusso {
 				String appo = documento.DatiCreditore.get(j).Denominazione1;
 				appo = appo.trim().replaceAll("\\s+", " ");
 				if(appo.length() == 0) {
-					messaggiErrore += "-la denominazione1 dell'Ente Creditore Ã¨ mancante \r\n";
+					messaggiErrore += "-la denominazione1 dell'Ente Creditore è mancante \r\n";
 					errCounter++;
 				}
 				int maxDen = 100; //al max 50 ch per riga, 2 righe
@@ -189,7 +189,7 @@ public class ValidaFlusso {
 			// cbill
 			if (documento.DatiCreditore.get(j).CodiceInterbancario == null
 					|| documento.DatiCreditore.get(j).CodiceInterbancario.length() == 0) {
-				messaggiErrore += "-il Codice Interbancario dell'Ente Creditore Ã¨ mancante \r\n";
+				messaggiErrore += "-il Codice Interbancario dell'Ente Creditore è mancante \r\n";
 				errCounter++;
 			} else if (documento.DatiCreditore.get(j).CodiceInterbancario.length() > 5) {
 				messaggiErrore += "-il Codice Interbancario dell'Ente Creditore eccede i 5 caratteri \r\n";
@@ -201,7 +201,7 @@ public class ValidaFlusso {
 		for (int k = 0; k < documento.DatiAnagrafici.size(); k++) {
 			
 			if (documento.DatiAnagrafici.get(k).Cf == null || documento.DatiAnagrafici.get(k).Cf.length() == 0) {
-				messaggiErrore += "-il Codice Fiscale soggetto pagatore Ã¨ mancante \r\n";
+				messaggiErrore += "-il Codice Fiscale soggetto pagatore è mancante \r\n";
 				errCounter++;
 			}else if (documento.DatiAnagrafici.get(k).Cf.length() > 16) {
 				messaggiErrore += "-il Codice Fiscale soggetto pagatore eccede i 16 caratteri \r\n";
@@ -209,7 +209,7 @@ public class ValidaFlusso {
 			}
 			
 			if (documento.DatiAnagrafici.get(k).Denominazione1 == null || documento.DatiAnagrafici.get(k).Cf.length() == 0) {
-				messaggiErrore += "-la Denominazione del soggetto pagatore Ã¨ mancante \r\n";
+				messaggiErrore += "-la Denominazione del soggetto pagatore è mancante \r\n";
 				errCounter++;
 			//inizio LP PG200420 - Errori nel pdf dell'avviso
 			//} else if (documento.DatiAnagrafici.get(k).Denominazione1.length() > 35) {
@@ -222,7 +222,7 @@ public class ValidaFlusso {
 				String appo = documento.DatiAnagrafici.get(k).Denominazione1;
 				appo = appo.trim().replaceAll("\\s+", " ");
 				if(appo.length() == 0) {
-					messaggiErrore += "-la Denominazione del soggetto pagatore Ã¨ mancante \r\n";
+					messaggiErrore += "-la Denominazione del soggetto pagatore è mancante \r\n";
 					errCounter++;
 				}
 				if (appo.length() > maxDen) {
@@ -234,7 +234,7 @@ public class ValidaFlusso {
 			//fine LP PG200420 - Errori nel pdf dell'avviso
 			
 //			if (documento.DatiAnagrafici.get(k).Indirizzo == null || documento.DatiAnagrafici.get(k).Indirizzo.length() == 0) {
-//				messaggiErrore += "-l'Indirizzo del soggetto pagatore Ã¨ mancante \r\n";
+//				messaggiErrore += "-l'Indirizzo del soggetto pagatore è mancante \r\n";
 //				errCounter++;
 //			//inizio LP PG200420 - Errori nel pdf dell'avviso
 ////			}else if (documento.DatiAnagrafici.get(k).Indirizzo.length() > 40) {
@@ -248,7 +248,7 @@ public class ValidaFlusso {
 				String appo = documento.DatiAnagrafici.get(k).Indirizzo;
 				appo = appo.trim().replaceAll("\\s+", " ");
 //				if(appo.length() == 0) {
-//					messaggiErrore += "-l'Indirizzo del soggetto pagatore Ã¨ mancante \r\n";
+//					messaggiErrore += "-l'Indirizzo del soggetto pagatore è mancante \r\n";
 //					errCounter++;
 //				}
 				if (appo.length() > maxDen) {
@@ -261,7 +261,7 @@ public class ValidaFlusso {
 				String appo = documento.DatiAnagrafici.get(k).Cap;
 				appo = appo.trim().replaceAll("\\s+", " ");
 //				if(appo.length() == 0) {
-//					messaggiErrore += "-il Cap del soggetto pagatore Ã¨ mancante \r\n";
+//					messaggiErrore += "-il Cap del soggetto pagatore è mancante \r\n";
 //					errCounter++;
 //				}
 				if(appo.length() != 0 && appo.length() != 5) {
@@ -270,27 +270,27 @@ public class ValidaFlusso {
 				}
 				documento.DatiAnagrafici.get(k).Cap = appo;
 //				if(documento.DatiAnagrafici.get(k).Citta == null) {
-//					messaggiErrore += "-la CittÃ  del soggetto pagatore Ã¨ mancante \r\n";
+//					messaggiErrore += "-la CittÃ  del soggetto pagatore è mancante \r\n";
 //					errCounter++;
 //				} else {
 				if(documento.DatiAnagrafici.get(k).Citta != null) {
 					appo = documento.DatiAnagrafici.get(k).Citta;
 					appo = appo.trim().replaceAll("\\s+", " ");
 //					if(appo.length() == 0) {
-//						messaggiErrore += "-la CittÃ  del soggetto pagatore Ã¨ mancante \r\n";
+//						messaggiErrore += "-la CittÃ  del soggetto pagatore è mancante \r\n";
 //						errCounter++;
 //					}
 					documento.DatiAnagrafici.get(k).Citta = appo;
 				}
 //				if(documento.DatiAnagrafici.get(k).Provincia == null) {
-//					messaggiErrore += "-la Provincia del soggetto pagatore Ã¨ mancante \r\n";
+//					messaggiErrore += "-la Provincia del soggetto pagatore è mancante \r\n";
 //					errCounter++;
 //				} else {
 				if (documento.DatiAnagrafici.get(k).Provincia != null) {
 					appo = documento.DatiAnagrafici.get(k).Provincia;
 					appo = appo.trim().replaceAll("\\s+", " ");
 //					if(appo.length() == 0) {
-//						messaggiErrore += "-la Provincia del soggetto pagatore Ã¨ mancante \r\n";
+//						messaggiErrore += "-la Provincia del soggetto pagatore è mancante \r\n";
 //						errCounter++;
 //					}
 					if(appo.length() != 0 && appo.length() != 2) {
@@ -315,7 +315,7 @@ public class ValidaFlusso {
 				System.out.println("bollettino.ProgressivoBoll = " + bollettino.ProgressivoBoll);
 				
 				if (bollettino.ProgressivoBoll > 999) {
-					messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
+					messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
 							+ " eccede la numerazione massima consentita: 999 \r\n";
 					errCounter++;
 				}
@@ -328,7 +328,7 @@ public class ValidaFlusso {
 				{
 					System.out.println("bollettino.AvvisoPagoPa = " + bollettino.AvvisoPagoPa);	
 				}else
-					System.out.println("bollettino.AvvisoPagoPa Ã¨ nullo");
+					System.out.println("bollettino.AvvisoPagoPa è nullo");
 				
 				
 				
@@ -337,11 +337,11 @@ public class ValidaFlusso {
 					boolean match = controlloAvviso(bollettino.AvvisoPagoPa);
 					if (!match) {
 //							logger.debug("------------------ codice avviso -- " + bollettino.AvvisoPagoPa);
-						messaggiErrore += "-il campo Codice avviso Ã¨ in formato errato \r\n";
+						messaggiErrore += "-il campo Codice avviso è in formato errato \r\n";
 						errCounter++;
 					}
 				} else {
-					messaggiErrore += "-il campo Codice avviso Ã¨ vuoto \r\n";
+					messaggiErrore += "-il campo Codice avviso è vuoto \r\n";
 					errCounter++;
 				}
 				
@@ -361,10 +361,10 @@ public class ValidaFlusso {
 				
 				if (bollettino.BarcodePagoPa == null || bollettino.BarcodePagoPa.length() == 0) {
 //						logger.debug(bollettino.BarcodePagoPa); 
-					messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll + " Ã¨ mancante del QrCode \r\n";
+					messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll + " è mancante del QrCode \r\n";
 					errCounter++;
 				} else if (bollettino.BarcodePagoPa.length() > 52) {
-					messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
+					messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
 							+ " ha il QrCode in formato errato\r\n";
 					errCounter++;
 				}
@@ -415,11 +415,11 @@ public class ValidaFlusso {
 					}
 					
 					if (bollettino.QRcodePagoPa == null || bollettino.QRcodePagoPa.length() == 0) {
-						messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
-								+ " Ã¨ mancante del datamatrix \r\n";
+						messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
+								+ " è mancante del datamatrix \r\n";
 						errCounter++;
 					} else if (bollettino.QRcodePagoPa.length() != 256) {
-						messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
+						messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
 								+ " ha il campo datamatrix in formato errato, lunghezza: " + bollettino.QRcodePagoPa.length() + ", deve essere 256\r\n";
 						errCounter++;
 					}
@@ -427,7 +427,7 @@ public class ValidaFlusso {
 				// CC Postale
 				if (bollettino.Codeline12Boll != null && bollettino.Codeline12Boll.length() > 20) {
 					bollettino.Codeline12Boll = bollettino.Codeline12Boll.substring(0,20);
-//					messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
+//					messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
 //							+ " ha il campo numero di CC Postale che eccede i 20 caratteri \r\n";
 //					errCounter++;
 				}
@@ -436,7 +436,7 @@ public class ValidaFlusso {
 				//inizio LP PG210070
 //				if (bollettino.Descon60Boll != null && bollettino.Descon60Boll.length() > 50) {
 //					bollettino.Descon60Boll = bollettino.Descon60Boll.substring(0,50);
-////					messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
+////					messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
 ////							+ " ha il campo intestatario del CC Postale che eccede i 50 caratteri \r\n";
 ////					errCounter++;
 //				}
@@ -449,7 +449,7 @@ public class ValidaFlusso {
 				// controllo di Autorizzazione
 				if (bollettino.AutorizCcp != null && bollettino.AutorizCcp.length() != 0
 						&& bollettino.AutorizCcp.length() > 64) {
-					messaggiErrore += "-il campo Autorizzazione Ã¨ in formato errato \r\n";
+					messaggiErrore += "-il campo Autorizzazione è in formato errato \r\n";
 					errCounter++;
 				}
 				
@@ -467,27 +467,27 @@ public class ValidaFlusso {
 					Pattern pattern = Pattern.compile(regex);
 					Matcher matcher = pattern.matcher(bollettino.ScadenzaRata);
 					if (!matcher.matches()) {
-//							logger.info("------------scadenza rata -- bollettino nÂ° ---" + bollettino.ProgressivoBoll + " " + bollettino.ScadenzaRata );
-						messaggiErrore += "-il campo ScadenzaRata relativo al bollettino nÂ°"
-								+ bollettino.ProgressivoBoll + " Ã¨ in un formato errato \r\n";
+//							logger.info("------------scadenza rata -- bollettino n° ---" + bollettino.ProgressivoBoll + " " + bollettino.ScadenzaRata );
+						messaggiErrore += "-il campo ScadenzaRata relativo al bollettino n°"
+								+ bollettino.ProgressivoBoll + " è in un formato errato \r\n";
 						errCounter++;
 					}
 				} else {
-					messaggiErrore += "-il campo ScadenzaRata relativo al bollettino nÂ°" + bollettino.ProgressivoBoll
-							+ " Ã¨ vuoto \r\n";
+					messaggiErrore += "-il campo ScadenzaRata relativo al bollettino n°" + bollettino.ProgressivoBoll
+							+ " è vuoto \r\n";
 					errCounter++;
 				}
 				
 				if (bollettino.ProgressivoBoll == 666)
-					logger.info("Ã¨ uscito il bollettino della Bestia");
+					logger.info("è uscito il bollettino della Bestia");
 				
 				System.out.println("Codeline2Boll = " + bollettino.Codeline2Boll);
 				System.out.println("max = " + max);
 				
 				// controllo di Importo rata
 				if (bollettino.Codeline2Boll == null || bollettino.Codeline2Boll.length() == 0) {
-					messaggiErrore += "-il campo importo da pagare relativo alla rata del rigo nÂ°"
-							+ bollettino.ProgressivoBoll + " Ã¨ vuoto \r\n";
+					messaggiErrore += "-il campo importo da pagare relativo alla rata del rigo n°"
+							+ bollettino.ProgressivoBoll + " è vuoto \r\n";
 					errCounter++;
 				} else {
 					
@@ -496,8 +496,8 @@ public class ValidaFlusso {
 					}
 					
 					if (NumberUtils.isCreatable(bollettino.Codeline2Boll) && new BigDecimal(bollettino.Codeline2Boll).compareTo(max) > 0) {
-						messaggiErrore += "-il campo importo da pagare relativo alla rata del rigo nÂ°"
-								+ bollettino.ProgressivoBoll + " non Ã¨ un numero o eccede il massimo ammesso: â‚¬ 999999,99 \r\n";
+						messaggiErrore += "-il campo importo da pagare relativo alla rata del rigo n°"
+								+ bollettino.ProgressivoBoll + " non è un numero o eccede il massimo ammesso: â‚¬ 999999,99 \r\n";
 						errCounter++;
 					}
 				}
@@ -508,10 +508,10 @@ public class ValidaFlusso {
 		}
 		
 		if (elencoBollettini != null) {
-//			accerta che il bollettino nÂ° 999  vada alla fine
+//			accerta che il bollettino n° 999  vada alla fine
 			Arrays.sort(elencoBollettini);
 			if (elencoBollettini[elencoBollettini.length - 1] != 999)
-				messaggiErrore += "l'ultimo bollettino non Ã¨ il 999";
+				messaggiErrore += "l'ultimo bollettino non è il 999";
 		}
 
 		if (errCounter > 0)
@@ -562,7 +562,7 @@ public class ValidaFlusso {
 		}
 		//Controllo di Importo da pagare
 		if (documento.ImportoDocumento == null) {
-			messaggiErrore += "-il campo importo da pagare Ã¨ vuoto\r\n";
+			messaggiErrore += "-il campo importo da pagare è vuoto\r\n";
 			errCounter++;
 		} else if (new BigDecimal(documento.ImportoDocumento).compareTo(maxImportoTotale) > 0) {
 			messaggiErrore += "-il campo importo da pagare eccede il massimo ammesso: â‚¬ 99.999.999,99\r\n";
@@ -571,33 +571,33 @@ public class ValidaFlusso {
 		//Controllo dei Dati Creditore
 		for (int j = 0; j < documento.DatiCreditore.size(); j++) {
 			if (documento.DatiCreditore.get(j).Cf == null || documento.DatiCreditore.get(j).Cf.length() == 0) {
-				messaggiErrore += "-il Codice Fiscale dell'Ente Creditore Ã¨ mancante\r\n";
+				messaggiErrore += "-il Codice Fiscale dell'Ente Creditore è mancante\r\n";
 				errCounter++;
 			}else if (documento.DatiCreditore.get(j).Cf.length() > 16) {
 				messaggiErrore += "-il Codice Fiscale dell'Ente Creditore eccede i 16 caratteri\r\n";
 				errCounter++;
 			}
 			if (documento.DatiCreditore.get(j).Denominazione1 == null || documento.DatiCreditore.get(j).Denominazione1.length() == 0) {
-				messaggiErrore += "-la denominazione1 dell'Ente Creditore in lingua tedesca Ã¨ mancante\r\n";
+				messaggiErrore += "-la denominazione1 dell'Ente Creditore in lingua tedesca è mancante\r\n";
 				errCounter++;
 			} else {
 				String appo = documento.DatiCreditore.get(j).Denominazione1;
 				appo = appo.trim().replaceAll("\\s+", " ");
 				if(appo.length() == 0) {
-					messaggiErrore += "-la denominazione1 dell'Ente Creditore in lingua tedesca Ã¨ mancante\r\n";
+					messaggiErrore += "-la denominazione1 dell'Ente Creditore in lingua tedesca è mancante\r\n";
 					errCounter++;
 				}
 				appo = ValidaFlusso.truncDescAlternativa(appo, maxLenDenCreditore, maxLenDenCreditoreLower);
 				documento.DatiCreditore.get(j).Denominazione1 = appo; 
 			}
 			if (documento.DatiCreditore.get(j).Denominazione2 == null || documento.DatiCreditore.get(j).Denominazione2.length() == 0) {
-				messaggiErrore += "-la denominazione2 dell'Ente Creditore in lingua italiana Ã¨ mancante\r\n";
+				messaggiErrore += "-la denominazione2 dell'Ente Creditore in lingua italiana è mancante\r\n";
 				errCounter++;
 			} else {
 				String appo = documento.DatiCreditore.get(j).Denominazione2;
 				appo = appo.trim().replaceAll("\\s+", " ");
 				if(appo.length() == 0) {
-					messaggiErrore += "-la denominazione2 dell'Ente Creditore in lingua italiana Ã¨ mancante\r\n";
+					messaggiErrore += "-la denominazione2 dell'Ente Creditore in lingua italiana è mancante\r\n";
 					errCounter++;
 				}
 				documento.DatiCreditore.get(j).Denominazione2 = truncDesc(appo, maxLenDenCreditore); 
@@ -618,7 +618,7 @@ public class ValidaFlusso {
 			// cbill
 			if (documento.DatiCreditore.get(j).CodiceInterbancario == null
 				|| documento.DatiCreditore.get(j).CodiceInterbancario.length() == 0) {
-				messaggiErrore += "-il Codice Interbancario dell'Ente Creditore Ã¨ mancante\r\n";
+				messaggiErrore += "-il Codice Interbancario dell'Ente Creditore è mancante\r\n";
 				errCounter++;
 			} else if (documento.DatiCreditore.get(j).CodiceInterbancario.length() > 5) {
 				messaggiErrore += "-il Codice Interbancario dell'Ente Creditore eccede i 5 caratteri\r\n";
@@ -628,33 +628,33 @@ public class ValidaFlusso {
 		//Controllo dati pagatore
 		for (int k = 0; k < documento.DatiAnagrafici.size(); k++) {
 			if (documento.DatiAnagrafici.get(k).Cf == null || documento.DatiAnagrafici.get(k).Cf.length() == 0) {
-				messaggiErrore += "-il Codice Fiscale soggetto pagatore Ã¨ mancante\r\n";
+				messaggiErrore += "-il Codice Fiscale soggetto pagatore è mancante\r\n";
 				errCounter++;
 			} else if (documento.DatiAnagrafici.get(k).Cf.length() > 16) {
 				messaggiErrore += "-il Codice Fiscale soggetto pagatore eccede i 16 caratteri\r\n";
 				errCounter++;
 			}
 			if (documento.DatiAnagrafici.get(k).Denominazione1 == null || documento.DatiAnagrafici.get(k).Cf.length() == 0) {
-				messaggiErrore += "-la Denominazione del soggetto pagatore Ã¨ mancante\r\n";
+				messaggiErrore += "-la Denominazione del soggetto pagatore è mancante\r\n";
 				errCounter++;
 			} else {
 				String appo = documento.DatiAnagrafici.get(k).Denominazione1;
 				appo = appo.trim().replaceAll("\\s+", " ");
 				if(appo.length() == 0) {
-					messaggiErrore += "-la Denominazione del soggetto pagatore Ã¨ mancante\r\n";
+					messaggiErrore += "-la Denominazione del soggetto pagatore è mancante\r\n";
 					errCounter++;
 				}
 				documento.DatiAnagrafici.get(k).Denominazione1 = truncDesc(appo, maxLenDenDebitore * 2);
 			}
 //			if (documento.DatiAnagrafici.get(k).Indirizzo == null || documento.DatiAnagrafici.get(k).Indirizzo.length() == 0) {
-//				messaggiErrore += "-l'Indirizzo del soggetto pagatore Ã¨ mancante\r\n";
+//				messaggiErrore += "-l'Indirizzo del soggetto pagatore è mancante\r\n";
 //				errCounter++;
 //			} else {
 			if (documento.DatiAnagrafici.get(k).Indirizzo != null) {
 				String appo = documento.DatiAnagrafici.get(k).Indirizzo;
 				appo = appo.trim().replaceAll("\\s+", " ");
 //				if(appo.length() == 0) {
-//					messaggiErrore += "-l'Indirizzo del soggetto pagatore Ã¨ mancante\r\n";
+//					messaggiErrore += "-l'Indirizzo del soggetto pagatore è mancante\r\n";
 //					errCounter++;
 //				}
 				appo = appo.replaceAll(",", "");
@@ -666,48 +666,48 @@ public class ValidaFlusso {
 			}
 			String appo = "";
 //			if(documento.DatiAnagrafici.get(k).Cap == null) {
-//				messaggiErrore += "-il Cap del soggetto pagatore non Ã¨ valorizzato\r\n";
+//				messaggiErrore += "-il Cap del soggetto pagatore non è valorizzato\r\n";
 //				errCounter++;
 //			} else {
 			if(documento.DatiAnagrafici.get(k).Cap != null) {
 				appo = documento.DatiAnagrafici.get(k).Cap;
 				appo = appo.trim().replaceAll("\\s+", " ");
 //				if(appo.length() == 0) {
-//					messaggiErrore += "-il Cap del soggetto pagatore Ã¨ mancante\r\n";
+//					messaggiErrore += "-il Cap del soggetto pagatore è mancante\r\n";
 //					errCounter++;
 //				}
 				if(appo.length() != 0 && appo.length() != 5) {
-					messaggiErrore += "-il Cap del soggetto pagatore Ã¨ errato\r\n";
+					messaggiErrore += "-il Cap del soggetto pagatore è errato\r\n";
 					errCounter++;
 				}
 				documento.DatiAnagrafici.get(k).Cap = appo;
 			}
 //			if(documento.DatiAnagrafici.get(k).Citta == null) {
-//				messaggiErrore += "-la CittÃ  del soggetto pagatore Ã¨ mancante\r\n";
+//				messaggiErrore += "-la CittÃ  del soggetto pagatore è mancante\r\n";
 //				errCounter++;
 //			} else {
 			if(documento.DatiAnagrafici.get(k).Citta != null) {
 				appo = documento.DatiAnagrafici.get(k).Citta;
 				appo = appo.trim().replaceAll("\\s+", " ");
 //				if(appo.length() == 0) {
-//					messaggiErrore += "-la CittÃ  del soggetto pagatore Ã¨ mancante\r\n";
+//					messaggiErrore += "-la CittÃ  del soggetto pagatore è mancante\r\n";
 //					errCounter++;
 //				}
 				documento.DatiAnagrafici.get(k).Citta = appo;
 			}
 //			if(documento.DatiAnagrafici.get(k).Provincia == null) {
-//				messaggiErrore += "-la Provincia del soggetto pagatore Ã¨ mancante\r\n";
+//				messaggiErrore += "-la Provincia del soggetto pagatore è mancante\r\n";
 //				errCounter++;
 //			} else {
 			if(documento.DatiAnagrafici.get(k).Provincia != null) {
 				appo = documento.DatiAnagrafici.get(k).Provincia;
 				appo = appo.trim().replaceAll("\\s+", " ");
 //				if(appo.length() == 0) {
-//					messaggiErrore += "-la Provincia del soggetto pagatore Ã¨ mancante\r\n";
+//					messaggiErrore += "-la Provincia del soggetto pagatore è mancante\r\n";
 //					errCounter++;
 //				}
 				if(appo.length() != 0 && appo.length() != 2) {
-					messaggiErrore += "-la Provincia del soggetto pagatore Ã¨ errata\r\n";
+					messaggiErrore += "-la Provincia del soggetto pagatore è errata\r\n";
 					errCounter++;
 				}
 				documento.DatiAnagrafici.get(k).Provincia = appo;
@@ -719,7 +719,7 @@ public class ValidaFlusso {
 			int contatoreIndiceElencoBollettini = 0;
 			for (Bollettino bollettino : documento.DatiBollettino) {
 				if (bollettino.ProgressivoBoll > 999) {
-					messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
+					messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
 							+ " eccede la numerazione massima consentita: 999\r\n";
 					errCounter++;
 				}
@@ -730,42 +730,42 @@ public class ValidaFlusso {
 				if (bollettino.AvvisoPagoPa != null && bollettino.AvvisoPagoPa.length() > 0) {
 					boolean match = controlloAvviso(bollettino.AvvisoPagoPa);
 					if (!match) {
-						messaggiErrore += "-il campo Codice avviso Ã¨ in formato errato\r\n";
+						messaggiErrore += "-il campo Codice avviso è in formato errato\r\n";
 						errCounter++;
 					}
 				} else {
-					messaggiErrore += "-il campo Codice avviso Ã¨ vuoto\r\n";
+					messaggiErrore += "-il campo Codice avviso è vuoto\r\n";
 					errCounter++;
 				}
 				//QRCode
 				if (bollettino.BarcodePagoPa == null || bollettino.BarcodePagoPa.length() == 0) {
-					messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll + " Ã¨ mancante del QRCode\r\n";
+					messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll + " è mancante del QRCode\r\n";
 					errCounter++;
 				} else if (bollettino.BarcodePagoPa.length() > 52) {
-					messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
+					messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
 							+ " ha il QRCode in formato errato\r\n";
 					errCounter++;
 				}
 				if(tipoStampa.equals("P")) {
 					//DataMatrix
 					if (bollettino.QRcodePagoPa == null || bollettino.QRcodePagoPa.length() == 0) {
-						messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
-								+ " Ã¨ mancante del datamatrix\r\n";
+						messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
+								+ " è mancante del datamatrix\r\n";
 						errCounter++;
 					} else if (bollettino.QRcodePagoPa.length() != 256) {
-						messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
+						messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
 								+ " ha il campo datamatrix in formato errato, lunghezza: " + bollettino.QRcodePagoPa.length() + "\r\n";
 						errCounter++;
 					}
 					//CC Postale
 					if (bollettino.Codeline12Boll != null && bollettino.Codeline12Boll.length() != 12) {
-						messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
+						messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
 								+ " ha il campo numero di CC Postale diverso da 12 caratteri\r\n";
 						errCounter++;
 					}
 					//Intestazione CCCP
 					if(bollettino.Descon60Boll == null) {
-						messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
+						messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
 								+ " ha il campo intestatario del CC Postale non valorizzato\r\n";
 						errCounter++;
 					} else  {
@@ -783,7 +783,7 @@ public class ValidaFlusso {
 							bollettino.Descon60Boll = truncDesc(bollettino.Descon60Boll, maxLenDescIntestatario);
 						}
 						if (bollettino.Descon60Boll.length() == 0) {
-							messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
+							messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
 									+ " ha il campo intestatario del CC Postale mancante\r\n";
 							errCounter++;
 						}
@@ -792,7 +792,7 @@ public class ValidaFlusso {
 					if (bollettino.AutorizCcp != null
 						&& bollettino.AutorizCcp.length() != 0
 						&& bollettino.AutorizCcp.length() > 64) {
-						messaggiErrore += "-il campo Autorizzazione Ã¨ in formato errato\r\n";
+						messaggiErrore += "-il campo Autorizzazione è in formato errato\r\n";
 						errCounter++;
 					}
 				}
@@ -802,21 +802,21 @@ public class ValidaFlusso {
 					Pattern pattern = Pattern.compile(regex);
 					Matcher matcher = pattern.matcher(bollettino.ScadenzaRata);
 					if (!matcher.matches()) {
-						messaggiErrore += "-il campo ScadenzaRata relativo al bollettino nÂ°"
-								+ bollettino.ProgressivoBoll + " Ã¨ in un formato errato\r\n";
+						messaggiErrore += "-il campo ScadenzaRata relativo al bollettino n°"
+								+ bollettino.ProgressivoBoll + " è in un formato errato\r\n";
 						errCounter++;
 					}
 				} else {
-					messaggiErrore += "-il campo ScadenzaRata relativo al bollettino nÂ°" + bollettino.ProgressivoBoll + " Ã¨ vuoto\r\n";
+					messaggiErrore += "-il campo ScadenzaRata relativo al bollettino n°" + bollettino.ProgressivoBoll + " è vuoto\r\n";
 					errCounter++;
 				}
 				//Controllo di Importo rata
 				if (bollettino.Codeline2Boll == null || bollettino.Codeline2Boll.length() == 0) {
-					messaggiErrore += "-il campo importo da pagare relativo al bollettino nÂ°"
-							+ bollettino.ProgressivoBoll + " Ã¨ vuoto\r\n";
+					messaggiErrore += "-il campo importo da pagare relativo al bollettino n°"
+							+ bollettino.ProgressivoBoll + " è vuoto\r\n";
 					errCounter++;
 				} else if (new BigDecimal(bollettino.Codeline2Boll).compareTo(maxImportoTotale) > 0) {
-					messaggiErrore += "-il campo importo da pagare relativo al bollettino nÂ°"
+					messaggiErrore += "-il campo importo da pagare relativo al bollettino n°"
 							+ bollettino.ProgressivoBoll + " eccede il massimo ammesso: â‚¬ 99.999.999,99\r\n";
 					errCounter++;
 				}
@@ -827,10 +827,10 @@ public class ValidaFlusso {
 		}
 		
 		if (elencoBollettini != null) {
-//			accerta che il bollettino nÂ° 999  vada alla fine
+//			accerta che il bollettino n° 999  vada alla fine
 			Arrays.sort(elencoBollettini);
 			if (elencoBollettini[elencoBollettini.length - 1] != 999)
-				messaggiErrore += "l'ultimo bollettino non Ã¨ il 999";
+				messaggiErrore += "l'ultimo bollettino non è il 999";
 		}
 		if (errCounter > 0)
 			throw new ValidazioneException(messaggiErrore);
@@ -918,7 +918,7 @@ public class ValidaFlusso {
 	BigDecimal max = new BigDecimal("9999999999");
 	//PAGONET-418 25012023 - fine
 	if (documento.ImportoDocumento == null) {
-		messaggiErrore += "-il campo importo da pagare Ã¨ vuoto \r\n";
+		messaggiErrore += "-il campo importo da pagare è vuoto \r\n";
 		errCounter++;
 	} else if (new BigDecimal(documento.ImportoDocumento).compareTo(max) > 0) {
 		//PAGONET-418 25012023 - inizio
@@ -932,7 +932,7 @@ public class ValidaFlusso {
 	for (int j = 0; j < documento.DatiCreditore.size(); j++) {
 		
 		if (documento.DatiCreditore.get(j).Cf == null || documento.DatiCreditore.get(j).Cf.length() == 0) {
-			messaggiErrore += "-il Codice Fiscale dell'Ente Creditore Ã¨ mancante \r\n";
+			messaggiErrore += "-il Codice Fiscale dell'Ente Creditore è mancante \r\n";
 			errCounter++;
 		}else if (documento.DatiCreditore.get(j).Cf.length() > 16) {
 			messaggiErrore += "-il Codice Fiscale dell'Ente Creditore eccede i 16 caratteri \r\n";
@@ -941,13 +941,13 @@ public class ValidaFlusso {
 		
 		if (documento.DatiCreditore.get(j).Denominazione1 == null
 				|| documento.DatiCreditore.get(j).Denominazione1.length() == 0) {
-			messaggiErrore += "-la denominazione1 dell'Ente Creditore Ã¨ mancante \r\n";
+			messaggiErrore += "-la denominazione1 dell'Ente Creditore è mancante \r\n";
 			errCounter++;
 		} else {
 			String appo = documento.DatiCreditore.get(j).Denominazione1;
 			appo = appo.trim().replaceAll("\\s+", " ");
 			if(appo.length() == 0) {
-				messaggiErrore += "-la denominazione1 dell'Ente Creditore Ã¨ mancante \r\n";
+				messaggiErrore += "-la denominazione1 dell'Ente Creditore è mancante \r\n";
 				errCounter++;
 			}
 			int maxDen = 100; //al max 50 ch per riga, 2 righe
@@ -982,7 +982,7 @@ public class ValidaFlusso {
 		// cbill
 		if (documento.DatiCreditore.get(j).CodiceInterbancario == null
 				|| documento.DatiCreditore.get(j).CodiceInterbancario.length() == 0) {
-			messaggiErrore += "-il Codice Interbancario dell'Ente Creditore Ã¨ mancante \r\n";
+			messaggiErrore += "-il Codice Interbancario dell'Ente Creditore è mancante \r\n";
 			errCounter++;
 		} else if (documento.DatiCreditore.get(j).CodiceInterbancario.length() > 5) {
 			messaggiErrore += "-il Codice Interbancario dell'Ente Creditore eccede i 5 caratteri \r\n";
@@ -994,7 +994,7 @@ public class ValidaFlusso {
 	for (int k = 0; k < documento.DatiAnagrafici.size(); k++) {
 		
 		if (documento.DatiAnagrafici.get(k).Cf == null || documento.DatiAnagrafici.get(k).Cf.length() == 0) {
-			messaggiErrore += "-il Codice Fiscale soggetto pagatore Ã¨ mancante \r\n";
+			messaggiErrore += "-il Codice Fiscale soggetto pagatore è mancante \r\n";
 			errCounter++;
 		}else if (documento.DatiAnagrafici.get(k).Cf.length() > 16) {
 			messaggiErrore += "-il Codice Fiscale soggetto pagatore eccede i 16 caratteri \r\n";
@@ -1002,14 +1002,14 @@ public class ValidaFlusso {
 		}
 		
 		if (documento.DatiAnagrafici.get(k).Denominazione1 == null || documento.DatiAnagrafici.get(k).Cf.length() == 0) {
-			messaggiErrore += "-la Denominazione del soggetto pagatore Ã¨ mancante \r\n";
+			messaggiErrore += "-la Denominazione del soggetto pagatore è mancante \r\n";
 			errCounter++;
 		} else {
 			int maxDen = 70; //al max 35 ch per riga, 2 righe
 			String appo = documento.DatiAnagrafici.get(k).Denominazione1;
 			appo = appo.trim().replaceAll("\\s+", " ");
 			if(appo.length() == 0) {
-				messaggiErrore += "-la Denominazione del soggetto pagatore Ã¨ mancante \r\n";
+				messaggiErrore += "-la Denominazione del soggetto pagatore è mancante \r\n";
 				errCounter++;
 			}
 			if (appo.length() > maxDen) {
@@ -1033,7 +1033,7 @@ public class ValidaFlusso {
 			String appo = documento.DatiAnagrafici.get(k).Cap;
 			appo = appo.trim().replaceAll("\\s+", " ");
 			if(appo.length() != 0 && appo.length() != 5) {
-				messaggiErrore += "-il Cap del soggetto pagatore Ã¨ errato \r\n";
+				messaggiErrore += "-il Cap del soggetto pagatore è errato \r\n";
 				errCounter++;
 			}
 			documento.DatiAnagrafici.get(k).Cap = appo;
@@ -1046,7 +1046,7 @@ public class ValidaFlusso {
 				appo = documento.DatiAnagrafici.get(k).Provincia;
 				appo = appo.trim().replaceAll("\\s+", " ");
 				if(appo.length() != 0 && appo.length() != 2) {
-					messaggiErrore += "-la Provincia del soggetto pagatore Ã¨ errata \r\n";
+					messaggiErrore += "-la Provincia del soggetto pagatore è errata \r\n";
 					errCounter++;
 				}
 				documento.DatiAnagrafici.get(k).Provincia = appo;
@@ -1066,7 +1066,7 @@ public class ValidaFlusso {
 			System.out.println("bollettino.ProgressivoBoll = " + bollettino.ProgressivoBoll);
 			
 			if (bollettino.ProgressivoBoll > 999) {
-				messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
+				messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
 						+ " eccede la numerazione massima consentita: 999 \r\n";
 				errCounter++;
 			}
@@ -1077,7 +1077,7 @@ public class ValidaFlusso {
 			{
 				System.out.println("bollettino.AvvisoPagoPa = " + bollettino.AvvisoPagoPa);	
 			}else
-				System.out.println("bollettino.AvvisoPagoPa Ã¨ nullo");
+				System.out.println("bollettino.AvvisoPagoPa è nullo");
 			
 			
 			
@@ -1086,11 +1086,11 @@ public class ValidaFlusso {
 				boolean match = controlloAvviso(bollettino.AvvisoPagoPa);
 				if (!match) {
 //						logger.debug("------------------ codice avviso -- " + bollettino.AvvisoPagoPa);
-					messaggiErrore += "-il campo Codice avviso Ã¨ in formato errato \r\n";
+					messaggiErrore += "-il campo Codice avviso è in formato errato \r\n";
 					errCounter++;
 				}
 			} else {
-				messaggiErrore += "-il campo Codice avviso Ã¨ vuoto \r\n";
+				messaggiErrore += "-il campo Codice avviso è vuoto \r\n";
 				errCounter++;
 			}
 			
@@ -1110,10 +1110,10 @@ public class ValidaFlusso {
 			
 			if (bollettino.BarcodePagoPa == null || bollettino.BarcodePagoPa.length() == 0) {
 //					logger.debug(bollettino.BarcodePagoPa); 
-				messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll + " Ã¨ mancante del QrCode \r\n";
+				messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll + " è mancante del QrCode \r\n";
 				errCounter++;
 			} else if (bollettino.BarcodePagoPa.length() > 52) {
-				messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
+				messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
 						+ " ha il QrCode in formato errato\r\n";
 				errCounter++;
 			}
@@ -1164,11 +1164,11 @@ public class ValidaFlusso {
 				}
 				
 				if (bollettino.QRcodePagoPa == null || bollettino.QRcodePagoPa.length() == 0) {
-					messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
-							+ " Ã¨ mancante del datamatrix \r\n";
+					messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
+							+ " è mancante del datamatrix \r\n";
 					errCounter++;
 				} else if (bollettino.QRcodePagoPa.length() != 256) {
-					messaggiErrore += "-il bollettino nÂ°" + bollettino.ProgressivoBoll
+					messaggiErrore += "-il bollettino n°" + bollettino.ProgressivoBoll
 							+ " ha il campo datamatrix in formato errato, lunghezza: " + bollettino.QRcodePagoPa.length() + "\r\n";
 					errCounter++;
 				}
@@ -1186,7 +1186,7 @@ public class ValidaFlusso {
 			// controllo di Autorizzazione
 			if (bollettino.AutorizCcp != null && bollettino.AutorizCcp.length() != 0
 					&& bollettino.AutorizCcp.length() > 64) {
-				messaggiErrore += "-il campo Autorizzazione Ã¨ in formato errato \r\n";
+				messaggiErrore += "-il campo Autorizzazione è in formato errato \r\n";
 				errCounter++;
 			}
 			
@@ -1200,21 +1200,21 @@ public class ValidaFlusso {
 							bollettino.ScadenzaRata.substring(4));
 				}
 			}else{
-				messaggiErrore += "-il campo ScadenzaRata relativo al bollettino nÂ°" + bollettino.ProgressivoBoll
-						+ " Ã¨ vuoto \r\n";
+				messaggiErrore += "-il campo ScadenzaRata relativo al bollettino n°" + bollettino.ProgressivoBoll
+						+ " è vuoto \r\n";
 				errCounter++;
 			}
 			
 			if (bollettino.ProgressivoBoll == 666)
-				logger.info("Ã¨ uscito il bollettino della Bestia");
+				logger.info("è uscito il bollettino della Bestia");
 			
 			System.out.println("Codeline2Boll = " + bollettino.Codeline2Boll);
 			System.out.println("max = " + max);
 			
 			// controllo di Importo rata
 			if (bollettino.Codeline2Boll == null || bollettino.Codeline2Boll.length() == 0) {
-				messaggiErrore += "-il campo importo da pagare relativo alla rata del rigo nÂ°"
-						+ bollettino.ProgressivoBoll + " Ã¨ vuoto \r\n";
+				messaggiErrore += "-il campo importo da pagare relativo alla rata del rigo n°"
+						+ bollettino.ProgressivoBoll + " è vuoto \r\n";
 				errCounter++;
 			} else {
 				
@@ -1223,8 +1223,8 @@ public class ValidaFlusso {
 				}
 				
 				if (NumberUtils.isCreatable(bollettino.Codeline2Boll) && new BigDecimal(bollettino.Codeline2Boll).compareTo(max) > 0) {
-					messaggiErrore += "-il campo importo da pagare relativo alla rata del rigo nÂ°"
-							+ bollettino.ProgressivoBoll + " non Ã¨ un numero o eccede il massimo ammesso: â‚¬ 999999,99 \r\n";
+					messaggiErrore += "-il campo importo da pagare relativo alla rata del rigo n°"
+							+ bollettino.ProgressivoBoll + " non è un numero o eccede il massimo ammesso: € 999999,99 \r\n";
 					errCounter++;
 				}
 			}
@@ -1235,10 +1235,10 @@ public class ValidaFlusso {
 	}
 	
 	if (elencoBollettini != null) {
-//		accerta che il bollettino nÂ° 999  vada alla fine
+//		accerta che il bollettino n° 999  vada alla fine
 		Arrays.sort(elencoBollettini);
 		if (elencoBollettini[elencoBollettini.length - 1] != 999)
-			messaggiErrore += "l'ultimo bollettino non Ã¨ il 999";
+			messaggiErrore += "l'ultimo bollettino non è il 999";
 	}
 
 	if (errCounter > 0)

@@ -74,7 +74,7 @@ public class SalvaPDF {
 			logger.info("FINE Validazione");
 //			chiude il metodo con stato a 1 se il numero dei bollettini è 0
 			if (elencoBollettini.length < 1) {
-				logger.info("elencoBollettini.length Ã¨ 0");
+				logger.info("elencoBollettini.length è 0");
 				return null;
 			}
 //			accerta che il bollettino nÂ° 999  vada alla fine
@@ -137,7 +137,7 @@ public class SalvaPDF {
 					throw new ValidazioneException("Manca il bollettino rata unica (nÂ° 999)");
 				}
 				
-//				se i bollettini sono 2 allora non c'Ã¨ rateizzazione perchÃ© Ã¨ il numero 1 e il 999 entrambi con dati coincidenti
+//				se i bollettini sono 2 allora non c'è rateizzazione perchè Ã¨ il numero 1 e il 999 entrambi con dati coincidenti
 //				se invece i bollettini sono almeno 3 il 999 contiene la rata unica e gli altri la rateizzazione
 				logger.info("Numero di bollettini nel documento: " + elencoBollettini.length);
 				if (elencoBollettini.length > 2) {
@@ -280,7 +280,7 @@ public class SalvaPDF {
 			int pagineAggiunteDocumento = 0;
 //			validaFlusso controlla i dati del flusso, 
 //			se sono corretti restituisce un array contenente la sequenza dei numeri progressivi dei bollettini, 
-//			se il numero di bollettini Ã¨ zero la stampa non parte
+//			se il numero di bollettini è zero la stampa non parte
 			int[] elencoBollettini = ValidaFlusso.validaFlusso(flusso.Documentdata.get(i), flusso.TipoStampa);
 //			chiude il metodo con stato a 1 se il numero dei bollettini è 0
 			if (elencoBollettini.length < 1) {
@@ -310,7 +310,7 @@ public class SalvaPDF {
 //				}
 				pagineAggiunteDocumento++;
 				
-//				se i bollettini sono 2 allora non c'Ã¨ rateizzazione perchÃ© Ã¨ il numero 1 e il 999 entrambi con dati coincidenti
+//				se i bollettini sono 2 allora non c'è rateizzazione perchè Ã¨ il numero 1 e il 999 entrambi con dati coincidenti
 //				se invece i bollettini sono almeno 3 il 999 contiene la rata unica e gli altri 2 la rateizzazione
 				logger.debug(elencoBollettini.length);
 				if (elencoBollettini.length > 2) {
@@ -713,8 +713,8 @@ public class SalvaPDF {
 		// Importo Description
 		Rectangle importoDescriptionRectangle = new Rectangle(30, 430, 243, 58);
 		Canvas importoDescriptionCanvas = new Canvas(pdfCanvas, importoDescriptionRectangle);
-		Text importoDescriptionText = new Text("L'importo Ã¨ aggiornato automaticamente dal sistema e potrebbe subire variazioni per eventuali sgravi"
-				+ ", note di credito, indennitÃ Â  di mora, sanzioni o interessi, ecc. "
+		Text importoDescriptionText = new Text("L'importo è aggiornato automaticamente dal sistema e potrebbe subire variazioni per eventuali sgravi"
+				+ ", note di credito, indennità di mora, sanzioni o interessi, ecc. "
 				+ "Un operatore, il sito o l'app che userai ti potrebbero quindi chiedere una cifra diversa da quella"
 				+ (asset.getFormatoStampa() == FormatoStampa.GEOS ? " qui" : "")
 				+ " indicata.")
@@ -766,8 +766,8 @@ public class SalvaPDF {
 		Canvas pagaTerritorioDescriptionCanvas = new Canvas(pdfCanvas, pagaTerritorioDescriptionRectangle);
 		System.out.println("formato impaginazione: " + asset.getFormatoStampa());
 		System.out.println("tipo stampa: " + asset.getTipoStampaBancaPoste() );
-		System.out.println("Ã¨ GEOS? " + (asset.getFormatoStampa() == FormatoStampa.GEOS ? "true" : "false"));
-		System.out.println("Ã¨ postale? " + (asset.getTipoStampaBancaPoste().equals("P") ? "true" : "false"));
+		System.out.println("è GEOS? " + (asset.getFormatoStampa() == FormatoStampa.GEOS ? "true" : "false"));
+		System.out.println("è postale? " + (asset.getTipoStampaBancaPoste().equals("P") ? "true" : "false"));
 		String fraseSulTerritorio = asset.getFormatoStampa() == FormatoStampa.GEOS 
 				? (asset.getTipoStampaBancaPoste().equals("P") ? "In tutti gli Uffici Postali, " : "")
 						+ "in Banca, in Ricevitoria, dal Tabaccaio, al Bancomat, al Supermercato. "
@@ -2123,7 +2123,7 @@ public class SalvaPDF {
 		Text n3RataText1 = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza).ProgressivoBoll) + "Â° ").setFont(asset.getInEvidenza5Font()).setFontSize(asset.getInEvidenza5Size());
 		Text n3RataText2 = new Text("RATA  ").setFont(asset.getInEvidenza5Font()).setFontSize(asset.getInEvidenza5Size());
 		Text n3RataText3 = new Text(" entro il  ").setFont(asset.getEntroRateFont()).setFontSize(asset.getEntroRateSize());
-		Text n3RataText4 = new Text(documento.DatiBollettino.get(bollettinoDiPartenza).ScadenzaRata).setFont(asset.getInEvidenza5Font()).setFontSize(asset.getInEvidenza1Size()); //non Ã¨ un errore in evidenza 3 e 1, serve una combinaizone diversa
+		Text n3RataText4 = new Text(documento.DatiBollettino.get(bollettinoDiPartenza).ScadenzaRata).setFont(asset.getInEvidenza5Font()).setFontSize(asset.getInEvidenza1Size()); //non è un errore in evidenza 3 e 1, serve una combinaizone diversa
 		Paragraph n3RataP = new Paragraph().add(n3RataText1).add(n3RataText2).add(n3RataText3).add(n3RataText4)
 				.setFontColor(ColorConstants.BLACK).setMargin(0);
 		n3RataCanvas.add(n3RataP);
@@ -2135,7 +2135,7 @@ public class SalvaPDF {
 		Text n4RataText1 = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ProgressivoBoll) + "Â° ").setFont(asset.getNumRataFont()).setFontSize(asset.getNumRataSize());
 		Text n4RataText2 = new Text("RATA  ").setFont(asset.getNumRataFont()).setFontSize(asset.getNumRataSize());
 		Text n4RataText3 = new Text(" entro il  ").setFont(asset.getEntroRateFont()).setFontSize(asset.getEntroRateSize());
-		Text n4RataText4 = new Text(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ScadenzaRata).setFont(asset.getInEvidenza5Font()).setFontSize(asset.getInEvidenza1Size()); //non Ã¨ un errore in evidenza 3 e 1, serve una combinaizone diversa
+		Text n4RataText4 = new Text(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ScadenzaRata).setFont(asset.getInEvidenza5Font()).setFontSize(asset.getInEvidenza1Size()); //non è un errore in evidenza 3 e 1, serve una combinaizone diversa
 		Paragraph n4RataP = new Paragraph().add(n4RataText1).add(n4RataText2).add(n4RataText3).add(n4RataText4)
 				.setFontColor(ColorConstants.BLACK).setMargin(0);
 		n4RataCanvas.add(n4RataP);
@@ -3339,7 +3339,7 @@ public class SalvaPDF {
 	
 	public String formattaCodiceAvviso(String numeroAvviso) {
 		//da flusso 512 arriva il numero codice avviso senza spazi ogni 4 cifre. 
-				//controlliamo che non sia formattato dando per assunto che se alla quinta cifra c'Ã¨ lo spazio allora sono corrette
+				//controlliamo che non sia formattato dando per assunto che se alla quinta cifra c'è lo spazio allora sono corrette
 				if(numeroAvviso != null && !numeroAvviso.trim().substring(4, 5).equals(" ")) 
 					return numeroAvviso.trim().replaceAll("(.{4})", "$1 ").trim();
 		return numeroAvviso;
