@@ -64,7 +64,7 @@ public class SalvaPDFBolzano {
 					paginaUnBollettino(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, bollettino999, flusso.TipoStampa);
 				else {
 					document.close();
-					throw new ValidazioneException("Manca il bollettino rata unica (nÂ° 999)");
+					throw new ValidazioneException("Manca il bollettino rata unica (n° 999)");
 				}
 				//Se i bollettini sono 2 allora non c'è rateizzazione perchè il numero 1 e il 999 entrambi con dati coincidenti
 				//se invece i bollettini sono almeno 3 il 999 contiene la rata unica e gli altri la rateizzazione
@@ -553,7 +553,7 @@ public class SalvaPDFBolzano {
 		listaCanaliPagamentoCanvas.close();
 
 		//====================================================================================================================================================================//
-		//                                                           1Â° Riga Importo/Data Scadenza/Modalita Pagamento
+		//                                                           1° Riga Importo/Data Scadenza/Modalita Pagamento
 		//====================================================================================================================================================================//
 		int offset2 = offset + 13;
 		int xqqp2 = 51;
@@ -640,7 +640,7 @@ public class SalvaPDFBolzano {
 		int offset3 = 15;
 		offset2 += offset3; 
 		//====================================================================================================================================================================//
-		//                                                           2Â° Riga
+		//                                                           2° Riga
 		//====================================================================================================================================================================//
 		//Avvertenza su variabilita importo DE
 		int yqqp3 = 430 + offset2;
@@ -1001,7 +1001,7 @@ public class SalvaPDFBolzano {
 		rataUnicadataCanvas.close();
 
 		//====================================================================================================================================================================//
-		//                                                        1Â° Riga Sezione Banche PagoPA
+		//                                                        1° Riga Sezione Banche PagoPA
 		//====================================================================================================================================================================//
 		offset = offset + 24; 
 		//Euro
@@ -1452,7 +1452,7 @@ public class SalvaPDFBolzano {
 			//                                                       Lato Destro Sezione Bollettino Postale PagoPA
 			//====================================================================================================================================================================//
 			//====================================================================================================================================================================//
-			//                                                       1Â° Riga Sezione Bollettino Postale PagoPA
+			//                                                       1° Riga Sezione Bollettino Postale PagoPA
 			//====================================================================================================================================================================//
 			//Logo Euro
 			int xle = 180 - offsetX;
@@ -1548,7 +1548,7 @@ public class SalvaPDFBolzano {
 			dataMatrixCanvas.close();
 			
 			//====================================================================================================================================================================//
-			//                                                       2Â° Riga Sezione Bollettino Postale PagoPA
+			//                                                       2° Riga Sezione Bollettino Postale PagoPA
 			//====================================================================================================================================================================//
 			//Intestato a DE
 			int xbp0 = 178 - offsetX;
@@ -1595,7 +1595,7 @@ public class SalvaPDFBolzano {
 			intestatarioCCPostaleCanvas.close();
 	
 			//====================================================================================================================================================================//
-			//                                                       3Â° Riga Sezione Bollettino Postale PagoPA
+			//                                                       3° Riga Sezione Bollettino Postale PagoPA
 			//====================================================================================================================================================================//
 			// Destinatario DE
 			int xbp2 = 178 - offsetX;
@@ -1630,7 +1630,7 @@ public class SalvaPDFBolzano {
 			nomeCognomeDestinatarioCanvas3.close();
 	
 			//====================================================================================================================================================================//
-			//                                                       4Â° Riga Sezione Bollettino Postale PagoPA
+			//                                                       4° Riga Sezione Bollettino Postale PagoPA
 			//====================================================================================================================================================================//
 			offset -= 4;
 			// Oggetto Pagamento DE
@@ -1672,7 +1672,7 @@ public class SalvaPDFBolzano {
 			oggettoPagamentoStringCanvas3.close();
 	
 			//====================================================================================================================================================================//
-			//                                                       5Â° Riga Sezione Bollettino Postale PagoPA
+			//                                                       5° Riga Sezione Bollettino Postale PagoPA
 			//====================================================================================================================================================================//
 			//Coordinate pagamento
 			offset -= 5;
