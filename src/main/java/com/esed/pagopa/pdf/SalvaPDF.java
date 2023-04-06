@@ -317,14 +317,14 @@ public class SalvaPDF {
 					for (int j = 0; j < elencoBollettini.length - 1; ) {
 						if (elencoBollettini.length - 1 - j >= 3 && (elencoBollettini.length - 1 - j) != 4) {
 							logger.info("chiamato metodo 3 bollettini per pagina");
-							paginaTreBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
+							paginaTreBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j, flusso.TipoStampa);
 							j += 3;
 							pagineAggiunteDocumento++;
 							continue;
 						}
 						if (elencoBollettini.length - 1 - j >= 2 && (elencoBollettini.length - 1 - j) % 3 != 0) {
 							logger.info("chiamato metodo 2 bollettini per pagina");
-							paginaDueBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
+							paginaDueBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j, flusso.TipoStampa);
 							j += 2;
 							pagineAggiunteDocumento++;
 							continue;
@@ -1285,7 +1285,7 @@ public class SalvaPDF {
 		footerBorderCanvas.close();
 	}
 
-	private void paginaDueBollettini(PdfPage pageTarget, LeggoAsset asset, Documento documento, PdfDocument pdf, int bollettinoDiPartenza) {
+	private void paginaDueBollettini(PdfPage pageTarget, LeggoAsset asset, Documento documento, PdfDocument pdf, int bollettinoDiPartenza, String tipoStampa) {
 		//inizio LP PG200420 - Errori nel pdf dell'avviso
 		boolean bDebug = false; //se == true mostra alcune aree con fill colorato per verificare posizione e dimensione 
 		//fine LP PG200420 - Errori nel pdf dell'avviso
@@ -2052,7 +2052,7 @@ public class SalvaPDF {
 
 	}
 
-	private void paginaTreBollettini(PdfPage pageTarget, LeggoAsset asset, Documento documento, PdfDocument pdf, int bollettinoDiPartenza) {
+	private void paginaTreBollettini(PdfPage pageTarget, LeggoAsset asset, Documento documento, PdfDocument pdf, int bollettinoDiPartenza, String tipoStampa) {
 		//inizio LP PG200420 - Errori nel pdf dell'avviso
 		boolean bDebug = false; //se == true mostra alcune aree con fill colorato per verificare posizione e dimensione 
 		//fine LP PG200420 - Errori nel pdf dell'avviso
@@ -2503,7 +2503,10 @@ public class SalvaPDF {
 		Canvas bancheAltriCanaliDescriptionCanvas3 = new Canvas(pdfCanvas, bancheAltriCanaliDescriptionRectangle3);
 		bancheAltriCanaliDescriptionCanvas3.add(bancheAltriCanaliDescriptionP);
 		bancheAltriCanaliDescriptionCanvas3.close();
-
+		
+		//PAGONET-527 - Introdotta condizione su tipoStampa
+		if(tipoStampa.equals("P")) {
+		
 		// Bollettino 1
 		// Forbici
 		Rectangle b1_forbiciRectangle = new Rectangle(548, 474, 14, 10);
@@ -3254,6 +3257,7 @@ public class SalvaPDF {
 		Canvas b3_cfEnteCreditoreStringCanvas2 = new Canvas(pdfCanvas, b3_cfEnteCreditoreStringRectangle2);
 		b3_cfEnteCreditoreStringCanvas2.add(cfEnteCreditoreStringP);
 		b3_cfEnteCreditoreStringCanvas2.close();
+		}
 	}
 
 //	private static File creaFile(String soggettoPagatore) {
