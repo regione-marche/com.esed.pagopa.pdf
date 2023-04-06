@@ -77,7 +77,7 @@ public class SalvaPDF {
 				logger.info("elencoBollettini.length è 0");
 				return null;
 			}
-//			accerta che il bollettino nÂ° 999  vada alla fine
+//			accerta che il bollettino n° 999  vada alla fine
 			logger.info("Arrays.sort");
 			Arrays.sort(elencoBollettini);
 			
@@ -134,7 +134,7 @@ public class SalvaPDF {
 								bollettino999 /* PASSARE SOLO UN BOLLETTINO */, flusso.TipoStampa);
 				else {
 					document.close();
-					throw new ValidazioneException("Manca il bollettino rata unica (nÂ° 999)");
+					throw new ValidazioneException("Manca il bollettino rata unica (n° 999)");
 				}
 				
 //				se i bollettini sono 2 allora non c'è rateizzazione perchè Ã¨ il numero 1 e il 999 entrambi con dati coincidenti
@@ -144,13 +144,13 @@ public class SalvaPDF {
 					for (int j = 0; j < elencoBollettini.length - 1; ) {
 						if (elencoBollettini.length - 1 - j >= 3 && (elencoBollettini.length - 1 - j) != 4) {
 							logger.info("chiamato metodo 3 bollettini per pagina");
-							paginaTreBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
+							paginaTreBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j, flusso.TipoStampa);
 							j += 3;
 							continue;
 						}
 						if (elencoBollettini.length - 1 - j >= 2 && (elencoBollettini.length - 1 - j) % 3 != 0) {
 							logger.info("chiamato metodo 2 bollettini per pagina");
-							paginaDueBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
+							paginaDueBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j, flusso.TipoStampa);
 							j += 2;
 							continue;
 						}
@@ -286,14 +286,14 @@ public class SalvaPDF {
 			if (elencoBollettini.length < 1) {
 				return stato;
 			}
-//			accerta che il bollettino nÂ° 999  vada alla fine
+//			accerta che il bollettino n° 999  vada alla fine
 			Arrays.sort(elencoBollettini);
 			
 			logger.info(Arrays.toString(elencoBollettini) + "---------------ELENCO BOLLETTINI-----------------");
 			
 			if (elencoBollettini.length > 0) {
 				
-//			PREDISPONE LA STAMPA DEL BOLLETTINO NÂ° 999 OVVERO LA RATA UNICA
+//			PREDISPONE LA STAMPA DEL BOLLETTINO N° 999 OVVERO LA RATA UNICA
 //				paginaUnBollettino(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, flusso.Documentdata.get(i).DatiBollettino.get(elencoBollettini[elencoBollettini.length - 1]) /* PASSA SOLO LA RATA UNICA BOLLETTINO */);
 				Bollettino bollettino999 = flusso.Documentdata.get(i).DatiBollettino
 						.stream()
@@ -317,14 +317,14 @@ public class SalvaPDF {
 					for (int j = 0; j < elencoBollettini.length - 1; ) {
 						if (elencoBollettini.length - 1 - j >= 3 && (elencoBollettini.length - 1 - j) != 4) {
 							logger.info("chiamato metodo 3 bollettini per pagina");
-							paginaTreBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
+							paginaTreBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j, flusso.TipoStampa);
 							j += 3;
 							pagineAggiunteDocumento++;
 							continue;
 						}
 						if (elencoBollettini.length - 1 - j >= 2 && (elencoBollettini.length - 1 - j) % 3 != 0) {
 							logger.info("chiamato metodo 2 bollettini per pagina");
-							paginaDueBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
+							paginaDueBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j, flusso.TipoStampa);
 							j += 2;
 							pagineAggiunteDocumento++;
 							continue;
@@ -1285,7 +1285,7 @@ public class SalvaPDF {
 		footerBorderCanvas.close();
 	}
 
-	private void paginaDueBollettini(PdfPage pageTarget, LeggoAsset asset, Documento documento, PdfDocument pdf, int bollettinoDiPartenza) {
+	private void paginaDueBollettini(PdfPage pageTarget, LeggoAsset asset, Documento documento, PdfDocument pdf, int bollettinoDiPartenza, String tipoStampa) {
 		//inizio LP PG200420 - Errori nel pdf dell'avviso
 		boolean bDebug = false; //se == true mostra alcune aree con fill colorato per verificare posizione e dimensione 
 		//fine LP PG200420 - Errori nel pdf dell'avviso
@@ -1317,7 +1317,7 @@ public class SalvaPDF {
 		Rectangle oggettoPagamentoRectangle = new Rectangle(30, 715, 445, 60);
 		Canvas oggettoPagamentoCanvas = new Canvas(pdfCanvas, oggettoPagamentoRectangle);
 		Text oggettoPagamentoText = new Text(
-				"Rate " + Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza).ProgressivoBoll) + "Â°e " + Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ProgressivoBoll) + "Â°- " + documento.CausaleDocumento)
+				"Rate " + Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza).ProgressivoBoll) + "°e " + Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ProgressivoBoll) + "°- " + documento.CausaleDocumento)
 						.setFont(asset.getTestataFont());
 		Paragraph oggettoPagamentoP = new Paragraph().add(oggettoPagamentoText).setFontColor(ColorConstants.BLACK)
 				.setFontSize(asset.getTestataSize()).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(18);
@@ -1351,7 +1351,7 @@ public class SalvaPDF {
 // 		RATA E SCADENZA
 		Rectangle b1sxNumRataEScadenzaRectangle = new Rectangle(143, 704, 189, 15);
 		Canvas b1sxNumRataEScadenzaCanvas = new Canvas(pdfCanvas, b1sxNumRataEScadenzaRectangle);
-		Text b1sxNumRataText = new Text(documento.DatiBollettino.get(bollettinoDiPartenza).ProgressivoBoll + "Â° RATA ")
+		Text b1sxNumRataText = new Text(documento.DatiBollettino.get(bollettinoDiPartenza).ProgressivoBoll + "° RATA ")
 				.setFont(asset.getNumRataFont())
 				.setFontSize(asset.getNumRataSize());
 		Text b1sxScadenzaText = new Text("entro il ")
@@ -1505,7 +1505,7 @@ public class SalvaPDF {
 // 		RATA E SCADENZA
 		Rectangle b2dxNumRataEScadenzaRectangle = new Rectangle(433, 704, 189, 15);
 		Canvas b2dxNumRataEScadenzaCanvas = new Canvas(pdfCanvas, b2dxNumRataEScadenzaRectangle);
-		Text b2dxNumRataText = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ProgressivoBoll) + "Â° RATA  ")
+		Text b2dxNumRataText = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ProgressivoBoll) + "° RATA  ")
 				.setFont(asset.getNumRataFont()).setFontSize(asset.getNumRataSize());
 		Text b2dxScadenzaText = new Text(" entro il ")
 				.setFont(asset.getEntroRateFont()).setFontSize(asset.getEntroRateSize());
@@ -1628,6 +1628,9 @@ public class SalvaPDF {
 		b2dxIstruzioniBancheAltroCanvas.add(b2dxIstruzioniBancheAltroParagrafo);
 		b2dxIstruzioniBancheAltroCanvas.close();
 
+		//PAGONET-527 - Introdotta condizione su tipoStampa
+		if(tipoStampa.equals("P")) {
+
 //	BOLLETTINO 1
 //		banda grigia
 		Rectangle b1_2bandaGrigia = new Rectangle(0, 448, 595, 19);
@@ -1653,10 +1656,10 @@ public class SalvaPDF {
 		Canvas b1_2logoBancoPostaCanvas = new Canvas(pdfCanvas, b1_2logoBancoPosta);
 		b1_2logoBancoPostaCanvas.add(asset.getLogo_bancoposta().scaleToFit(50, 15));
 		b1_2logoBancoPostaCanvas.close();
-//		TESTO NÂ° RATA E SCADENZA
+//		TESTO N° RATA E SCADENZA
 		Rectangle b1_2rettangoloTestoNumEScadRata = new Rectangle(433 - asset.getXoffSet() * 2, 450, 157, 17);
 		Canvas b1_2TestoNumEScadRataCanvas = new Canvas(pdfCanvas, b1_2rettangoloTestoNumEScadRata);
-		Text b1_2NumRataTesto = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza).ProgressivoBoll) + "Â° RATA ").setFont(asset.getNumRataFont());
+		Text b1_2NumRataTesto = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza).ProgressivoBoll) + "° RATA ").setFont(asset.getNumRataFont());
 		Text b1_2entroIlTesto = new Text("  entro il  ").setFont(asset.getEntroRateFont());
 		Text b1_2scadenzaTesto = new Text(documento.DatiBollettino.get(bollettinoDiPartenza).ScadenzaRata).setFont(asset.getInEvidenza5Font());
 		Paragraph b1_2paragrafoNumEScadRata = new Paragraph()
@@ -1866,10 +1869,10 @@ public class SalvaPDF {
 		Canvas b2_2logoBancoPostaCanvas = new Canvas(pdfCanvas, b2_2logoBancoPosta);
 		b2_2logoBancoPostaCanvas.add(asset.getLogo_bancoposta().scaleToFit(50, 15));
 		b2_2logoBancoPostaCanvas.close();
-//		TESTO NÂ° RATA E SCADENZA
+//		TESTO N° RATA E SCADENZA
 		Rectangle b2_2rettangoloTestoNumEScadRata = new Rectangle(433 - asset.getXoffSet() * 2, 226, 157, 17);
 		Canvas b2_2TestoNumEScadRataCanvas = new Canvas(pdfCanvas, b2_2rettangoloTestoNumEScadRata);
-		Text b2_2NumRataTesto = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ProgressivoBoll) + "Â° RATA ").setFont(asset.getNumRataFont());
+		Text b2_2NumRataTesto = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ProgressivoBoll) + "° RATA ").setFont(asset.getNumRataFont());
 		Text b2_2entroIlTesto = new Text("  entro il  ").setFont(asset.getEntroRateFont());
 		Text b2_2scadenzaTesto = new Text(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ScadenzaRata).setFont(asset.getInEvidenza3Font());
 		Paragraph b2_2paragrafoNumEScadRata = new Paragraph()
@@ -2049,10 +2052,11 @@ public class SalvaPDF {
 		Canvas b2_dataMatrixCanvas = new Canvas(pdfCanvas, b2_dataMatrixRectangle);
 		b2_dataMatrixCanvas.add(generaDataMatrix(documento.DatiBollettino.get(bollettinoDiPartenza + 1).QRcodePagoPa, pdf).scaleToFit(72, 72));
 		b2_dataMatrixCanvas.close();
+		}
 
 	}
 
-	private void paginaTreBollettini(PdfPage pageTarget, LeggoAsset asset, Documento documento, PdfDocument pdf, int bollettinoDiPartenza) {
+	private void paginaTreBollettini(PdfPage pageTarget, LeggoAsset asset, Documento documento, PdfDocument pdf, int bollettinoDiPartenza, String tipoStampa) {
 		//inizio LP PG200420 - Errori nel pdf dell'avviso
 		boolean bDebug = false; //se == true mostra alcune aree con fill colorato per verificare posizione e dimensione 
 		//fine LP PG200420 - Errori nel pdf dell'avviso
@@ -2083,8 +2087,8 @@ public class SalvaPDF {
 		// Rate
 		Rectangle oggettoPagamentoRectangle = new Rectangle(32, 715, 445, 60);
 		Canvas oggettoPagamentoCanvas = new Canvas(pdfCanvas, oggettoPagamentoRectangle);
-		Text oggettoPagamentoText = new Text("Rate " + Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza).ProgressivoBoll) + "Â°, " + Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ProgressivoBoll) + "Â°e "
-				+ Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 2).ProgressivoBoll) + "Â°- " + documento.CausaleDocumento).setFont(asset.getTestataFont());
+		Text oggettoPagamentoText = new Text("Rate " + Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza).ProgressivoBoll) + "°, " + Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ProgressivoBoll) + "°e "
+				+ Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 2).ProgressivoBoll) + "°- " + documento.CausaleDocumento).setFont(asset.getTestataFont());
 		Paragraph oggettoPagamentoP = new Paragraph().add(oggettoPagamentoText).setFontColor(ColorConstants.BLACK)
 				.setFontSize(asset.getImporto1Size()).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(18); //FIXME uso getImporto1Size perchÃ© corrisponde alla combinazione di dimensioni del titolo delle pagine successive
 		oggettoPagamentoCanvas.add(oggettoPagamentoP);
@@ -2120,7 +2124,7 @@ public class SalvaPDF {
 		// n3rata
 		Rectangle n3RataRectangle = new Rectangle(32, 704, 186, 15);
 		Canvas n3RataCanvas = new Canvas(pdfCanvas, n3RataRectangle);
-		Text n3RataText1 = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza).ProgressivoBoll) + "Â° ").setFont(asset.getInEvidenza5Font()).setFontSize(asset.getInEvidenza5Size());
+		Text n3RataText1 = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza).ProgressivoBoll) + "° ").setFont(asset.getInEvidenza5Font()).setFontSize(asset.getInEvidenza5Size());
 		Text n3RataText2 = new Text("RATA  ").setFont(asset.getInEvidenza5Font()).setFontSize(asset.getInEvidenza5Size());
 		Text n3RataText3 = new Text(" entro il  ").setFont(asset.getEntroRateFont()).setFontSize(asset.getEntroRateSize());
 		Text n3RataText4 = new Text(documento.DatiBollettino.get(bollettinoDiPartenza).ScadenzaRata).setFont(asset.getInEvidenza5Font()).setFontSize(asset.getInEvidenza1Size()); //non è un errore in evidenza 3 e 1, serve una combinaizone diversa
@@ -2132,7 +2136,7 @@ public class SalvaPDF {
 		// n4rata
 		Rectangle n4RataRectangle = new Rectangle(222, 704, 186, 15);
 		Canvas n4RataCanvas = new Canvas(pdfCanvas, n4RataRectangle);
-		Text n4RataText1 = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ProgressivoBoll) + "Â° ").setFont(asset.getNumRataFont()).setFontSize(asset.getNumRataSize());
+		Text n4RataText1 = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ProgressivoBoll) + "° ").setFont(asset.getNumRataFont()).setFontSize(asset.getNumRataSize());
 		Text n4RataText2 = new Text("RATA  ").setFont(asset.getNumRataFont()).setFontSize(asset.getNumRataSize());
 		Text n4RataText3 = new Text(" entro il  ").setFont(asset.getEntroRateFont()).setFontSize(asset.getEntroRateSize());
 		Text n4RataText4 = new Text(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ScadenzaRata).setFont(asset.getInEvidenza5Font()).setFontSize(asset.getInEvidenza1Size()); //non è un errore in evidenza 3 e 1, serve una combinaizone diversa
@@ -2144,7 +2148,7 @@ public class SalvaPDF {
 		// n5rata
 		Rectangle n5RataRectangle = new Rectangle(420, 704, 186, 15);
 		Canvas n5RataCanvas = new Canvas(pdfCanvas, n5RataRectangle);
-		Text n5RataText1 = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 2).ProgressivoBoll) + "Â° ").setFont(asset.getInEvidenza5Font()).setFontSize(asset.getNumRataSize());
+		Text n5RataText1 = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 2).ProgressivoBoll) + "° ").setFont(asset.getInEvidenza5Font()).setFontSize(asset.getNumRataSize());
 		Text n5RataText2 = new Text("RATA  ").setFont(asset.getNumRataFont()).setFontSize(asset.getNumRataSize());
 		Text n5RataText3 = new Text(" entro il  ").setFont(asset.getEntroRateFont()).setFontSize(asset.getEntroRateSize());
 		Text n5RataText4 = new Text(documento.DatiBollettino.get(bollettinoDiPartenza + 2).ScadenzaRata).setFont(asset.getInEvidenza5Font()).setFontSize(asset.getInEvidenza1Size()); //non Ã¨ un errore in evidenza 3 e 1, serve una combinaizone diversa
@@ -2503,7 +2507,10 @@ public class SalvaPDF {
 		Canvas bancheAltriCanaliDescriptionCanvas3 = new Canvas(pdfCanvas, bancheAltriCanaliDescriptionRectangle3);
 		bancheAltriCanaliDescriptionCanvas3.add(bancheAltriCanaliDescriptionP);
 		bancheAltriCanaliDescriptionCanvas3.close();
-
+		
+		//PAGONET-527 - Introdotta condizione su tipoStampa
+		if(tipoStampa.equals("P")) {
+		
 		// Bollettino 1
 		// Forbici
 		Rectangle b1_forbiciRectangle = new Rectangle(548, 474, 14, 10);
@@ -2544,7 +2551,7 @@ public class SalvaPDF {
 		// Numero Rata
 		Rectangle b1_numeroRataRectangle2 = new Rectangle(437 - asset.getXoffSet() * 2, 463 - asset.getYoffSet() * 2, 230, 15 + asset.getXoffSet());
 		Canvas b1_numeroRataCanvas2 = new Canvas(pdfCanvas, b1_numeroRataRectangle2);
-		Text b1_numeroRataText1 = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza).ProgressivoBoll) + "Â° ").setFont(asset.getNumRataFont());
+		Text b1_numeroRataText1 = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza).ProgressivoBoll) + "° ").setFont(asset.getNumRataFont());
 		Text b1_numeroRataText2 = new Text(" RATA ").setFont(asset.getNumRataFont());
 		Text b1_numeroRataText3 = new Text("  entro il  ").setFont(asset.getEntroRateFont());
 		Text b1_numeroRataText4 = new Text(documento.DatiBollettino.get(bollettinoDiPartenza).ScadenzaRata).setFont(asset.getInEvidenza5Font());
@@ -2801,7 +2808,7 @@ public class SalvaPDF {
 		// Numero Rata 
 		Rectangle b2_numeroRataRectangle2 = new Rectangle(437 - asset.getXoffSet() * 2, 463 - 160  - asset.getYoffSet() * 2, 195, 15 + asset.getXoffSet());
 		Canvas b2_numeroRataCanvas2 = new Canvas(pdfCanvas, b2_numeroRataRectangle2);
-		Text b2_numeroRataText1 = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ProgressivoBoll) + "Â° ").setFont(asset.getNumRataFont());
+		Text b2_numeroRataText1 = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ProgressivoBoll) + "° ").setFont(asset.getNumRataFont());
 		Text b2_numeroRataText2 = new Text(" RATA ").setFont(asset.getNumRataFont());
 		Text b2_numeroRataText3 = new Text("  entro il  ").setFont(asset.getEntroRateFont());
 		Text b2_numeroRataText4 = new Text(documento.DatiBollettino.get(bollettinoDiPartenza + 1).ScadenzaRata).setFont(asset.getInEvidenza5Font());
@@ -3048,7 +3055,7 @@ public class SalvaPDF {
 		// Numero Rata
 		Rectangle b3_numeroRataRectangle2 = new Rectangle(437 - asset.getXoffSet() * 2, 463 - 320  - asset.getYoffSet() * 2, 195, 15 + asset.getXoffSet());
 		Canvas b3_numeroRataCanvas2 = new Canvas(pdfCanvas, b3_numeroRataRectangle2);
-		Text b3_numeroRataText1 = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 2).ProgressivoBoll) + "Â° ").setFont(asset.getNumRataFont());
+		Text b3_numeroRataText1 = new Text(Integer.toString(documento.DatiBollettino.get(bollettinoDiPartenza + 2).ProgressivoBoll) + "° ").setFont(asset.getNumRataFont());
 		Text b3_numeroRataText2 = new Text(" RATA ").setFont(asset.getNumRataFont());
 		Text b3_numeroRataText3 = new Text("  entro il  ").setFont(asset.getEntroRateFont());
 		Text b3_numeroRataText4 = new Text(documento.DatiBollettino.get(bollettinoDiPartenza + 2).ScadenzaRata).setFont(asset.getInEvidenza5Font());
@@ -3254,6 +3261,7 @@ public class SalvaPDF {
 		Canvas b3_cfEnteCreditoreStringCanvas2 = new Canvas(pdfCanvas, b3_cfEnteCreditoreStringRectangle2);
 		b3_cfEnteCreditoreStringCanvas2.add(cfEnteCreditoreStringP);
 		b3_cfEnteCreditoreStringCanvas2.close();
+		}
 	}
 
 //	private static File creaFile(String soggettoPagatore) {
