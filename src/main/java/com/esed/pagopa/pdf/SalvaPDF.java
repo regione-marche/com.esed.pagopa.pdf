@@ -144,13 +144,13 @@ public class SalvaPDF {
 					for (int j = 0; j < elencoBollettini.length - 1; ) {
 						if (elencoBollettini.length - 1 - j >= 3 && (elencoBollettini.length - 1 - j) != 4) {
 							logger.info("chiamato metodo 3 bollettini per pagina");
-							paginaTreBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
+							paginaTreBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j, flusso.TipoStampa);
 							j += 3;
 							continue;
 						}
 						if (elencoBollettini.length - 1 - j >= 2 && (elencoBollettini.length - 1 - j) % 3 != 0) {
 							logger.info("chiamato metodo 2 bollettini per pagina");
-							paginaDueBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
+							paginaDueBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j, flusso.TipoStampa);
 							j += 2;
 							continue;
 						}
