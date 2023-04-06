@@ -1628,6 +1628,9 @@ public class SalvaPDF {
 		b2dxIstruzioniBancheAltroCanvas.add(b2dxIstruzioniBancheAltroParagrafo);
 		b2dxIstruzioniBancheAltroCanvas.close();
 
+		//PAGONET-527 - Introdotta condizione su tipoStampa
+		if(tipoStampa.equals("P")) {
+
 //	BOLLETTINO 1
 //		banda grigia
 		Rectangle b1_2bandaGrigia = new Rectangle(0, 448, 595, 19);
@@ -2049,6 +2052,7 @@ public class SalvaPDF {
 		Canvas b2_dataMatrixCanvas = new Canvas(pdfCanvas, b2_dataMatrixRectangle);
 		b2_dataMatrixCanvas.add(generaDataMatrix(documento.DatiBollettino.get(bollettinoDiPartenza + 1).QRcodePagoPa, pdf).scaleToFit(72, 72));
 		b2_dataMatrixCanvas.close();
+		}
 
 	}
 
