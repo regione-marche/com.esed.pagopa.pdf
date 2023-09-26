@@ -10,12 +10,13 @@ public class FlussoFinto extends Flusso {
 	public FlussoFinto() {
 //		esempio su una proprietà semplice
 		CodiceEnte = "80009280274";
-		TipoStampa = "P"; //PG21X007
+		TipoStampa = "jppa"; //PG21X007
 //		esempio con un oggetto articolato
 		Documento documento1 = new Documento("imposta servizio", "12345678", "Oggetto del pagamento");
+		documento1.NumeroDocumento = "54321";
 //		aggiungiamo l'ente ciucciabocchi
 		DatiAnagrafici datiAnagrafici = new DatiAnagrafici();
-		datiAnagrafici.Denominazione1= "Mario Rossi S.p.A.";
+		datiAnagrafici.Denominazione1= "Mario Rossi";
 		datiAnagrafici.Cf = "MRORSS99M22D810Z";
 		datiAnagrafici.Indirizzo = "Via Vai a Casa";
 		datiAnagrafici.Citta = "Frossedi";
@@ -25,7 +26,7 @@ public class FlussoFinto extends Flusso {
 		DatiCreditore datiCreditore = new DatiCreditore();
 		datiCreditore.CodiceInterbancario = "12345";//cbill
 		datiCreditore.Cf = "CF_ENTE_MAX_16CH";
-		datiCreditore.Denominazione1 = "Comune di Vattel'a Pesca";
+		datiCreditore.Denominazione1 = "Comune di Vattela Pesca";
 		datiCreditore.Denominazione2 = "settore ente = ufficio ente?";
 		datiCreditore.Denominazione3 = "Denominazione 3"; //PG21X007
 //		TODO INSERIRE INFO ENTE
@@ -38,7 +39,7 @@ public class FlussoFinto extends Flusso {
 		bollettino1.BarcodePagoPa = "1 - PAGOPA|002|123456789012345678|12345678901|";
 		bollettino1.QRcodePagoPa = "1 - PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|1 - PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678";
 		bollettino1.AvvisoPagoPa = "0001567890123456123";
-		bollettino1.AutorizCcp = "1 - AUT. DB/xxxx/xxx xxxxx\r\nDEL xx/xx/xxxx";
+		bollettino1.AutorizCcp = "1 - AUT. DB/xxxx/xxx xxxxxxx/xx/xxxx";
 		bollettino1.Codeline2Boll = "100"; // importo in centesimi
 		bollettino1.Codeline12Boll = "1 - 37892987549"; // CC
 		bollettino1.Codeline1Boll = "1 - 1234 5678 9012 3456 123";

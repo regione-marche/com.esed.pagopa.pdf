@@ -1,7 +1,7 @@
 [{
         "tipoTemplate": "POSTE_",
         "cutecute": "000TO",
-        "ente": "12345",
+        "ente": "000P5",
         "idFlusso": "123",
         "cBill": "54321",
         "descrizioneEnte": "Comune di Ala di Stura -",
@@ -37,7 +37,7 @@
                     "codiceFiscaleAlternativo": "09000640012",
                     "idDominio": "01234567890     ",
                     "flusso": {
-                        "cutecute": "000TO",
+                        "cutecute": "000P5",
                         "idFlusso": "123",
                         "societa": "00004",
                         "ccp": "1234567801",
@@ -95,7 +95,7 @@
                     "codiceFiscaleAlternativo": "09000640012",
                     "idDominio": "01234567890     ",
                     "flusso": {
-                        "cutecute": "000TO",
+                        "cutecute": "000P5",
                         "idFlusso": "123",
                         "societa": "00004",
                         "ccp": "1234567801",
@@ -184,7 +184,7 @@
                     }
                 ]
             }, {
-                "codiceEnte": "12345",
+                "codiceEnte": "000P5",
                 "descrizioneEnte": "Comune di Ala di Stura - ",
                 "anno": 2019,
                 "numero": "20190000050000000005",
@@ -211,7 +211,7 @@
                     "codiceFiscaleAlternativo": "09000640012",
                     "idDominio": "01234567890     ",
                     "flusso": {
-                        "cutecute": "000TO",
+                        "cutecute": "000P5",
                         "idFlusso": "123",
                         "societa": "00004",
                         "ccp": "1234567801",
@@ -242,7 +242,7 @@
                     }
                 ]
             }, {
-                "codiceEnte": "12345",
+                "codiceEnte": "000P5",
                 "descrizioneEnte": "Comune di Ala di Stura - ",
                 "anno": 2019,
                 "numero": "20190000050000000004",
@@ -300,7 +300,7 @@
                     }
                 ]
             }, {
-                "codiceEnte": "12345",
+                "codiceEnte": "000P5",
                 "descrizioneEnte": "Comune di Ala di Stura - ",
                 "anno": 2019,
                 "numero": "20190000050000000006",
@@ -358,7 +358,7 @@
                     }
                 ]
             }, {
-                "codiceEnte": "12345",
+                "codiceEnte": "000P5",
                 "descrizioneEnte": "Comune di Ala di Stura - ",
                 "anno": 2019,
                 "numero": "20190000050000000008",
@@ -1420,7 +1420,7 @@
                 "debitore": {
                     "codiceFiscale": "TRTBNG43A04G401F",
                     "nomeCognRagSoc": "TROTTO GATTA BRUNO GIOVANNI",
-                    "indirizzo": "LocalitÃ  CAPOLUOGO 9",
+                    "indirizzo": "LocalitÃ  CAPOLUOGO 9",
                     "comune": "VALPELLINE",
                     "provincia": "AO",
                     "cap": "11010",
@@ -2040,7 +2040,7 @@
                         "progressivoBollettino": 1
                     }
                 },
-                "oggettoPagamento": "CONGUAGLIO SOVRAC BIM IMP CHAMPAGNE II� 2020",
+                "oggettoPagamento": "CONGUAGLIO SOVRAC BIM IMP CHAMPAGNE II� 2020",
                 "listaTributi": [{
                         "anno": 2020,
                         "codiceTributo": "SOV2",
