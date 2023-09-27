@@ -3,13 +3,8 @@
  */
 package com.esed.pagopa.pdf.printer.jppa;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.esed.pagopa.pdf.TipoStampaGeos;
 import com.seda.payer.commons.geos.Documento;
 
-import io.swagger.client.model.ListaTerminaliPOSDto.ContestoPosEnum;
 import it.maggioli.pagopa.jppa.printer.model.ChiaviDebitoDto;
 import it.maggioli.pagopa.jppa.printer.model.ChiaviDebitoDto.CodiceServizioEnum;
 import it.maggioli.pagopa.jppa.printer.model.ChiaviDebitoDto.CodiceTipoDebitoEnum;
@@ -75,7 +70,7 @@ public class InformazioniStampa {
 		if(tipostampa.equals("jppa"))
 		this.avvisaturaDto.setCpIntestatario(doc.DatiBollettino.get(0).AutorizCcp);
 		else {
-			this.avvisaturaDto.setCpIntestatario(doc.DatiBollettino.get(0).AutorizCcp);
+			this.avvisaturaDto.setCpIntestatario("");
 			this.avvisaturaDto.setCpIntestatarioDe(doc.DatiBollettino.get(0).AutorizCcp);
 		}
 		this.avvisaturaDto.setCpNumero(doc.NumeroDocumento);
@@ -83,7 +78,7 @@ public class InformazioniStampa {
 		if(tipostampa.equals("jppa"))
         this.avvisaturaDto.setNome(doc.DatiCreditore.get(0).Denominazione1);
 		else {
-		  this.avvisaturaDto.setNome(doc.DatiCreditore.get(0).Denominazione1);
+		  this.avvisaturaDto.setNome("");
 		  this.avvisaturaDto.setNomeDe(doc.DatiCreditore.get(0).Denominazione1);
 		}
 	}
@@ -101,15 +96,21 @@ public class InformazioniStampa {
 	}
 	
 	public StampaBollettinoRichiesta bollRichiesta(Documento doc, String logo64,String tipoStampa) {
+		
 		StampaBollettinoRichiesta bollRichiesta = null;
-		if(tipoStampa.equals("jppade")) {
-			return richiestade(doc,logo64);
-		}else {
+//		if(tipoStampa.equals("jppade")) {
+//			return richiestade(doc,logo64);
+//		}else {
 		
 		bollRichiesta = new StampaBollettinoRichiesta();
 		PosizioneDebitoriaAvvisaturaDto posDeb  = new PosizioneDebitoriaAvvisaturaDto();
+		if(tipoStampa.equals("jppade")) {
+			posDeb.setCausaleDebitoriaDe(doc.CausaleDocumento);
+			posDeb.setCausaleDebitoria("");
+			}
+		else {
 		posDeb.setCausaleDebitoria(doc.CausaleDocumento);
-		//posDeb.setDataScadenza(buildInstant(doc.DatiBollettino.get(0).ScadenzaRata));
+		}
 		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento));
 		posDeb.setNumeroAvviso(doc.NumeroDocumento);
 		posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Indirizzo);
@@ -133,9 +134,12 @@ public class InformazioniStampa {
 		bollRichiesta.addPosizioneDebitoriaItem(posDeb); // causale
 		bollRichiesta.datiEnte(this.avvisaturaDto);
 		bollRichiesta.setNumeroAvviso(doc.NumeroDocumento);
-		   bollRichiesta.setLocale(it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta.LocaleEnum.IT);
-        bollRichiesta.setBase64FileLogoEnte(logo64);
-	}
+		if(tipoStampa.equals("jppade")) { bollRichiesta.setLocale(it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta.LocaleEnum.DE);
+	       }
+		else {
+		bollRichiesta.setLocale(it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta.LocaleEnum.IT);
+		}
+		bollRichiesta.setBase64FileLogoEnte(logo64);
 		
 		return bollRichiesta;
 	}
