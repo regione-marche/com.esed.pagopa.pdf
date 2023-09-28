@@ -114,9 +114,10 @@ public class SalvaPDFBolzano {
 		ByteArrayOutputStream baos = null;
 		String passwordJppa = propertiesTree.getProperty(PropKeys.passwordJppa.format("000P6"));
 		String userJppa = propertiesTree.getProperty(PropKeys.utenteJppa.format("000P6"));
+		String urlPrinter = propertiesTree.getProperty(PropKeys.urlprinter.format("000P6"));
 		
 		if(tipostampa.equals("jppa") || tipostampa.equals("jppade") ) {
-			return stampaJppa(flusso,passwordJppa,userJppa,"").getBytes();
+			return stampaJppa(flusso,passwordJppa,userJppa,urlPrinter,"").getBytes();
 		}
 		else {
 		for (int i = 0; i < flusso.Documentdata.size(); i++) {
@@ -201,10 +202,10 @@ public class SalvaPDFBolzano {
 		return base64Image.stream().collect(Collectors.joining());
 	}
 
-	private static String stampaJppa(Flusso flusso,String pass,String user, String codiceIpa) throws ValidazioneException {
+	private static String stampaJppa(Flusso flusso,String pass,String user,String urlPrinter, String codiceIpa) throws ValidazioneException {
 		StampaPdfJppaPagonet stampa = null;
 		try {
-		 stampa = new StampaPdfJppaPagonet(user,pass);
+		 stampa = new StampaPdfJppaPagonet(user,pass,urlPrinter);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -240,7 +241,8 @@ public class SalvaPDFBolzano {
 				if (bollettino999 != null) {
 					
 					info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa); // Inofrmazioni Avvisatura
-					res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),LogoBollettino.getLogoBolzano64(),flusso.TipoStampa));
+					res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
+							LogoBollettino.getLogoBolzano64(),flusso.TipoStampa));
 				}
 			
 				//Se i bollettini sono 2 allora non c rateizzazione perche il numero 1 e il 999 entrambi con dati coincidenti

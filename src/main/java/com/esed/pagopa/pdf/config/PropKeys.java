@@ -10,7 +10,8 @@ public enum PropKeys {
 	pathLogoEnteSizeX,
 	pathLogoEnteSizeY,
 	utenteJppa,
-	passwordJppa
+	passwordJppa,
+	urlprinter
 	;
 
     private static ResourceBundle rb;
