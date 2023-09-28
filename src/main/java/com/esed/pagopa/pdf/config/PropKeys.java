@@ -8,7 +8,10 @@ public enum PropKeys {
 	usaDescTipServ,
 	pathLogoEnte,
 	pathLogoEnteSizeX,
-	pathLogoEnteSizeY
+	pathLogoEnteSizeY,
+	utenteJppa,
+	passwordJppa,
+	urlprinter
 	;
 
     private static ResourceBundle rb;
