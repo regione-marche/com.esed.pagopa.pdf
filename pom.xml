@@ -25,6 +25,14 @@
 	
 	<dependencies>
 		
+		<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+		<dependency>
+		    <groupId>org.apache.pdfbox</groupId>
+		    <artifactId>pdfbox</artifactId>
+		    <version>3.0.0</version>
+		</dependency>
+
+		
 		<dependency>
 			<groupId>com.seda.payer.pgec.webservice.client</groupId>
 			<artifactId>com.seda.payer.pgec.webservice.client</artifactId>

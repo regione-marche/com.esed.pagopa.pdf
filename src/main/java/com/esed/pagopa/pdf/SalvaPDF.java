@@ -3,21 +3,26 @@ package com.esed.pagopa.pdf;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import javax.sql.rowset.CachedRowSet;
 
+import org.apache.pdfbox.io.MemoryUsageSetting;
+import org.apache.pdfbox.multipdf.PDFMergerUtility;
 
 import com.esed.pagopa.pdf.LeggoAsset.FormatoStampa;
 import com.esed.pagopa.pdf.config.PropKeys;
@@ -25,6 +30,7 @@ import com.esed.pagopa.pdf.printer.jppa.InformazioniStampa;
 import com.esed.pagopa.pdf.printer.jppa.StampaPdfJppaPagonet;
 import com.itextpdf.barcodes.BarcodeDataMatrix;
 import com.itextpdf.barcodes.BarcodeQRCode;
+import com.itextpdf.io.source.OutputStream;
 import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.colors.DeviceRgb;
 import com.itextpdf.kernel.geom.PageSize;
@@ -214,9 +220,10 @@ public class SalvaPDF {
 		PdfDocument pdf = null;
 		Document document = null;
 		File file = null;
+		File fileGuida = null;
 		
 		if(file512 != null) {
-			if(file512.ente.equals("000P6")) {
+			if(file512.cutecute.equals("000P6")) {
 			   tipoStampa = this.propertiesTree.getProperty(PropKeys.tipoStampa.format("000P6"));
 			   informazioniStampa.setDebito(file512.ente,null, null, null, null);
 			}
@@ -226,10 +233,13 @@ public class SalvaPDF {
 			String nomeFile = generaNomeFile(file512);
 			com.seda.payer.commons.geos.Flusso flusso = null;
 			
-			File fileGuida = new File(LeggoAsset.DIRECTORY_SALVATAGGIO_FILE, nomeFile + ".txt");
-			GuidaDocumento guidaDocumento = new GuidaDocumento(/*nomeFile, */fileGuida);
+			
 			
 			if(!tipoStampa.equals("jppa")) {
+			
+			fileGuida = new File(LeggoAsset.DIRECTORY_SALVATAGGIO_FILE, nomeFile + ".txt");
+			GuidaDocumento guidaDocumento = new GuidaDocumento(/*nomeFile, */fileGuida);
+				
 			System.out.println("LeggoAsset.DIRECTORY_SALVATAGGIO_FILE = " + LeggoAsset.DIRECTORY_SALVATAGGIO_FILE);
 			flusso = ConvertiFile512FlussoGeos.convertiFlusso(file512, this.propertiesTree);  // CONTROLLA LA CLASSE DEL DOCUMENTO E RESTITUISCE SEMPRE UN OGGETTO FLUSSO
 			
@@ -258,52 +268,75 @@ public class SalvaPDF {
 			
 			}
 			else {
-				//flusso = ConvertiFile512FlussoGeos.convertiFlusso(file512, this.propertiesTree);
-				flusso = new FlussoJppa(file512.cutecute,file512.ente,"jppa");
+				
+				fileGuida = new File(nomeFile+".pdf");
+				
+				String passwordJppa = propertiesTree.getProperty(PropKeys.passwordJppa.format(file512.cutecute));
+				String userJppa = propertiesTree.getProperty(PropKeys.utenteJppa.format(file512.cutecute));
+				String urlPrinter = propertiesTree.getProperty(PropKeys.urlprinter.format(file512.cutecute));
+				
+				flusso = ConvertiFile512FlussoGeos.convertiFlusso(file512, this.propertiesTree);
+				flusso.TipoStampa = "jppa";
+
+				String nomeFileOrigine = file512.getFileName();
+				System.out.println("nomeFileOrigine = " + nomeFileOrigine);
+				System.out.println("file512.tipoTemplate = " + file512.tipoTemplate);
+				
 				//FlussoJppa
-				stampaJppa(flusso,"");
+				stampaJppa(flusso,"",userJppa,passwordJppa,urlPrinter,file512.idFlusso,nomeFile,pdf);
 			}
 			
-//			file512.listaDocumenti.stream().forEach(documento -> {
-//				if(documento.listaAvvisi.size() > 0) {
-//					try {
-//						stampaDocumento(flusso, asset, pdf, guidaDocumento/*, document*/, file.getName(), nomeFileOrigine);
-//					} catch (NumberFormatException | IOException | ValidazioneException e) {
-//						throw new RuntimeException(e);
-//					}
-//				}
-//			});
-			if(pdf!=null)
-			  pdf.close();
-			if(document!=null)
-			  document.close();
-			
-			//comprime il file pdf e cancella il file originale
-			FileOutputStream fos = new FileOutputStream(file.getAbsolutePath() + ".zip");
-			ZipOutputStream zipOut = new ZipOutputStream(fos);
-			ZipEntry zipFile = new ZipEntry(file.getName());
-			zipOut.putNextEntry(zipFile);
-			FileInputStream fisDaZippare = new FileInputStream(file);
-			byte[] bytes = new byte[1024];
-			int length;
-			while((length = fisDaZippare.read(bytes)) >= 0) {
-				zipOut.write(bytes, 0, length);
+			if(!tipoStampa.equals("jppa")) {
+				if(pdf!=null)
+				  pdf.close();
+				if(document!=null)
+				  document.close();
+				
+				//comprime il file pdf e cancella il file originale
+				FileOutputStream fos = new FileOutputStream(file.getAbsolutePath() + ".zip");
+				ZipOutputStream zipOut = new ZipOutputStream(fos);
+				ZipEntry zipFile = new ZipEntry(file.getName());
+				zipOut.putNextEntry(zipFile);
+				FileInputStream fisDaZippare = new FileInputStream(file);
+				byte[] bytes = new byte[1024];
+				int length;
+				while((length = fisDaZippare.read(bytes)) >= 0) {
+					zipOut.write(bytes, 0, length);
+				}
+				zipOut.close();
+				fisDaZippare.close();
+				fos.close();
+				file.delete();
+				
+				Thread.sleep(1000);
+			} else {
+				FileOutputStream fos = new FileOutputStream(fileGuida+".zip");
+				ZipOutputStream zipOut = new ZipOutputStream(fos);
+				ZipEntry zipFile = new ZipEntry(fileGuida.getName());
+				zipOut.putNextEntry(zipFile);
+				FileInputStream fisDaZippare = new FileInputStream(fileGuida);
+				byte[] bytes = new byte[1024];
+				int length;
+				while((length = fisDaZippare.read(bytes)) >= 0) {
+					zipOut.write(bytes, 0, length);
+				}
+				zipOut.close();
+				fisDaZippare.close();
+				fos.close();
+				fileGuida.delete();
+				
+				Thread.sleep(1000);
 			}
-			zipOut.close();
-			fisDaZippare.close();
-			fos.close();
-			file.delete();
-			
-			Thread.sleep(1000);
 		}
 		
 	}
 	
 	
 	
-    private static String stampaJppa(Flusso flusso, String codiceIpa) throws ValidazioneException {
+    private static int stampaJppa(Flusso flusso, String codiceIpa,String userJppa,
+    		String passwordJppa,String urlPrinter,String nomeFile,String nomefileguida,PdfDocument pdf) throws ValidazioneException {
 		
-		StampaPdfJppaPagonet stampa = new StampaPdfJppaPagonet("");
+		StampaPdfJppaPagonet stampa = new StampaPdfJppaPagonet(userJppa,passwordJppa,urlPrinter);
 		
 		InformazioniStampa info = new InformazioniStampa();
 		
@@ -311,68 +344,153 @@ public class SalvaPDF {
 
 		ByteArrayOutputStream baos = null;
 		
+		FileOutputStream out = null;
+		
+		PDFMergerUtility obj = null;
+		
+		File file = null;
+		
+		int stato = 1;
+		
+//		guidaDocumento.numeroPaginaIniziale = 1;
 		for (int i = 0; i < flusso.Documentdata.size(); i++) {
-			//ValidaFlusso controlla i dati del flusso, se sono corretti restituisce un array contenente la sequenza
-			//dei numeri progressivi dei bollettini, se il numero di bollettini == zero non si esegue la stampa
-			int[] elencoBollettini = null;
+			
 			try {
-				elencoBollettini = ValidaFlusso.validaFlussoBolzano(flusso.Documentdata.get(i), flusso.TipoStampa);
-			} catch (ValidazioneException e) {
+				out = new FileOutputStream(i+".pdf");
+			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-			if (elencoBollettini.length < 1) {
-				return null;
-			}
-			//NOTA. Per adesso consentita la stampa solo per avviso con rataunica ==> 2 bollettini 1 e 999
-			if(elencoBollettini.length != 2) {
-				throw new ValidazioneException("Stampa abilitata solo per rata unica");
-			}
-			System.out.println(Arrays.toString(elencoBollettini) + "--------------- ELENCO BOLLETTINI BOLZANO -----------------");
-			if (elencoBollettini.length > 0) {
-				Bollettino bollettino999 = flusso.Documentdata.get(i).DatiBollettino
-						.stream()
-						.filter(x -> x.ProgressivoBoll == 999)
-						.findFirst()
-						.orElse(null);
-				if (bollettino999 != null) {
-					
-					// Stampo tramite il printer jppa
-					info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa); // Inofrmazioni Avvisatura
-					res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),LogoBollettino.getLogoBolzano64(),flusso.TipoStampa));
-				}
 			
-				//Se i bollettini sono 2 allora non c rateizzazione perche il numero 1 e il 999 entrambi con dati coincidenti
-				//se invece i bollettini sono almeno 3 il 999 contiene la rata unica e gli altri la rateizzazione
-				System.out.println("Numero di bollettini nel documento: " + elencoBollettini.length);
+			int pagineAggiunteDocumento = 0;
+//			validaFlusso controlla i dati del flusso, 
+//			se sono corretti restituisce un array contenente la sequenza dei numeri progressivi dei bollettini, 
+//			se il numero di bollettini è zero la stampa non parte
+			int[] elencoBollettini = ValidaFlusso.validaFlusso(flusso.Documentdata.get(i), flusso.TipoStampa);
+//			chiude il metodo con stato a 1 se il numero dei bollettini è 0
+			if (elencoBollettini.length < 1) {
+				return stato;
+			}
+//			accerta che il bollettino n° 999  vada alla fine
+			Arrays.sort(elencoBollettini);
+			
+			System.out.println(Arrays.toString(elencoBollettini) + "---------------ELENCO BOLLETTINI-----------------");
+			
+			if (elencoBollettini.length > 0) {
+				
+//			PREDISPONE LA STAMPA DEL BOLLETTINO N° 999 OVVERO LA RATA UNICA
+//				paginaUnBollettino(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, flusso.Documentdata.get(i).DatiBollettino.get(elencoBollettini[elencoBollettini.length - 1]) /* PASSA SOLO LA RATA UNICA BOLLETTINO */);
+//				Bollettino bollettino999 = flusso.Documentdata.get(i).DatiBollettino
+//						.stream()
+//						.filter(x -> x.ProgressivoBoll == 999)
+//						.findFirst()
+//						.orElse(null);
+				
+						info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa); // Inofrmazioni Avvisatura
+						res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
+						LogoBollettino.getLogoBolzano64(),flusso.TipoStampa));
+						
+						
+						try {
+							out.write(Base64.getDecoder().decode(res.getFileBase64Encoded()));
+						           
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						
+						try {
+							out.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						
+				pagineAggiunteDocumento++;
+				
+//				se i bollettini sono 2 allora non c'è rateizzazione perchè Ã¨ il numero 1 e il 999 entrambi con dati coincidenti
+//				se invece i bollettini sono almeno 3 il 999 contiene la rata unica e gli altri 2 la rateizzazione
+				System.out.println(elencoBollettini.length);
 				if (elencoBollettini.length > 2) {
 					for (int j = 0; j < elencoBollettini.length - 1; ) {
-						if (elencoBollettini.length - 1 - j >= 3 && (elencoBollettini.length - 1 - j) != 4 && (flusso.TipoStampa.equals("jppa"))) {
+						if (elencoBollettini.length - 1 - j >= 3 && (elencoBollettini.length - 1 - j) != 4) {
 							System.out.println("chiamato metodo 3 bollettini per pagina");
-							//paginaTreBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
 							info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa); // Inofrmazioni Avvisatura
-							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),LogoBollettino.getLogoBolzano64(),flusso.TipoStampa));
+							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
+							LogoBollettino.getLogoBolzano64(),flusso.TipoStampa));
+							
+							
+							try {
+								out.write(Base64.getDecoder().decode(res.getFileBase64Encoded()));
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							
+							try {
+								out.close();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 							j += 3;
+							pagineAggiunteDocumento++;
 							continue;
 						}
-						if (elencoBollettini.length - 1 - j >= 2 && (elencoBollettini.length - 1 - j) % 3 != 0 && (flusso.TipoStampa.equals("jppa"))) {
+						if (elencoBollettini.length - 1 - j >= 2 && (elencoBollettini.length - 1 - j) % 3 != 0) {
 							System.out.println("chiamato metodo 2 bollettini per pagina");
-							//paginaDueBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
 							info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa); // Inofrmazioni Avvisatura
-							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),LogoBollettino.getLogoBolzano64(),flusso.TipoStampa));
+							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
+							LogoBollettino.getLogoBolzano64(),flusso.TipoStampa));
+							
+							
+							try {
+								out.write(Base64.getDecoder().decode(res.getFileBase64Encoded()));
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							
+							try {
+								out.close();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 							j += 2;
+							pagineAggiunteDocumento++;
 							continue;
 						}
 						if (j < 0)
 							break;
 					}
 				}
+				stato = 0;
+			} else {
+				throw new ValidazioneException("Mancano i bollettini");
+			}
 		}
-	}
-		return res.getFileBase64Encoded();
+		
+		try {
+			
+	           // Instantiating PDFMergerUtility class
+		     
+	           obj = new PDFMergerUtility();
+	     
+	           // Setting the destination file path
+	     
+	           obj.setDestinationFileName(nomefileguida+".pdf");
+	     
+	           // Add all source files, to be merged
+	           for(int i=0;i<flusso.Documentdata.size();i++) {
+	        	   obj.addSource(i+".pdf");
+	           }
+
+			obj.mergeDocuments(null);
+			
+	           for(int i=0;i<flusso.Documentdata.size();i++) {
+	        	   Files.delete(Paths.get(i+".pdf")); 
+	           }
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return 0;
 
 }
-	
-	
 	
 	
 	
