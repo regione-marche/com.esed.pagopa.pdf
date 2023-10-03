@@ -45,8 +45,8 @@ public class FaccioPDFTest {
 		
 //		puntuale(propertiesTree, cuteCute);
 
-//		massivo(propertiesTree);
-		puntuale(propertiesTree,cuteCute);
+		massivo(propertiesTree);
+//		puntuale(propertiesTree,cuteCute);
 	}
 
 	static void puntuale(PropertiesTree propertiesTree, String cuteCute) throws Exception {

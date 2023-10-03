@@ -1,7 +1,7 @@
 [{
         "tipoTemplate": "POSTE_",
-        "cutecute": "000TO",
-        "ente": "000P5",
+        "cutecute": "000P6",
+        "ente": "000P6",
         "idFlusso": "123",
         "cBill": "54321",
         "descrizioneEnte": "Comune di Ala di Stura -",
@@ -37,8 +37,8 @@
                     "codiceFiscaleAlternativo": "09000640012",
                     "idDominio": "01234567890     ",
                     "flusso": {
-                        "cutecute": "000P5",
-                        "idFlusso": "123",
+                        "cutecute": "000P6",
+                        "idFlusso": "1234",
                         "societa": "00004",
                         "ccp": "1234567801",
                         "ccpIntest": "prova",
@@ -95,8 +95,8 @@
                     "codiceFiscaleAlternativo": "09000640012",
                     "idDominio": "01234567890     ",
                     "flusso": {
-                        "cutecute": "000P5",
-                        "idFlusso": "123",
+                        "cutecute": "000P6",
+                        "idFlusso": "12345",
                         "societa": "00004",
                         "ccp": "1234567801",
                         "ccpIntest": "prova",
@@ -153,8 +153,8 @@
                     "codiceFiscaleAlternativo": "09000640012",
                     "idDominio": "01234567890     ",
                     "flusso": {
-                        "cutecute": "000TO",
-                        "idFlusso": "123",
+                        "cutecute": "000P6",
+                        "idFlusso": "1235654",
                         "societa": "00004",
                         "ccp": "1234567801",
                         "ccpIntest": "prova",
@@ -211,8 +211,8 @@
                     "codiceFiscaleAlternativo": "09000640012",
                     "idDominio": "01234567890     ",
                     "flusso": {
-                        "cutecute": "000P5",
-                        "idFlusso": "123",
+                        "cutecute": "000P6",
+                        "idFlusso": "12343543",
                         "societa": "00004",
                         "ccp": "1234567801",
                         "ccpIntest": "prova",
@@ -269,8 +269,8 @@
                     "codiceFiscaleAlternativo": "09000640012",
                     "idDominio": "01234567890     ",
                     "flusso": {
-                        "cutecute": "000TO",
-                        "idFlusso": "123",
+                        "cutecute": "000P6",
+                        "idFlusso": "1233333",
                         "societa": "00004",
                         "ccp": "1234567801",
                         "ccpIntest": "prova",
@@ -327,8 +327,8 @@
                     "codiceFiscaleAlternativo": "09000640012",
                     "idDominio": "01234567890     ",
                     "flusso": {
-                        "cutecute": "000TO",
-                        "idFlusso": "123",
+                        "cutecute": "000P6",
+                        "idFlusso": "1231111",
                         "societa": "00004",
                         "ccp": "1234567801",
                         "ccpIntest": "prova",
@@ -358,7 +358,7 @@
                     }
                 ]
             }, {
-                "codiceEnte": "000P5",
+                "codiceEnte": "000P6",
                 "descrizioneEnte": "Comune di Ala di Stura - ",
                 "anno": 2019,
                 "numero": "20190000050000000008",
@@ -385,7 +385,7 @@
                     "codiceFiscaleAlternativo": "09000640012",
                     "idDominio": "01234567890     ",
                     "flusso": {
-                        "cutecute": "000TO",
+                        "cutecute": "000P6",
                         "idFlusso": "123",
                         "societa": "00004",
                         "ccp": "1234567801",
@@ -443,7 +443,7 @@
                     "codiceFiscaleAlternativo": "09000640012",
                     "idDominio": "01234567890     ",
                     "flusso": {
-                        "cutecute": "000TO",
+                        "cutecute": "000P6",
                         "idFlusso": "123",
                         "societa": "00004",
                         "ccp": "1234567801",
@@ -501,7 +501,7 @@
                     "codiceFiscaleAlternativo": "09000640012",
                     "idDominio": "01234567890     ",
                     "flusso": {
-                        "cutecute": "000TO",
+                        "cutecute": "000P6",
                         "idFlusso": "123",
                         "societa": "00004",
                         "ccp": "1234567801",
@@ -559,7 +559,7 @@
                     "codiceFiscaleAlternativo": "09000640012",
                     "idDominio": "01234567890     ",
                     "flusso": {
-                        "cutecute": "000TO",
+                        "cutecute": "000P6",
                         "idFlusso": "123",
                         "societa": "00004",
                         "ccp": "1234567801",
@@ -617,7 +617,7 @@
                     "codiceFiscaleAlternativo": "09000640012",
                     "idDominio": "01234567890     ",
                     "flusso": {
-                        "cutecute": "000TO",
+                        "cutecute": "000P6",
                         "idFlusso": "123",
                         "societa": "00004",
                         "ccp": "1234567801",

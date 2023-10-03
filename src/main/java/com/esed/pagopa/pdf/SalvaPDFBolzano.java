@@ -116,6 +116,10 @@ public class SalvaPDFBolzano {
 		String userJppa = propertiesTree.getProperty(PropKeys.utenteJppa.format("000P6"));
 		String urlPrinter = propertiesTree.getProperty(PropKeys.urlprinter.format("000P6"));
 		
+		System.out.println("password printer- " + passwordJppa);
+		System.out.println("user printer- " + userJppa);
+		System.out.println("url printer - " + urlPrinter);
+		
 		if(tipostampa.equals("jppa") || tipostampa.equals("jppade") ) {
 			return stampaJppa(flusso,passwordJppa,userJppa,urlPrinter,"").getBytes();
 		}
@@ -203,9 +207,12 @@ public class SalvaPDFBolzano {
 	}
 
 	private static String stampaJppa(Flusso flusso,String pass,String user,String urlPrinter, String codiceIpa) throws ValidazioneException {
+		System.out.println("Dentro metodo stampa Jppa");
+		
 		StampaPdfJppaPagonet stampa = null;
 		try {
 		 stampa = new StampaPdfJppaPagonet(user,pass,urlPrinter);
+		 System.out.println("Oggetto stampa" + stampa.toString());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -241,6 +248,7 @@ public class SalvaPDFBolzano {
 				if (bollettino999 != null) {
 					
 					info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa); // Inofrmazioni Avvisatura
+					System.out.println("info AvvisaturaDto - " + info.toString());
 					res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
 							LogoBollettino.getLogoBolzano64(),flusso.TipoStampa));
 				}

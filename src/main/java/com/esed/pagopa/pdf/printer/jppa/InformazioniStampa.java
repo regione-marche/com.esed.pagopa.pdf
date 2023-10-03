@@ -55,7 +55,11 @@ public class InformazioniStampa {
 		stampaAvvisaturaRichiesta.base64FileLogoEnte(logoente64);
         stampaAvvisaturaRichiesta.chiaviDebito(this.chiaviDebitoDto);
         stampaAvvisaturaRichiesta.setLocale(locale);
+        if(numeroAvviso==null) {
+        	stampaAvvisaturaRichiesta.setNumeroAvviso("");
+        }else {
         stampaAvvisaturaRichiesta.setNumeroAvviso(numeroAvviso);
+        }
         
         return this.stampaAvvisaturaRichiesta;
 	}
@@ -67,13 +71,31 @@ public class InformazioniStampa {
 		this.avvisaturaDto.setCodiceInterbancario(doc.DatiCreditore.get(0).CodiceInterbancario);
 		this.avvisaturaDto.setCpAbilitato(!(doc.DatiCreditore.get(0).CodiceInterbancario.equals("00000")));
 		this.avvisaturaDto.cpAutorizzazione(doc.DatiBollettino.get(0).AutorizCcp);
-		if(tipostampa.equals("jppa"))
-		this.avvisaturaDto.setCpIntestatario(doc.DatiBollettino.get(0).AutorizCcp);
-		else {
+		if(doc.DatiBollettino.get(0).AutorizCcp == null) {
 			this.avvisaturaDto.setCpIntestatario("");
-			this.avvisaturaDto.setCpIntestatarioDe(doc.DatiBollettino.get(0).AutorizCcp);
+			this.avvisaturaDto.setCpIntestatarioDe("");
 		}
-		this.avvisaturaDto.setCpNumero(doc.NumeroDocumento);
+		else {
+			if(tipostampa.equals("jppade")) {
+				this.avvisaturaDto.setCpIntestatario("");
+				this.avvisaturaDto.setCpIntestatarioDe(doc.DatiBollettino.get(0).AutorizCcp);
+			}
+				if(tipostampa.equals("jppa")) {
+				this.avvisaturaDto.setCpIntestatario(doc.DatiBollettino.get(0).AutorizCcp);
+				this.avvisaturaDto.setCpIntestatarioDe("");
+			}
+			
+		}
+		
+		if(doc.NumeroDocumento == null) {
+			System.out.println("Numero documento NULL Avvisatura DTO");
+			System.out.println("doc.NumeroDocumento = " + doc.NumeroDocumento);
+			this.avvisaturaDto.setCpNumero("NN");
+		}
+		else {
+			this.avvisaturaDto.setCpNumero(doc.NumeroDocumento);
+		}
+		
 		this.avvisaturaDto.setSettore(doc.DatiCreditore.get(0).Denominazione2);
 		if(tipostampa.equals("jppa"))
         this.avvisaturaDto.setNome(doc.DatiCreditore.get(0).Denominazione1);
@@ -112,28 +134,38 @@ public class InformazioniStampa {
 		posDeb.setCausaleDebitoria(doc.CausaleDocumento);
 		}
 		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento));
-		posDeb.setNumeroAvviso(doc.NumeroDocumento);
-		posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Indirizzo);
-		posDeb.setTitDebitoCapSedeLegale("");
-		posDeb.setTitDebitoCf(doc.DatiAnagrafici.get(0).Cf);
-		posDeb.setTitDebitoCivicoRes("");
-		posDeb.setTitDebitoCivicoSedeLegale("");
-		posDeb.setTitDebitoCognome("");
-		posDeb.setTitDebitoComuneRes(doc.DatiAnagrafici.get(0).Citta);
-		posDeb.setTitDebitoComuneSedeLegale("");
-		posDeb.setTitDebitoIndirizzoRes("");
-		posDeb.setTitDebitonazioneRes("");
-		posDeb.setTitDebitoNazioneSedeLegale("");
-		posDeb.setTitDebitoNome("");
-		posDeb.setTitDebitoNominativo(doc.DatiAnagrafici.get(0).Denominazione1);
-		posDeb.setTitDebitoprovRes("");
-		posDeb.setTitDebitoProvSedeLegale(doc.DatiAnagrafici.get(0).Provincia);
-		posDeb.setTitDebitoRagioneSociale("");
-		posDeb.setTitDebitoIndirizzoSedeLegale("");
+		if(doc.NumeroDocumento==null) {
+			System.out.println("Numero documento NULL PosDebitoria");
+			System.out.println("doc.NumeroDocumento = " + doc.NumeroDocumento);
+			posDeb.setNumeroAvviso("NN");
+		}else {
+			posDeb.setNumeroAvviso(doc.NumeroDocumento);
+		}
+			posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Indirizzo);
+			posDeb.setTitDebitoCapSedeLegale("");
+			posDeb.setTitDebitoCf(doc.DatiAnagrafici.get(0).Cf);
+			posDeb.setTitDebitoCivicoRes(doc.DatiAnagrafici.get(0).Indirizzo);
+			posDeb.setTitDebitoCivicoSedeLegale("");
+			posDeb.setTitDebitoCognome("");
+			posDeb.setTitDebitoComuneRes(doc.DatiAnagrafici.get(0).Citta);
+			posDeb.setTitDebitoComuneSedeLegale("");
+			posDeb.setTitDebitoIndirizzoRes("");
+			posDeb.setTitDebitonazioneRes("");
+			posDeb.setTitDebitoNazioneSedeLegale("");
+			posDeb.setTitDebitoNome("");
+			posDeb.setTitDebitoNominativo(doc.DatiAnagrafici.get(0).Denominazione1);
+			posDeb.setTitDebitoprovRes("");
+			posDeb.setTitDebitoProvSedeLegale(doc.DatiAnagrafici.get(0).Provincia);
+			posDeb.setTitDebitoRagioneSociale("");
+			posDeb.setTitDebitoIndirizzoSedeLegale("");
 		
 		bollRichiesta.addPosizioneDebitoriaItem(posDeb); // causale
 		bollRichiesta.datiEnte(this.avvisaturaDto);
+        if(doc.NumeroDocumento==null) {
+            bollRichiesta.setNumeroAvviso("000000");
+        }else {
 		bollRichiesta.setNumeroAvviso(doc.NumeroDocumento);
+        }
 		if(tipoStampa.equals("jppade")) { bollRichiesta.setLocale(it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta.LocaleEnum.DE);
 	       }
 		else {
@@ -151,7 +183,12 @@ public class InformazioniStampa {
 		PosizioneDebitoriaAvvisaturaDto posDeb  = new PosizioneDebitoriaAvvisaturaDto();
 		posDeb.setCausaleDebitoriaDe(doc.CausaleDocumento);
 		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento));
-		posDeb.setNumeroAvviso(doc.NumeroDocumento);
+		if(doc.NumeroDocumento==null) {
+			System.out.println("Numero documento NULL Posizione Debitoria");
+			posDeb.setNumeroAvviso("NN");
+		}else {
+			posDeb.setNumeroAvviso(doc.NumeroDocumento);
+		}
 		posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Indirizzo);
 		posDeb.setTitDebitoCapSedeLegale("");
 		posDeb.setTitDebitoCf(doc.DatiAnagrafici.get(0).Cf);
