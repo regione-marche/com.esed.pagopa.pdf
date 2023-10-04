@@ -3,6 +3,17 @@
  */
 package com.esed.pagopa.pdf.printer.jppa;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Locale;
+
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
+
 import com.seda.payer.commons.geos.Documento;
 
 import it.maggioli.pagopa.jppa.printer.model.ChiaviDebitoDto;
@@ -65,21 +76,23 @@ public class InformazioniStampa {
 	}
 	
 	//Stampa Bollettino
-	public void setAvvisauraDto(Documento doc,String tipostampa) {
+	public void setAvvisauraDto(Documento doc,String tipostampa,String cutecute) {
 		this.avvisaturaDto = new DatiEnteAvvisaturaDto();
 		this.avvisaturaDto.setCodiceFiscale(doc.DatiCreditore.get(0).Cf);
 		this.avvisaturaDto.setCodiceInterbancario(doc.DatiCreditore.get(0).CodiceInterbancario);
-		this.avvisaturaDto.setCpAbilitato(!(doc.DatiCreditore.get(0).CodiceInterbancario.equals("00000")));
+		if(cutecute.equals("000P6")) {
+			this.avvisaturaDto.setCpAbilitato(false);
+		}
+		else {
+			this.avvisaturaDto.setCpAbilitato(!(doc.DatiCreditore.get(0).CodiceInterbancario.equals("00000")));
+		}
+		
 		this.avvisaturaDto.cpAutorizzazione(doc.DatiBollettino.get(0).AutorizCcp);
 		if(doc.DatiBollettino.get(0).AutorizCcp == null) {
 			this.avvisaturaDto.setCpIntestatario("");
 			this.avvisaturaDto.setCpIntestatarioDe("");
 		}
 		else {
-			if(tipostampa.equals("jppade")) {
-				this.avvisaturaDto.setCpIntestatario("");
-				this.avvisaturaDto.setCpIntestatarioDe(doc.DatiBollettino.get(0).AutorizCcp);
-			}
 				if(tipostampa.equals("jppa")) {
 				this.avvisaturaDto.setCpIntestatario(doc.DatiBollettino.get(0).AutorizCcp);
 				this.avvisaturaDto.setCpIntestatarioDe("");
@@ -87,37 +100,31 @@ public class InformazioniStampa {
 			
 		}
 		
-		if(doc.NumeroDocumento == null) {
+		if(doc.DatiBollettino.get(0).AutorizCcp == null) {
 			System.out.println("Numero documento NULL Avvisatura DTO");
-			System.out.println("doc.NumeroDocumento = " + doc.NumeroDocumento);
+			System.out.println("doc.NumeroDocumento = " + doc.DatiBollettino.get(0).AutorizCcp);
 			this.avvisaturaDto.setCpNumero("NN");
 		}
 		else {
-			this.avvisaturaDto.setCpNumero(doc.NumeroDocumento);
+			this.avvisaturaDto.setCpNumero(doc.DatiBollettino.get(0).AutorizCcp);
 		}
 		
 		this.avvisaturaDto.setSettore(doc.DatiCreditore.get(0).Denominazione2);
-		if(tipostampa.equals("jppa"))
+		if(tipostampa.equals("jppa")) {
         this.avvisaturaDto.setNome(doc.DatiCreditore.get(0).Denominazione1);
-		else {
-		  this.avvisaturaDto.setNome("");
-		  this.avvisaturaDto.setNomeDe(doc.DatiCreditore.get(0).Denominazione1);
+        this.avvisaturaDto.setNomeDe(doc.DatiCreditore.get(0).Denominazione2);
 		}
+
 	}
 
-	private java.time.Instant buildInstant(String data) {
-		
-		String[] dataSplit = data.split("\\/");
-		StringBuilder builder = new StringBuilder();
-		builder.append(dataSplit[2]+"-").append(dataSplit[1]+"-").append(dataSplit[0]).append("T")
-		.append("00:00:00Z");
-		
-		String dataFormattata = builder.toString();
-		
-		return java.time.Instant.parse(dataFormattata);
+	private String buildDate(String data) {
+		String dataformat[] = new String[3];
+		dataformat = data.split("\\/"); //2099-12-31T00:00:00Z
+		return new StringBuilder().append(dataformat[2]).append("-").append(dataformat[1])
+				.append("-").append(dataformat[0]).append("T").append("00:00:00Z").toString();
 	}
 	
-	public StampaBollettinoRichiesta bollRichiesta(Documento doc, String logo64,String tipoStampa) {
+	public StampaBollettinoRichiesta bollRichiesta(Documento doc, String logo64,String tipoStampa,String cutecute) {
 		
 		StampaBollettinoRichiesta bollRichiesta = null;
 //		if(tipoStampa.equals("jppade")) {
@@ -134,14 +141,15 @@ public class InformazioniStampa {
 		posDeb.setCausaleDebitoria(doc.CausaleDocumento);
 		}
 		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento));
-		if(doc.NumeroDocumento==null) {
+		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
 			System.out.println("Numero documento NULL PosDebitoria");
-			System.out.println("doc.NumeroDocumento = " + doc.NumeroDocumento);
+			System.out.println("doc.DatiBollettino.get(0).AutorizCcp = " + doc.DatiBollettino.get(0).AutorizCcp);
 			posDeb.setNumeroAvviso("NN");
 		}else {
-			posDeb.setNumeroAvviso(doc.NumeroDocumento);
+			posDeb.setNumeroAvviso(doc.DatiBollettino.get(0).AvvisoPagoPa);
 		}
 			posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Indirizzo);
+		    posDeb.setDataScadenza(buildDate(doc.DatiBollettino.get(0).ScadenzaRata));// Data scadenza
 			posDeb.setTitDebitoCapSedeLegale("");
 			posDeb.setTitDebitoCf(doc.DatiAnagrafici.get(0).Cf);
 			posDeb.setTitDebitoCivicoRes(doc.DatiAnagrafici.get(0).Indirizzo);
@@ -161,19 +169,16 @@ public class InformazioniStampa {
 		
 		bollRichiesta.addPosizioneDebitoriaItem(posDeb); // causale
 		bollRichiesta.datiEnte(this.avvisaturaDto);
-        if(doc.NumeroDocumento==null) {
-            bollRichiesta.setNumeroAvviso("000000");
-        }else {
-		bollRichiesta.setNumeroAvviso(doc.NumeroDocumento);
-        }
-		if(tipoStampa.equals("jppade")) { bollRichiesta.setLocale(it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta.LocaleEnum.DE);
-	       }
-		else {
-		bollRichiesta.setLocale(it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta.LocaleEnum.IT);
+		bollRichiesta.setNumeroAvviso(doc.DatiBollettino.get(0).AvvisoPagoPa);
+        
+		if(cutecute.equals("000P6")) {
+			bollRichiesta.setLocale(it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta.LocaleEnum.DE);
+		}else  {
+			bollRichiesta.setLocale(it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta.LocaleEnum.IT);
 		}
 		bollRichiesta.setBase64FileLogoEnte(logo64);
 		
-		return bollRichiesta;
+		return bollRichiesta; 
 	}
 	
 	
