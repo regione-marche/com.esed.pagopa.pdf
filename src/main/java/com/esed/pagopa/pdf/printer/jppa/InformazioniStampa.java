@@ -140,7 +140,7 @@ public class InformazioniStampa {
 		else {
 		posDeb.setCausaleDebitoria(doc.CausaleDocumento);
 		}
-		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento));
+		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento)/100);
 		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
 			System.out.println("Numero documento NULL PosDebitoria");
 			System.out.println("doc.DatiBollettino.get(0).AutorizCcp = " + doc.DatiBollettino.get(0).AutorizCcp);
