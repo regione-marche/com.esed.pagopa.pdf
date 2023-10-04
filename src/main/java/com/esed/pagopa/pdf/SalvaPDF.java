@@ -216,7 +216,7 @@ public class SalvaPDF {
 	//metodo per stampare il singolo File512 e creare il relativo file guida
 	private void  stampaFile512(UUID uuid, File512 file512) throws ValidazioneException, IOException, InterruptedException{
 		this.informazioniStampa = new InformazioniStampa();
-		String tipoStampa = "";
+		String stampaJppa = "";
 		PdfDocument pdf = null;
 		Document document = null;
 		File file = null;
@@ -224,7 +224,7 @@ public class SalvaPDF {
 		
 		if(file512 != null) {
 			if(file512.cutecute.equals("000P6")) {
-			   tipoStampa = this.propertiesTree.getProperty(PropKeys.tipoStampa.format("000P6"));
+				stampaJppa = this.propertiesTree.getProperty(PropKeys.stampaJppa.format("000P6"));
 			   informazioniStampa.setDebito(file512.ente,null, null, null, null);
 			}
 			
@@ -235,7 +235,7 @@ public class SalvaPDF {
 			
 			
 			
-			if(!tipoStampa.equals("jppa")) {
+			if(!stampaJppa.equals("Y")) {
 			
 			fileGuida = new File(LeggoAsset.DIRECTORY_SALVATAGGIO_FILE, nomeFile + ".txt");
 			GuidaDocumento guidaDocumento = new GuidaDocumento(/*nomeFile, */fileGuida);
@@ -283,10 +283,10 @@ public class SalvaPDF {
 				System.out.println("file512.tipoTemplate = " + file512.tipoTemplate);
 				
 				//FlussoJppa
-				stampaJppa(flusso,"",userJppa,passwordJppa,urlPrinter,file512.idFlusso,nomeFile,pdf);
+				stampaJppa(flusso,"",userJppa,passwordJppa,urlPrinter,file512.idFlusso,nomeFile,pdf,stampaJppa);
 			}
 			
-			if(!tipoStampa.equals("jppa")) {
+			if(!stampaJppa.equals("Y")) {
 				if(pdf!=null)
 				  pdf.close();
 				if(document!=null)
@@ -334,7 +334,8 @@ public class SalvaPDF {
 	
 	
     private static int stampaJppa(Flusso flusso, String codiceIpa,String userJppa,
-    		String passwordJppa,String urlPrinter,String nomeFile,String nomefileguida,PdfDocument pdf) throws ValidazioneException {
+    		String passwordJppa,String urlPrinter,String nomeFile,String nomefileguida,PdfDocument pdf
+    		,String stampaJppa) throws ValidazioneException {
 		
 		StampaPdfJppaPagonet stampa = new StampaPdfJppaPagonet(userJppa,passwordJppa,urlPrinter);
 		
@@ -347,6 +348,8 @@ public class SalvaPDF {
 		FileOutputStream out = null;
 		
 		PDFMergerUtility obj = null;
+		
+		String stampaj = stampaJppa == "Y" ? "jppa" : "";
 		
 		File file = null;
 		
@@ -385,9 +388,9 @@ public class SalvaPDF {
 //						.findFirst()
 //						.orElse(null);
 				
-						info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa,flusso.CuteCute); // Inofrmazioni Avvisatura
+						info.setAvvisauraDto(flusso.Documentdata.get(i),stampaj,flusso.CuteCute); // Inofrmazioni Avvisatura
 						res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
-						LogoBollettino.getLogoBolzano64(),flusso.TipoStampa,flusso.CuteCute));
+						LogoBollettino.getLogoBolzano64(),stampaj,flusso.CuteCute));
 						
 						
 						try {
