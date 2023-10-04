@@ -385,9 +385,9 @@ public class SalvaPDF {
 //						.findFirst()
 //						.orElse(null);
 				
-						info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa); // Inofrmazioni Avvisatura
+						info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa,flusso.CuteCute); // Inofrmazioni Avvisatura
 						res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
-						LogoBollettino.getLogoBolzano64(),flusso.TipoStampa));
+						LogoBollettino.getLogoBolzano64(),flusso.TipoStampa,flusso.CuteCute));
 						
 						
 						try {
@@ -412,9 +412,9 @@ public class SalvaPDF {
 					for (int j = 0; j < elencoBollettini.length - 1; ) {
 						if (elencoBollettini.length - 1 - j >= 3 && (elencoBollettini.length - 1 - j) != 4) {
 							System.out.println("chiamato metodo 3 bollettini per pagina");
-							info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa); // Inofrmazioni Avvisatura
+							info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa,flusso.CuteCute); // Inofrmazioni Avvisatura
 							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
-							LogoBollettino.getLogoBolzano64(),flusso.TipoStampa));
+							LogoBollettino.getLogoBolzano64(),flusso.TipoStampa,flusso.CuteCute));
 							
 							
 							try {
@@ -434,9 +434,9 @@ public class SalvaPDF {
 						}
 						if (elencoBollettini.length - 1 - j >= 2 && (elencoBollettini.length - 1 - j) % 3 != 0) {
 							System.out.println("chiamato metodo 2 bollettini per pagina");
-							info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa); // Inofrmazioni Avvisatura
+							info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa,flusso.CuteCute); // Inofrmazioni Avvisatura
 							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
-							LogoBollettino.getLogoBolzano64(),flusso.TipoStampa));
+							LogoBollettino.getLogoBolzano64(),flusso.TipoStampa,flusso.CuteCute));
 							
 							
 							try {

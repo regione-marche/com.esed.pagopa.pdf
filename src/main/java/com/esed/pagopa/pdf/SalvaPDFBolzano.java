@@ -121,7 +121,7 @@ public class SalvaPDFBolzano {
 		System.out.println("url printer - " + urlPrinter);
 		
 		if(tipostampa.equals("jppa") || tipostampa.equals("jppade") ) {
-			return stampaJppa(flusso,passwordJppa,userJppa,urlPrinter,"").getBytes();
+			return stampaJppa(flusso,passwordJppa,userJppa,urlPrinter,tipostampa).getBytes();
 		}
 		else {
 		for (int i = 0; i < flusso.Documentdata.size(); i++) {
@@ -199,14 +199,7 @@ public class SalvaPDFBolzano {
 		return codiceIpa;
 	}
 
-	
-	private static String getlogo64(LeggoAsset asset) {
-		byte[] immagine = Base64.getEncoder().encode(asset.getLogo_bolzano().toString().getBytes());
-		List<String> base64Image = Stream.of(immagine).map(b -> b.toString()).collect(Collectors.toList());
-		return base64Image.stream().collect(Collectors.joining());
-	}
-
-	private static String stampaJppa(Flusso flusso,String pass,String user,String urlPrinter, String codiceIpa) throws ValidazioneException {
+	private static String stampaJppa(Flusso flusso,String pass,String user,String urlPrinter, String tipostampa) throws ValidazioneException {
 		System.out.println("Dentro metodo stampa Jppa");
 		
 		StampaPdfJppaPagonet stampa = null;
@@ -247,10 +240,10 @@ public class SalvaPDFBolzano {
 						.orElse(null);
 				if (bollettino999 != null) {
 					
-					info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa); // Inofrmazioni Avvisatura
+					info.setAvvisauraDto(flusso.Documentdata.get(i),tipostampa,"000P6"); // Informazioni Avvisatura
 					System.out.println("info AvvisaturaDto - " + info.toString());
 					res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
-							LogoBollettino.getLogoBolzano64(),flusso.TipoStampa));
+							LogoBollettino.getLogoBolzano64(),tipostampa,"000P6"));
 				}
 			
 				//Se i bollettini sono 2 allora non c rateizzazione perche il numero 1 e il 999 entrambi con dati coincidenti
@@ -261,16 +254,16 @@ public class SalvaPDFBolzano {
 						if (elencoBollettini.length - 1 - j >= 3 && (elencoBollettini.length - 1 - j) != 4 && (flusso.TipoStampa.equals("jppa"))) {
 							logger.info("chiamato metodo 3 bollettini per pagina");
 							//paginaTreBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
-							info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa); // Inofrmazioni Avvisatura
-							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),LogoBollettino.getLogoBolzano64(),flusso.TipoStampa));
+							info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa,"000P6"); // Inofrmazioni Avvisatura
+							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),LogoBollettino.getLogoBolzano64(),flusso.TipoStampa,"000P6"));
 							j += 3;
 							continue;
 						}
 						if (elencoBollettini.length - 1 - j >= 2 && (elencoBollettini.length - 1 - j) % 3 != 0 && (flusso.TipoStampa.equals("jppa"))) {
 							logger.info("chiamato metodo 2 bollettini per pagina");
 							//paginaDueBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
-							info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa); // Inofrmazioni Avvisatura
-							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),LogoBollettino.getLogoBolzano64(),flusso.TipoStampa));
+							info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa,"000P6"); // Inofrmazioni Avvisatura
+							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),LogoBollettino.getLogoBolzano64(),flusso.TipoStampa,"000P6"));
 							j += 2;
 							continue;
 						}
