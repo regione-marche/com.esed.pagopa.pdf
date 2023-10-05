@@ -69,12 +69,39 @@ public class SalvaPDF {
 	
 	
 	
-	public byte[] SalvaFile(Flusso flusso) throws IOException, ValidazioneException {
-		
-		
+	public byte[] SalvaFile(Flusso flusso,String tipoStampa) throws IOException, ValidazioneException {
 		
 //		int stato = 1;
 		ByteArrayOutputStream baos = null;
+		
+		if(tipoStampa==null) {
+			tipoStampa="";
+		}
+		
+		String passwordJppa = propertiesTree.getProperty(PropKeys.passwordJppa.format(flusso.CuteCute));
+		String userJppa = propertiesTree.getProperty(PropKeys.utenteJppa.format(flusso.CuteCute));
+		String urlPrinter = propertiesTree.getProperty(PropKeys.urlprinter.format(flusso.CuteCute));
+		
+		if(passwordJppa==null) {
+			passwordJppa="";
+		}
+		
+		if(userJppa==null) {
+			userJppa="";
+		}
+		
+		if(urlPrinter==null) {
+			urlPrinter="";
+		}
+		
+		System.out.println("password printer- " + passwordJppa);
+		System.out.println("user printer- " + userJppa);
+		System.out.println("url printer - " + urlPrinter);
+		
+		if(tipoStampa.equals("jppa")) {
+			return stampaJppa(flusso,passwordJppa,userJppa,urlPrinter,tipoStampa).getBytes();
+		}
+		
 
 //		il flusso può contenere più di un documento
 //		lavoriamone uno per volta
@@ -283,7 +310,7 @@ public class SalvaPDF {
 				System.out.println("file512.tipoTemplate = " + file512.tipoTemplate);
 				
 				//FlussoJppa
-				stampaJppa(flusso,"",userJppa,passwordJppa,urlPrinter,file512.idFlusso,nomeFile,pdf,stampaJppa);
+				stampaJppaMassivo(flusso,"",userJppa,passwordJppa,urlPrinter,file512.idFlusso,nomeFile,pdf,stampaJppa);
 			}
 			
 			if(!stampaJppa.equals("Y")) {
@@ -332,8 +359,100 @@ public class SalvaPDF {
 	}
 	
 	
+	private static String stampaJppa(Flusso flusso,String pass,String user,String urlPrinter, String tipostampa) throws ValidazioneException {
+		System.out.println("Dentro metodo stampa Jppa");
+		
+		StampaPdfJppaPagonet stampa = null;
+		
+		LogoBollettino logobollettino = new LogoBollettino();
+		
+		try {
+		 stampa = new StampaPdfJppaPagonet(user,pass,urlPrinter);
+		 System.out.println("Oggetto stampa" + stampa.toString());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		InformazioniStampa info = new InformazioniStampa();
+		
+		StampaBollettinoRisposta res = null;
+
+//		guidaDocumento.numeroPaginaIniziale = 1;
+		for (int i = 0; i < flusso.Documentdata.size(); i++) {
+			
+//			validaFlusso controlla i dati del flusso, 
+//			se sono corretti restituisce un array contenente la sequenza dei numeri progressivi dei bollettini, 
+//			se il numero di bollettini è zero la stampa non parte
+			int[] elencoBollettini = ValidaFlusso.validaFlusso(flusso.Documentdata.get(i), flusso.TipoStampa);
+//			chiude il metodo con stato a 1 se il numero dei bollettini è 0
+			if (elencoBollettini.length < 1) {
+				return "";
+			}
+//			accerta che il bollettino n° 999  vada alla fine
+			Arrays.sort(elencoBollettini);
+			
+			System.out.println(Arrays.toString(elencoBollettini) + "---------------ELENCO BOLLETTINI-----------------");
+			
+			if (elencoBollettini.length > 0) {
+				
+//			PREDISPONE LA STAMPA DEL BOLLETTINO N° 999 OVVERO LA RATA UNICA
+//				paginaUnBollettino(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, flusso.Documentdata.get(i).DatiBollettino.get(elencoBollettini[elencoBollettini.length - 1]) /* PASSA SOLO LA RATA UNICA BOLLETTINO */);
+				Bollettino bollettino999 = flusso.Documentdata.get(i).DatiBollettino
+						.stream()
+						.filter(x -> x.ProgressivoBoll == 999)
+						.findFirst()
+						.orElse(null);
+				
+				info.setAvvisauraDto(flusso.Documentdata.get(i),tipostampa,flusso.CuteCute); // Informazioni Avvisatura
+				System.out.println("info AvvisaturaDto - " + info.toString());
+				res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
+						logobollettino.getLogo(flusso.CuteCute),tipostampa,flusso.CuteCute));
+
+				
+//				se i bollettini sono 2 allora non c'è rateizzazione perchè Ã¨ il numero 1 e il 999 entrambi con dati coincidenti
+//				se invece i bollettini sono almeno 3 il 999 contiene la rata unica e gli altri 2 la rateizzazione
+				System.out.println(elencoBollettini.length);
+				if (elencoBollettini.length > 2) {
+					for (int j = 0; j < elencoBollettini.length - 1; ) {
+						if (elencoBollettini.length - 1 - j >= 3 && (elencoBollettini.length - 1 - j) != 4) {
+							System.out.println("chiamato metodo 3 bollettini per pagina");
+							
+							info.setAvvisauraDto(flusso.Documentdata.get(i),tipostampa,flusso.CuteCute); // Informazioni Avvisatura
+							System.out.println("info AvvisaturaDto - " + info.toString());
+							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
+									logobollettino.getLogo(flusso.CuteCute),tipostampa,flusso.CuteCute));
+							
+							j += 3;
+
+							continue;
+						}
+						if (elencoBollettini.length - 1 - j >= 2 && (elencoBollettini.length - 1 - j) % 3 != 0) {
+							System.out.println("chiamato metodo 2 bollettini per pagina");
+							
+							info.setAvvisauraDto(flusso.Documentdata.get(i),tipostampa,flusso.CuteCute); // Informazioni Avvisatura
+							System.out.println("info AvvisaturaDto - " + info.toString());
+							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
+									logobollettino.getLogo(flusso.CuteCute),tipostampa,flusso.CuteCute));
+							j += 2;
+
+							continue;
+						}
+						if (j < 0)
+							break;
+					}
+				}
+			} else {
+				throw new ValidazioneException("Mancano i bollettini");
+			}
+		}
 	
-    private static int stampaJppa(Flusso flusso, String codiceIpa,String userJppa,
+		return res.getFileBase64Encoded();
+
+}
+	
+	
+	
+    private static int stampaJppaMassivo(Flusso flusso, String codiceIpa,String userJppa,
     		String passwordJppa,String urlPrinter,String nomeFile,String nomefileguida,PdfDocument pdf
     		,String stampaJppa) throws ValidazioneException {
 		
