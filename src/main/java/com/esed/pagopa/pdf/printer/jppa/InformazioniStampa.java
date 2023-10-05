@@ -133,12 +133,13 @@ public class InformazioniStampa {
 		
 		bollRichiesta = new StampaBollettinoRichiesta();
 		PosizioneDebitoriaAvvisaturaDto posDeb  = new PosizioneDebitoriaAvvisaturaDto();
+		String replaced = doc.CausaleDocumento.replaceAll("(\\r|\\n)", "");
 		if(tipoStampa.equals("jppa")) {
-			posDeb.setCausaleDebitoriaDe(doc.CausaleDocumento);
-			posDeb.setCausaleDebitoria(doc.CausaleDocumento);
+			posDeb.setCausaleDebitoriaDe(replaced);
+			posDeb.setCausaleDebitoria(replaced);
 			}
 		else {
-		posDeb.setCausaleDebitoria(doc.CausaleDocumento);
+		posDeb.setCausaleDebitoria(replaced);
 		}
 		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento)/100);
 		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
