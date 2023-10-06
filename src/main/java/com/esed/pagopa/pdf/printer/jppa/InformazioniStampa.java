@@ -111,8 +111,10 @@ public class InformazioniStampa {
 		
 		this.avvisaturaDto.setSettore(doc.DatiCreditore.get(0).Denominazione2);
 		if(tipostampa.equals("jppa")) {
-        this.avvisaturaDto.setNome(doc.DatiCreditore.get(0).Denominazione1);
-        this.avvisaturaDto.setNomeDe(doc.DatiCreditore.get(0).Denominazione2);
+			this.avvisaturaDto.setNome(doc.DatiCreditore.get(0).Denominazione1);
+           if(cutecute.equals("000P6")) {
+			this.avvisaturaDto.setNomeDe(doc.DatiCreditore.get(0).Denominazione2);
+           }
 		}
 
 	}
@@ -133,13 +135,31 @@ public class InformazioniStampa {
 		
 		bollRichiesta = new StampaBollettinoRichiesta();
 		PosizioneDebitoriaAvvisaturaDto posDeb  = new PosizioneDebitoriaAvvisaturaDto();
-		String replaced = doc.CausaleDocumento.replaceAll("(\\r|\\n)", "");
-		if(tipoStampa.equals("jppa")) {
-			posDeb.setCausaleDebitoriaDe(replaced);
-			posDeb.setCausaleDebitoria(replaced);
+		
+		String primaparte[] = new String[2];
+		primaparte = doc.CausaleDocumento.split("\\n");
+		
+		String prima[] = new String[2];
+		
+		prima = primaparte[0].split("\\/");
+		
+		doc.CausaleDocumento = doc.CausaleDocumento.replaceAll("(\\r|\\n)", " ");
+		
+		if(tipoStampa.equals("jppa") && cutecute.equals("000P6")) {
+			if(prima[0]==null) {
+				posDeb.setCausaleDebitoriaDe("");
+			}else {
+				posDeb.setCausaleDebitoriaDe(prima[0].replaceAll("(\\r|\\n)", ""));
+			}
+			  if(primaparte[1]==null) {
+				posDeb.setCausaleDebitoria(doc.CausaleDocumento);
+			  }else {
+				  posDeb.setCausaleDebitoria(primaparte[1].replaceAll("(\\r|\\n)", ""));
+			  }
 			}
 		else {
-		posDeb.setCausaleDebitoria(replaced);
+			posDeb.setCausaleDebitoriaDe("");
+			posDeb.setCausaleDebitoria(doc.CausaleDocumento);
 		}
 		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento)/100);
 		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
@@ -177,75 +197,15 @@ public class InformazioniStampa {
 		}else  {
 			bollRichiesta.setLocale(it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta.LocaleEnum.IT);
 		}
+		
+		if(logo64.equals("")) {
+			logo64 = null;
+			bollRichiesta.setBase64FileLogoEnte(logo64);
+		}
 		bollRichiesta.setBase64FileLogoEnte(logo64);
 		
 		return bollRichiesta; 
 	}
-	
-	
-	private StampaBollettinoRichiesta richiestade(Documento doc, String logo64) {
-		
-		StampaBollettinoRichiesta bollRichiesta = new StampaBollettinoRichiesta();
-		PosizioneDebitoriaAvvisaturaDto posDeb  = new PosizioneDebitoriaAvvisaturaDto();
-		posDeb.setCausaleDebitoriaDe(doc.CausaleDocumento);
-		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento));
-		if(doc.NumeroDocumento==null) {
-			System.out.println("Numero documento NULL Posizione Debitoria");
-			posDeb.setNumeroAvviso("NN");
-		}else {
-			posDeb.setNumeroAvviso(doc.NumeroDocumento);
-		}
-		posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Indirizzo);
-		posDeb.setTitDebitoCapSedeLegale("");
-		posDeb.setTitDebitoCf(doc.DatiAnagrafici.get(0).Cf);
-		posDeb.setTitDebitoCivicoRes("");
-		posDeb.setTitDebitoCivicoSedeLegale("");
-		posDeb.setTitDebitoCognome("");
-		posDeb.setTitDebitoComuneRes(doc.DatiAnagrafici.get(0).Citta);
-		posDeb.setTitDebitoComuneSedeLegale("");
-		posDeb.setTitDebitoIndirizzoRes("");
-		posDeb.setTitDebitonazioneRes("");
-		posDeb.setTitDebitoNazioneSedeLegale("");
-		posDeb.setTitDebitoNome("");
-		posDeb.setTitDebitoNominativo(doc.DatiAnagrafici.get(0).Denominazione1);
-		posDeb.setTitDebitoprovRes("");
-		posDeb.setTitDebitoProvSedeLegale(doc.DatiAnagrafici.get(0).Provincia);
-		posDeb.setTitDebitoRagioneSociale("");
-		posDeb.setTitDebitoIndirizzoSedeLegale("");
-		
-		bollRichiesta.addPosizioneDebitoriaItem(posDeb); // causale
-		bollRichiesta.datiEnte(this.avvisaturaDto);
-		bollRichiesta.setNumeroAvviso(doc.NumeroDocumento);
-		bollRichiesta.setLocale(it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta.LocaleEnum.DE);
-		bollRichiesta.setBase64FileLogoEnte(logo64);
-		
-		return bollRichiesta;
-
-	}
-
-
-	/*
-	 * 
-	 *  datiEnte.setCodiceFiscale("");
-        datiEnte.setCodiceInterbancario(null);
-        datiEnte.setCpAbilitato(null);
-        datiEnte.cpAutorizzazione(null);
-        datiEnte.setCpIntestatario(null);
-        datiEnte.setCpNumero(null);
-        datiEnte.setSettore(null);
-        datiEnte.setNome(null);
-        
-        
-        stampaBollettinoRichiesta = new StampaBollettinoRichiesta();
-        
-        stampaBollettinoRichiesta.addPosizioneDebitoriaItem(null); // causale
-        stampaBollettinoRichiesta.datiEnte(null);
-        stampaBollettinoRichiesta.setNumeroAvviso(null);
-        stampaBollettinoRichiesta.setLocale(null);
-        stampaBollettinoRichiesta.setBase64FileLogoEnte(null);
-	 * 
-	 * */
-
 	
 	/**
 	 * @param args
