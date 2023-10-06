@@ -212,6 +212,8 @@ public class SalvaPDFBolzano {
 		
 		InformazioniStampa info = new InformazioniStampa();
 		
+		LogoBollettino boll = new LogoBollettino();
+		
 		StampaBollettinoRisposta res = null;
 
 		ByteArrayOutputStream baos = null;

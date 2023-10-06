@@ -139,27 +139,41 @@ public class InformazioniStampa {
 		String primaparte[] = new String[2];
 		primaparte = doc.CausaleDocumento.split("\\n");
 		
+		if(primaparte[0]==null||primaparte[0]=="") {
+			primaparte[0] = "";
+		}
+		
 		String prima[] = new String[2];
 		
+
 		prima = primaparte[0].split("\\/");
-		
+	
 		doc.CausaleDocumento = doc.CausaleDocumento.replaceAll("(\\r|\\n)", " ");
 		
+		if(prima.length==1) {
+			posDeb.setCausaleDebitoriaDe(prima[0].replaceAll("(\\r|\\n)", ""));
+			posDeb.setCausaleDebitoria(primaparte[1].replaceAll("(\\r|\\n)", ""));
+		} else {
+		
 		if(tipoStampa.equals("jppa") && cutecute.equals("000P6")) {
-			if(prima[0]==null) {
-				posDeb.setCausaleDebitoriaDe("");
-			}else {
-				posDeb.setCausaleDebitoriaDe(prima[0].replaceAll("(\\r|\\n)", ""));
-			}
+			if(prima!=null) {
+				if(prima[0]==null||prima[1]==null) {
+					posDeb.setCausaleDebitoriaDe("");
+				}else {
+					posDeb.setCausaleDebitoriaDe(prima[0].replaceAll("(\\r|\\n)", "")+"/"+prima[1].replaceAll("(\\r|\\n)", ""));
+				}
+		    }
 			  if(primaparte[1]==null) {
 				posDeb.setCausaleDebitoria(doc.CausaleDocumento);
 			  }else {
 				  posDeb.setCausaleDebitoria(primaparte[1].replaceAll("(\\r|\\n)", ""));
 			  }
 			}
-		else {
-			posDeb.setCausaleDebitoriaDe("");
-			posDeb.setCausaleDebitoria(doc.CausaleDocumento);
+		
+			else {
+				posDeb.setCausaleDebitoriaDe("");
+				posDeb.setCausaleDebitoria(doc.CausaleDocumento);
+			}
 		}
 		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento)/100);
 		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
