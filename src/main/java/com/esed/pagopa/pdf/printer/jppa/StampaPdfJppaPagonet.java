@@ -38,7 +38,7 @@ public class StampaPdfJppaPagonet implements StampaPdfJppa {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		StampaPdfJppaPagonet stampa = new StampaPdfJppaPagonet("admin","password");
+		StampaPdfJppaPagonet stampa = new StampaPdfJppaPagonet("","");
 		System.out.println(stampa.getConnettorePrinter().getToken());
 	}
 
