@@ -27,6 +27,7 @@ import org.apache.pdfbox.multipdf.PDFMergerUtility;
 import com.esed.pagopa.pdf.LeggoAsset.FormatoStampa;
 import com.esed.pagopa.pdf.config.PropKeys;
 import com.esed.pagopa.pdf.printer.jppa.InformazioniStampa;
+import com.esed.pagopa.pdf.printer.jppa.InformazioniStampaAosta;
 import com.esed.pagopa.pdf.printer.jppa.StampaPdfJppaPagonet;
 import com.itextpdf.barcodes.BarcodeDataMatrix;
 import com.itextpdf.barcodes.BarcodeQRCode;
@@ -403,11 +404,17 @@ public class SalvaPDF {
 						.findFirst()
 						.orElse(null);
 				
-				info.setAvvisauraDto(flusso.Documentdata.get(i),tipostampa,flusso.CuteCute); // Informazioni Avvisatura
-				System.out.println("info AvvisaturaDto - " + info.toString());
-				res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
+				if(flusso.CuteCute.equals("000P4")) {
+				com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
+				res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso.Documentdata.get(i),
 						logobollettino.getLogo(flusso.CuteCute),tipostampa,flusso.CuteCute));
-
+				}else {
+					
+					info.setAvvisauraDto(flusso.Documentdata.get(i),tipostampa,flusso.CuteCute); // Informazioni Avvisatura
+					System.out.println("info AvvisaturaDto - " + info.toString());
+					res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
+							LogoBollettino.getLogoBolzano64(),tipostampa,flusso.CuteCute));
+				}
 				
 //				se i bollettini sono 2 allora non c'è rateizzazione perchè Ã¨ il numero 1 e il 999 entrambi con dati coincidenti
 //				se invece i bollettini sono almeno 3 il 999 contiene la rata unica e gli altri 2 la rateizzazione
@@ -419,8 +426,18 @@ public class SalvaPDF {
 							
 							info.setAvvisauraDto(flusso.Documentdata.get(i),tipostampa,flusso.CuteCute); // Informazioni Avvisatura
 							System.out.println("info AvvisaturaDto - " + info.toString());
-							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
-									logobollettino.getLogo(flusso.CuteCute),tipostampa,flusso.CuteCute));
+							
+							if(flusso.CuteCute.equals("000P4")) {
+								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
+								res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso.Documentdata.get(i),
+										logobollettino.getLogo(flusso.CuteCute),tipostampa,flusso.CuteCute));
+								}else {
+									
+									info.setAvvisauraDto(flusso.Documentdata.get(i),tipostampa,flusso.CuteCute); // Informazioni Avvisatura
+									System.out.println("info AvvisaturaDto - " + info.toString());
+									res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
+											LogoBollettino.getLogoBolzano64(),tipostampa,flusso.CuteCute));
+								}
 							
 							j += 3;
 
@@ -431,8 +448,18 @@ public class SalvaPDF {
 							
 							info.setAvvisauraDto(flusso.Documentdata.get(i),tipostampa,flusso.CuteCute); // Informazioni Avvisatura
 							System.out.println("info AvvisaturaDto - " + info.toString());
-							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
-									logobollettino.getLogo(flusso.CuteCute),tipostampa,flusso.CuteCute));
+							
+							if(flusso.CuteCute.equals("000P4")) {
+								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
+								res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso.Documentdata.get(i),
+										logobollettino.getLogo(flusso.CuteCute),tipostampa,flusso.CuteCute));
+								}else {
+									
+									info.setAvvisauraDto(flusso.Documentdata.get(i),tipostampa,flusso.CuteCute); // Informazioni Avvisatura
+									System.out.println("info AvvisaturaDto - " + info.toString());
+									res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
+											LogoBollettino.getLogoBolzano64(),tipostampa,flusso.CuteCute));
+								}
 							j += 2;
 
 							continue;
