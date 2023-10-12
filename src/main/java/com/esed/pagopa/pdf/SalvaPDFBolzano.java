@@ -17,7 +17,8 @@ import javax.sql.rowset.CachedRowSet;
 import org.apache.log4j.Logger;
 
 import com.esed.pagopa.pdf.config.PropKeys;
-import com.esed.pagopa.pdf.printer.jppa.InformazioniStampa;
+import com.esed.pagopa.pdf.printer.jppa.InformazioniStampaBolzano;
+import com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface;
 import com.esed.pagopa.pdf.printer.jppa.StampaPdfJppaPagonet;
 import com.itextpdf.barcodes.BarcodeDataMatrix;
 import com.itextpdf.barcodes.BarcodeQRCode;
@@ -210,7 +211,7 @@ public class SalvaPDFBolzano {
 			e.printStackTrace();
 		}
 		
-		InformazioniStampa info = new InformazioniStampa();
+		InformazioniStampaInterface info = new InformazioniStampaBolzano();
 		
 		LogoBollettino boll = new LogoBollettino();
 		
@@ -242,10 +243,10 @@ public class SalvaPDFBolzano {
 						.orElse(null);
 				if (bollettino999 != null) {
 					
-					info.setAvvisauraDto(flusso.Documentdata.get(i),tipostampa,"000P6"); // Informazioni Avvisatura
+					info.setAvvisauraDto(flusso,flusso.Documentdata.get(i),false,"000P6"); // Informazioni Avvisatura
 					System.out.println("info AvvisaturaDto - " + info.toString());
-					res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),
-							LogoBollettino.getLogoBolzano64(),tipostampa,"000P6"));
+					res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
+							LogoBollettino.getLogoBolzano64(),"000P6"));
 				}
 			
 				//Se i bollettini sono 2 allora non c rateizzazione perche il numero 1 e il 999 entrambi con dati coincidenti
@@ -256,16 +257,18 @@ public class SalvaPDFBolzano {
 						if (elencoBollettini.length - 1 - j >= 3 && (elencoBollettini.length - 1 - j) != 4 && (flusso.TipoStampa.equals("jppa"))) {
 							logger.info("chiamato metodo 3 bollettini per pagina");
 							//paginaTreBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
-							info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa,"000P6"); // Inofrmazioni Avvisatura
-							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),LogoBollettino.getLogoBolzano64(),flusso.TipoStampa,"000P6"));
+							info.setAvvisauraDto(flusso,flusso.Documentdata.get(i),false,"000P6"); // Inofrmazioni Avvisatura
+							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
+									LogoBollettino.getLogoBolzano64(),"000P6"));
 							j += 3;
 							continue;
 						}
 						if (elencoBollettini.length - 1 - j >= 2 && (elencoBollettini.length - 1 - j) % 3 != 0 && (flusso.TipoStampa.equals("jppa"))) {
 							logger.info("chiamato metodo 2 bollettini per pagina");
 							//paginaDueBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
-							info.setAvvisauraDto(flusso.Documentdata.get(i),flusso.TipoStampa,"000P6"); // Inofrmazioni Avvisatura
-							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso.Documentdata.get(i),LogoBollettino.getLogoBolzano64(),flusso.TipoStampa,"000P6"));
+							info.setAvvisauraDto(flusso,flusso.Documentdata.get(i),false,"000P6"); // Inofrmazioni Avvisatura
+							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
+									LogoBollettino.getLogoBolzano64(),"000P6"));
 							j += 2;
 							continue;
 						}

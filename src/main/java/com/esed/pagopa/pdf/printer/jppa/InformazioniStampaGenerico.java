@@ -13,36 +13,28 @@ import it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta;
 /**
  * 
  */
-public class InformazioniStampaAosta implements InformazioniStampaInterface {
+public class InformazioniStampaGenerico implements InformazioniStampaInterface {
 
 	/**
 	 * 
 	 */
-	public InformazioniStampaAosta() {
+	public InformazioniStampaGenerico() {
+		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
 	public DatiEnteAvvisaturaDto setAvvisauraDto(Flusso flusso,Documento doc,Boolean tipostampa,String cutecute) {
-		
-		System.out.println("TipoStampa postale: " + tipostampa);
 		
 		DatiEnteAvvisaturaDto avvisaturaDto = new DatiEnteAvvisaturaDto();
 		avvisaturaDto.setCodiceFiscale(doc.DatiCreditore.get(0).Cf);
 		avvisaturaDto.setCodiceInterbancario(doc.DatiCreditore.get(0).CodiceInterbancario);
 	    avvisaturaDto.setCpAbilitato(tipostampa);
 	    
-	    System.out.println("QRcodePagoPa: " + doc.DatiBollettino.get(0).QRcodePagoPa);
-	    
-	    if(doc.DatiBollettino.get(0).QRcodePagoPa.contains("null")) {
-	       avvisaturaDto.setDataMatrix("");
-	    }else {
-	       avvisaturaDto.setDataMatrix(doc.DatiBollettino.get(0).QRcodePagoPa);
-	    }
+	    avvisaturaDto.setDataMatrix(doc.DatiBollettino.get(0).QRcodePagoPa);
 		
 		avvisaturaDto.cpAutorizzazione(doc.DatiBollettino.get(0).AutorizCcp);
 
-		System.out.println("Intestatario Descon60Boll: " + doc.DatiBollettino.get(0).Descon60Boll);
-		avvisaturaDto.setCpIntestatario(doc.DatiBollettino.get(0).Descon60Boll);
+		avvisaturaDto.setCpIntestatario(doc.DatiBollettino.get(0).AutorizCcp);
 			
 	
 		if(doc.DatiBollettino.get(0).AutorizCcp == null) {
@@ -52,14 +44,14 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 		}
 		
 		else {
-			avvisaturaDto.setCpNumero(doc.DatiBollettino.get(0).Codeline12Boll);
+			avvisaturaDto.setCpNumero(doc.DatiBollettino.get(0).AutorizCcp);
 		}
 		
 		
 		avvisaturaDto.setNome(doc.DatiCreditore.get(0).Denominazione1);
 		
 		
-		avvisaturaDto.setSettore(doc.CausaleDocumento);
+		avvisaturaDto.setSettore(doc.DatiCreditore.get(0).Denominazione2);
 
 
 		return avvisaturaDto;
@@ -120,6 +112,5 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 		
 		return bollRichiesta; 
 	}
-	
-	
+
 }

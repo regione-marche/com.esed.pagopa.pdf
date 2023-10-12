@@ -1,6 +1,7 @@
 package com.esed.pagopa.pdf.printer.jppa;
 
 import com.seda.payer.commons.geos.Documento;
+import com.seda.payer.commons.geos.Flusso;
 
 import it.maggioli.pagopa.jppa.printer.model.DatiEnteAvvisaturaDto;
 import it.maggioli.pagopa.jppa.printer.model.PosizioneDebitoriaAvvisaturaDto;
@@ -8,7 +9,7 @@ import it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta;
 
 public interface InformazioniStampaInterface {
 	
-	public default DatiEnteAvvisaturaDto setAvvisauraDto(Documento doc,String tipostampa,String cutecute) {
+	public default DatiEnteAvvisaturaDto setAvvisauraDto(Flusso flusso,Documento doc,Boolean tipostampa,String cutecute) {
 		DatiEnteAvvisaturaDto avvisaturaDto = new DatiEnteAvvisaturaDto();
 		avvisaturaDto = new DatiEnteAvvisaturaDto();
 		avvisaturaDto.setCodiceFiscale(doc.DatiCreditore.get(0).Cf);
@@ -63,9 +64,9 @@ public interface InformazioniStampaInterface {
 	
 	
 	
-	public default  StampaBollettinoRichiesta bollRichiesta(Documento doc, String logo64,String tipoStampa,String cutecute) {
+	public default  StampaBollettinoRichiesta bollRichiesta(Flusso flusso,Documento doc, String logo64,String cutecute) {
 		
-		DatiEnteAvvisaturaDto avvisaturaDto = setAvvisauraDto(doc, tipoStampa, cutecute);
+		DatiEnteAvvisaturaDto avvisaturaDto = setAvvisauraDto(flusso,doc, false, cutecute);
 		
 		StampaBollettinoRichiesta bollRichiesta = null;
 		
@@ -102,7 +103,7 @@ public interface InformazioniStampaInterface {
 			}
 		} else {
 		
-		if(tipoStampa.equals("jppa") && cutecute.equals("000P6")) {
+		if(cutecute.equals("000P6")) {
 			if(prima!=null) {
 				if(prima[0]==null||prima[1]==null) {
 					posDeb.setCausaleDebitoriaDe("");
