@@ -89,7 +89,7 @@ public class FaccioPDFTest {
 		
 		UUID uuid = UUID.randomUUID();
 		SalvaPDF salvaPDF = new SalvaPDF(propertiesTree);
-		salvaPDF.SalvaFileMassivo(uuid, listaFile512, "C:\\work\\Pagonet\\ConfigFiles\\pagopaPDFws\\pagopaPdf");
+		salvaPDF.SalvaFileMassivo(uuid, listaFile512, "C:/work/Pagonet/ConfigFiles/pagopaPDFws/pagopaPdf/");
 	}
 }
 
