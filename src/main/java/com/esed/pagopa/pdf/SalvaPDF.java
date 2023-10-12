@@ -227,7 +227,7 @@ public class SalvaPDF {
 
 		listaFile512.stream().filter(x -> x != null).forEach(file512 -> {
 			try {
-				stampaFile512(uuid, file512);
+				stampaFile512(uuid, file512,path);
 			} catch (ValidazioneException | 
 					IOException | 
 					InterruptedException e) {
@@ -244,7 +244,7 @@ public class SalvaPDF {
 		//<FILE512> --> <DOCUMENTO> -->  <AVVISI (rate) >
 
 	//metodo per stampare il singolo File512 e creare il relativo file guida
-	private void  stampaFile512(UUID uuid, File512 file512) throws ValidazioneException, IOException, InterruptedException{
+	private void  stampaFile512(UUID uuid, File512 file512,String path) throws ValidazioneException, IOException, InterruptedException{
 		this.informazioniStampa = new InformazioniStampaBolzano();
 		String stampaJppa = "";
 		PdfDocument pdf = null;
@@ -267,7 +267,8 @@ public class SalvaPDF {
 			String nomeFile = generaNomeFile(file512);
 			com.seda.payer.commons.geos.Flusso flusso = null;
 			
-			
+			System.out.println("stampaJppa.equals(\"Y\") = " + stampaJppa.equals("Y"));
+			System.out.println("file512.cutecute = " + file512.cutecute);
 			
 			if(!stampaJppa.equals("Y")) {
 			
@@ -291,6 +292,7 @@ public class SalvaPDF {
 			// ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			// PdfDocument pdf = new PdfDocument(new PdfWriter(baos));
 			
+			System.out.println("LeggoAsset");
 			// creato il documento crea il lettore di asset
 			LeggoAsset asset = new LeggoAsset(pdf, flusso.TipoStampa, flusso.Documentdata.get(0).DatiCreditore.get(0).LogoEnte, this.propertiesTree, flusso.CuteCute);
 			
@@ -316,7 +318,7 @@ public class SalvaPDF {
 				System.out.println("file512.tipoTemplate = " + file512.tipoTemplate);
 				
 				//FlussoJppa
-				stampaJppaMassivo(flusso,"",userJppa,passwordJppa,urlPrinter,file512.idFlusso,nomeFile,pdf,stampaJppa);
+				stampaJppaMassivo(flusso,"",userJppa,passwordJppa,urlPrinter,file512.idFlusso,fileGuida.getName(),pdf,stampaJppa,path);
 			}
 			
 			if(!stampaJppa.equals("Y")) {
@@ -343,11 +345,11 @@ public class SalvaPDF {
 				
 				Thread.sleep(1000);
 			} else {
-				FileOutputStream fos = new FileOutputStream(fileGuida+".zip");
+				FileOutputStream fos = new FileOutputStream(path+"/"+nomeFile+".zip");
 				ZipOutputStream zipOut = new ZipOutputStream(fos);
 				ZipEntry zipFile = new ZipEntry(fileGuida.getName());
 				zipOut.putNextEntry(zipFile);
-				FileInputStream fisDaZippare = new FileInputStream(fileGuida);
+				FileInputStream fisDaZippare = new FileInputStream(path+"/"+nomeFile+".pdf");
 				byte[] bytes = new byte[1024];
 				int length;
 				while((length = fisDaZippare.read(bytes)) >= 0) {
@@ -475,7 +477,7 @@ public class SalvaPDF {
 	
     private static int stampaJppaMassivo(Flusso flusso, String codiceIpa,String userJppa,
     		String passwordJppa,String urlPrinter,String nomeFile,String nomefileguida,PdfDocument pdf
-    		,String stampaJppa) throws ValidazioneException {
+    		,String stampaJppa,String path) throws ValidazioneException {
 		
 		StampaPdfJppaPagonet stampa = new StampaPdfJppaPagonet(userJppa,passwordJppa,urlPrinter);
 		
@@ -501,7 +503,7 @@ public class SalvaPDF {
 		for (int i = 0; i < flusso.Documentdata.size(); i++) {
 			
 			try {
-				out = new FileOutputStream(i+".pdf");
+				out = new FileOutputStream(path+"/"+i+".pdf");
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -534,7 +536,7 @@ public class SalvaPDF {
 					info.setAvvisauraDto(flusso,flusso.Documentdata.get(i),flusso.TipoStampa.equals("P"),"000P6"); // Informazioni Avvisatura
 					System.out.println("info AvvisaturaDto - " + info.toString());
 					res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
-							LogoBollettino.getLogoBolzano64(),"000P6"));
+							logobollettino.getLogo(flusso.CuteCute),"000P6"));
 				}else if(flusso.CuteCute.equals("000P4")) {
 					com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
 					res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso,flusso.Documentdata.get(i),
@@ -577,7 +579,7 @@ public class SalvaPDF {
 								info.setAvvisauraDto(flusso,flusso.Documentdata.get(i),flusso.TipoStampa.equals("P"),"000P6"); // Informazioni Avvisatura
 								System.out.println("info AvvisaturaDto - " + info.toString());
 								res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
-										LogoBollettino.getLogoBolzano64(),"000P6"));
+										logobollettino.getLogo(flusso.CuteCute),"000P6"));
 							}else if(flusso.CuteCute.equals("000P4")) {
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
 								res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso,flusso.Documentdata.get(i),
@@ -615,7 +617,8 @@ public class SalvaPDF {
 								info.setAvvisauraDto(flusso,flusso.Documentdata.get(i),flusso.TipoStampa.equals("P"),"000P6"); // Informazioni Avvisatura
 								System.out.println("info AvvisaturaDto - " + info.toString());
 								res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
-										LogoBollettino.getLogoBolzano64(),"000P6"));
+										logobollettino.getLogo(flusso.CuteCute),"000P6"));
+								
 							}else if(flusso.CuteCute.equals("000P4")) {
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
 								res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso,flusso.Documentdata.get(i),
@@ -661,17 +664,17 @@ public class SalvaPDF {
 	     
 	           // Setting the destination file path
 	     
-	           obj.setDestinationFileName(nomefileguida+".pdf");
+	           obj.setDestinationFileName(path+"/"+nomefileguida);
 	     
 	           // Add all source files, to be merged
 	           for(int i=0;i<flusso.Documentdata.size();i++) {
-	        	   obj.addSource(i+".pdf");
+	        	   obj.addSource(path+"/"+i+".pdf");
 	           }
 
 			obj.mergeDocuments(null);
 			
 	           for(int i=0;i<flusso.Documentdata.size();i++) {
-	        	   Files.delete(Paths.get(i+".pdf")); 
+	        	   Files.delete(Paths.get(path+"/"+i+".pdf")); 
 	           }
 			
 		} catch (IOException e) {
