@@ -59,7 +59,7 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 		avvisaturaDto.setNome(doc.DatiCreditore.get(0).Denominazione1);
 		
 		
-		avvisaturaDto.setSettore(doc.CausaleDocumento);
+		avvisaturaDto.setSettore(doc.DatiCreditore.get(0).Denominazione2);
 
 
 		return avvisaturaDto;

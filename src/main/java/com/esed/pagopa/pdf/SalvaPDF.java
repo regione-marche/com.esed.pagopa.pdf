@@ -252,10 +252,14 @@ public class SalvaPDF {
 		File file = null;
 		File fileGuida = null;
 		
+		String conf = this.propertiesTree.getProperty(PropKeys.stampaJppa.format(file512.cutecute));
+		
 		if(file512 != null) {
-			if(file512.cutecute.equals("000P6")) {
-				stampaJppa = this.propertiesTree.getProperty(PropKeys.stampaJppa.format("000P6"));
+			if(conf!=null && !conf.equals("")) {
+				stampaJppa = this.propertiesTree.getProperty(PropKeys.stampaJppa.format(file512.cutecute));
 			   informazioniStampa.setDebito(file512.ente,null, null, null, null);
+			}else {
+				stampaJppa = "";
 			}
 			
 			
@@ -531,7 +535,12 @@ public class SalvaPDF {
 					System.out.println("info AvvisaturaDto - " + info.toString());
 					res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
 							LogoBollettino.getLogoBolzano64(),"000P6"));
-				}else {
+				}else if(flusso.CuteCute.equals("000P4")) {
+					com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
+					res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso,flusso.Documentdata.get(i),
+							logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute));
+				}
+				else {
 					com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaGenerico = new InformazioniStampaGenerico();
 					res = stampa.stampaBolpuntuale(stampaGenerico.bollRichiesta(flusso,flusso.Documentdata.get(i),
 							logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute));
@@ -569,11 +578,16 @@ public class SalvaPDF {
 								System.out.println("info AvvisaturaDto - " + info.toString());
 								res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
 										LogoBollettino.getLogoBolzano64(),"000P6"));
-								}else {
-									com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaGenerico = new InformazioniStampaGenerico();
-									res = stampa.stampaBolpuntuale(stampaGenerico.bollRichiesta(flusso,flusso.Documentdata.get(i),
-											logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute));
-								}
+							}else if(flusso.CuteCute.equals("000P4")) {
+								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
+								res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso,flusso.Documentdata.get(i),
+										logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute));
+							}
+							else {
+								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaGenerico = new InformazioniStampaGenerico();
+								res = stampa.stampaBolpuntuale(stampaGenerico.bollRichiesta(flusso,flusso.Documentdata.get(i),
+										logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute));
+							}
 							
 							
 							try {
@@ -602,11 +616,16 @@ public class SalvaPDF {
 								System.out.println("info AvvisaturaDto - " + info.toString());
 								res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
 										LogoBollettino.getLogoBolzano64(),"000P6"));
-								}else {
-									com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaGenerico = new InformazioniStampaGenerico();
-									res = stampa.stampaBolpuntuale(stampaGenerico.bollRichiesta(flusso,flusso.Documentdata.get(i),
-											logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute));
-								}
+							}else if(flusso.CuteCute.equals("000P4")) {
+								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
+								res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso,flusso.Documentdata.get(i),
+										logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute));
+							}
+							else {
+								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaGenerico = new InformazioniStampaGenerico();
+								res = stampa.stampaBolpuntuale(stampaGenerico.bollRichiesta(flusso,flusso.Documentdata.get(i),
+										logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute));
+							}
 							
 							
 							try {
