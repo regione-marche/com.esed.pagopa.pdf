@@ -15,6 +15,7 @@ import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import com.seda.payer.commons.geos.Documento;
+import com.seda.payer.commons.geos.Flusso;
 
 import it.maggioli.pagopa.jppa.printer.model.ChiaviDebitoDto;
 import it.maggioli.pagopa.jppa.printer.model.ChiaviDebitoDto.CodiceServizioEnum;
@@ -28,7 +29,7 @@ import it.maggioli.pagopa.jppa.printer.model.StampaAvvisaturaRichiesta.LocaleEnu
 /**
  * 
  */
-public class InformazioniStampa implements InformazioniStampaInterface {
+public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 	
 	private StampaAvvisaturaRichiesta stampaAvvisaturaRichiesta;
 	private ChiaviDebitoDto chiaviDebitoDto;
@@ -39,7 +40,7 @@ public class InformazioniStampa implements InformazioniStampaInterface {
 	/**
 	 * 
 	 */
-	public InformazioniStampa() {
+	public InformazioniStampaBolzano() {
 		this.chiaviDebitoDto = new ChiaviDebitoDto();
 	}
 	
@@ -77,15 +78,16 @@ public class InformazioniStampa implements InformazioniStampaInterface {
 	
 	//Stampa Bollettino
 	@Override
-	public DatiEnteAvvisaturaDto setAvvisauraDto(Documento doc,String tipostampa,String cutecute) {
+	public DatiEnteAvvisaturaDto setAvvisauraDto(Flusso flusso,Documento doc,Boolean tipostampa,String cutecute) {
 		this.avvisaturaDto = new DatiEnteAvvisaturaDto();
 		this.avvisaturaDto.setCodiceFiscale(doc.DatiCreditore.get(0).Cf);
 		this.avvisaturaDto.setCodiceInterbancario(doc.DatiCreditore.get(0).CodiceInterbancario);
+		this.avvisaturaDto.setDataMatrix(doc.DatiBollettino.get(0).QRcodePagoPa);
 		if(cutecute.equals("000P6")) {
 			this.avvisaturaDto.setCpAbilitato(false);
 		}
 		else {
-			this.avvisaturaDto.setCpAbilitato(!(doc.DatiCreditore.get(0).CodiceInterbancario.equals("00000")));
+			this.avvisaturaDto.setCpAbilitato(tipostampa);
 		}
 		
 		this.avvisaturaDto.cpAutorizzazione(doc.DatiBollettino.get(0).AutorizCcp);
@@ -111,12 +113,11 @@ public class InformazioniStampa implements InformazioniStampaInterface {
 		}
 		
 		this.avvisaturaDto.setSettore(doc.DatiCreditore.get(0).Denominazione2);
-		if(tipostampa.equals("jppa")) {
 			this.avvisaturaDto.setNome(doc.DatiCreditore.get(0).Denominazione1);
            if(cutecute.equals("000P6")) {
 			this.avvisaturaDto.setNomeDe(doc.DatiCreditore.get(0).Denominazione2);
            }
-		}
+		
 
 		return avvisaturaDto;
 	}
@@ -128,12 +129,10 @@ public class InformazioniStampa implements InformazioniStampaInterface {
 				.append("-").append(dataformat[0]).append("T").append("00:00:00Z").toString();
 	}
 	
-	public StampaBollettinoRichiesta bollRichiesta(Documento doc, String logo64,String tipoStampa,String cutecute) {
+	@Override
+	public StampaBollettinoRichiesta bollRichiesta(Flusso flusso,Documento doc, String logo64,String cutecute) {
 		
 		StampaBollettinoRichiesta bollRichiesta = null;
-//		if(tipoStampa.equals("jppade")) {
-//			return richiestade(doc,logo64);
-//		}else {
 		
 		bollRichiesta = new StampaBollettinoRichiesta();
 		PosizioneDebitoriaAvvisaturaDto posDeb  = new PosizioneDebitoriaAvvisaturaDto();
@@ -168,7 +167,7 @@ public class InformazioniStampa implements InformazioniStampaInterface {
 			}
 		} else {
 		
-		if(tipoStampa.equals("jppa") && cutecute.equals("000P6")) {
+		if(cutecute.equals("000P6")) {
 			if(prima!=null) {
 				if(prima[0]==null||prima[1]==null) {
 					posDeb.setCausaleDebitoriaDe("");
@@ -185,7 +184,6 @@ public class InformazioniStampa implements InformazioniStampaInterface {
 		}
 		
 	}else {
-		//posDeb.setCausaleDebitoriaDe("");
 		posDeb.setCausaleDebitoria(doc.CausaleDocumento);
 	}
 		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento)/100);
@@ -196,11 +194,11 @@ public class InformazioniStampa implements InformazioniStampaInterface {
 		}else {
 			posDeb.setNumeroAvviso(doc.DatiBollettino.get(0).AvvisoPagoPa);
 		}
-			posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Indirizzo);
+			posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Indirizzo+" "+doc.DatiAnagrafici.get(0).Cap+" ");
 		    posDeb.setDataScadenza(buildDate(doc.DatiBollettino.get(0).ScadenzaRata));// Data scadenza
 			posDeb.setTitDebitoCapSedeLegale("");
 			posDeb.setTitDebitoCf(doc.DatiAnagrafici.get(0).Cf);
-			posDeb.setTitDebitoCivicoRes(doc.DatiAnagrafici.get(0).Indirizzo);
+			posDeb.setTitDebitoCivicoRes("");
 			posDeb.setTitDebitoCivicoSedeLegale("");
 			posDeb.setTitDebitoCognome("");
 			posDeb.setTitDebitoComuneRes(doc.DatiAnagrafici.get(0).Citta);
