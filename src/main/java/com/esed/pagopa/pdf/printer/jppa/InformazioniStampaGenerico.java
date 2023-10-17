@@ -30,8 +30,6 @@ public class InformazioniStampaGenerico implements InformazioniStampaInterface {
 		avvisaturaDto.setCodiceFiscale(doc.DatiCreditore.get(0).Cf);
 		avvisaturaDto.setCodiceInterbancario(doc.DatiCreditore.get(0).CodiceInterbancario);
 	    avvisaturaDto.setCpAbilitato(tipostampa);
-	    
-	    avvisaturaDto.setDataMatrix(doc.DatiBollettino.get(0).QRcodePagoPa);
 		
 		avvisaturaDto.cpAutorizzazione(doc.DatiBollettino.get(0).AutorizCcp);
 
@@ -71,6 +69,8 @@ public class InformazioniStampaGenerico implements InformazioniStampaInterface {
 		PosizioneDebitoriaAvvisaturaDto posDeb  = new PosizioneDebitoriaAvvisaturaDto();
 
 		posDeb.setCausaleDebitoria(doc.CausaleDocumento);
+		
+		posDeb.setDataMatrix(doc.DatiBollettino.get(0).QRcodePagoPa);
 		
 		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento)/100);
 		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
@@ -126,12 +126,6 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 	    avvisaturaDto.setCpAbilitato(tipostampa);
 	    
 	    System.out.println("QRcodePagoPa: " + bollettino999.BarcodePagoPa);
-	    
-	    if(doc.DatiBollettino.get(0).QRcodePagoPa.contains("null")) {
-	       avvisaturaDto.setDataMatrix("");
-	    }else {
-	       avvisaturaDto.setDataMatrix(bollettino999.QRcodePagoPa);
-	    }
 		
 		avvisaturaDto.cpAutorizzazione(bollettino999.AutorizCcp);
 
@@ -175,6 +169,8 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 		PosizioneDebitoriaAvvisaturaDto posDeb  = new PosizioneDebitoriaAvvisaturaDto();
 
 		posDeb.setCausaleDebitoria(doc.CausaleDocumento);
+		
+		posDeb.setDataMatrix(doc.DatiBollettino.get(0).QRcodePagoPa);
 		
 		posDeb.setImporto(Float.valueOf(bollettino999.Codeline2Boll)/100);
 		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
