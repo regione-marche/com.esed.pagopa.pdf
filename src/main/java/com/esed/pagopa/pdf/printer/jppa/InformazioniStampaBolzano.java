@@ -83,7 +83,6 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 		this.avvisaturaDto = new DatiEnteAvvisaturaDto();
 		this.avvisaturaDto.setCodiceFiscale(doc.DatiCreditore.get(0).Cf);
 		this.avvisaturaDto.setCodiceInterbancario(doc.DatiCreditore.get(0).CodiceInterbancario);
-		this.avvisaturaDto.setDataMatrix(doc.DatiBollettino.get(0).QRcodePagoPa);
 		if(cutecute.equals("000P6")) {
 			this.avvisaturaDto.setCpAbilitato(false);
 		}
@@ -137,6 +136,8 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 		
 		bollRichiesta = new StampaBollettinoRichiesta();
 		PosizioneDebitoriaAvvisaturaDto posDeb  = new PosizioneDebitoriaAvvisaturaDto();
+		
+		posDeb.setDataMatrix(doc.DatiBollettino.get(0).QRcodePagoPa);
 		
 		if(cutecute.equals("000P6")) {
 		
@@ -246,7 +247,6 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 		this.avvisaturaDto = new DatiEnteAvvisaturaDto();
 		this.avvisaturaDto.setCodiceFiscale(doc.DatiCreditore.get(0).Cf);
 		this.avvisaturaDto.setCodiceInterbancario(doc.DatiCreditore.get(0).CodiceInterbancario);
-		this.avvisaturaDto.setDataMatrix(bollettino999.QRcodePagoPa);
 		if(cutecute.equals("000P6")) {
 			this.avvisaturaDto.setCpAbilitato(false);
 		}

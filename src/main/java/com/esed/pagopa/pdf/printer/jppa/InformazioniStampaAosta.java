@@ -34,12 +34,6 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 	    
 	    System.out.println("QRcodePagoPa: " + doc.DatiBollettino.get(0).QRcodePagoPa);
 	    
-	    if(doc.DatiBollettino.get(0).QRcodePagoPa.contains("null")) {
-	       avvisaturaDto.setDataMatrix("");
-	    }else {
-	       avvisaturaDto.setDataMatrix(doc.DatiBollettino.get(0).QRcodePagoPa);
-	    }
-		
 		avvisaturaDto.cpAutorizzazione(doc.DatiBollettino.get(0).AutorizCcp);
 
 		System.out.println("Intestatario Descon60Boll: " + doc.DatiBollettino.get(0).Descon60Boll);
@@ -79,6 +73,8 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 		PosizioneDebitoriaAvvisaturaDto posDeb  = new PosizioneDebitoriaAvvisaturaDto();
 
 		posDeb.setCausaleDebitoria(doc.CausaleDocumento);
+		
+		posDeb.setDataMatrix(doc.DatiBollettino.get(0).QRcodePagoPa);
 		
 		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento)/100);
 		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
@@ -136,12 +132,6 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 	    
 	    System.out.println("QRcodePagoPa: " + bollettino999.BarcodePagoPa);
 	    
-	    if(doc.DatiBollettino.get(0).QRcodePagoPa.contains("null")) {
-	       avvisaturaDto.setDataMatrix("");
-	    }else {
-	       avvisaturaDto.setDataMatrix(bollettino999.QRcodePagoPa);
-	    }
-		
 		avvisaturaDto.cpAutorizzazione(bollettino999.AutorizCcp);
 
 		System.out.println("Intestatario Descon60Boll: " + bollettino999.Descon60Boll);
@@ -184,6 +174,8 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 		PosizioneDebitoriaAvvisaturaDto posDeb  = new PosizioneDebitoriaAvvisaturaDto();
 
 		posDeb.setCausaleDebitoria(doc.CausaleDocumento);
+		
+		posDeb.setDataMatrix(bollettino999.QRcodePagoPa);
 		
 		posDeb.setImporto(Float.valueOf(bollettino999.Codeline2Boll)/100);
 		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
