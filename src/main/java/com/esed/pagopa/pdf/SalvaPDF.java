@@ -604,29 +604,24 @@ public class SalvaPDF {
 						if (elencoBollettini.length - 1 - j >= 3 && (elencoBollettini.length - 1 - j) != 4) {
 							System.out.println("chiamato metodo 3 bollettini per pagina");
 							
-							
-							/*multiBollJppa(file512, nomiFile, pagineAggiunteDocumento, 
-									guidaDocumento, risposte, flusso, 
-									j, stampa, 
-									allBoll, fileTxtGuida, path,nomef,out);*/
-							
 							if(flusso.CuteCute.equals("000P6")) {
 					    		
 								InformazioniStampaInterface info = new InformazioniStampaBolzano(); 
 								System.out.println("info AvvisaturaDto - " + info.toString());
-								res = stampa.stampaBolpuntuale(info.stampaBoll999(bollettino999,flusso,flusso.Documentdata.get(i),"","000P6"));
+								res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
+										/*logobollettino.getLogo(flusso.CuteCute)*/"",flusso.CuteCute));
 								
 							}else if(flusso.CuteCute.equals("000P4")) {
 								
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
-								res = stampa.stampaBolpuntuale(stampaAosta.stampaBoll999(bollettino999, flusso, flusso.Documentdata.get(i), 
-										/*logobollettino.getLogo(flusso.CuteCute)*/"", flusso.CuteCute));
+								res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso,flusso.Documentdata.get(i),
+										/*logobollettino.getLogo(flusso.CuteCute)*/"",flusso.CuteCute));
 							}
 							else {
 								
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaGenerico = new InformazioniStampaGenerico();
-								res = stampa.stampaBolpuntuale(stampaGenerico.stampaBoll999(bollettino999, flusso, flusso.Documentdata.get(i), 
-										/*logobollettino.getLogo(flusso.CuteCute)*/"", flusso.CuteCute));
+								res = stampa.stampaBolpuntuale(stampaGenerico.bollRichiesta(flusso,flusso.Documentdata.get(i),
+										/*logobollettino.getLogo(flusso.CuteCute)*/"",flusso.CuteCute));
 							}
 					    	
 					    	
@@ -665,29 +660,25 @@ public class SalvaPDF {
 							
 							risposte = new ArrayList<>();
 							
-							/*multiBollJppa(file512, nomiFile, pagineAggiunteDocumento, 
-									guidaDocumento, risposte, flusso, 
-									j, stampa, 
-									allBoll, fileTxtGuida, path,nomef,out);*/
-							
-							
+
 							if(flusso.CuteCute.equals("000P6")) {
 					    		
 								InformazioniStampaInterface info = new InformazioniStampaBolzano(); 
 								System.out.println("info AvvisaturaDto - " + info.toString());
-								res = stampa.stampaBolpuntuale(info.stampaBoll999(bollettino999,flusso,flusso.Documentdata.get(i),"","000P6"));
+								res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
+										/*logobollettino.getLogo(flusso.CuteCute)*/"",flusso.CuteCute));
 								
 							}else if(flusso.CuteCute.equals("000P4")) {
 								
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
-								res = stampa.stampaBolpuntuale(stampaAosta.stampaBoll999(bollettino999, flusso, flusso.Documentdata.get(i), 
-										/*logobollettino.getLogo(flusso.CuteCute)*/"", flusso.CuteCute));
+								res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso,flusso.Documentdata.get(i),
+										/*logobollettino.getLogo(flusso.CuteCute)*/"",flusso.CuteCute));
 							}
 							else {
 								
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaGenerico = new InformazioniStampaGenerico();
-								res = stampa.stampaBolpuntuale(stampaGenerico.stampaBoll999(bollettino999, flusso, flusso.Documentdata.get(i), 
-										/*logobollettino.getLogo(flusso.CuteCute)*/"", flusso.CuteCute));
+								 res = stampa.stampaBolpuntuale(stampaGenerico.bollRichiesta(flusso,flusso.Documentdata.get(i),
+										 /*logobollettino.getLogo(flusso.CuteCute)*/"",flusso.CuteCute));
 							}
 					    	
 					    	
@@ -724,8 +715,8 @@ public class SalvaPDF {
 						flusso.Documentdata.get(i).DatiAnagrafici.get(0).Cf,
 						Integer.parseInt(flusso.DataFornitura.substring(4)),
 						flusso.Documentdata.get(i).NumeroDocumento,
-						allBoll.get(i),
-						fileTxtGuida.getName(),
+						file.getName(),
+						file512.getFileName(),
 						pagineAggiunteDocumento,
 						flusso.Documentdata.get(i).ImpostaServizio	//PAGONET-303
 						);
@@ -744,7 +735,7 @@ public class SalvaPDF {
 		     
 	           // Setting the destination file path
 
-		     obj.setDestinationFileName(path+"/"+fileFinale+".pdf");
+		     obj.setDestinationFileName(path+"/"+fileTxtGuida.getName()+".pdf");
 		     
 		           // Add all source files, to be merged
 		           for(String n : nomiFile) {
@@ -754,11 +745,11 @@ public class SalvaPDF {
 			 obj.mergeDocuments(null);
 			 
 			 
-			 FileOutputStream fos = new FileOutputStream(path+"/"+fileFinale+".zip");
+			 FileOutputStream fos = new FileOutputStream(path+"/"+fileTxtGuida.getName()+".pdf.zip");
 				ZipOutputStream zipOut = new ZipOutputStream(fos);
-				ZipEntry zipFile = new ZipEntry(fileFinale+".pdf");
+				ZipEntry zipFile = new ZipEntry(fileTxtGuida.getName()+".pdf");
 				zipOut.putNextEntry(zipFile);
-				FileInputStream fisDaZippare = new FileInputStream(path+"/"+fileFinale+".pdf");
+				FileInputStream fisDaZippare = new FileInputStream(path+"/"+fileTxtGuida.getName()+".pdf");
 				byte[] bytes = new byte[1024];
 				int length;
 				while((length = fisDaZippare.read(bytes)) >= 0) {
