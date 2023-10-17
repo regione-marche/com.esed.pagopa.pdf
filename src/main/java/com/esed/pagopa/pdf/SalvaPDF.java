@@ -249,6 +249,7 @@ public class SalvaPDF {
 		Document document = null;
 		File file = null;
 		File fileGuida = null;
+		File fileTxtGuida = null;
 		
 		String conf = this.propertiesTree.getProperty(PropKeys.stampaJppa.format(file512.cutecute));
 
@@ -301,7 +302,10 @@ public class SalvaPDF {
 			}
 			else {
 				
-				fileGuida = new File(nomeFile+".pdf");
+				
+				fileTxtGuida = new File(path,nomeFile+".txt");
+				GuidaDocumento guidaDocumento = new GuidaDocumento(fileTxtGuida);
+				file = new File(path, nomeFile + ".pdf");
 				
 				String passwordJppa = propertiesTree.getProperty(PropKeys.passwordJppa.format(file512.cutecute));
 				String userJppa = propertiesTree.getProperty(PropKeys.utenteJppa.format(file512.cutecute));
@@ -309,12 +313,14 @@ public class SalvaPDF {
 				
 				flusso = ConvertiFile512FlussoGeos.convertiFlusso(file512, this.propertiesTree);
 
+				file.getParentFile().mkdirs();
 				String nomeFileOrigine = file512.getFileName();
 				System.out.println("nomeFileOrigine = " + nomeFileOrigine);
 				System.out.println("file512.tipoTemplate = " + file512.tipoTemplate);
 				
 				//FlussoJppa
-				stampaJppaMassivo(flusso,"",userJppa,passwordJppa,urlPrinter,file512.idFlusso,fileGuida.getName(),pdf,stampaJppa,path);
+				stampaJppaMassivo(file512, flusso,"",userJppa,passwordJppa,urlPrinter,
+						file512.getFileName(),pdf,stampaJppa,path,fileTxtGuida,file,guidaDocumento);
 			}
 			
 			if(!stampaJppa.equals("Y")) {
@@ -341,24 +347,7 @@ public class SalvaPDF {
 				
 				Thread.sleep(1000);
 				
-			} else {
-				FileOutputStream fos = new FileOutputStream(path+"/"+nomeFile+".zip");
-				ZipOutputStream zipOut = new ZipOutputStream(fos);
-				ZipEntry zipFile = new ZipEntry(fileGuida.getName());
-				zipOut.putNextEntry(zipFile);
-				FileInputStream fisDaZippare = new FileInputStream(path+"/"+nomeFile+".pdf");
-				byte[] bytes = new byte[1024];
-				int length;
-				while((length = fisDaZippare.read(bytes)) >= 0) {
-					zipOut.write(bytes, 0, length);
-				}
-				zipOut.close();
-				fisDaZippare.close();
-				fos.close();
-				fileGuida.delete();
 			}
-		
-		
 	}
 	
 	
@@ -488,9 +477,9 @@ public class SalvaPDF {
 	 * @return
 	 * @throws ValidazioneException
 	 */
-    private static int stampaJppaMassivo(Flusso flusso, String codiceIpa,String userJppa,
-    		String passwordJppa,String urlPrinter,String nomeFile,String nomefileguida,PdfDocument pdf
-    		,String stampaJppa,String path) throws ValidazioneException {
+    private static int stampaJppaMassivo(File512 file512,Flusso flusso, String codiceIpa,String userJppa,
+    		String passwordJppa,String urlPrinter,String nomeFile,PdfDocument pdf
+    		,String stampaJppa,String path,File fileTxtGuida,File file,GuidaDocumento guidaDocumento) throws ValidazioneException {
 		
 		StampaPdfJppaPagonet stampa = new StampaPdfJppaPagonet(userJppa,passwordJppa,urlPrinter);
 		
@@ -500,7 +489,15 @@ public class SalvaPDF {
 		
 		FileOutputStream out = null;
 		
+		//nomef = generaNomeFile(file512);
 		PDFMergerUtility obj = null;
+		
+		String nomef = "";
+		
+		List<String> nomiFile = new ArrayList<>();
+		List<String> allBoll = new ArrayList<>();
+		
+		String fileFinale = generaNomeFile(file512);
 		
 		/**
 		 * All interno dell oggetto LogoBollettino sono salvati in modo statico 
@@ -510,18 +507,20 @@ public class SalvaPDF {
 		
 		String stampaj = stampaJppa == "Y" ? "jppa" : "";
 		
-		File file = null;
-		
 		int stato = 1;
 		
 //		guidaDocumento.numeroPaginaIniziale = 1;
 		for (int i = 0; i < flusso.Documentdata.size(); i++) {
 			
 			try {
-				out = new FileOutputStream(path+"/"+i+".pdf");
-			} catch (FileNotFoundException e) {
+				nomef = generaNomeFile(file512);
+				out = new FileOutputStream(path+"/"+nomef+".pdf");
+				nomiFile.add(nomef);
+				allBoll.add(nomef+".pdf");
+			}catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
+			 
 			
 			int pagineAggiunteDocumento = 0;
 //			validaFlusso controlla i dati del flusso, 
@@ -539,129 +538,178 @@ public class SalvaPDF {
 			
 			if (elencoBollettini.length > 0) {
 				
-//			PREDISPONE LA STAMPA DEL BOLLETTINO N° 999 OVVERO LA RATA UNICA
-//				paginaUnBollettino(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, flusso.Documentdata.get(i).DatiBollettino.get(elencoBollettini[elencoBollettini.length - 1]) /* PASSA SOLO LA RATA UNICA BOLLETTINO */);
-//				Bollettino bollettino999 = flusso.Documentdata.get(i).DatiBollettino
-//						.stream()
-//						.filter(x -> x.ProgressivoBoll == 999)
-//						.findFirst()
-//						.orElse(null);
+				Bollettino bollettino999 = flusso.Documentdata.get(i).DatiBollettino
+						.stream()
+						.filter(x -> x.ProgressivoBoll == 999)
+						.findFirst()
+						.orElse(null);
+			/*
+				stampaBoll999(flusso, bollettino999, stampa, pagineAggiunteDocumento, guidaDocumento, 
+						pagineAggiunteDocumento, fileTxtGuida, nomef, path,allBoll,file512,nomiFile,out);*/
 				
 				if(flusso.CuteCute.equals("000P6")) {
-					
-					InformazioniStampaInterface info = new InformazioniStampaBolzano();
-					info.setAvvisauraDto(flusso,flusso.Documentdata.get(i),false,"000P6"); // Informazioni Avvisatura
+		    		
+					InformazioniStampaInterface info = new InformazioniStampaBolzano(); 
 					System.out.println("info AvvisaturaDto - " + info.toString());
-					res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
-							logobollettino.getLogo(flusso.CuteCute),"000P6"));
+					res = stampa.stampaBolpuntuale(info.stampaBoll999(bollettino999,flusso,flusso.Documentdata.get(i),"","000P6"));
 					
 				}else if(flusso.CuteCute.equals("000P4")) {
 					
 					com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
-					res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso,flusso.Documentdata.get(i),
-							logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute));
+					res = stampa.stampaBolpuntuale(stampaAosta.stampaBoll999(bollettino999, flusso, flusso.Documentdata.get(i), 
+							/*logobollettino.getLogo(flusso.CuteCute)*/"", flusso.CuteCute));
 				}
 				else {
 					
 					com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaGenerico = new InformazioniStampaGenerico();
-					res = stampa.stampaBolpuntuale(stampaGenerico.bollRichiesta(flusso,flusso.Documentdata.get(i),
-							logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute));
+					res = stampa.stampaBolpuntuale(stampaGenerico.stampaBoll999(bollettino999, flusso, flusso.Documentdata.get(i), 
+							/*logobollettino.getLogo(flusso.CuteCute)*/"", flusso.CuteCute));
 				}
-						
-						
-						try {
-							out.write(Base64.getDecoder().decode(res.getFileBase64Encoded())); // scrivo nel file creato sopra
-						           
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						
-						try {
-							out.close(); // chiudo il file i.pdf dove i è l'indice del for
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+		    	
+		    	
+		    	
+		    	try {
+					
+					out.write(Base64.getDecoder().decode(res.getFileBase64Encoded())); // scrivo nel file creato sopra
+					
+					out.close();
+					       
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				
+				
 						
 				pagineAggiunteDocumento++;
-				
+						
 //				se i bollettini sono 2 allora non c'è rateizzazione perchè Ã¨ il numero 1 e il 999 entrambi con dati coincidenti
 //				se invece i bollettini sono almeno 3 il 999 contiene la rata unica e gli altri 2 la rateizzazione
 				System.out.println(elencoBollettini.length);
-				if (elencoBollettini.length > 2) {
-					for (int j = 0; j < elencoBollettini.length - 1; ) {
-						if (elencoBollettini.length - 1 - j >= 3 && (elencoBollettini.length - 1 - j) != 4) {
-							
-							if(flusso.CuteCute.equals("000P6")) {
-								InformazioniStampaInterface info = new InformazioniStampaBolzano();
-								info.setAvvisauraDto(flusso,flusso.Documentdata.get(i),false,"000P6"); // Informazioni Avvisatura
-								System.out.println("info AvvisaturaDto - " + info.toString());
-								res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
-										logobollettino.getLogo(flusso.CuteCute),"000P6"));
-								
-							}else if(flusso.CuteCute.equals("000P4")) {
-								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
-								res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso,flusso.Documentdata.get(i),
-										logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute));
-							}
-							else {
-								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaGenerico = new InformazioniStampaGenerico();
-								res = stampa.stampaBolpuntuale(stampaGenerico.bollRichiesta(flusso,flusso.Documentdata.get(i),
-										logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute));
-							}
-							
-							
-							try {
-								out.write(Base64.getDecoder().decode(res.getFileBase64Encoded()));
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-							
-							try {
-								out.close();
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-							j += 3;
-							pagineAggiunteDocumento++;
-							continue;
-						}
-						if (elencoBollettini.length - 1 - j >= 2 && (elencoBollettini.length - 1 - j) % 3 != 0) {
-							System.out.println("chiamato metodo 2 bollettini per pagina");
+				
+				
+				
+				
+				
+				
+				
+				List<StampaBollettinoRisposta> risposte = new ArrayList<>();
+				
 
+				if (elencoBollettini.length > 2) {
+					
+					for (int j = 0; j < elencoBollettini.length - 1; ) {			
+						
+						
+						if (elencoBollettini.length - 1 - j >= 3 && (elencoBollettini.length - 1 - j) != 4) {
+							System.out.println("chiamato metodo 3 bollettini per pagina");
+							
+							
+							/*multiBollJppa(file512, nomiFile, pagineAggiunteDocumento, 
+									guidaDocumento, risposte, flusso, 
+									j, stampa, 
+									allBoll, fileTxtGuida, path,nomef,out);*/
+							
 							if(flusso.CuteCute.equals("000P6")) {
-								InformazioniStampaInterface info = new InformazioniStampaBolzano();
-								info.setAvvisauraDto(flusso,flusso.Documentdata.get(i),false,"000P6"); // Informazioni Avvisatura
+					    		
+								InformazioniStampaInterface info = new InformazioniStampaBolzano(); 
 								System.out.println("info AvvisaturaDto - " + info.toString());
-								res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
-										logobollettino.getLogo(flusso.CuteCute),"000P6"));
+								res = stampa.stampaBolpuntuale(info.stampaBoll999(bollettino999,flusso,flusso.Documentdata.get(i),"","000P6"));
 								
 							}else if(flusso.CuteCute.equals("000P4")) {
+								
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
-								res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso,flusso.Documentdata.get(i),
-										logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute));
+								res = stampa.stampaBolpuntuale(stampaAosta.stampaBoll999(bollettino999, flusso, flusso.Documentdata.get(i), 
+										/*logobollettino.getLogo(flusso.CuteCute)*/"", flusso.CuteCute));
 							}
 							else {
+								
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaGenerico = new InformazioniStampaGenerico();
-								res = stampa.stampaBolpuntuale(stampaGenerico.bollRichiesta(flusso,flusso.Documentdata.get(i),
-										logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute));
+								res = stampa.stampaBolpuntuale(stampaGenerico.stampaBoll999(bollettino999, flusso, flusso.Documentdata.get(i), 
+										/*logobollettino.getLogo(flusso.CuteCute)*/"", flusso.CuteCute));
 							}
-							
-							
-							try {
-								out.write(Base64.getDecoder().decode(res.getFileBase64Encoded()));
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-							
-							try {
+					    	
+					    	
+					    	
+					    	try {
+								
+								out.write(Base64.getDecoder().decode(res.getFileBase64Encoded())); // scrivo nel file creato sopra
+								
 								out.close();
+								       
 							} catch (IOException e) {
 								e.printStackTrace();
 							}
-							j += 2;
+							
+							
+							
+							j += 3;
+							
 							pagineAggiunteDocumento++;
+							
 							continue;
 						}
+						
+						
+	/*###########################################################################################################*/
+	/*###########################################################################################################*/
+	/*###########################################################################################################*/	
+		
+						
+						
+						
+						if (elencoBollettini.length - 1 - j >= 2 && (elencoBollettini.length - 1 - j) % 3 != 0) {
+													
+							
+							System.out.println("chiamato metodo 2 bollettini per pagina");
+							
+							risposte = new ArrayList<>();
+							
+							/*multiBollJppa(file512, nomiFile, pagineAggiunteDocumento, 
+									guidaDocumento, risposte, flusso, 
+									j, stampa, 
+									allBoll, fileTxtGuida, path,nomef,out);*/
+							
+							
+							if(flusso.CuteCute.equals("000P6")) {
+					    		
+								InformazioniStampaInterface info = new InformazioniStampaBolzano(); 
+								System.out.println("info AvvisaturaDto - " + info.toString());
+								res = stampa.stampaBolpuntuale(info.stampaBoll999(bollettino999,flusso,flusso.Documentdata.get(i),"","000P6"));
+								
+							}else if(flusso.CuteCute.equals("000P4")) {
+								
+								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
+								res = stampa.stampaBolpuntuale(stampaAosta.stampaBoll999(bollettino999, flusso, flusso.Documentdata.get(i), 
+										/*logobollettino.getLogo(flusso.CuteCute)*/"", flusso.CuteCute));
+							}
+							else {
+								
+								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaGenerico = new InformazioniStampaGenerico();
+								res = stampa.stampaBolpuntuale(stampaGenerico.stampaBoll999(bollettino999, flusso, flusso.Documentdata.get(i), 
+										/*logobollettino.getLogo(flusso.CuteCute)*/"", flusso.CuteCute));
+							}
+					    	
+					    	
+					    	
+					    	try {
+								
+								out.write(Base64.getDecoder().decode(res.getFileBase64Encoded())); // scrivo nel file creato sopra
+								
+								out.close();
+								       
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							
+							
+							j += 2;
+							
+							pagineAggiunteDocumento++;
+							
+							continue;
+					} // fine if 2
+						
 						if (j < 0)
 							break;
 					}
@@ -670,42 +718,76 @@ public class SalvaPDF {
 			} else {
 				throw new ValidazioneException("Mancano i bollettini");
 			}
+			
+			try {
+				guidaDocumento.aggiungiRigo(
+						flusso.Documentdata.get(i).DatiAnagrafici.get(0).Cf,
+						Integer.parseInt(flusso.DataFornitura.substring(4)),
+						flusso.Documentdata.get(i).NumeroDocumento,
+						allBoll.get(i),
+						fileTxtGuida.getName(),
+						pagineAggiunteDocumento,
+						flusso.Documentdata.get(i).ImpostaServizio	//PAGONET-303
+						);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		
+		
+		
+		
 		try {
-			
-			   System.out.println("Inizio merge documenti");
-	           // Instantiating PDFMergerUtility class
+			 obj = new PDFMergerUtility();
 		     
-	           obj = new PDFMergerUtility();
-	     
 	           // Setting the destination file path
-	     
-	           obj.setDestinationFileName(path+"/"+nomefileguida);
-	     
-	           // Add all source files, to be merged
-	           for(int i=0;i<flusso.Documentdata.size();i++) {
-	        	   obj.addSource(path+"/"+i+".pdf");
-	           }
 
-			   obj.mergeDocuments(null);
+		     obj.setDestinationFileName(path+"/"+fileFinale+".pdf");
+		     
+		           // Add all source files, to be merged
+		           for(String n : nomiFile) {
+		        	   obj.addSource(path+"/"+n+".pdf");
+		           }
+	
+			 obj.mergeDocuments(null);
+			 
+			 
+			 FileOutputStream fos = new FileOutputStream(path+"/"+fileFinale+".zip");
+				ZipOutputStream zipOut = new ZipOutputStream(fos);
+				ZipEntry zipFile = new ZipEntry(fileFinale+".pdf");
+				zipOut.putNextEntry(zipFile);
+				FileInputStream fisDaZippare = new FileInputStream(path+"/"+fileFinale+".pdf");
+				byte[] bytes = new byte[1024];
+				int length;
+				while((length = fisDaZippare.read(bytes)) >= 0) {
+					zipOut.write(bytes, 0, length);
+				}
+				zipOut.close();
+				fisDaZippare.close();
+				fos.close();
+				file.delete();
 				
-			   System.out.println("Merge eseguita nome file : " + nomefileguida);
-			
-	           for(int i=0;i<flusso.Documentdata.size();i++) {
-	        	   Files.delete(Paths.get(path+"/"+i+".pdf")); 
-	           }
-	        
-	        System.out.println("pdf cancellati");
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+		
+	           nomiFile.forEach(f -> {
+				try {
+					Files.delete(Paths.get(path+"/"+f+".pdf"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			});
+	           
 		return 0;
 
 }
 	
-	
+
 	
 	//metodo per stampare il documento contenuto nel File512 e implementare il relativo file guida
 	private int stampaDocumento(
@@ -3719,7 +3801,7 @@ public class SalvaPDF {
 //		return file;
 //	}
 	
-	private String generaNomeFile(File512 file512) {
+	private static String generaNomeFile(File512 file512) {
 		
 		String nomeFile = file512.societa
 				+ "_"

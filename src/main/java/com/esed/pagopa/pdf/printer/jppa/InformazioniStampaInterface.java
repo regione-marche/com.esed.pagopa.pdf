@@ -1,5 +1,6 @@
 package com.esed.pagopa.pdf.printer.jppa;
 
+import com.seda.payer.commons.geos.Bollettino;
 import com.seda.payer.commons.geos.Documento;
 import com.seda.payer.commons.geos.Flusso;
 
@@ -171,7 +172,10 @@ public interface InformazioniStampaInterface {
 	
 	
 	
-	
+	public default StampaBollettinoRichiesta stampaBoll999(Bollettino boll999,Flusso flusso,
+			Documento doc, String logo64,String cutecute) {
+		return null;
+	}
 	
 	
 	
