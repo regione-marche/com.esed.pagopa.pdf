@@ -177,8 +177,26 @@ public interface InformazioniStampaInterface {
 		return null;
 	}
 	
+	/**
+	 * Bolzano999
+	 * @param boll999
+	 * @param flusso
+	 * @param doc
+	 * @param logo64
+	 * @param cutecute
+	 * @return
+	 */
+	public default StampaBollettinoRichiesta stampaBoll999(Flusso flusso,Documento doc,Boolean tipostampa,
+			String cutecute,Bollettino bollettino999) {
+		return null;
+	}
+
+
 	
-	
+	public default DatiEnteAvvisaturaDto avvisaturaDto999(Flusso flusso, Documento doc, Boolean tipostampa, String cutecute,
+			Bollettino bollettino999) {
+		return null;
+	}
 	
 	
 	
