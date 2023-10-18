@@ -240,7 +240,7 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 	
 	
 	
-	
+	@Override
 	public DatiEnteAvvisaturaDto avvisaturaDto999(Flusso flusso,Documento doc,Boolean tipostampa,
 			String cutecute,Bollettino bollettino999) {
 		
