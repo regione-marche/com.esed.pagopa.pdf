@@ -15,6 +15,16 @@ import com.seda.payer.commons.geos.Documento;
 public class ValidaFlusso {
 	
 	private static Logger logger = Logger.getLogger(ValidaFlusso.class);
+	private static boolean daArchivioCarichi = false; 
+	
+	
+	
+	
+	public static boolean getDaArchivioCarichi() {
+		return daArchivioCarichi;
+	}
+	
+	
 	/**
 	 * @param documento
 	 * @return restituisce l'array della numerazione dei bollettini validati
@@ -351,6 +361,7 @@ public class ValidaFlusso {
 					System.out.println("Chiamata da archivioCarichiWS");
 					// vengo da archvioCarichi
 					// inverto BarcodePagoPa <--> QRcodePagoPa
+					ValidaFlusso.daArchivioCarichi = true;
 					String barcodePagoPaTemp = bollettino.BarcodePagoPa;
 					bollettino.BarcodePagoPa = bollettino.QRcodePagoPa;
 					bollettino.QRcodePagoPa = barcodePagoPaTemp;
@@ -407,7 +418,7 @@ public class ValidaFlusso {
 						String dataMatrix = "codfase=NBPA;" + codeline + "1P1"
 								+ String.format("%11.11s", codiceIdentificativoDominio)
 								+ String.format("%-16.16s", codiceFiscale)
-								+ String.format("%-40.40s", denominazione)
+								+ String.format("%-40.40s", denominazione.toUpperCase())
 								+ String.format("%-110.110s", causaleServizio) + "            "// filler
 								+ "A";
 						

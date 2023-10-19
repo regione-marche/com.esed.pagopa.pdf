@@ -246,7 +246,7 @@ public class SalvaPDFBolzano {
 					info.setAvvisauraDto(flusso,flusso.Documentdata.get(i),false,"000P6"); // Informazioni Avvisatura
 					System.out.println("info AvvisaturaDto - " + info.toString());
 					res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
-							LogoBollettino.getLogoBolzano64(),"000P6"));
+							LogoBollettino.getLogoBolzano64(),"000P6",false));
 				}
 			
 				//Se i bollettini sono 2 allora non c rateizzazione perche il numero 1 e il 999 entrambi con dati coincidenti
@@ -259,7 +259,7 @@ public class SalvaPDFBolzano {
 							//paginaTreBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
 							info.setAvvisauraDto(flusso,flusso.Documentdata.get(i),false,"000P6"); // Inofrmazioni Avvisatura
 							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
-									LogoBollettino.getLogoBolzano64(),"000P6"));
+									LogoBollettino.getLogoBolzano64(),"000P6",false));
 							j += 3;
 							continue;
 						}
@@ -268,7 +268,7 @@ public class SalvaPDFBolzano {
 							//paginaDueBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
 							info.setAvvisauraDto(flusso,flusso.Documentdata.get(i),false,"000P6"); // Inofrmazioni Avvisatura
 							res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
-									LogoBollettino.getLogoBolzano64(),"000P6"));
+									LogoBollettino.getLogoBolzano64(),"000P6",false));
 							j += 2;
 							continue;
 						}

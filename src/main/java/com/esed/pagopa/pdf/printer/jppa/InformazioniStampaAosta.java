@@ -32,8 +32,6 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 		avvisaturaDto.setCodiceInterbancario(doc.DatiCreditore.get(0).CodiceInterbancario);
 	    avvisaturaDto.setCpAbilitato(tipostampa);
 	    
-	    System.out.println("QRcodePagoPa: " + doc.DatiBollettino.get(0).QRcodePagoPa);
-	    
 		avvisaturaDto.cpAutorizzazione(doc.DatiBollettino.get(0).AutorizCcp);
 
 		System.out.println("Intestatario Descon60Boll: " + doc.DatiBollettino.get(0).Descon60Boll);
@@ -63,7 +61,7 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 	
 	
 	@Override
-	public StampaBollettinoRichiesta bollRichiesta(Flusso flusso,Documento doc, String logo64,String cutecute) {
+	public StampaBollettinoRichiesta bollRichiesta(Flusso flusso,Documento doc, String logo64,String cutecute,boolean daArchivio) {
 		
 		DatiEnteAvvisaturaDto avvisaturaDto = setAvvisauraDto(flusso,doc, flusso.TipoStampa.equals("P"), cutecute);
 		
@@ -74,7 +72,22 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 
 		posDeb.setCausaleDebitoria(doc.CausaleDocumento);
 		
-		posDeb.setDataMatrix(doc.DatiBollettino.get(0).QRcodePagoPa);
+		
+		if(!doc.DatiBollettino.get(0).AvvisoPagoPa.contains(" ")) {
+		doc.DatiBollettino.get(0).AvvisoPagoPa = doc.DatiBollettino.get(0).AvvisoPagoPa.replaceAll("(.{" + 4 + "})", "$0 ").trim();
+		System.out.println("Numero Avviso: " + doc.DatiBollettino.get(0).AvvisoPagoPa);
+		}
+		
+		
+		System.out.println("QRcodePagoPa: " + doc.DatiBollettino.get(0).QRcodePagoPa);
+		System.out.println("BarCode: " + doc.DatiBollettino.get(0).BarcodePagoPa);
+		
+		if(!daArchivio) {
+		     posDeb.setDataMatrix(doc.DatiBollettino.get(0).QRcodePagoPa);
+		}else {
+			System.out.println("Vengo da archivio sono scambiati qr e barcode....");
+		    posDeb.setDataMatrix(doc.DatiBollettino.get(0).BarcodePagoPa);
+		}
 		
 		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento)/100);
 		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
@@ -164,7 +177,7 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 	
 	@Override
     public StampaBollettinoRichiesta stampaBoll999(Bollettino bollettino999,Flusso flusso,
-			Documento doc, String logo64,String cutecute) {
+			Documento doc, String logo64,String cutecute,boolean daArchivio) {
 		
 		DatiEnteAvvisaturaDto avvisaturaDto = avvisatura999(flusso, doc, flusso.TipoStampa.equals("P"), cutecute,bollettino999);
 		
@@ -175,7 +188,21 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 
 		posDeb.setCausaleDebitoria(doc.CausaleDocumento);
 		
-		posDeb.setDataMatrix(bollettino999.QRcodePagoPa);
+		if(!doc.DatiBollettino.get(0).AvvisoPagoPa.contains(" ")) {
+			bollettino999.AvvisoPagoPa = bollettino999.AvvisoPagoPa.replaceAll("(.{" + 4 + "})", "$0 ").trim();
+		System.out.println("Numero Avviso: " +bollettino999.AvvisoPagoPa);
+		}
+		
+		
+		System.out.println("QRcodePagoPa: " + doc.DatiBollettino.get(0).QRcodePagoPa);
+		System.out.println("BarCode: " + doc.DatiBollettino.get(0).BarcodePagoPa);
+		
+		if(!daArchivio) {
+		     posDeb.setDataMatrix(bollettino999.QRcodePagoPa);
+		}else {
+			System.out.println("Vengo da archivio sono scambiati qr e barcode....");
+		    posDeb.setDataMatrix(bollettino999.BarcodePagoPa);
+		}
 		
 		posDeb.setImporto(Float.valueOf(bollettino999.Codeline2Boll)/100);
 		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
