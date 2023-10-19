@@ -189,8 +189,8 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 		posDeb.setCausaleDebitoria(doc.CausaleDocumento);
 		
 		if(!doc.DatiBollettino.get(0).AvvisoPagoPa.contains(" ")) {
-		doc.DatiBollettino.get(0).AvvisoPagoPa = doc.DatiBollettino.get(0).AvvisoPagoPa.replaceAll("(.{" + 4 + "})", "$0 ").trim();
-		System.out.println("Numero Avviso: " + doc.DatiBollettino.get(0).AvvisoPagoPa);
+			bollettino999.AvvisoPagoPa = bollettino999.AvvisoPagoPa.replaceAll("(.{" + 4 + "})", "$0 ").trim();
+		System.out.println("Numero Avviso: " +bollettino999.AvvisoPagoPa);
 		}
 		
 		
@@ -198,10 +198,10 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 		System.out.println("BarCode: " + doc.DatiBollettino.get(0).BarcodePagoPa);
 		
 		if(!daArchivio) {
-		     posDeb.setDataMatrix(doc.DatiBollettino.get(0).QRcodePagoPa);
+		     posDeb.setDataMatrix(bollettino999.QRcodePagoPa);
 		}else {
 			System.out.println("Vengo da archivio sono scambiati qr e barcode....");
-		    posDeb.setDataMatrix(doc.DatiBollettino.get(0).BarcodePagoPa);
+		    posDeb.setDataMatrix(bollettino999.BarcodePagoPa);
 		}
 		
 		posDeb.setImporto(Float.valueOf(bollettino999.Codeline2Boll)/100);
