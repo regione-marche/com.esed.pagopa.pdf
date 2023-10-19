@@ -130,14 +130,27 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 	}
 	
 	@Override
-	public StampaBollettinoRichiesta bollRichiesta(Flusso flusso,Documento doc, String logo64,String cutecute) {
+	public StampaBollettinoRichiesta bollRichiesta(Flusso flusso,Documento doc, String logo64,String cutecute,boolean daArchivio) {
 		
 		StampaBollettinoRichiesta bollRichiesta = null;
 		
 		bollRichiesta = new StampaBollettinoRichiesta();
 		PosizioneDebitoriaAvvisaturaDto posDeb  = new PosizioneDebitoriaAvvisaturaDto();
 		
-		posDeb.setDataMatrix(doc.DatiBollettino.get(0).QRcodePagoPa);
+		System.out.println("QRcodePagoPa: " + doc.DatiBollettino.get(0).QRcodePagoPa);
+		System.out.println("BarCode: " + doc.DatiBollettino.get(0).BarcodePagoPa);
+		
+		if(!doc.DatiBollettino.get(0).AvvisoPagoPa.contains(" ")) {
+			doc.DatiBollettino.get(0).AvvisoPagoPa = doc.DatiBollettino.get(0).AvvisoPagoPa.replaceAll("(.{" + 4 + "})", "$0 ").trim();
+			System.out.println("Numero Avviso: " + doc.DatiBollettino.get(0).AvvisoPagoPa);
+		}
+		
+		if(!daArchivio) {
+		     posDeb.setDataMatrix(doc.DatiBollettino.get(0).QRcodePagoPa);
+		}else {
+			System.out.println("Vengo da archivio sono scambiati qr e barcode....");
+		    posDeb.setDataMatrix(doc.DatiBollettino.get(0).BarcodePagoPa);
+		}
 		
 		if(cutecute.equals("000P6")) {
 		
@@ -302,7 +315,7 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 	
     @Override
     public StampaBollettinoRichiesta stampaBoll999(Bollettino bollettino999,Flusso flusso,
-			Documento doc, String logo64,String cutecute) {
+			Documento doc, String logo64,String cutecute,boolean daArchivio) {
     	
     	avvisaturaDto999(flusso, doc, false, cutecute, bollettino999);
 
@@ -311,6 +324,24 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 		bollRichiesta = new StampaBollettinoRichiesta();
 		
 		PosizioneDebitoriaAvvisaturaDto posDeb  = new PosizioneDebitoriaAvvisaturaDto();
+		
+		
+		if(!doc.DatiBollettino.get(0).AvvisoPagoPa.contains(" ")) {
+			bollettino999.AvvisoPagoPa = bollettino999.AvvisoPagoPa.replaceAll("(.{" + 4 + "})", "$0 ").trim();
+		    System.out.println("Numero Avviso: " + bollettino999.AvvisoPagoPa);
+		}
+		
+		
+		System.out.println("QRcodePagoPa: " + doc.DatiBollettino.get(0).QRcodePagoPa);
+		System.out.println("BarCode: " + doc.DatiBollettino.get(0).BarcodePagoPa);
+		
+		if(!daArchivio) {
+		     posDeb.setDataMatrix(bollettino999.QRcodePagoPa);
+		}else {
+			System.out.println("Vengo da archivio sono scambiati qr e barcode....");
+		    posDeb.setDataMatrix(bollettino999.BarcodePagoPa);
+		}
+		
 		
 		if(cutecute.equals("000P6")) {
 		

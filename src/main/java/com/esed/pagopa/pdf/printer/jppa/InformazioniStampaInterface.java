@@ -65,7 +65,7 @@ public interface InformazioniStampaInterface {
 	
 	
 	
-	public default  StampaBollettinoRichiesta bollRichiesta(Flusso flusso,Documento doc, String logo64,String cutecute) {
+	public default  StampaBollettinoRichiesta bollRichiesta(Flusso flusso,Documento doc, String logo64,String cutecute,boolean daArchivio) {
 		
 		DatiEnteAvvisaturaDto avvisaturaDto = setAvvisauraDto(flusso,doc, false, cutecute);
 		
@@ -173,7 +173,7 @@ public interface InformazioniStampaInterface {
 	
 	
 	public default StampaBollettinoRichiesta stampaBoll999(Bollettino boll999,Flusso flusso,
-			Documento doc, String logo64,String cutecute) {
+			Documento doc, String logo64,String cutecute,boolean daArchivio) {
 		return null;
 	}
 	
@@ -187,7 +187,7 @@ public interface InformazioniStampaInterface {
 	 * @return
 	 */
 	public default StampaBollettinoRichiesta stampaBoll999(Flusso flusso,Documento doc,Boolean tipostampa,
-			String cutecute,Bollettino bollettino999) {
+			String cutecute,Bollettino bollettino999,boolean daArchivio) {
 		return null;
 	}
 
