@@ -137,21 +137,6 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 		bollRichiesta = new StampaBollettinoRichiesta();
 		PosizioneDebitoriaAvvisaturaDto posDeb  = new PosizioneDebitoriaAvvisaturaDto();
 		
-		System.out.println("QRcodePagoPa: " + doc.DatiBollettino.get(0).QRcodePagoPa);
-		System.out.println("BarCode: " + doc.DatiBollettino.get(0).BarcodePagoPa);
-		
-		if(!doc.DatiBollettino.get(0).AvvisoPagoPa.contains(" ")) {
-			doc.DatiBollettino.get(0).AvvisoPagoPa = doc.DatiBollettino.get(0).AvvisoPagoPa.replaceAll("(.{" + 4 + "})", "$0 ").trim();
-			System.out.println("Numero Avviso: " + doc.DatiBollettino.get(0).AvvisoPagoPa);
-		}
-		
-		if(!daArchivio) {
-		     posDeb.setDataMatrix(doc.DatiBollettino.get(0).QRcodePagoPa);
-		}else {
-			System.out.println("Vengo da archivio sono scambiati qr e barcode....");
-		    posDeb.setDataMatrix(doc.DatiBollettino.get(0).BarcodePagoPa);
-		}
-		
 		if(cutecute.equals("000P6")) {
 		
 		String primaparte[] = new String[2];
@@ -201,6 +186,52 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 	}else {
 		posDeb.setCausaleDebitoria(doc.CausaleDocumento);
 	}
+		
+		//##############################################################
+		
+		if(!doc.DatiBollettino.get(0).AvvisoPagoPa.contains(" ")) {
+		doc.DatiBollettino.get(0).AvvisoPagoPa = doc.DatiBollettino.get(0).AvvisoPagoPa.replaceAll("(.{" + 4 + "})", "$0 ").trim();
+		System.out.println("Numero Avviso: " + doc.DatiBollettino.get(0).AvvisoPagoPa);
+		}
+		
+		String codiceAvvisoOriginalePagoPa = doc.DatiBollettino.get(0).AvvisoPagoPa == null ? "" : doc.DatiBollettino.get(0).AvvisoPagoPa.replace(" ", "");
+		String numeroContoCorrente = doc.DatiBollettino.get(0).Codeline12Boll == null ? "" : doc.DatiBollettino.get(0).Codeline12Boll;
+		String importo = doc.ImportoDocumento == null ? "" : doc.ImportoDocumento;
+		
+		System.out.println("codiceAvvisoOriginalePagoPa: " + codiceAvvisoOriginalePagoPa);
+		System.out.println("numeroContoCorrente: " + numeroContoCorrente);
+		System.out.println("importo: " + importo);
+		
+		String codeline =   "18"
+				+ String.format("%-18.18s", codiceAvvisoOriginalePagoPa)
+				+ "12"
+				+ String.format("%12.12s", numeroContoCorrente).replace(' ', '0') // numero conto
+				+ "10"
+				+ String.format("%10.10s", importo).replace(' ', '0')
+				+ "3"
+				+ "896"; //tipo documento;
+		
+		System.out.println("Codeline: " + codeline);
+		
+		String dataMatrix = "codfase=NBPA;" + codeline + "1P1"
+				+ String.format("%11.11s", doc.DatiCreditore.get(0).Cf)
+				+ String.format("%-16.16s", doc.DatiAnagrafici.get(0).Cf)
+				+ String.format("%-40.40s", doc.DatiAnagrafici.get(0).Denominazione1.toUpperCase())
+				+ String.format("%-110.110s", doc.CausaleDocumento) + "            "// filler
+				+ "A";
+		
+		System.out.println("DataMatrix: " + dataMatrix);
+		
+		
+		if(!daArchivio) {
+			posDeb.setDataMatrix(dataMatrix); //bollettino.QRcodePagoPa
+		}else {
+			System.out.println("Vengo da archivio");
+			posDeb.setDataMatrix(dataMatrix);
+		}
+		
+		
+		
 		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento)/100);
 		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
 			System.out.println("Numero documento NULL PosDebitoria");
@@ -331,18 +362,6 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 		    System.out.println("Numero Avviso: " + bollettino999.AvvisoPagoPa);
 		}
 		
-		
-		System.out.println("QRcodePagoPa: " + doc.DatiBollettino.get(0).QRcodePagoPa);
-		System.out.println("BarCode: " + doc.DatiBollettino.get(0).BarcodePagoPa);
-		
-		if(!daArchivio) {
-		     posDeb.setDataMatrix(bollettino999.QRcodePagoPa);
-		}else {
-			System.out.println("Vengo da archivio sono scambiati qr e barcode....");
-		    posDeb.setDataMatrix(bollettino999.BarcodePagoPa);
-		}
-		
-		
 		if(cutecute.equals("000P6")) {
 		
 		String primaparte[] = new String[2];
@@ -392,6 +411,47 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 	}else {
 		posDeb.setCausaleDebitoria(doc.CausaleDocumento);
 	}
+		
+		
+		String codiceAvvisoOriginalePagoPa = bollettino999.AvvisoPagoPa == null ? "" : bollettino999.AvvisoPagoPa.replace(" ", "");
+		String numeroContoCorrente = bollettino999.Codeline12Boll == null ? "" : bollettino999.Codeline12Boll;
+		String importo = bollettino999.Codeline2Boll == null ? "" : bollettino999.Codeline2Boll;
+		
+		System.out.println("codiceAvvisoOriginalePagoPa: " + codiceAvvisoOriginalePagoPa);
+		System.out.println("numeroContoCorrente: " + numeroContoCorrente);
+		System.out.println("importo: " + importo);
+		
+		String codeline =   "18"
+				+ String.format("%-18.18s", codiceAvvisoOriginalePagoPa)
+				+ "12"
+				+ String.format("%12.12s", numeroContoCorrente).replace(' ', '0') // numero conto
+				+ "10"
+				+ String.format("%10.10s", importo).replace(' ', '0')
+				+ "3"
+				+ "896"; //tipo documento;
+		
+		System.out.println("Codeline: " + codeline);
+		
+		String dataMatrix = "codfase=NBPA;" + codeline + "1P1"
+				+ String.format("%11.11s", doc.DatiCreditore.get(0).Cf)
+				+ String.format("%-16.16s", doc.DatiAnagrafici.get(0).Cf)
+				+ String.format("%-40.40s", doc.DatiAnagrafici.get(0).Denominazione1.toUpperCase())
+				+ String.format("%-110.110s", doc.CausaleDocumento) + "            "// filler
+				+ "A";
+		
+		System.out.println("DataMatrix: " + dataMatrix);
+		
+		
+		if(!daArchivio) {
+			posDeb.setDataMatrix(dataMatrix); //bollettino.QRcodePagoPa
+		}else {
+			System.out.println("Vengo da archivio");
+			posDeb.setDataMatrix(dataMatrix);
+		}
+		
+		
+		
+		
 		posDeb.setImporto(Float.valueOf(bollettino999.Codeline2Boll)/100);
 		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
 			System.out.println("Numero documento NULL PosDebitoria");
