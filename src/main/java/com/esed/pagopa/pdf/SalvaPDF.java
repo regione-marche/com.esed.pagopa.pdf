@@ -497,15 +497,11 @@ public class SalvaPDF {
 		List<String> nomiFile = new ArrayList<>();
 		List<String> allBoll = new ArrayList<>();
 		
-		String fileFinale = generaNomeFile(file512);
-		
 		/**
 		 * All interno dell oggetto LogoBollettino sono salvati in modo statico 
 		 * le strighe corrispondenti al logo dell ente
 		 */
 		LogoBollettino logobollettino = new LogoBollettino();
-		
-		String stampaj = stampaJppa == "Y" ? "jppa" : "";
 		
 		int stato = 1;
 		
@@ -569,7 +565,7 @@ public class SalvaPDF {
 					
 					out.write(Base64.getDecoder().decode(res.getFileBase64Encoded())); // scrivo nel file creato sopra
 					
-					out.close();
+					//out.close();
 					       
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -625,7 +621,7 @@ public class SalvaPDF {
 								
 								out.write(Base64.getDecoder().decode(res.getFileBase64Encoded())); // scrivo nel file creato sopra
 								
-								out.close();
+								//out.close();
 								       
 							} catch (IOException e) {
 								e.printStackTrace();
@@ -683,7 +679,7 @@ public class SalvaPDF {
 								
 								out.write(Base64.getDecoder().decode(res.getFileBase64Encoded())); // scrivo nel file creato sopra
 								
-								out.close();
+								//out.close();
 								       
 							} catch (IOException e) {
 								e.printStackTrace();
@@ -704,6 +700,12 @@ public class SalvaPDF {
 				stato = 0;
 			} else {
 				throw new ValidazioneException("Mancano i bollettini");
+			}
+			
+			try {
+				out.close();
+			}catch(Exception e) {
+				System.out.println("Errore stream" + nomef);
 			}
 			
 			try {
