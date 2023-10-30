@@ -83,25 +83,41 @@ public class InformazioniStampaGenerico implements InformazioniStampaInterface {
 		System.out.println("numeroContoCorrente: " + numeroContoCorrente);
 		System.out.println("importo: " + importo);
 		
-		String codeline =   "18"
-				+ String.format("%-18.18s", codiceAvvisoOriginalePagoPa)
-				+ "12"
-				+ String.format("%12.12s", numeroContoCorrente).replace(' ', '0') // numero conto
-				+ "10"
-				+ String.format("%10.10s", importo).replace(' ', '0')
-				+ "3"
-				+ "896"; //tipo documento;
+		StringBuilder builder = new StringBuilder();
 		
-			System.out.println("Codeline: " + codeline);
+		String avviso = String.format("%-18.18s", codiceAvvisoOriginalePagoPa);
+		String numcc = String.format("%12.12s", numeroContoCorrente).replace(' ', '0');
+		String impor = String.format("%15.15s", importo).replace(' ', '0');
 		
-		String dataMatrix = "codfase=NBPA;" + codeline + "1P1"
+		builder.append("18")
+		.append(avviso)
+		.append("12")
+		.append(numcc)
+		.append("10")
+		.append(impor)
+		.append("3")
+		.append("896");
+		
+//		String codeline =   "18"
+//				+ String.format("%-18.18s", codiceAvvisoOriginalePagoPa)
+//				+ "12"
+//				+ String.format("%12.12s", numeroContoCorrente).replace(' ', '0') // numero conto
+//				+ "10"
+//				+ String.format("%15.15s", importo).replace(' ', '0')
+//				+ "3"
+//				+ "896"; //tipo documento;
+		
+		System.out.println("Codeline: " + builder.toString());
+		
+		String dataMatrix = "codfase=NBPA;" + builder.toString() + "1P1"
 				+ String.format("%11.11s", doc.DatiCreditore.get(0).Cf)
 				+ String.format("%-16.16s", doc.DatiAnagrafici.get(0).Cf)
 				+ String.format("%-40.40s", doc.DatiAnagrafici.get(0).Denominazione1.toUpperCase())
 				+ String.format("%-110.110s", doc.CausaleDocumento) + "            "// filler
 				+ "A";
 		
-			System.out.println("DataMatrix: " + dataMatrix);
+		System.out.println("DataMatrix: " + dataMatrix);
+		
 		
 		
 			if(!daArchivio) {
