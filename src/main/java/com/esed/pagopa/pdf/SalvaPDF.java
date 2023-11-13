@@ -606,8 +606,8 @@ public class SalvaPDF {
 							if(flusso.CuteCute.equals("000P6")) {
 					    		
 								InformazioniStampaInterface stampabolzano = new InformazioniStampaBolzano();
-								info.setAvvisauraDto(flusso,flusso.Documentdata.get(i),false,"000P6");
-								System.out.println("info AvvisaturaDto - " + info.toString());
+								stampabolzano.setAvvisauraDto(flusso,flusso.Documentdata.get(i),false,"000P6");
+								System.out.println("info AvvisaturaDto - " + stampabolzano.toString());
 								res = stampa.stampaBolpuntuale(stampabolzano.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogoBolzano64(), nomef, 
 										ValidaFlusso.getDaArchivioCarichi()));
 								
@@ -640,7 +640,7 @@ public class SalvaPDF {
 							
 							j += 3;
 							
-							pagineAggiunteDocumento++;
+							pagineAggiunteDocumento+=2;
 							
 							continue;
 						}
