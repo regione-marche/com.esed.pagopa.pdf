@@ -4,6 +4,7 @@
 package com.esed.pagopa.pdf.printer.jppa;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.seda.payer.commons.geos.Bollettino;
@@ -373,10 +374,7 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 		}
 		bollRichiesta.setBase64FileLogoEnte(logo64);
 		
-		Bollettino bApp = bollettini.get(0);
-		bollettini.remove(bollettini.get(0));
-		bollettini.set(0, bollettini.get(bollettini.size()-1));
-		bollettini.add(1, bApp);
+		Collections.rotate(bollettini, bollettini.size()-1);
 		
 
 		if(!doc.DatiBollettino.get(0).AvvisoPagoPa.contains(" ")) {

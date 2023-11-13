@@ -605,23 +605,23 @@ public class SalvaPDF {
 							
 							if(flusso.CuteCute.equals("000P6")) {
 					    		
-								InformazioniStampaInterface info = new InformazioniStampaBolzano();
+								InformazioniStampaInterface stampabolzano = new InformazioniStampaBolzano();
 								info.setAvvisauraDto(flusso,flusso.Documentdata.get(i),false,"000P6");
 								System.out.println("info AvvisaturaDto - " + info.toString());
-								res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
-										logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute,ValidaFlusso.getDaArchivioCarichi()));
+								res = stampa.stampaBolpuntuale(stampabolzano.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogoBolzano64(), nomef, 
+										ValidaFlusso.getDaArchivioCarichi()));
 								
 							}else if(flusso.CuteCute.equals("000P4")) {
 								
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
-								res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso,flusso.Documentdata.get(i),
-										logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute,ValidaFlusso.getDaArchivioCarichi()));
+								res = stampa.stampaBolpuntuale(stampaAosta.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogoBolzano64(), nomef, 
+										ValidaFlusso.getDaArchivioCarichi()));
 							}
 							else {
 								
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaGenerico = new InformazioniStampaGenerico();
-								res = stampa.stampaBolpuntuale(stampaGenerico.bollRichiesta(flusso,flusso.Documentdata.get(i),
-										logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute,ValidaFlusso.getDaArchivioCarichi()));
+								res = stampa.stampaBolpuntuale(stampaGenerico.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogoBolzano64(), nomef, 
+										ValidaFlusso.getDaArchivioCarichi()));
 							}
 					    	
 					    	
