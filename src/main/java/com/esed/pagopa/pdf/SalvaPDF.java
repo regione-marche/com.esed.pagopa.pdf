@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -608,8 +609,9 @@ public class SalvaPDF {
 								InformazioniStampaInterface stampabolzano = new InformazioniStampaBolzano();
 								stampabolzano.setAvvisauraDto(flusso,flusso.Documentdata.get(i),false,"000P6");
 								System.out.println("info AvvisaturaDto - " + stampabolzano.toString());
-								res = stampa.stampaBolpuntuale(stampabolzano.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogoBolzano64(), nomef, 
-										ValidaFlusso.getDaArchivioCarichi()));
+								res = stampa.stampaBolpuntuale(stampabolzano.bollRichiesta(flusso,flusso.Documentdata.get(i),
+										logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute,ValidaFlusso.getDaArchivioCarichi()));
+								
 								
 							}else if(flusso.CuteCute.equals("000P4")) {
 								
@@ -664,10 +666,8 @@ public class SalvaPDF {
 					    		
 								InformazioniStampaInterface stampabolzano = new InformazioniStampaBolzano(); 
 								System.out.println("info AvvisaturaDto - " + stampabolzano.toString());
-								res = stampa.stampaBolpuntuale(stampabolzano.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogoBolzano64(), nomef, 
-										ValidaFlusso.getDaArchivioCarichi()));
-								
-								
+								res = stampa.stampaBolpuntuale(stampabolzano.bollRichiesta(flusso,flusso.Documentdata.get(i),
+										logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute,ValidaFlusso.getDaArchivioCarichi()));
 							}else if(flusso.CuteCute.equals("000P4")) {
 								
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
