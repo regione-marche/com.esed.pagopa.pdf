@@ -25,8 +25,10 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import javax.sql.rowset.CachedRowSet;
 
+import org.apache.pdfbox.cos.COSDocument;
 import org.apache.pdfbox.io.MemoryUsageSetting;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
+import org.apache.pdfbox.pdmodel.PDDocument;
 
 import com.esed.pagopa.pdf.LeggoAsset.FormatoStampa;
 import com.esed.pagopa.pdf.config.PropKeys;
@@ -35,7 +37,6 @@ import com.esed.pagopa.pdf.printer.jppa.InformazioniStampaAosta;
 import com.esed.pagopa.pdf.printer.jppa.InformazioniStampaGenerico;
 import com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface;
 import com.esed.pagopa.pdf.printer.jppa.StampaPdfJppaPagonet;
-import com.esed.pagopa.pdf.printer.threadManager.PrinterThreadManager;
 import com.itextpdf.barcodes.BarcodeDataMatrix;
 import com.itextpdf.barcodes.BarcodeQRCode;
 import com.itextpdf.io.source.OutputStream;
@@ -45,6 +46,7 @@ import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfPage;
+import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.layout.Canvas;
@@ -683,7 +685,6 @@ public class SalvaPDF {
 							}
 
 					    	try {
-								
 								out.write(Base64.getDecoder().decode(res.getFileBase64Encoded())); // scrivo nel file creato sopra
 								
 								//out.close();
