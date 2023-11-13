@@ -374,7 +374,7 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 		}
 		bollRichiesta.setBase64FileLogoEnte(logo64);
 		
-		Collections.rotate(bollettini, bollettini.size()-1);
+		Collections.rotate(bollettini, -(-bollettini.size()-1));
 		
 
 		if(!doc.DatiBollettino.get(0).AvvisoPagoPa.contains(" ")) {
@@ -440,7 +440,7 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 			}
 			
 			posDeb.setCausaleDebitoria(doc.CausaleDocumento);
-			posDeb.setImporto(Float.valueOf(doc.ImportoDocumento)/100);
+			posDeb.setImporto(Float.valueOf(bollettino.Codeline2Boll)/100);
 			if(doc.DatiBollettino.get(0).AutorizCcp==null) {
 				System.out.println("Numero documento NULL PosDebitoria");
 				System.out.println("doc.DatiBollettino.get(0).AutorizCcp = " + doc.DatiBollettino.get(0).AutorizCcp);

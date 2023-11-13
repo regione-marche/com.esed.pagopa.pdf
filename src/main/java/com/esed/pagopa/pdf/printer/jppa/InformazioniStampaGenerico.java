@@ -352,7 +352,7 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 		}
 		bollRichiesta.setBase64FileLogoEnte(logo64);
 		
-		Collections.rotate(bollettini, bollettini.size()-1);
+		Collections.rotate(bollettini, -(-bollettini.size()-1));
 
 		if(!doc.DatiBollettino.get(0).AvvisoPagoPa.contains(" ")) {
 			doc.DatiBollettino.get(0).AvvisoPagoPa = doc.DatiBollettino.get(0).AvvisoPagoPa.replaceAll("(.{" + 4 + "})", "$0 ").trim();
@@ -367,9 +367,7 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 		System.out.println("codiceAvvisoOriginalePagoPa: " + codiceAvvisoOriginalePagoPa);
 		System.out.println("numeroContoCorrente: " + numeroContoCorrente);
 		System.out.println("importo: " + importo);
-		
-		
-		
+
 		
 		for(Bollettino bollettino : bollettini) {
 			
@@ -417,7 +415,7 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 			}
 			
 			posDeb.setCausaleDebitoria(doc.CausaleDocumento);
-			posDeb.setImporto(Float.valueOf(doc.ImportoDocumento)/100);
+			posDeb.setImporto(Float.valueOf(bollettino.Codeline2Boll)/100);
 			if(doc.DatiBollettino.get(0).AutorizCcp==null) {
 				System.out.println("Numero documento NULL PosDebitoria");
 				System.out.println("doc.DatiBollettino.get(0).AutorizCcp = " + doc.DatiBollettino.get(0).AutorizCcp);
