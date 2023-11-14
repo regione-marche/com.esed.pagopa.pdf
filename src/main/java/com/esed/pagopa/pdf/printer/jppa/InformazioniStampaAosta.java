@@ -387,9 +387,9 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 		String numeroContoCorrente = doc.DatiBollettino.get(0).Codeline12Boll == null ? "" : doc.DatiBollettino.get(0).Codeline12Boll;
 		String importo = doc.ImportoDocumento == null ? "" : doc.ImportoDocumento;
 		
-		System.out.println("codiceAvvisoOriginalePagoPa: " + codiceAvvisoOriginalePagoPa);
-		System.out.println("numeroContoCorrente: " + numeroContoCorrente);
-		System.out.println("importo: " + importo);
+		System.out.println("codiceAvvisoOriginalePagoPa 999: " + codiceAvvisoOriginalePagoPa);
+		System.out.println("numeroContoCorrente 999: " + numeroContoCorrente);
+		System.out.println("importo 999: " + importo);
 		
 		
 		
@@ -402,9 +402,9 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 			
 			StringBuilder builder = new StringBuilder();
 			
-			String avviso = String.format("%-18.18s", codiceAvvisoOriginalePagoPa);
-			String numcc = String.format("%12.12s", numeroContoCorrente).replace(' ', '0');
-			String impor = String.format("%15.15s", importo).replace(' ', '0');
+			String avviso = String.format("%-18.18s", bollettino.AvvisoPagoPa);
+			String numcc = String.format("%12.12s", bollettino.Codeline12Boll).replace(' ', '0');
+			String impor = String.format("%15.15s", bollettino.Codeline2Boll).replace(' ', '0');
 			
 			builder.append("18")
 			.append(avviso)

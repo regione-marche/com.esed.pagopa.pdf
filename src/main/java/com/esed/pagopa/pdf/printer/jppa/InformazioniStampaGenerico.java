@@ -376,10 +376,10 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 			
 			
 			StringBuilder builder = new StringBuilder();
-			
-			String avviso = String.format("%-18.18s", codiceAvvisoOriginalePagoPa);
-			String numcc = String.format("%12.12s", numeroContoCorrente).replace(' ', '0');
-			String impor = String.format("%15.15s", importo).replace(' ', '0');
+
+			String avviso = String.format("%-18.18s", bollettino.AvvisoPagoPa);
+			String numcc = String.format("%12.12s", bollettino.Codeline12Boll).replace(' ', '0');
+			String impor = String.format("%15.15s", bollettino.Codeline2Boll).replace(' ', '0');
 			
 			builder.append("18")
 			.append(avviso)
