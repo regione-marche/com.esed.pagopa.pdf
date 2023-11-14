@@ -108,7 +108,7 @@ public class SalvaPDF {
 		System.out.println("user printer- " + userJppa);
 		System.out.println("url printer - " + urlPrinter);
 		
-		if(tipoStampa.equals("jppa")) {
+		if(tipoStampa.equals("Y")) {
 			return stampaJppa(flusso,passwordJppa,userJppa,urlPrinter,tipoStampa).getBytes();
 		}
 		
