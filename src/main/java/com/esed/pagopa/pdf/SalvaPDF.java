@@ -422,13 +422,13 @@ public class SalvaPDF {
 							
 							if(flusso.CuteCute.equals("000P4")) {
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
-								res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso,flusso.Documentdata.get(i),
-										logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute,ValidaFlusso.getDaArchivioCarichi()));
+								res = stampa.stampaBolpuntuale(stampaAosta.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogo(flusso.CuteCute), flusso.CuteCute, 
+										ValidaFlusso.getDaArchivioCarichi()));
 								}else {
 									
 									com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaGenerico = new InformazioniStampaGenerico();
-									res = stampa.stampaBolpuntuale(stampaGenerico.bollRichiesta(flusso,flusso.Documentdata.get(i),
-											logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute,ValidaFlusso.getDaArchivioCarichi()));
+									res = stampa.stampaBolpuntuale(stampaGenerico.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogo(flusso.CuteCute), flusso.CuteCute, 
+											ValidaFlusso.getDaArchivioCarichi()));
 								}
 							
 							j += 3;
@@ -440,13 +440,13 @@ public class SalvaPDF {
 							
 							if(flusso.CuteCute.equals("000P4")) {
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
-								res = stampa.stampaBolpuntuale(stampaAosta.bollRichiesta(flusso,flusso.Documentdata.get(i),
-										logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute,ValidaFlusso.getDaArchivioCarichi()));
+								res = stampa.stampaBolpuntuale(stampaAosta.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogo(flusso.CuteCute), flusso.CuteCute, 
+										ValidaFlusso.getDaArchivioCarichi()));
 								}else {
 									
 									com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaGenerico = new InformazioniStampaGenerico();
-									res = stampa.stampaBolpuntuale(stampaGenerico.bollRichiesta(flusso,flusso.Documentdata.get(i),
-											logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute,ValidaFlusso.getDaArchivioCarichi()));
+									res = stampa.stampaBolpuntuale(stampaGenerico.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogo(flusso.CuteCute), flusso.CuteCute, 
+											ValidaFlusso.getDaArchivioCarichi()));
 								}
 							j += 2;
 
@@ -618,13 +618,13 @@ public class SalvaPDF {
 							}else if(flusso.CuteCute.equals("000P4")) {
 								
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
-								res = stampa.stampaBolpuntuale(stampaAosta.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogoBolzano64(), nomef, 
+								res = stampa.stampaBolpuntuale(stampaAosta.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogo(flusso.CuteCute), flusso.CuteCute, 
 										ValidaFlusso.getDaArchivioCarichi()));
 							}
 							else {
 								
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaGenerico = new InformazioniStampaGenerico();
-								res = stampa.stampaBolpuntuale(stampaGenerico.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogoBolzano64(), nomef, 
+								res = stampa.stampaBolpuntuale(stampaGenerico.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogo(flusso.CuteCute), flusso.CuteCute, 
 										ValidaFlusso.getDaArchivioCarichi()));
 							}
 					    	
@@ -673,14 +673,14 @@ public class SalvaPDF {
 							}else if(flusso.CuteCute.equals("000P4")) {
 								
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaAosta = new InformazioniStampaAosta();
-								res = stampa.stampaBolpuntuale(stampaAosta.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogo(flusso.CuteCute), nomef, 
+								res = stampa.stampaBolpuntuale(stampaAosta.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogo(flusso.CuteCute), flusso.CuteCute, 
 										ValidaFlusso.getDaArchivioCarichi()));
 							}
 							else {
 								
 								com.esed.pagopa.pdf.printer.jppa.InformazioniStampaInterface stampaGenerico = new InformazioniStampaGenerico();
-								 res = stampa.stampaBolpuntuale(stampaGenerico.bollRichiesta(flusso,flusso.Documentdata.get(i),
-										logobollettino.getLogo(flusso.CuteCute),flusso.CuteCute,ValidaFlusso.getDaArchivioCarichi()));
+								 res = stampa.stampaBolpuntuale(stampaGenerico.stampaBollettinMultirata(flusso.Documentdata.get(i), logobollettino.getLogo(flusso.CuteCute), flusso.CuteCute, 
+											ValidaFlusso.getDaArchivioCarichi()));
 							
 							}
 
