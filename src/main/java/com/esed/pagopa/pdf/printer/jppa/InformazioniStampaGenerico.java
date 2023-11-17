@@ -314,7 +314,7 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 	}
 
 	@Override
-	public StampaBollettinoRichiesta stampaBollettinMultirata(Documento doc, String logo64,
+	public StampaBollettinoRichiesta stampaBollettinMultirata(Flusso flusso,Documento doc, String logo64,
 			String cutecute, boolean daArchivio) {
 		
 		final List<Bollettino> bollettini = new ArrayList<>();
@@ -325,13 +325,13 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 				ArrayList<>();
 		
 		
-		richiestaMultirata = bollRichiestaFromBollettino(doc,bollettini,logo64,cutecute,daArchivio);
+		richiestaMultirata = bollRichiestaFromBollettino(flusso,doc,bollettini,logo64,cutecute,daArchivio);
 		
 		
 		return richiestaMultirata;
 	}
 
-	private StampaBollettinoRichiesta bollRichiestaFromBollettino(Documento doc,List<Bollettino> bollettini, String logo64,
+	private StampaBollettinoRichiesta bollRichiestaFromBollettino(Flusso flusso,Documento doc,List<Bollettino> bollettini, String logo64,
 			String cutecute, boolean daArchivio) {
 		
 		PosizioneDebitoriaAvvisaturaDto posDeb = null;
@@ -340,7 +340,7 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 		
 		bollRichiesta = new StampaBollettinoRichiesta();
 
-		bollRichiesta.datiEnte(setAvvisauraDto(null, doc, true, cutecute));
+		bollRichiesta.datiEnte(setAvvisauraDto(flusso, doc,flusso.TipoStampa.equals("P"), cutecute));
 	    
 	    bollRichiesta.setLocale(it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta.LocaleEnum.IT);
 
@@ -353,6 +353,7 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 		bollRichiesta.setBase64FileLogoEnte(logo64);
 		
 		Collections.rotate(bollettini, -(-bollettini.size()-1));
+		
 
 		if(!doc.DatiBollettino.get(0).AvvisoPagoPa.contains(" ")) {
 			doc.DatiBollettino.get(0).AvvisoPagoPa = doc.DatiBollettino.get(0).AvvisoPagoPa.replaceAll("(.{" + 4 + "})", "$0 ").trim();
@@ -364,10 +365,12 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 		String numeroContoCorrente = doc.DatiBollettino.get(0).Codeline12Boll == null ? "" : doc.DatiBollettino.get(0).Codeline12Boll;
 		String importo = doc.ImportoDocumento == null ? "" : doc.ImportoDocumento;
 		
-		System.out.println("codiceAvvisoOriginalePagoPa: " + codiceAvvisoOriginalePagoPa);
-		System.out.println("numeroContoCorrente: " + numeroContoCorrente);
-		System.out.println("importo: " + importo);
-
+		System.out.println("codiceAvvisoOriginalePagoPa 999: " + codiceAvvisoOriginalePagoPa);
+		System.out.println("numeroContoCorrente 999: " + numeroContoCorrente);
+		System.out.println("importo 999: " + importo);
+		
+		
+		
 		
 		for(Bollettino bollettino : bollettini) {
 			
@@ -377,22 +380,22 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 			
 			StringBuilder builder = new StringBuilder();
 			
-			String avviso = String.format("%-18.18s", codiceAvvisoOriginalePagoPa);
-			String numcc = String.format("%12.12s", numeroContoCorrente).replace(' ', '0');
-			String impor = String.format("%15.15s", importo).replace(' ', '0');
+			String avviso = String.format("%-18.18s",bollettino.AvvisoPagoPa == null ? "" : bollettino.AvvisoPagoPa.replace(" ", ""));
+			String numcc = String.format("%12.12s",bollettino.Codeline12Boll.replace(" ","0"));
+			String impor = String.format("%15.15s",bollettino.Codeline2Boll.replace(" ","0"));
 			
 			builder.append("18")
-			.append(avviso)
+			.append(avviso.replace(" ", ""))
 			.append("12")
-			.append(numcc)
+			.append(numcc.replace(" ","0"))
 			.append("10")
-			.append(impor)
+			.append(impor.replace(" ","0"))
 			.append("3")
 			.append("896");
 			
 			System.out.println("Codeline: " + builder.toString());
 			
-			String dataMatrix = "codfase=NBPA;" + builder.toString() + "1P1"
+			String dataMatrix = "codfase=NBPA;" + builder.toString().trim() + "1P1"
 					+ String.format("%11.11s", doc.DatiCreditore.get(0).Cf)
 					+ String.format("%-16.16s", doc.DatiAnagrafici.get(0).Cf)
 					+ String.format("%-40.40s", doc.DatiAnagrafici.get(0).Denominazione1.toUpperCase())
@@ -400,18 +403,12 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 					+ "A";
 			
 			System.out.println("DataMatrix: " + dataMatrix);
-			
+
 			if(!daArchivio) {
 				posDeb.setDataMatrix(dataMatrix); //bollettino.QRcodePagoPa
 			}else {
 				System.out.println("Vengo da archivio");
 				posDeb.setDataMatrix(dataMatrix);
-			}
-			
-			
-			if(!bollettino.AvvisoPagoPa.contains(" ")) {
-				bollettino.AvvisoPagoPa = bollettino.AvvisoPagoPa.replaceAll("(.{" + 4 + "})", "$0 ").trim();
-				System.out.println("Numero Avviso: " + bollettino.AvvisoPagoPa);
 			}
 			
 			posDeb.setCausaleDebitoria(doc.CausaleDocumento);
@@ -421,6 +418,12 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 				System.out.println("doc.DatiBollettino.get(0).AutorizCcp = " + doc.DatiBollettino.get(0).AutorizCcp);
 				posDeb.setNumeroAvviso("NN");
 			}else {
+				
+				if(!bollettino.AvvisoPagoPa.contains(" ")) {
+					bollettino.AvvisoPagoPa = bollettino.AvvisoPagoPa.replaceAll("(.{" + 4 + "})", "$0 ").trim();
+					System.out.println("Numero Avviso: " + bollettino.AvvisoPagoPa);
+				}
+				
 				posDeb.setNumeroAvviso(bollettino.AvvisoPagoPa);
 			}
 				posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Indirizzo+" "+doc.DatiAnagrafici.get(0).Cap+" ");

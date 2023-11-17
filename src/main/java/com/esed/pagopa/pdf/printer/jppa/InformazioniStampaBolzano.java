@@ -319,7 +319,7 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 				posDeb.setTitDebitoIndirizzoSedeLegale("");
 			
 			bollRichiesta.addPosizioneDebitoriaItem(posDeb); // causale
-			bollRichiesta.datiEnte(setAvvisauraDto(flusso, doc, true, cutecute));
+			bollRichiesta.datiEnte(setAvvisauraDto(flusso, doc, false, cutecute));
 			bollRichiesta.setNumeroAvviso(doc.DatiBollettino.get(0).AvvisoPagoPa);
 		    
 		    bollRichiesta.setLocale(it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta.LocaleEnum.DE);
@@ -603,7 +603,7 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
     
 
 	@Override
-	public StampaBollettinoRichiesta stampaBollettinMultirata(Documento doc, String logo64,
+	public StampaBollettinoRichiesta stampaBollettinMultirata(Flusso flusso,Documento doc, String logo64,
 			String cutecute, boolean daArchivio) {
 		
 		final List<Bollettino> bollettini = new ArrayList<>();

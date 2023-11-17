@@ -34,7 +34,6 @@ public final class ConvertiFile512FlussoGeos {
 		String tipoStampa = "";
 		if(file512.tipoTemplate.equals("STANDARD_")) tipoStampa = "B";
 		else tipoStampa = "P";
-		if(file512.tipoTemplate.equals("jppa")) tipoStampa = "jppa";
 		System.out.println("istanzio il flusso con tipoStampa = " + tipoStampa);
 		Flusso flusso = new Flusso(file512.cutecute, file512.ente, tipoStampa, file512.idFlusso);
 		
