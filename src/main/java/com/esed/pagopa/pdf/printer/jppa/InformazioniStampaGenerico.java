@@ -314,7 +314,7 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 	}
 
 	@Override
-	public StampaBollettinoRichiesta stampaBollettinMultirata(Documento doc, String logo64,
+	public StampaBollettinoRichiesta stampaBollettinMultirata(Flusso flusso,Documento doc, String logo64,
 			String cutecute, boolean daArchivio) {
 		
 		final List<Bollettino> bollettini = new ArrayList<>();
@@ -325,13 +325,13 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 				ArrayList<>();
 		
 		
-		richiestaMultirata = bollRichiestaFromBollettino(doc,bollettini,logo64,cutecute,daArchivio);
+		richiestaMultirata = bollRichiestaFromBollettino(flusso,doc,bollettini,logo64,cutecute,daArchivio);
 		
 		
 		return richiestaMultirata;
 	}
 
-	private StampaBollettinoRichiesta bollRichiestaFromBollettino(Documento doc,List<Bollettino> bollettini, String logo64,
+	private StampaBollettinoRichiesta bollRichiestaFromBollettino(Flusso flusso,Documento doc,List<Bollettino> bollettini, String logo64,
 			String cutecute, boolean daArchivio) {
 		
 		PosizioneDebitoriaAvvisaturaDto posDeb = null;
@@ -340,7 +340,7 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 		
 		bollRichiesta = new StampaBollettinoRichiesta();
 
-		bollRichiesta.datiEnte(setAvvisauraDto(null, doc, true, cutecute));
+		bollRichiesta.datiEnte(setAvvisauraDto(flusso,doc,flusso.TipoStampa.equals("P"), cutecute));
 	    
 	    bollRichiesta.setLocale(it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta.LocaleEnum.IT);
 
@@ -400,6 +400,8 @@ private DatiEnteAvvisaturaDto avvisatura999(Flusso flusso,Documento doc,Boolean 
 					+ "A";
 			
 			System.out.println("DataMatrix: " + dataMatrix);
+			
+			bollettino.AvvisoPagoPa = bollettino.AvvisoPagoPa.replaceAll("(.{" + 4 + "})", "$0 ").trim();
 			
 			if(!daArchivio) {
 				posDeb.setDataMatrix(dataMatrix); //bollettino.QRcodePagoPa

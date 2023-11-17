@@ -205,7 +205,7 @@ public interface InformazioniStampaInterface {
 	
 	
 	
-	StampaBollettinoRichiesta stampaBollettinMultirata(Documento Doc, String logo64,String cutecute,boolean daArchivio);
+	StampaBollettinoRichiesta stampaBollettinMultirata(Flusso flusso,Documento Doc, String logo64,String cutecute,boolean daArchivio);
 	
 	
 	
