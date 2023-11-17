@@ -5,7 +5,7 @@
 
 	<groupId>com.esed.pagopa.pdf</groupId>
 	<artifactId>com.esed.pagopa.pdf</artifactId>
-	<version>2.2.20-SNAPSHOT</version>
+	<version>2.2.20</version>
 	<packaging>jar</packaging>
 
 	<name>com.esed.pagopa.pdf</name>
