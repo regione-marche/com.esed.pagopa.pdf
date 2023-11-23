@@ -52,9 +52,6 @@ import it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRisposta;
 
 public class SalvaPDFBolzano {
 	
-	
-	
-	
 	private static final Logger logger = Logger.getLogger(SalvaPDFBolzano.class);
     protected static EnteImplementationStub entePort = null;
 	
@@ -121,7 +118,7 @@ public class SalvaPDFBolzano {
 		System.out.println("user printer- " + userJppa);
 		System.out.println("url printer - " + urlPrinter);
 		
-		if(tipostampa.equals("jppa") || tipostampa.equals("jppade") ) {
+		if(tipostampa.equals("Y")) {
 			return stampaJppa(flusso,passwordJppa,userJppa,urlPrinter,tipostampa).getBytes();
 		}
 		else {

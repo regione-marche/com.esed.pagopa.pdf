@@ -1,7 +1,7 @@
 [{
         "tipoTemplate": "POSTE_",
-        "cutecute": "000P6",
-        "ente": "000P6",
+        "cutecute": "000P4",
+        "ente": "000P4",
         "idFlusso": "123",
         "cBill": "54321",
         "descrizioneEnte": "Comune di Ala di Stura -",
@@ -16,7 +16,7 @@
                 "numero": "20190000050000000003",
                 "tipologiaServizio": "MCA",
                 "descrizioneServizio": "MCA",
-                "importoTotale": "000000000215818",
+                "importoTotale": "000000000000010",
                 "fatturazioneElettronica": false,
                 "iban": "IT11F0760101200000012085114",
                 "numAvvisoPagoPa": "301205270000002242",
@@ -53,18 +53,45 @@
                 "listaTributi": [{
                         "anno": 2019,
                         "codiceTributo": "1   ",
-                        "importo": "000000000215818",
+                        "importo": "000000000000010",
                         "note": ""
                     }
                 ],
                 "listaAvvisi": [{
                         "dataScadenza": "31012019",
-                        "importo": "000000000215818",
+                        "importo": "000000000000001",
                         "progressivoBollettino": 1,
                         "numeroAvviso": "301205270000002242",
                         "codiceIUV": "01205270000002242",
                         "codiceQRcode": "PAGOPA|002|301205270000002242|09000640012|0000215818",
-                        "codiceBarcode": "(415)null(8020)301205270000002242(3902)215818"
+                        "codiceBarcode": "(415)0000(8020)301205270000002242(3902)215818"
+                    },
+                    {
+                        "dataScadenza": "31012019",
+                        "importo": "000000000000002",
+                        "progressivoBollettino": 2,
+                        "numeroAvviso": "301205270000002243",
+                        "codiceIUV": "01205270000002242",
+                        "codiceQRcode": "PAGOPA|002|301205270000002242|09000640012|0000215818",
+                        "codiceBarcode": "(415)0000(8020)301205270000002242(3902)215818"
+                    },
+                    {
+                        "dataScadenza": "31012019",
+                        "importo": "000000000000003",
+                        "progressivoBollettino": 3,
+                        "numeroAvviso": "301205270000002244",
+                        "codiceIUV": "01205270000002242",
+                        "codiceQRcode": "PAGOPA|002|301205270000002242|09000640012|0000215818",
+                        "codiceBarcode": "(415)0000(8020)301205270000002242(3902)215818"
+                    },
+                    {
+                        "dataScadenza": "31012019",
+                        "importo": "000000000000004",
+                        "progressivoBollettino": 4,
+                        "numeroAvviso": "301205270000002245",
+                        "codiceIUV": "01205270000002242",
+                        "codiceQRcode": "PAGOPA|002|301205270000002242|09000640012|0000215818",
+                        "codiceBarcode": "(415)0000(8020)301205270000002242(3902)215818"
                     }
                 ]
             }, {
@@ -120,6 +147,15 @@
                         "importo": "000000000184098",
                         "progressivoBollettino": 1,
                         "numeroAvviso": "301205270000001737",
+                        "codiceIUV": "01205270000001737",
+                        "codiceQRcode": "PAGOPA|002|301205270000001737|09000640012|0000184098",
+                        "codiceBarcode": "(415)null(8020)301205270000001737(3902)184098"
+                    },
+                    {
+                        "dataScadenza": "31012019",
+                        "importo": "000000000184098",
+                        "progressivoBollettino": 2,
+                        "numeroAvviso": "301205270000001738",
                         "codiceIUV": "01205270000001737",
                         "codiceQRcode": "PAGOPA|002|301205270000001737|09000640012|0000184098",
                         "codiceBarcode": "(415)null(8020)301205270000001737(3902)184098"
@@ -1708,7 +1744,7 @@
         "gruppoAvvisi": "DOC_ITALIA",
         "dataOra": "20201015235232",
         "dataElaborazione": 1602798752857,
-        "progressivo": 0,
+        "progressivo": 1,
         "listaDocumenti": [{
                 "codiceEnte": "12345",
                 "descrizioneEnte": "Comune di Ala di Stura - ",
@@ -1784,7 +1820,7 @@
         "gruppoAvvisi": "DOC_ITALIA",
         "dataOra": "20201015235232",
         "dataElaborazione": 1602798752857,
-        "progressivo": 0,
+        "progressivo": 2,
         "listaDocumenti": [{
                 "codiceEnte": "06789",
                 "descrizioneEnte": "Comune di prova - ",
@@ -1865,7 +1901,7 @@
         "gruppoAvvisi": "DOC_ITALIA",
         "dataOra": "20201015235232",
         "dataElaborazione": 1602798752857,
-        "progressivo": 0,
+        "progressivo": 3,
         "listaDocumenti": [{
                 "codiceEnte": "06954",
                 "descrizioneEnte": "Comune di Torino -  ",
@@ -1941,7 +1977,7 @@
         "gruppoAvvisi": "DOC_ITALIA",
         "dataOra": "20201015235232",
         "dataElaborazione": 1602798752857,
-        "progressivo": 0,
+        "progressivo": 4,
         "listaDocumenti": [{
                 "codiceEnte": "12345",
                 "descrizioneEnte": "Comune di Ala di Stura - ",
@@ -2133,7 +2169,7 @@
         "gruppoAvvisi": "DOC_ITALIA",
         "dataOra": "20201015235232",
         "dataElaborazione": 1602798752857,
-        "progressivo": 0,
+        "progressivo": 5,
         "listaDocumenti": [{
                 "codiceEnte": "12345",
                 "descrizioneEnte": "Comune di Ala di Stura - ",
@@ -2152,7 +2188,7 @@
                 "causale": "MCA",
                 "debitore": {
                     "codiceFiscale": "GCNGRG79L65E388O",
-                    "nomeCognRagSoc": "Giorgia Giacani",
+                    "nomeCognRagSoc": "Lorenzo Micci",
                     "indirizzo": "Via Pasquinelli 2A",
                     "comune": "JESI",
                     "provincia": "AN",
@@ -2169,7 +2205,7 @@
                         "ccpIntest": "prova",
                         "type": "   ",
                         "impServ": "MCA ",
-                        "cbill": "54321",
+                        "cbill": "1111",
                         "codiceAutorizzazione": "123CODAUTORIZZ4567890",
                         "progressivoBollettino": 1
                     }

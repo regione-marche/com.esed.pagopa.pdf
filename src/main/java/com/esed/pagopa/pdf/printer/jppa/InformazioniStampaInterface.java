@@ -1,5 +1,8 @@
 package com.esed.pagopa.pdf.printer.jppa;
 
+import java.text.ParseException;
+import java.util.List;
+
 import com.seda.payer.commons.geos.Bollettino;
 import com.seda.payer.commons.geos.Documento;
 import com.seda.payer.commons.geos.Flusso;
@@ -133,7 +136,8 @@ public interface InformazioniStampaInterface {
 			posDeb.setNumeroAvviso(doc.DatiBollettino.get(0).AvvisoPagoPa);
 		}
 			posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Indirizzo);
-		    posDeb.setDataScadenza(buildDate(doc.DatiBollettino.get(0).ScadenzaRata));// Data scadenza
+			posDeb.setDataScadenza(buildDate(doc.DatiBollettino.get(0).ScadenzaRata));
+			// Data scadenza
 			posDeb.setTitDebitoCapSedeLegale("");
 			posDeb.setTitDebitoCf(doc.DatiAnagrafici.get(0).Cf);
 			posDeb.setTitDebitoCivicoRes(doc.DatiAnagrafici.get(0).Indirizzo);
@@ -201,7 +205,7 @@ public interface InformazioniStampaInterface {
 	
 	
 	
-	
+	StampaBollettinoRichiesta stampaBollettinMultirata(Flusso flusso,Documento Doc, String logo64,String cutecute,boolean daArchivio);
 	
 	
 	
