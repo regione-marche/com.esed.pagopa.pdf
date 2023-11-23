@@ -693,7 +693,7 @@ public class SalvaPDFBolzano {
 		int hqqp1 = 12;
 		Rectangle pagamentoRatealeRectangle = new Rectangle(xqqp1a, yqqp1a, wqqp1, hqqp1);
 		Canvas pagamentoRatealeCanvas = new Canvas(pdfCanvas, pagamentoRatealeRectangle);
-		Text pagamentoRatealeText = new Text(documento.DatiBollettino.size() > 2 ? "Sie kÃ¶nnen auch in raten zahlen" : "")
+		Text pagamentoRatealeText = new Text(documento.DatiBollettino.size() > 2 ? "Sie können auch in raten zahlen" : "")
 				.setFont(asset.getTitillium_regular());
 		Paragraph pagamentoRatealeP = new Paragraph().add(pagamentoRatealeText).setFontColor(ColorConstants.WHITE)
 				.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
