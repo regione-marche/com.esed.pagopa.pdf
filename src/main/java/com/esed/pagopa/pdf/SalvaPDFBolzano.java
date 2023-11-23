@@ -132,7 +132,7 @@ public class SalvaPDFBolzano {
 			if (elencoBollettini.length < 1) {
 				return null;
 			}
-			//NOTA. Per adesso � consentita la stampa solo per avviso con rataunica ==> 2 bollettini 1 e 999
+			//NOTA. Per adesso � consentita la stampa solo per avviso con rataunica ==> 2 bollettini 1 e 999
 			if(elencoBollettini.length != 2) {
 				throw new ValidazioneException("Stampa abilitata solo per rata unica");
 			}
@@ -456,7 +456,7 @@ public class SalvaPDFBolzano {
 		//Ente Creditore
 		Rectangle enteCreditoreRectangle = new Rectangle(x0, y0, w0, h0);
 		Canvas enteCreditoreCanvas = new Canvas(pdfCanvas, enteCreditoreRectangle);
-		Text enteCreditoreText = new Text("K�RPERSCHAFT / ENTE:").setFont(asset.getTitillium_bold());
+		Text enteCreditoreText = new Text("KÖRPERSCHAFT / ENTE:").setFont(asset.getTitillium_bold());
 		Paragraph enteCreditoreP = new Paragraph().add(enteCreditoreText).setFontColor(ColorConstants.WHITE)
 				.setFontSize(10).setMargin(0).setVerticalAlignment(VerticalAlignment.BOTTOM);
 		enteCreditoreCanvas.add(enteCreditoreP);
@@ -696,7 +696,7 @@ public class SalvaPDFBolzano {
 		int hqqp1 = 12;
 		Rectangle pagamentoRatealeRectangle = new Rectangle(xqqp1a, yqqp1a, wqqp1, hqqp1);
 		Canvas pagamentoRatealeCanvas = new Canvas(pdfCanvas, pagamentoRatealeRectangle);
-		Text pagamentoRatealeText = new Text(documento.DatiBollettino.size() > 2 ? "Sie k�nnen auch in raten zahlen" : "")
+		Text pagamentoRatealeText = new Text(documento.DatiBollettino.size() > 2 ? "Sie können auch in raten zahlen" : "")
 				.setFont(asset.getTitillium_regular());
 		Paragraph pagamentoRatealeP = new Paragraph().add(pagamentoRatealeText).setFontColor(ColorConstants.WHITE)
 				.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
@@ -777,7 +777,7 @@ public class SalvaPDFBolzano {
 		if(bDebug)
 			pdfCanvas.saveState().setFillColor(new DeviceRgb(120, 120, 120)).rectangle(euroDataRectangle).fill();
 		euroDataCanvas = new Canvas(pdfCanvas, euroDataRectangle);
-		Text euroDataText2 = new Text("F�lligkeitsdatum").setFont(asset.getTitillium_regular()).setFontSize(f11);
+		Text euroDataText2 = new Text("Fälligkeitsdatum").setFont(asset.getTitillium_regular()).setFontSize(f11);
 		euroDataP = new Paragraph().add(euroDataText2).setFontColor(ColorConstants.BLACK).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 		euroDataCanvas.add(euroDataP);
 		euroDataCanvas.close();
@@ -836,11 +836,11 @@ public class SalvaPDFBolzano {
 			pdfCanvas.saveState().setFillColor(new DeviceRgb(212, 212, 212)).rectangle(importoDescriptionRectangle).fill();
 		Canvas importoDescriptionCanvas = new Canvas(pdfCanvas, importoDescriptionRectangle);
 		//inizio LP PG210070 - 20210806
-		//Text importoDescriptionText = new Text("Der angef�hrte Betrag k�nnte sich auf Grund von allf�lligen auch teilweisen Annullierungen oder Gutschriften, Verzugsgeb�hren, Strafen, Zinsen oder anderen Kosten �ndern. Der Schalterbeamte, eine App oder Webseite k�nnten folglich einen anderen Betrag einfordern.").setFont(asset.getTitillium_regular());
+		//Text importoDescriptionText = new Text("Der angeführte Betrag könnte sich auf Grund von allfälligen auch teilweisen Annullierungen oder Gutschriften, Verzugsgebühren, Strafen, Zinsen oder anderen Kosten ändern. Der Schalterbeamte, eine App oder Webseite könnten folglich einen anderen Betrag einfordern.").setFont(asset.getTitillium_regular());
 		//Paragraph importoDescriptionP = new Paragraph().add(importoDescriptionText).setFontColor(ColorConstants.BLACK)
 		//        .setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(10);
-		Text importoDescriptionText = new Text("Der angef�hrte Betrag k�nnte sich auf Grund von allf�lligen auch teilweisen Annullierungen oder Gutschriften, Verzugsgeb�hren, Strafen, Zinsen oder anderen Kosten �ndern. Der Schalterbeamte, eine App oder Webseite k�nnten folglich einen anderen Betrag einfordern.\r\nMitteilung erstellt in Zusammenarbeit mit").setFont(asset.getTitillium_regular());
-		Text importoDescription2Text = new Text(" S�dtiroler Einzugsdienste").setFont(asset.getTitillium_bold());
+		Text importoDescriptionText = new Text("Der angeführte Betrag könnte sich auf Grund von allfälligen auch teilweisen Annullierungen oder Gutschriften, Verzugsgebühren, Strafen, Zinsen oder anderen Kosten ändern. Der Schalterbeamte, eine App oder Webseite könnten folglich einen anderen Betrag einfordern.\r\nMitteilung erstellt in Zusammenarbeit mit").setFont(asset.getTitillium_regular());
+		Text importoDescription2Text = new Text(" Südtiroler Einzugsdienste").setFont(asset.getTitillium_bold());
 		Text importoDescription3Text = new Text(".").setFont(asset.getTitillium_regular());
 		Paragraph importoDescriptionP = new Paragraph().add(importoDescriptionText).add(importoDescription2Text).add(importoDescription3Text).setFontColor(ColorConstants.BLACK)
 				.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(10);
@@ -855,10 +855,10 @@ public class SalvaPDFBolzano {
 			pdfCanvas.saveState().setFillColor(new DeviceRgb(228, 0, 228)).rectangle(importoDescriptionRectangle).fill();
 		importoDescriptionCanvas = new Canvas(pdfCanvas, importoDescriptionRectangle);
 		//inizio LP PG210070 - 20210806
-		//importoDescriptionText = new Text("L'importo � aggiornato automaticamente dal sistema e potrebbe subire variazioni per eventuali sgravi, note di credito, indennit� di mora, sanzioni o interessi, ecc. Un operatore, il sito o l'app che user� Le potrebbero quindi chiedere una cifra diversa da quella qui indicata.").setFont(asset.getTitillium_regular());
+		//importoDescriptionText = new Text("L'importo è aggiornato automaticamente dal sistema e potrebbe subire variazioni per eventuali sgravi, note di credito, indennità di mora, sanzioni o interessi, ecc. Un operatore, il sito o l'app che userà Le potrebbero quindi chiedere una cifra diversa da quella qui indicata.").setFont(asset.getTitillium_regular());
 		//importoDescriptionP = new Paragraph().add(importoDescriptionText).setFontColor(ColorConstants.BLACK)
 		//		.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(10);
-		importoDescriptionText = new Text("L'importo � aggiornato automaticamente dal sistema e potrebbe subire variazioni per eventuali sgravi, note di credito, indennit� di mora, sanzioni o interessi, ecc. Un operatore, il sito o l'app che user� Le potrebbero quindi chiedere una cifra diversa da quella qui indicata.\r\nAvviso predisposto in collaborazione con").setFont(asset.getTitillium_regular());
+		importoDescriptionText = new Text("L'importo è aggiornato automaticamente dal sistema e potrebbe subire variazioni per eventuali sgravi, note di credito, indennità di mora, sanzioni o interessi, ecc. Un operatore, il sito o l'app che userà Le potrebbero quindi chiedere una cifra diversa da quella qui indicata.\r\nAvviso predisposto in collaborazione con").setFont(asset.getTitillium_regular());
 		importoDescription2Text = new Text(" Alto Adige Riscossioni").setFont(asset.getTitillium_bold());
 		importoDescription3Text = new Text(".").setFont(asset.getTitillium_regular());
 		importoDescriptionP = new Paragraph().add(importoDescriptionText).add(importoDescription2Text).add(importoDescription3Text).setFontColor(ColorConstants.BLACK)
@@ -972,7 +972,7 @@ public class SalvaPDFBolzano {
 		Canvas pagaSitoDescriptionCanvas = new Canvas(pdfCanvas, pagaSitoDescriptionRectangle);
 		Text pagaSitoDescriptionText = new Text(
 				"de.epays.it," + (tipoStampa.equals("P") ? " der Post,": "") + " Ihrer Bank\r\n" + 
-				"oder anderer Zahlungsdienstleister. Sie k�nnen mit\r\n" +
+				"oder anderer Zahlungsdienstleister. Sie können mit\r\n" +
 				"Kreditkarten, Bankkonto oder mit CBILL bezahlen.")
 						.setFont(asset.getTitillium_regular());
 		Paragraph pagaSitoDescriptionP = new Paragraph().add(pagaSitoDescriptionText).setFontColor(ColorConstants.BLACK)
@@ -992,9 +992,9 @@ public class SalvaPDFBolzano {
 		
 		// Paga Territorio Description
 		int wsdp3 = 434 + offset2;
-		String appoT = "bei allen Post�mtern, in Banken, Lottoannahmestellen,\r\n" + 
-				       "Tabaktrafiken, beim Bancomat, im Supermarkt. Sie k�nnen\r\n" + 
-				       "mit Bargeld, Karten oder Bank�berweisung bezahlen."; 
+		String appoT = "bei allen Postämtern, in Banken, Lottoannahmestellen,\r\n" + 
+				       "Tabaktrafiken, beim Bancomat, im Supermarkt. Sie können\r\n" + 
+				       "mit Bargeld, Karten oder Banküberweisung bezahlen."; 
 		Rectangle pagaTerritorioDescriptionRectangle = new Rectangle(xsdp0, wsdp3, wdpl, hsdp1);
 		Canvas pagaTerritorioDescriptionCanvas = new Canvas(pdfCanvas, pagaTerritorioDescriptionRectangle);//
 		Text pagaTerritorioDescriptionText = new Text(appoT)
@@ -1045,7 +1045,7 @@ public class SalvaPDFBolzano {
 		pagaSitoDescriptionText = new Text(
 				"it.epays.it," + (tipoStampa.equals("P") ? " di Poste,": "") + " della tua Banca\r\n" +
 				"o degli altri canali di pagamento.\r\n" +
-				"Pu� pagare con carte, conto corrente o CBILL.")
+				"Può pagare con carte, conto corrente o CBILL.")
 						.setFont(asset.getTitillium_regular());
 		pagaSitoDescriptionP = new Paragraph().add(pagaSitoDescriptionText).setFontColor(ColorConstants.BLACK)
 				.setFontSize(fd).setFixedLeading(fd).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
@@ -1064,7 +1064,7 @@ public class SalvaPDFBolzano {
 		// Paga Territorio Description
 		appoT = "in tutti gli Uffici Postali, in Banca, in Ricevitoria,\r\n" +
 				"dal Tabaccaio, al Bancomat, al Supermercato.\r\n" +
-				"Pu� pagare in contanti, con carte o conto corrente.";
+				"Può pagare in contanti, con carte o conto corrente.";
 		pagaTerritorioDescriptionRectangle = new Rectangle(xddp0, wsdp3, wdpr, hsdp1);
 		pagaTerritorioDescriptionCanvas = new Canvas(pdfCanvas, pagaTerritorioDescriptionRectangle);//
 		pagaTerritorioDescriptionText = new Text(appoT).setFont(asset.getTitillium_regular());
@@ -1154,7 +1154,7 @@ public class SalvaPDFBolzano {
 		// Banche e Altri Canali
 		Rectangle bancheAltriCanaliRectangle = new Rectangle(xapp, yapp, wtl, happ);
 		Canvas bancheAltriCanaliCanvas = new Canvas(pdfCanvas, bancheAltriCanaliRectangle);
-		Text bancheAltriCanaliText = new Text("BANKEN UND ANDERE KAN�LE - BANCHE E ALTRI CANALI").setFont(asset.getTitillium_bold());
+		Text bancheAltriCanaliText = new Text("BANKEN UND ANDERE KANÄLE - BANCHE E ALTRI CANALI").setFont(asset.getTitillium_bold());
 		Paragraph bancheAltriCanaliP = new Paragraph().add(bancheAltriCanaliText).setFontColor(ColorConstants.WHITE)
 				.setFontSize(10).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 		bancheAltriCanaliCanvas.add(bancheAltriCanaliP);
@@ -1165,7 +1165,7 @@ public class SalvaPDFBolzano {
 		int wrataunica = 213 - marginleft;
 		Rectangle rataUnicaRectangle = new Rectangle(xrataunica, yapp, wrataunica, happ);
 		Canvas rataUnicaCanvas = new Canvas(pdfCanvas, rataUnicaRectangle);
-		Text rataUnicaText1 = new Text("Einzige Rate f�llig am / Rata unica entro il").setFont(asset.getTitillium_bold());
+		Text rataUnicaText1 = new Text("Einzige Rate fällig am / Rata unica entro il").setFont(asset.getTitillium_bold());
 		Paragraph rataUnicaP = new Paragraph().add(rataUnicaText1)
 				.setFontColor(ColorConstants.WHITE).setFontSize(10).setMargin(0)
 				.setVerticalAlignment(VerticalAlignment.MIDDLE);
@@ -1234,7 +1234,7 @@ public class SalvaPDFBolzano {
 		int yapp3 = yapp3a + offset;
 		int wapp3 = 119;
 		//Banche Altri Canali Description DE
-		//Hier finden Sie den QR-Code und den CBILL-Code, um �ber Banken und andere berechtigte Zahlungsdienstleister zu zahlen.
+		//Hier finden Sie den QR-Code und den CBILL-Code, um über Banken und andere berechtigte Zahlungsdienstleister zu zahlen.
 		Rectangle bancheAltriCanaliDescriptionRectangle = new Rectangle(xt, yapp3 - hq, wapp3, hq);
 		if(bDebug)
 			pdfCanvas.saveState().setFillColor(new DeviceRgb(210, 210, 210)).rectangle(bancheAltriCanaliDescriptionRectangle).fill();
@@ -1243,7 +1243,7 @@ public class SalvaPDFBolzano {
 		Text bancheAltriCanaliDescriptionText2 = new Text(" QR-Code ").setFont(asset.getTitillium_bold());
 		Text bancheAltriCanaliDescriptionText3 = new Text("und den ").setFont(asset.getTitillium_regular());
 		Text bancheAltriCanaliDescriptionText4 = new Text(" CBILL-Code").setFont(asset.getTitillium_bold());
-		Text bancheAltriCanaliDescriptionText5 = new Text(", um �ber Banken und andere berechtigte Zahlungsdienstleister zu zahlen.").setFont(asset.getTitillium_regular());
+		Text bancheAltriCanaliDescriptionText5 = new Text(", um über Banken und andere berechtigte Zahlungsdienstleister zu zahlen.").setFont(asset.getTitillium_regular());
 		Paragraph bancheAltriCanaliDescriptionP = new Paragraph().add(bancheAltriCanaliDescriptionText1)
 				.add(bancheAltriCanaliDescriptionText2).add(bancheAltriCanaliDescriptionText3)
 				.add(bancheAltriCanaliDescriptionText4).add(bancheAltriCanaliDescriptionText5)
@@ -1294,7 +1294,7 @@ public class SalvaPDFBolzano {
 		//Destinatario DE
 		Rectangle destinatarioRectangle = new Rectangle(xdapp0, yapp3, wdapp0, hdapp0);
 		Canvas destinatarioCanvas = new Canvas(pdfCanvas, destinatarioRectangle);
-		Text destinatarioText = new Text("Empf�nger").setFont(asset.getTitillium_regular());
+		Text destinatarioText = new Text("Empfänger").setFont(asset.getTitillium_regular());
 		Paragraph destinatarioPDE = new Paragraph().add(destinatarioText).setFontColor(ColorConstants.BLACK)
 				.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 		destinatarioCanvas.add(destinatarioPDE);
@@ -1329,7 +1329,7 @@ public class SalvaPDFBolzano {
 		int wdapp2 = 49;
 		Rectangle destinatarioRectangle2 = new Rectangle(xdapp2, ydapp2, wdapp2, hdapp0);
 		Canvas destinatarioCanvas2 = new Canvas(pdfCanvas, destinatarioRectangle2);
-		Text destinatarioText2 = new Text("Gl�ubiger").setFont(asset.getTitillium_regular());
+		Text destinatarioText2 = new Text("Gläubiger").setFont(asset.getTitillium_regular());
 		Paragraph destinatarioP2 = new Paragraph().add(destinatarioText2).setFontColor(ColorConstants.BLACK)
 				.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 		destinatarioCanvas2.add(destinatarioP2);
@@ -1429,7 +1429,7 @@ public class SalvaPDFBolzano {
 		int wcp2 = 151 + offsetX;
 		Rectangle cfEnteCreditoreRectangle = new Rectangle(xdapp5, ycp0, wcp2, hcp0);
 		Canvas cfEnteCreditoreCanvas = new Canvas(pdfCanvas, cfEnteCreditoreRectangle);
-		Text cfEnteCreditoreText = new Text("St.Nr. der K�rperschaft").setFont(asset.getTitillium_regular());
+		Text cfEnteCreditoreText = new Text("St.Nr. der Körperschaft").setFont(asset.getTitillium_regular());
 		Paragraph cfEnteCreditorePDE = new Paragraph().add(cfEnteCreditoreText).setFontColor(ColorConstants.BLACK)
 				.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 		cfEnteCreditoreCanvas.add(cfEnteCreditorePDE);
@@ -1597,7 +1597,7 @@ public class SalvaPDFBolzano {
 			if(bDebug)
 				pdfCanvas.saveState().setFillColor(new DeviceRgb(222, 222, 222)).rectangle(bollettinoPostaleDescrizioneRectangle).fill();
 			Canvas bollettinoPostaleDescrizioneCanvas = new Canvas(pdfCanvas, bollettinoPostaleDescrizioneRectangle);
-			Text bollettinoPostaleDescrizioneText = new Text("Posterlagschein, in allen Post�mtern sowie auf den von Poste Italiane autorisierten physischen oder digitalen Kan�len zahlbar")
+			Text bollettinoPostaleDescrizioneText = new Text("Posterlagschein, in allen Postämtern sowie auf den von Poste Italiane autorisierten physischen oder digitalen Kanälen zahlbar")
 					.setFont(asset.getTitillium_regular());
 			Paragraph bollettinoPostaleDescrizioneP = new Paragraph().add(bollettinoPostaleDescrizioneText)
 					.setFontColor(ColorConstants.BLACK).setFontSize(fp8).setMargin(0)
