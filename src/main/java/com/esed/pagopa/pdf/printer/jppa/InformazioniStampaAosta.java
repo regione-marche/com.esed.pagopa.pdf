@@ -31,10 +31,17 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 		
 		System.out.println("TipoStampa postale: " + tipostampa);
 		
+		System.out.println("flusso.TipoStampa: " + flusso.TipoStampa);
+		
+		if(flusso.Documentdata.get(0).Iban!=null) {
+			System.out.println("flusso.Documentdata.get(0).Iban: " + flusso.Documentdata.get(0).Iban);
+		}
+
 		DatiEnteAvvisaturaDto avvisaturaDto = new DatiEnteAvvisaturaDto();
 		avvisaturaDto.setCodiceFiscale(doc.DatiCreditore.get(0).Cf);
 		avvisaturaDto.setCodiceInterbancario(doc.DatiCreditore.get(0).CodiceInterbancario);
-	    avvisaturaDto.setCpAbilitato(tipostampa);
+	    
+		avvisaturaDto.setCpAbilitato(tipostampa);
 	    
 		avvisaturaDto.cpAutorizzazione(doc.DatiBollettino.get(0).AutorizCcp);
 
