@@ -453,7 +453,7 @@ public class SalvaPDFBolzano {
 		//Ente Creditore
 		Rectangle enteCreditoreRectangle = new Rectangle(x0, y0, w0, h0);
 		Canvas enteCreditoreCanvas = new Canvas(pdfCanvas, enteCreditoreRectangle);
-		Text enteCreditoreText = new Text("KÖ–RPERSCHAFT / ENTE:").setFont(asset.getTitillium_bold());
+		Text enteCreditoreText = new Text("KÖRPERSCHAFT / ENTE:").setFont(asset.getTitillium_bold());
 		Paragraph enteCreditoreP = new Paragraph().add(enteCreditoreText).setFontColor(ColorConstants.WHITE)
 				.setFontSize(10).setMargin(0).setVerticalAlignment(VerticalAlignment.BOTTOM);
 		enteCreditoreCanvas.add(enteCreditoreP);
@@ -1151,7 +1151,7 @@ public class SalvaPDFBolzano {
 		// Banche e Altri Canali
 		Rectangle bancheAltriCanaliRectangle = new Rectangle(xapp, yapp, wtl, happ);
 		Canvas bancheAltriCanaliCanvas = new Canvas(pdfCanvas, bancheAltriCanaliRectangle);
-		Text bancheAltriCanaliText = new Text("BANKEN UND ANDERE KANÄ„LE - BANCHE E ALTRI CANALI").setFont(asset.getTitillium_bold());
+		Text bancheAltriCanaliText = new Text("BANKEN UND ANDERE KANÄLE - BANCHE E ALTRI CANALI").setFont(asset.getTitillium_bold());
 		Paragraph bancheAltriCanaliP = new Paragraph().add(bancheAltriCanaliText).setFontColor(ColorConstants.WHITE)
 				.setFontSize(10).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 		bancheAltriCanaliCanvas.add(bancheAltriCanaliP);
