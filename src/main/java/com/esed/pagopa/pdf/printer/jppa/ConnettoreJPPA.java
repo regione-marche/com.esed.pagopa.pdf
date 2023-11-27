@@ -10,6 +10,8 @@ import java.util.Map;
 
 import org.threeten.bp.OffsetDateTime;
 
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.payer.commons.jppa.interfaces.IConnettoreJPPA;
 
 import io.swagger.client.ApiClient;
@@ -27,6 +29,7 @@ import io.swagger.client.model.RispostaScaricaFlussiAgidDto;
  */
 public class ConnettoreJPPA implements IConnettoreJPPA {
 	
+	protected LoggerWrapper logger = CustomLoggerManager.get(getClass());
 	// args[0] user,  args[1] pw,  args[2] cutecute
 	private String authToken = "";
 	private List<String> retFlussi = null;

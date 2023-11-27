@@ -22,12 +22,7 @@ import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.apache.pdfbox.Loader;
-import org.apache.pdfbox.cos.COSDocument;
-import org.apache.pdfbox.io.RandomAccessReadBufferedFile;
 import org.apache.pdfbox.multipdf.PDFMergerUtility;
-import org.apache.pdfbox.pdfparser.PDFParser;
-import org.apache.pdfbox.pdmodel.PDDocument;
 
 import com.esed.pagopa.pdf.LeggoAsset.FormatoStampa;
 import com.esed.pagopa.pdf.config.PropKeys;
@@ -53,6 +48,8 @@ import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.VerticalAlignment;
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.commons.properties.tree.PropertiesTree;
 import com.seda.payer.commons.geos.Bollettino;
 import com.seda.payer.commons.geos.Documento;
@@ -66,6 +63,8 @@ import it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRisposta;
 public class SalvaPDF {
 	
 	private final PropertiesTree propertiesTree;
+	
+	protected static LoggerWrapper logger = CustomLoggerManager.get(SalvaPDF.class);
 	
 	public SalvaPDF(PropertiesTree propertiesTree) {
 		
