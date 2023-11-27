@@ -1,20 +1,13 @@
 package com.esed.pagopa.pdf;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.sql.rowset.CachedRowSet;
-
-import org.apache.log4j.Logger;
 
 import com.esed.pagopa.pdf.config.PropKeys;
 import com.esed.pagopa.pdf.printer.jppa.InformazioniStampaBolzano;
@@ -36,6 +29,8 @@ import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.VerticalAlignment;
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.commons.properties.tree.PropertiesTree;
 import com.seda.commons.string.Convert;
 import com.seda.payer.commons.geos.Bollettino;
@@ -47,12 +42,11 @@ import com.seda.payer.pgec.webservice.ente.dati.EnteSearchRequest;
 import com.seda.payer.pgec.webservice.ente.dati.EnteSearchResponse;
 import com.seda.payer.pgec.webservice.ente.source.EnteImplementationStub;
 
-import it.maggioli.pagopa.jppa.printer.model.StampaAvvisaturaRichiesta.LocaleEnum;
 import it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRisposta;
 
 public class SalvaPDFBolzano {
 	
-	private static final Logger logger = Logger.getLogger(SalvaPDFBolzano.class);
+	protected static final LoggerWrapper logger = CustomLoggerManager.get(SalvaPDFBolzano.class);
     protected static EnteImplementationStub entePort = null;
 	
 	
@@ -133,7 +127,7 @@ public class SalvaPDFBolzano {
 			if(elencoBollettini.length != 2) {
 				throw new ValidazioneException("Stampa abilitata solo per rata unica");
 			}
-			logger.debug(Arrays.toString(elencoBollettini) + "--------------- ELENCO BOLLETTINI BOLZANO -----------------");
+			System.out.println(Arrays.toString(elencoBollettini) + "--------------- ELENCO BOLLETTINI BOLZANO -----------------");
 			if (elencoBollettini.length > 0) {
 				baos = new ByteArrayOutputStream();
 				PdfDocument pdf = new PdfDocument(new PdfWriter(baos));
@@ -231,7 +225,7 @@ public class SalvaPDFBolzano {
 			if(elencoBollettini.length != 2) {
 				throw new ValidazioneException("Stampa abilitata solo per rata unica");
 			}
-			logger.debug(Arrays.toString(elencoBollettini) + "--------------- ELENCO BOLLETTINI BOLZANO -----------------");
+			System.out.println(Arrays.toString(elencoBollettini) + "--------------- ELENCO BOLLETTINI BOLZANO -----------------");
 			if (elencoBollettini.length > 0) {
 				Bollettino bollettino999 = flusso.Documentdata.get(i).DatiBollettino
 						.stream()

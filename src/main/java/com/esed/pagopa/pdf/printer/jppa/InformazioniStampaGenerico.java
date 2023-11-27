@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.payer.commons.geos.Bollettino;
 import com.seda.payer.commons.geos.Documento;
 import com.seda.payer.commons.geos.Flusso;
@@ -20,6 +22,8 @@ import it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta;
  */
 public class InformazioniStampaGenerico implements InformazioniStampaInterface {
 
+	protected LoggerWrapper logger = CustomLoggerManager.get(getClass());
+	
 	/**
 	 * 
 	 */

@@ -15,6 +15,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.commons.properties.PropertiesLoader;
 import com.seda.commons.properties.tree.PropertiesNodeException;
 import com.seda.commons.properties.tree.PropertiesTree;
@@ -25,6 +27,8 @@ import com.seda.payer.commons.jppa.utils.PdfConverter;
 import io.swagger.client.ApiException;
 
 public class FaccioPDFTest {
+	
+	protected LoggerWrapper logger = CustomLoggerManager.get(getClass());
 	
 	public static void main(String[] args) throws Exception {
         String rootPath = "C:\\work\\Pagonet\\ConfigFiles\\pagopaPDFws\\pagoPaPdfWsRoot.properties";

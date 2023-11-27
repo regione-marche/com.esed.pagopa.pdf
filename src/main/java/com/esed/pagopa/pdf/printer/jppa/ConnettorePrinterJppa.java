@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.payer.commons.jppa.interfaces.IconnettoreJppaPrinter;
 
 import it.maggioli.pagopa.jppa.printer.ApiClient;
@@ -20,6 +22,7 @@ import it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRisposta;
  */
 public class ConnettorePrinterJppa implements IconnettoreJppaPrinter {
 
+	protected LoggerWrapper logger = CustomLoggerManager.get(getClass());
 	private String token = "";
 	
 	/**
