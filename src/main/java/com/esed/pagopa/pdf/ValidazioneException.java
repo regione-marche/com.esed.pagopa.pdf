@@ -1,10 +1,11 @@
 package com.esed.pagopa.pdf;
 
-import org.apache.log4j.Logger;
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 
 public class ValidazioneException extends Exception {
 	 
-	private static Logger logger = Logger.getLogger(ValidazioneException.class);
+	private static LoggerWrapper logger = CustomLoggerManager.get(ValidazioneException.class);
 
 	/**
 	 * 

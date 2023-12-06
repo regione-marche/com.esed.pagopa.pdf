@@ -21,10 +21,6 @@ import com.seda.commons.properties.PropertiesLoader;
 import com.seda.commons.properties.tree.PropertiesNodeException;
 import com.seda.commons.properties.tree.PropertiesTree;
 import com.seda.payer.commons.inviaAvvisiForGeos.File512;
-import com.seda.payer.commons.jppa.utils.ConvertiPdfPrinter;
-import com.seda.payer.commons.jppa.utils.PdfConverter;
-
-import io.swagger.client.ApiException;
 
 public class FaccioPDFTest {
 	
@@ -77,7 +73,7 @@ public class FaccioPDFTest {
 	        byte[] encode = Base64.getDecoder().decode(Base64.getEncoder().encode(ba));
 	        String result = new String(encode);
 			
-			PdfConverter converter = new ConvertiPdfPrinter();
+			com.esed.pagopa.pdf.printer.jppa.PdfConverter converter = new com.esed.pagopa.pdf.printer.jppa.ConvertiPdfPrinter();
 			converter.convert(result, Paths.get("C:\\work\\Pagonet\\ConfigFiles\\pagopaPDFws\\pagopaPdf\\"+cuteCute+".pdf"));
 		}
 		else {

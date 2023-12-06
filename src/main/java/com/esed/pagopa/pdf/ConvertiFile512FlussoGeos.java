@@ -5,9 +5,9 @@ import com.seda.payer.commons.inviaAvvisiForGeos.Debitore;
 import com.seda.payer.commons.inviaAvvisiForGeos.File512;
 import com.seda.payer.commons.inviaAvvisiForGeos.Tributo;
 
-import org.apache.log4j.Logger;
-
 import com.esed.pagopa.pdf.config.PropKeys;
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.commons.properties.tree.PropertiesTree;
 import com.seda.payer.commons.geos.Bollettino;
 import com.seda.payer.commons.geos.DatiAnagrafici;
@@ -17,8 +17,7 @@ import com.seda.payer.commons.geos.Flusso;
 
 public final class ConvertiFile512FlussoGeos {
 
-	private static Logger logger = Logger.getLogger(ConvertiFile512FlussoGeos.class);
-	
+
 	public ConvertiFile512FlussoGeos() {
 	}
 
@@ -45,7 +44,8 @@ public final class ConvertiFile512FlussoGeos {
 	}
 	
 	private static Documento convertiDocumento512(com.seda.payer.commons.inviaAvvisiForGeos.Documento doc512, boolean usaDescTipologiaServizio, String cuteCute) {
-		logger.debug(doc512.toString());
+		//logger.debug(doc512.toString());
+		System.out.println(doc512.toString());
 		Documento documento = new Documento();
 		documento.ImpostaServizio = "";
 		//PAGONET-303 - inizio
@@ -80,7 +80,8 @@ public final class ConvertiFile512FlussoGeos {
 				avviso.codiceBarcode, 
 				avviso.codiceQRcode);
 		//bollettino.ScadenzaRata = convertiScadenza(avviso.dataScadenza);
-		logger.debug(bollettino.toString());
+		//logger.debug(bollettino.toString());
+		System.out.println(bollettino.toString());
 		return bollettino;
 	}
 	

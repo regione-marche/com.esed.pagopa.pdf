@@ -55,7 +55,7 @@ import com.seda.payer.commons.geos.Bollettino;
 import com.seda.payer.commons.geos.Documento;
 import com.seda.payer.commons.geos.Flusso;
 import com.seda.payer.commons.inviaAvvisiForGeos.File512;
-import com.seda.payer.commons.jppa.utils.LogoBollettino;
+import com.esed.pagopa.pdf.printer.jppa.LogoBollettino;
 
 import it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRisposta;
 

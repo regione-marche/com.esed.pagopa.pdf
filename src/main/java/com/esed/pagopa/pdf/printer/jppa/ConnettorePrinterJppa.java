@@ -9,9 +9,7 @@ import java.util.stream.Collectors;
 
 import com.seda.commons.logger.CustomLoggerManager;
 import com.seda.commons.logger.LoggerWrapper;
-import com.seda.payer.commons.jppa.interfaces.IconnettoreJppaPrinter;
 
-import it.maggioli.pagopa.jppa.printer.ApiClient;
 import it.maggioli.pagopa.jppa.printer.model.StampaAvvisaturaRichiesta;
 import it.maggioli.pagopa.jppa.printer.model.StampaAvvisaturaRisposta;
 import it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta;

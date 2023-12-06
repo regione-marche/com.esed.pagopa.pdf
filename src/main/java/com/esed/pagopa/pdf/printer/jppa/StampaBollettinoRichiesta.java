@@ -9,9 +9,9 @@ import it.maggioli.pagopa.jppa.printer.model.PosizioneDebitoriaAvvisaturaDto;
 public class StampaBollettinoRichiesta implements Serializable {
 
     private static final long serialVersionUID = 7242741915094874502L;
-    private final com.seda.payer.commons.jppa.DatiEnteAvvisaturaDto datiEnte;
+    private final DatiEnteAvvisaturaDto datiEnte;
 
-    private final List<com.seda.payer.commons.jppa.PosizioneDebitoriaAvvisaturaDto> posizioneDebitoria;
+    private final List<PosizioneDebitoriaAvvisaturaDto> posizioneDebitoria;
 
     private String numeroAvviso;
 
@@ -22,18 +22,18 @@ public class StampaBollettinoRichiesta implements Serializable {
 
     private final String base64FileLogoEnte;
 
-    public StampaBollettinoRichiesta(com.seda.payer.commons.jppa.DatiEnteAvvisaturaDto datiEnte, List<com.seda.payer.commons.jppa.PosizioneDebitoriaAvvisaturaDto> posizioneDebitoria, String locale, String base64FileLogoEnte) {
+    public StampaBollettinoRichiesta(DatiEnteAvvisaturaDto datiEnte, List<PosizioneDebitoriaAvvisaturaDto> posizioneDebitoria, String locale, String base64FileLogoEnte) {
         this.datiEnte = datiEnte;
         this.posizioneDebitoria = posizioneDebitoria;
         this.locale = locale;
         this.base64FileLogoEnte = base64FileLogoEnte;
     }
 
-    public com.seda.payer.commons.jppa.DatiEnteAvvisaturaDto getDatiEnte() {
+    public DatiEnteAvvisaturaDto getDatiEnte() {
         return datiEnte;
     }
 
-    public List<com.seda.payer.commons.jppa.PosizioneDebitoriaAvvisaturaDto> getPosizioneDebitoria() {
+    public List<PosizioneDebitoriaAvvisaturaDto> getPosizioneDebitoria() {
         return posizioneDebitoria;
     }
 

@@ -14,9 +14,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import org.threeten.bp.LocalDateTime;
-import org.threeten.bp.format.DateTimeFormatter;
-
 import com.seda.commons.logger.CustomLoggerManager;
 import com.seda.commons.logger.LoggerWrapper;
 import com.seda.payer.commons.geos.Bollettino;

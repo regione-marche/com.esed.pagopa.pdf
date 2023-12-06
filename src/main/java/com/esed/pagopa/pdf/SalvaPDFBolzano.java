@@ -36,7 +36,7 @@ import com.seda.commons.string.Convert;
 import com.seda.payer.commons.geos.Bollettino;
 import com.seda.payer.commons.geos.Documento;
 import com.seda.payer.commons.geos.Flusso;
-import com.seda.payer.commons.jppa.utils.LogoBollettino;
+import com.esed.pagopa.pdf.printer.jppa.LogoBollettino;
 import com.seda.payer.commons.utility.LogUtility;
 import com.seda.payer.pgec.webservice.ente.dati.EnteSearchRequest;
 import com.seda.payer.pgec.webservice.ente.dati.EnteSearchResponse;
