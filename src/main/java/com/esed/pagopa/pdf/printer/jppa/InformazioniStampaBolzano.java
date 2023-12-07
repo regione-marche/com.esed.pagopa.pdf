@@ -299,22 +299,22 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 			}else {
 				posDeb.setNumeroAvviso(doc.DatiBollettino.get(0).AvvisoPagoPa);
 			}
-				posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Indirizzo+" "+doc.DatiAnagrafici.get(0).Cap+" ");
-			    posDeb.setDataScadenza(buildDate(doc.DatiBollettino.get(0).ScadenzaRata));// Data scadenza
-				posDeb.setTitDebitoCapSedeLegale("");
-				posDeb.setTitDebitoCapSedeLegale(doc.DatiAnagrafici.get(0).Cf);
-				posDeb.setTitDebitoCivicoRes("");
+				posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Cap.trim());
+			    posDeb.setDataScadenza(buildDate(doc.DatiBollettino.get(0).ScadenzaRata).trim());// Data scadenza
+				posDeb.setTitDebitoCapSedeLegale(doc.DatiAnagrafici.get(0).Cf.trim());
+				posDeb.setTitDebitoCf(doc.DatiAnagrafici.get(0).Cf.trim());
+				posDeb.setTitDebitoCivicoRes(doc.DatiAnagrafici.get(0).Indirizzo.replaceAll("\\D", "").trim());
 				posDeb.setTitDebitoCivicoSedeLegale("");
 				posDeb.setTitDebitoCognome("");
-				posDeb.setTitDebitoComuneRes(doc.DatiAnagrafici.get(0).Citta);
+				posDeb.setTitDebitoComuneRes(doc.DatiAnagrafici.get(0).Citta.trim());
 				posDeb.setTitDebitoComuneSedeLegale("");
-				posDeb.setTitDebitoIndirizzoRes("");
+				posDeb.setTitDebitoIndirizzoRes(doc.DatiAnagrafici.get(0).Indirizzo.replaceAll("\\d","").trim());
 				posDeb.setTitDebitonazioneRes("");
 				posDeb.setTitDebitoNazioneSedeLegale("");
 				posDeb.setTitDebitoNome("");
-				posDeb.setTitDebitoNominativo(doc.DatiAnagrafici.get(0).Denominazione1);
+				posDeb.setTitDebitoNominativo(doc.DatiAnagrafici.get(0).Denominazione1.trim());
 				posDeb.setTitDebitoprovRes("");
-				posDeb.setTitDebitoProvSedeLegale(doc.DatiAnagrafici.get(0).Provincia);
+				posDeb.setTitDebitoProvSedeLegale(doc.DatiAnagrafici.get(0).Provincia.trim());
 				posDeb.setTitDebitoRagioneSociale("");
 				posDeb.setTitDebitoIndirizzoSedeLegale("");
 			
@@ -608,17 +608,11 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 		
 		final List<Bollettino> bollettini = new ArrayList<>();
 		bollettini.addAll(doc.DatiBollettino);
-		
-		StampaBollettinoRichiesta richiestaMultirata = new StampaBollettinoRichiesta();
-		List<StampaBollettinoRichiesta> richieste = new 
-				ArrayList<>();
-		
-		
-		richiestaMultirata = bollRichiestaFromBollettino(doc,bollettini,logo64,cutecute,daArchivio);
-		
-		
-		return richiestaMultirata;
+	
+		return bollRichiestaFromBollettino(doc,bollettini,logo64,cutecute,daArchivio);
 	}
+	
+	
 
 	private StampaBollettinoRichiesta bollRichiestaFromBollettino(Documento doc,List<Bollettino> bollettini, String logo64,
 			String cutecute, boolean daArchivio) {
@@ -664,17 +658,19 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 			}else {
 				posDeb.setNumeroAvviso(bollettino.AvvisoPagoPa);
 			}
-				posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Indirizzo+" "+doc.DatiAnagrafici.get(0).Cap+" ");
+				posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Cap.trim());
 			    posDeb.setDataScadenza(buildDate(bollettino.ScadenzaRata));// Data scadenza
 				posDeb.setTitDebitoCapSedeLegale("");
-				posDeb.setTitDebitoCapSedeLegale(doc.DatiAnagrafici.get(0).Cf);
-				posDeb.setTitDebitoCivicoRes("");
+				posDeb.setTitDebitoCf(doc.DatiAnagrafici.get(0).Cf.trim());
+				posDeb.setTitDebitoCapSedeLegale(doc.DatiAnagrafici.get(0).Cf.trim());
+				posDeb.setTitDebitoCivicoRes(doc.DatiAnagrafici.get(0).Indirizzo.replaceAll("\\D", "").trim());
 				posDeb.setTitDebitoCivicoSedeLegale("");
 				posDeb.setTitDebitoCognome("");
 				posDeb.setTitDebitoComuneRes(doc.DatiAnagrafici.get(0).Citta);
 				posDeb.setTitDebitoComuneSedeLegale("");
 				posDeb.setTitDebitoIndirizzoRes("");
 				posDeb.setTitDebitonazioneRes("");
+				posDeb.setTitDebitoIndirizzoRes(doc.DatiAnagrafici.get(0).Indirizzo.replaceAll("\\d","").trim());
 				posDeb.setTitDebitoNazioneSedeLegale("");
 				posDeb.setTitDebitoNome("");
 				posDeb.setTitDebitoNominativo(doc.DatiAnagrafici.get(0).Denominazione1);
