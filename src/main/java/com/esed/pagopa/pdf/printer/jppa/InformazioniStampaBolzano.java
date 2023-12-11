@@ -132,6 +132,8 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 	
 	
 	
+	
+	
 	private void gestioneCausale(Documento doc,PosizioneDebitoriaAvvisaturaDto posDeb) {
 			
 			String primaparte[] = new String[2];
@@ -140,43 +142,10 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 				primaparte = doc.CausaleDocumento.split("\\n");
 			}
 			
-			primaparte = doc.CausaleDocumento.split("\\n");
+			posDeb.setCausaleDebitoriaDe(primaparte[0].replaceAll("\\n", "/").trim());
 			
-			if(primaparte[0]==null||primaparte[0].equals("")) {
-				primaparte[0] = "";
-			}
-			
-			String prima[] = new String[2];
-			
+			posDeb.setCausaleDebitoria(primaparte[1].replaceAll("(\\r|\\n)", "/").trim());
 
-			prima = primaparte[0].split("\\/");
-		
-			doc.CausaleDocumento = doc.CausaleDocumento.replaceAll("(\\r|\\n)", " ");
-			
-			if(prima.length==1) {
-				 posDeb.setCausaleDebitoriaDe(prima[0].replaceAll("(\\r|\\n)", ""));
-				if(primaparte.length==2) {
-				 posDeb.setCausaleDebitoria(primaparte[1].replaceAll("(\\r|\\n)", ""));
-				}else {
-					posDeb.setCausaleDebitoria(doc.CausaleDocumento.replaceAll("(\\r|\\n)", ""));
-				}
-			} else {
-			
-				if(prima!=null) {
-					if(prima[0]==null||prima[1]==null) {
-						posDeb.setCausaleDebitoriaDe("");
-					}else {
-						posDeb.setCausaleDebitoriaDe(prima[0].replaceAll("(\\r|\\n)", "")+"/"+prima[1].replaceAll("(\\r|\\n)", ""));
-					}
-			    }
-				  if(primaparte[1]==null) {
-					posDeb.setCausaleDebitoria(doc.CausaleDocumento);
-				  }else {
-					  posDeb.setCausaleDebitoria(primaparte[1].replaceAll("(\\r|\\n)", ""));
-				  }
-			}
-			
-			posDeb.setCausaleDebitoria(doc.CausaleDocumento);
 		}
 	
 
@@ -299,22 +268,22 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 			}else {
 				posDeb.setNumeroAvviso(doc.DatiBollettino.get(0).AvvisoPagoPa);
 			}
-				posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Indirizzo+" "+doc.DatiAnagrafici.get(0).Cap+" ");
-			    posDeb.setDataScadenza(buildDate(doc.DatiBollettino.get(0).ScadenzaRata));// Data scadenza
-				posDeb.setTitDebitoCapSedeLegale("");
-				posDeb.setTitDebitoCapSedeLegale(doc.DatiAnagrafici.get(0).Cf);
-				posDeb.setTitDebitoCivicoRes("");
+				posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Cap.trim());
+			    posDeb.setDataScadenza(buildDate(doc.DatiBollettino.get(0).ScadenzaRata).trim());// Data scadenza
+				posDeb.setTitDebitoCapSedeLegale(doc.DatiAnagrafici.get(0).Cf.trim());
+				posDeb.setTitDebitoCf(doc.DatiAnagrafici.get(0).Cf.trim());
+				posDeb.setTitDebitoCivicoRes(doc.DatiAnagrafici.get(0).Indirizzo.replaceAll("\\D", "").trim());
 				posDeb.setTitDebitoCivicoSedeLegale("");
 				posDeb.setTitDebitoCognome("");
-				posDeb.setTitDebitoComuneRes(doc.DatiAnagrafici.get(0).Citta);
+				posDeb.setTitDebitoComuneRes(doc.DatiAnagrafici.get(0).Citta.trim());
 				posDeb.setTitDebitoComuneSedeLegale("");
-				posDeb.setTitDebitoIndirizzoRes("");
+				posDeb.setTitDebitoIndirizzoRes(doc.DatiAnagrafici.get(0).Indirizzo.replaceAll("\\d","").trim());
 				posDeb.setTitDebitonazioneRes("");
 				posDeb.setTitDebitoNazioneSedeLegale("");
 				posDeb.setTitDebitoNome("");
-				posDeb.setTitDebitoNominativo(doc.DatiAnagrafici.get(0).Denominazione1);
+				posDeb.setTitDebitoNominativo(doc.DatiAnagrafici.get(0).Denominazione1.trim());
 				posDeb.setTitDebitoprovRes("");
-				posDeb.setTitDebitoProvSedeLegale(doc.DatiAnagrafici.get(0).Provincia);
+				posDeb.setTitDebitoProvSedeLegale(doc.DatiAnagrafici.get(0).Provincia.trim());
 				posDeb.setTitDebitoRagioneSociale("");
 				posDeb.setTitDebitoIndirizzoSedeLegale("");
 			
@@ -608,17 +577,11 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 		
 		final List<Bollettino> bollettini = new ArrayList<>();
 		bollettini.addAll(doc.DatiBollettino);
-		
-		StampaBollettinoRichiesta richiestaMultirata = new StampaBollettinoRichiesta();
-		List<StampaBollettinoRichiesta> richieste = new 
-				ArrayList<>();
-		
-		
-		richiestaMultirata = bollRichiestaFromBollettino(doc,bollettini,logo64,cutecute,daArchivio);
-		
-		
-		return richiestaMultirata;
+	
+		return bollRichiestaFromBollettino(doc,bollettini,logo64,cutecute,daArchivio);
 	}
+	
+	
 
 	private StampaBollettinoRichiesta bollRichiestaFromBollettino(Documento doc,List<Bollettino> bollettini, String logo64,
 			String cutecute, boolean daArchivio) {
@@ -664,17 +627,19 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 			}else {
 				posDeb.setNumeroAvviso(bollettino.AvvisoPagoPa);
 			}
-				posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Indirizzo+" "+doc.DatiAnagrafici.get(0).Cap+" ");
+				posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Cap.trim());
 			    posDeb.setDataScadenza(buildDate(bollettino.ScadenzaRata));// Data scadenza
 				posDeb.setTitDebitoCapSedeLegale("");
-				posDeb.setTitDebitoCapSedeLegale(doc.DatiAnagrafici.get(0).Cf);
-				posDeb.setTitDebitoCivicoRes("");
+				posDeb.setTitDebitoCf(doc.DatiAnagrafici.get(0).Cf.trim());
+				posDeb.setTitDebitoCapSedeLegale(doc.DatiAnagrafici.get(0).Cf.trim());
+				posDeb.setTitDebitoCivicoRes(doc.DatiAnagrafici.get(0).Indirizzo.replaceAll("\\D", "").trim());
 				posDeb.setTitDebitoCivicoSedeLegale("");
 				posDeb.setTitDebitoCognome("");
 				posDeb.setTitDebitoComuneRes(doc.DatiAnagrafici.get(0).Citta);
 				posDeb.setTitDebitoComuneSedeLegale("");
 				posDeb.setTitDebitoIndirizzoRes("");
 				posDeb.setTitDebitonazioneRes("");
+				posDeb.setTitDebitoIndirizzoRes(doc.DatiAnagrafici.get(0).Indirizzo.replaceAll("\\d","").trim());
 				posDeb.setTitDebitoNazioneSedeLegale("");
 				posDeb.setTitDebitoNome("");
 				posDeb.setTitDebitoNominativo(doc.DatiAnagrafici.get(0).Denominazione1);
