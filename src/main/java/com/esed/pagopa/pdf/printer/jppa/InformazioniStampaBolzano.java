@@ -132,6 +132,8 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 	
 	
 	
+	
+	
 	private void gestioneCausale(Documento doc,PosizioneDebitoriaAvvisaturaDto posDeb) {
 			
 			String primaparte[] = new String[2];
@@ -140,43 +142,10 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 				primaparte = doc.CausaleDocumento.split("\\n");
 			}
 			
-			primaparte = doc.CausaleDocumento.split("\\n");
+			posDeb.setCausaleDebitoriaDe(primaparte[0].replaceAll("\\n", "/").trim());
 			
-			if(primaparte[0]==null||primaparte[0].equals("")) {
-				primaparte[0] = "";
-			}
-			
-			String prima[] = new String[2];
-			
+			posDeb.setCausaleDebitoria(primaparte[1].replaceAll("(\\r|\\n)", "/").trim());
 
-			prima = primaparte[0].split("\\/");
-		
-			doc.CausaleDocumento = doc.CausaleDocumento.replaceAll("(\\r|\\n)", " ");
-			
-			if(prima.length==1) {
-				 posDeb.setCausaleDebitoriaDe(prima[0].replaceAll("(\\r|\\n)", ""));
-				if(primaparte.length==2) {
-				 posDeb.setCausaleDebitoria(primaparte[1].replaceAll("(\\r|\\n)", ""));
-				}else {
-					posDeb.setCausaleDebitoria(doc.CausaleDocumento.replaceAll("(\\r|\\n)", ""));
-				}
-			} else {
-			
-				if(prima!=null) {
-					if(prima[0]==null||prima[1]==null) {
-						posDeb.setCausaleDebitoriaDe("");
-					}else {
-						posDeb.setCausaleDebitoriaDe(prima[0].replaceAll("(\\r|\\n)", "")+"/"+prima[1].replaceAll("(\\r|\\n)", ""));
-					}
-			    }
-				  if(primaparte[1]==null) {
-					posDeb.setCausaleDebitoria(doc.CausaleDocumento);
-				  }else {
-					  posDeb.setCausaleDebitoria(primaparte[1].replaceAll("(\\r|\\n)", ""));
-				  }
-			}
-			
-			posDeb.setCausaleDebitoria(doc.CausaleDocumento);
 		}
 	
 
