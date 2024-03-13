@@ -11,7 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
+
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 
 /**
  * @apiNote classe per la generazione del file guida, viene restituita in risposta all'aggiunta di un documento al pdf
@@ -24,7 +26,7 @@ public class GuidaDocumento {
 	private int numeroPaginaIniziale;
 	private File file;
 	
-	private static Logger logger = Logger.getLogger(GuidaDocumento.class);
+	private static LoggerWrapper logger = CustomLoggerManager.get(GuidaDocumento.class);
 	
 	public GuidaDocumento(/*String nomeFile, */File file) {
 //		nomeFileDestinazione = nomeFile;
@@ -67,7 +69,7 @@ public class GuidaDocumento {
 		
 		FileUtils.writeStringToFile(this.file , rigoGuida.toString(), StandardCharsets.UTF_8, true);
 		logger.info("aggiungo rigo al file guida");
-		logger.info(rigoGuida);
+		logger.info(rigoGuida.toString());
 		
 		this.numeroPaginaIniziale += pagineAggiunteDocumento;
 	}

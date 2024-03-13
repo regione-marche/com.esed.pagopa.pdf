@@ -6,15 +6,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.math.NumberUtils;
-import org.apache.log4j.Logger;
 
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.payer.commons.geos.Bollettino;
 import com.seda.payer.commons.geos.DatiAnagrafici;
 import com.seda.payer.commons.geos.Documento;
 
 public class ValidaFlusso {
 	
-	private static Logger logger = Logger.getLogger(ValidaFlusso.class);
+	protected static LoggerWrapper logger = CustomLoggerManager.get(ValidaFlusso.class);
 	private static boolean daArchivioCarichi = false; 
 	
 	
@@ -478,7 +479,7 @@ public class ValidaFlusso {
 					Pattern pattern = Pattern.compile(regex);
 					Matcher matcher = pattern.matcher(bollettino.ScadenzaRata);
 					if (!matcher.matches()) {
-//							logger.info("------------scadenza rata -- bollettino n° ---" + bollettino.ProgressivoBoll + " " + bollettino.ScadenzaRata );
+//							System.out.println("------------scadenza rata -- bollettino n° ---" + bollettino.ProgressivoBoll + " " + bollettino.ScadenzaRata );
 						messaggiErrore += "-il campo ScadenzaRata relativo al bollettino n°"
 								+ bollettino.ProgressivoBoll + " è in un formato errato \r\n";
 						errCounter++;
@@ -490,7 +491,7 @@ public class ValidaFlusso {
 				}
 				
 				if (bollettino.ProgressivoBoll == 666)
-					logger.info("è uscito il bollettino della Bestia");
+					System.out.println("è uscito il bollettino della Bestia");
 				
 				System.out.println("Codeline2Boll = " + bollettino.Codeline2Boll);
 				System.out.println("max = " + max);
@@ -1217,7 +1218,7 @@ public class ValidaFlusso {
 			}
 			
 			if (bollettino.ProgressivoBoll == 666)
-				logger.info("è uscito il bollettino della Bestia");
+				System.out.println("è uscito il bollettino della Bestia");
 			
 			System.out.println("Codeline2Boll = " + bollettino.Codeline2Boll);
 			System.out.println("max = " + max);

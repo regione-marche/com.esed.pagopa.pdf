@@ -6,8 +6,12 @@ import org.apache.commons.io.IOUtils;
 
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.layout.property.TextAlignment;
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 
 public class TipoStampaPagoPa extends ATipoStampa {
+	
+	protected static LoggerWrapper logger = CustomLoggerManager.get(TipoStampaPagoPa.class);
 	
 	public TipoStampaPagoPa() {
 		

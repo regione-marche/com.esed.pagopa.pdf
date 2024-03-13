@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.payer.commons.geos.Bollettino;
 import com.seda.payer.commons.geos.Documento;
 import com.seda.payer.commons.geos.Flusso;
@@ -20,6 +22,9 @@ import it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRichiesta;
  */
 public class InformazioniStampaAosta implements InformazioniStampaInterface {
 
+	
+	protected LoggerWrapper logger = CustomLoggerManager.get(getClass());
+	
 	/**
 	 * 
 	 */
@@ -149,22 +154,22 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 		}else {
 			posDeb.setNumeroAvviso(doc.DatiBollettino.get(0).AvvisoPagoPa);
 		}
-			posDeb.setTitDebitoCapRes("");
-		    posDeb.setDataScadenza(buildDate(doc.DatiBollettino.get(0).ScadenzaRata));// Data scadenza
-			posDeb.setTitDebitoCapSedeLegale("");
-			posDeb.setTitDebitoCf(doc.DatiAnagrafici.get(0).Cf);
-			posDeb.setTitDebitoCivicoRes("");
+			posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Cap.trim());
+		    posDeb.setDataScadenza(buildDate(doc.DatiBollettino.get(0).ScadenzaRata).trim());// Data scadenza
+			posDeb.setTitDebitoCapSedeLegale(doc.DatiAnagrafici.get(0).Cf.trim());
+			posDeb.setTitDebitoCf(doc.DatiAnagrafici.get(0).Cf.trim());
+			posDeb.setTitDebitoCivicoRes(doc.DatiAnagrafici.get(0).Indirizzo.replaceAll("\\D", "").trim());
 			posDeb.setTitDebitoCivicoSedeLegale("");
 			posDeb.setTitDebitoCognome("");
-			posDeb.setTitDebitoComuneRes(doc.DatiAnagrafici.get(0).Cap +" "+ doc.DatiAnagrafici.get(0).Citta);
+			posDeb.setTitDebitoComuneRes(doc.DatiAnagrafici.get(0).Citta.trim());
 			posDeb.setTitDebitoComuneSedeLegale("");
-			posDeb.setTitDebitoIndirizzoRes(doc.DatiAnagrafici.get(0).Indirizzo);
+			posDeb.setTitDebitoIndirizzoRes(doc.DatiAnagrafici.get(0).Indirizzo.replaceAll("\\d","").trim());
 			posDeb.setTitDebitonazioneRes("");
 			posDeb.setTitDebitoNazioneSedeLegale("");
 			posDeb.setTitDebitoNome("");
-			posDeb.setTitDebitoNominativo(doc.DatiAnagrafici.get(0).Denominazione1);
+			posDeb.setTitDebitoNominativo(doc.DatiAnagrafici.get(0).Denominazione1.trim());
 			posDeb.setTitDebitoprovRes("");
-			posDeb.setTitDebitoProvSedeLegale(doc.DatiAnagrafici.get(0).Provincia);
+			posDeb.setTitDebitoProvSedeLegale(doc.DatiAnagrafici.get(0).Provincia.trim());
 			posDeb.setTitDebitoRagioneSociale("");
 			posDeb.setTitDebitoIndirizzoSedeLegale("");
 		
@@ -455,22 +460,22 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 				
 				posDeb.setNumeroAvviso(bollettino.AvvisoPagoPa);
 			}
-				posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Indirizzo+" "+doc.DatiAnagrafici.get(0).Cap+" ");
-			    posDeb.setDataScadenza(buildDate(bollettino.ScadenzaRata));// Data scadenza
-				posDeb.setTitDebitoCapSedeLegale("");
-				posDeb.setTitDebitoCapSedeLegale(doc.DatiAnagrafici.get(0).Cf);
-				posDeb.setTitDebitoCivicoRes("");
+				posDeb.setTitDebitoCapRes(doc.DatiAnagrafici.get(0).Cap.trim());
+			    posDeb.setDataScadenza(buildDate(bollettino.ScadenzaRata.trim()));// Data scadenza
+				posDeb.setTitDebitoCapSedeLegale(doc.DatiAnagrafici.get(0).Cf.trim());
+				posDeb.setTitDebitoCf(doc.DatiAnagrafici.get(0).Cf.trim());
+				posDeb.setTitDebitoCivicoRes(doc.DatiAnagrafici.get(0).Indirizzo.replaceAll("\\D", "").trim());
 				posDeb.setTitDebitoCivicoSedeLegale("");
 				posDeb.setTitDebitoCognome("");
-				posDeb.setTitDebitoComuneRes(doc.DatiAnagrafici.get(0).Citta);
+				posDeb.setTitDebitoComuneRes(doc.DatiAnagrafici.get(0).Citta.trim());
 				posDeb.setTitDebitoComuneSedeLegale("");
-				posDeb.setTitDebitoIndirizzoRes("");
+				posDeb.setTitDebitoIndirizzoRes(doc.DatiAnagrafici.get(0).Indirizzo.replaceAll("\\d","").trim());
 				posDeb.setTitDebitonazioneRes("");
 				posDeb.setTitDebitoNazioneSedeLegale("");
 				posDeb.setTitDebitoNome("");
-				posDeb.setTitDebitoNominativo(doc.DatiAnagrafici.get(0).Denominazione1);
+				posDeb.setTitDebitoNominativo(doc.DatiAnagrafici.get(0).Denominazione1.trim());
 				posDeb.setTitDebitoprovRes("");
-				posDeb.setTitDebitoProvSedeLegale(doc.DatiAnagrafici.get(0).Provincia);
+				posDeb.setTitDebitoProvSedeLegale(doc.DatiAnagrafici.get(0).Provincia.trim());
 				posDeb.setTitDebitoRagioneSociale("");
 				posDeb.setTitDebitoIndirizzoSedeLegale("");
 				bollRichiesta.setNumeroAvviso(bollettino.AvvisoPagoPa);

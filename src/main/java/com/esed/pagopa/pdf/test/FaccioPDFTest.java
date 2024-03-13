@@ -15,16 +15,18 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.commons.properties.PropertiesLoader;
 import com.seda.commons.properties.tree.PropertiesNodeException;
 import com.seda.commons.properties.tree.PropertiesTree;
 import com.seda.payer.commons.inviaAvvisiForGeos.File512;
-import com.seda.payer.commons.jppa.utils.ConvertiPdfPrinter;
-import com.seda.payer.commons.jppa.utils.PdfConverter;
 
-import io.swagger.client.ApiException;
+import it.maggioli.pagopa.jppa.printer.ApiException;
 
 public class FaccioPDFTest {
+	
+	protected LoggerWrapper logger = CustomLoggerManager.get(getClass());
 	
 	public static void main(String[] args) throws Exception {
         String rootPath = "C:\\work\\Pagonet\\ConfigFiles\\pagopaPDFws\\pagoPaPdfWsRoot.properties";
@@ -41,39 +43,32 @@ public class FaccioPDFTest {
 		String cuteCute;
 //		cuteCute = "000RM";
 //		cuteCute = "000TO";
-		cuteCute = "000P6";
+		cuteCute = "000P4";
 		
 //		puntuale(propertiesTree, cuteCute);
 
-		massivo(propertiesTree);
-//		puntuale(propertiesTree,cuteCute);
+//		massivo(propertiesTree);
+		puntuale(propertiesTree,cuteCute);
 	}
 
 	static void puntuale(PropertiesTree propertiesTree, String cuteCute) throws Exception {
 		
 		System.out.println("directory = " + System.getProperty("user.dir"));
 		FlussoFinto flusso = new FlussoFinto();
-		flusso.TipoStampa = "jppa";
+		flusso.TipoStampa = "P";
+		flusso.CuteCute = "000P4";
 		
 		//SalvaPDF salvaPDF = new SalvaPDF(propertiesTree);
-		SalvaPDFBolzano salvaPdfBolzano = new SalvaPDFBolzano();
+		SalvaPDF salvaPdfBolzano = new SalvaPDF(propertiesTree);
 		byte[] ba = null;
-//		try {
-//			ba = salvaPdfBolzano.SalvaFile(flusso,propertiesTree);
-//		} catch (ApiException e) {
-//	          System.err.println("Exception when calling BollettinoApi#stampaBollettino");
-//	          System.err.println("Status code: " + e.getCode());
-//	          System.err.println("Reason: " + e.getResponseBody());
-//	          System.err.println("Response headers: " + e.getResponseHeaders());
-//	          e.printStackTrace();
-//		}
+		ba = salvaPdfBolzano.SalvaFile(flusso,"Y");
 		
-		if(flusso.TipoStampa.equals("jppa")) {
+		if(flusso.TipoStampa.equals("jppa") || flusso.TipoStampa.equals("P")) {
 			
 	        byte[] encode = Base64.getDecoder().decode(Base64.getEncoder().encode(ba));
 	        String result = new String(encode);
 			
-			PdfConverter converter = new ConvertiPdfPrinter();
+			com.esed.pagopa.pdf.printer.jppa.PdfConverter converter = new com.esed.pagopa.pdf.printer.jppa.ConvertiPdfPrinter();
 			converter.convert(result, Paths.get("C:\\work\\Pagonet\\ConfigFiles\\pagopaPDFws\\pagopaPdf\\"+cuteCute+".pdf"));
 		}
 		else {

@@ -18,7 +18,7 @@ public class FlussoFinto extends Flusso {
 		DatiAnagrafici datiAnagrafici = new DatiAnagrafici();
 		datiAnagrafici.Denominazione1= "Mario Rossi";
 		datiAnagrafici.Cf = "MRORSS99M22D810Z";
-		datiAnagrafici.Indirizzo = "Via Vai a Casa";
+		datiAnagrafici.Indirizzo = "Via Vai a Casa 3";
 		datiAnagrafici.Citta = "Frossedi";
 		datiAnagrafici.Cap = "10100"; //PG21X007
 		datiAnagrafici.Provincia = "TO"; //PG21X007
@@ -38,7 +38,7 @@ public class FlussoFinto extends Flusso {
 		bollettino1.ScadenzaRata = "01/08/2084";
 		bollettino1.BarcodePagoPa = "1 - PAGOPA|002|123456789012345678|12345678901|";
 		bollettino1.QRcodePagoPa = "1 - PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|1 - PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678";
-		bollettino1.AvvisoPagoPa = "0001567890123456123";
+		bollettino1.AvvisoPagoPa = "0001 5678 9012 3456 12";
 		bollettino1.AutorizCcp = "1 - AUT. DB/xxxx/xxx xxxxxxx/xx/xxxx";
 		bollettino1.Codeline2Boll = "100"; // importo in centesimi
 		bollettino1.Codeline12Boll = "1 - 37892987549"; // CC
@@ -51,7 +51,7 @@ public class FlussoFinto extends Flusso {
 		bollettino2.ScadenzaRata = "02/08/2084";
 		bollettino2.BarcodePagoPa = "2 - PAGOPA|002|123456789012345678|12345678901|";
 		bollettino2.QRcodePagoPa = "2 - PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|1 - PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678";
-		bollettino2.AvvisoPagoPa = "0002 5678 9012 3456 123";
+		bollettino2.AvvisoPagoPa = "0002 5678 9012 3456 12";
 		bollettino2.AutorizCcp = "2 - AUT. DB/xxxx/xxx xxxxx\r\nDEL xx/xx/xxxx";
 		bollettino2.Codeline2Boll = "200";
 		bollettino2.Codeline12Boll = "2 - 37892987549"; // CC
@@ -63,7 +63,7 @@ public class FlussoFinto extends Flusso {
 		bollettino3.ScadenzaRata = "03/08/2084";
 		bollettino3.BarcodePagoPa = "3 - PAGOPA|002|123456789012345678|12345678901|";
 		bollettino3.QRcodePagoPa = "3 - PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|1 - PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678";
-		bollettino3.AvvisoPagoPa = "0003 5678 9012 3456 123";
+		bollettino3.AvvisoPagoPa = "0003 5678 9012 3456 12";
 		bollettino3.AutorizCcp = "3 - AUT. DB/xxxx/xxx xxxxx\r\nDEL xx/xx/xxxx";
 		bollettino3.Codeline2Boll = "300";
 		bollettino3.Codeline12Boll = "3 - 37892987549"; // CC
@@ -210,6 +210,8 @@ public class FlussoFinto extends Flusso {
 		documento1.addDatiAnagrafici(datiAnagrafici);
 		documento1.addDatiCreditore(datiCreditore);
 		documento1.addDatiBollettino(bollettino1);
+		documento1.addDatiBollettino(bollettino2);
+		documento1.addDatiBollettino(bollettino3);
 		
 //		documento1.addDatiBollettino(bollettino2);
 //		documento1.addDatiBollettino(bollettino3);

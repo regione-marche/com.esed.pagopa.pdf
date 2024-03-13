@@ -16,8 +16,6 @@ import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.apache.log4j.Logger;
-
 import com.itextpdf.barcodes.BarcodeDataMatrix;
 import com.itextpdf.barcodes.BarcodeQRCode;
 import com.itextpdf.kernel.colors.ColorConstants;
@@ -34,6 +32,8 @@ import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.VerticalAlignment;
+import com.seda.commons.logger.CustomLoggerManager;
+import com.seda.commons.logger.LoggerWrapper;
 import com.seda.commons.properties.tree.PropertiesTree;
 import com.seda.payer.commons.geos.Bollettino;
 import com.seda.payer.commons.geos.Documento;
@@ -43,7 +43,7 @@ import com.seda.payer.commons.inviaAvvisiForGeos.File512;
 
 public class SalvaPDFRegMarche {
 	
-	private static final Logger logger = Logger.getLogger(SalvaPDF.class);
+	protected static LoggerWrapper logger = CustomLoggerManager.get(SalvaPDFRegMarche.class);
 	
 	private final PropertiesTree propertiesTree;
 	
@@ -282,7 +282,7 @@ public class SalvaPDFRegMarche {
 				
 //				se i bollettini sono 2 allora non c'è rateizzazione perchè il numero 1 e il 999 entrambi con dati coincidenti
 //				se invece i bollettini sono almeno 3 il 999 contiene la rata unica e gli altri 2 la rateizzazione
-				logger.debug(elencoBollettini.length);
+				logger.debug(Integer.toString(elencoBollettini.length));
 				if (elencoBollettini.length > 2) {
 					for (int j = 0; j < elencoBollettini.length - 1; ) {
 						if (elencoBollettini.length - 1 - j >= 3 && (elencoBollettini.length - 1 - j) != 4) {
