@@ -275,10 +275,10 @@ public class ValidaFlusso {
 //					messaggiErrore += "-il Cap del soggetto pagatore Ë mancante \r\n";
 //					errCounter++;
 //				}
-				if(appo.length() != 0 && appo.length() != 5) {
-					messaggiErrore += "-il Cap del soggetto pagatore √® errato \r\n";
-					errCounter++;
-				}
+//				if(appo.length() != 0 && appo.length() != 5) {
+//					messaggiErrore += "-il Cap del soggetto pagatore √® errato \r\n";
+//					errCounter++;
+//				}
 				documento.DatiAnagrafici.get(k).Cap = appo;
 //				if(documento.DatiAnagrafici.get(k).Citta == null) {
 //					messaggiErrore += "-la Citt√† del soggetto pagatore Ë mancante \r\n";
