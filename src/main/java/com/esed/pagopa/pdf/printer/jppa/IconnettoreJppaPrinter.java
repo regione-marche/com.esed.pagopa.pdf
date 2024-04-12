@@ -107,8 +107,8 @@ public interface IconnettoreJppaPrinter {
         try {
           result = apiInstance.stampaBollettino(stampaBollettinoRichiesta);
           //System.out.println("Result chiamata" + result);
-          //System.out.println("richiesta.json : ");
-          //System.out.println(stampaBollettinoRichiesta.toJson());
+          System.out.println("richiesta.json : ");
+          System.out.println(stampaBollettinoRichiesta.toJson());
         } catch (ApiException e) {
           System.err.println("Exception when calling BollettinoApi#stampaBollettino");
           System.err.println("Status code: " + e.getCode());
