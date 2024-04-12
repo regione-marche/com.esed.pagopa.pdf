@@ -80,7 +80,7 @@ public class FaccioPDFTest {
 	static void massivo(PropertiesTree propertiesTree) throws JsonParseException, JsonMappingException, IOException {
 		System.out.println(System.getProperty("user.dir"));
 		ObjectMapper objectMapper = new ObjectMapper();
-		List<File512> listaFile512 = objectMapper.readValue(new File("src\\main\\java\\com\\esed\\pagopa\\pdf\\test\\File512rate.json"), new TypeReference<List<File512>>(){} );
+		List<File512> listaFile512 = objectMapper.readValue(new File("C:\\Users\\lorenzo.micci\\Documents\\git\\maggiolispa\\pagamenti\\pagonet\\gruppo-resource\\com.esed.pagopa.pdf\\src\\main\\java\\com\\esed\\pagopa\\pdf\\test\\File512rate.json"), new TypeReference<List<File512>>(){} );
 		
 		UUID uuid = UUID.randomUUID();
 		SalvaPDF salvaPDF = new SalvaPDF(propertiesTree);

@@ -12,7 +12,7 @@ public class FlussoFinto extends Flusso {
 		CodiceEnte = "80009280274";
 		TipoStampa = "jppa"; //PG21X007
 //		esempio con un oggetto articolato
-		Documento documento1 = new Documento("imposta servizio", "12345678", "Oggetto del pagamento");
+		Documento documento1 = new Documento("imposta servizio", "29860987", "Oggetto del pagamento");
 		documento1.NumeroDocumento = "54321";
 //		aggiungiamo l'ente ciucciabocchi
 		DatiAnagrafici datiAnagrafici = new DatiAnagrafici();
@@ -40,9 +40,9 @@ public class FlussoFinto extends Flusso {
 		bollettino1.QRcodePagoPa = "1 - PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|1 - PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678";
 		bollettino1.AvvisoPagoPa = "0001 5678 9012 3456 12";
 		bollettino1.AutorizCcp = "1 - AUT. DB/xxxx/xxx xxxxxxx/xx/xxxx";
-		bollettino1.Codeline2Boll = "100"; // importo in centesimi
-		bollettino1.Codeline12Boll = "1 - 37892987549"; // CC
-		bollettino1.Codeline1Boll = "1 - 1234 5678 9012 3456 123";
+		bollettino1.Codeline2Boll = "001"; // importo in centesimi
+		bollettino1.Codeline12Boll = "378929875499"; // CC
+		bollettino1.Codeline1Boll = "1 - 1234 5678 9012 3456 121";
 		bollettino1.Descon60Boll = "1 - Comune del cavolo che ti Pare";	
 
 		
@@ -53,9 +53,9 @@ public class FlussoFinto extends Flusso {
 		bollettino2.QRcodePagoPa = "2 - PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|1 - PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678";
 		bollettino2.AvvisoPagoPa = "0002 5678 9012 3456 12";
 		bollettino2.AutorizCcp = "2 - AUT. DB/xxxx/xxx xxxxx\r\nDEL xx/xx/xxxx";
-		bollettino2.Codeline2Boll = "200";
-		bollettino2.Codeline12Boll = "2 - 37892987549"; // CC
-		bollettino2.Codeline1Boll = "2 - 1234 5678 9012 3456 123";
+		bollettino2.Codeline2Boll = "001";
+		bollettino2.Codeline12Boll = "378929875490"; // CC
+		bollettino2.Codeline1Boll = "2 - 1234 5678 9012 3456 122";
 		bollettino2.Descon60Boll = "2 - Comune del cavolo che ti Pare";	
 		
 		Bollettino bollettino3 = new Bollettino();
@@ -65,8 +65,8 @@ public class FlussoFinto extends Flusso {
 		bollettino3.QRcodePagoPa = "3 - PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|1 - PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678";
 		bollettino3.AvvisoPagoPa = "0003 5678 9012 3456 12";
 		bollettino3.AutorizCcp = "3 - AUT. DB/xxxx/xxx xxxxx\r\nDEL xx/xx/xxxx";
-		bollettino3.Codeline2Boll = "300";
-		bollettino3.Codeline12Boll = "3 - 37892987549"; // CC
+		bollettino3.Codeline2Boll = "001";
+		bollettino3.Codeline12Boll = "378929875493"; // CC
 		bollettino3.Codeline1Boll = "3 - 1234 5678 9012 3456 123";
 		bollettino3.Descon60Boll = "3 - Comune del cavolo che ti Pare";	
 		
@@ -197,8 +197,8 @@ public class FlussoFinto extends Flusso {
 		bollettino999.QRcodePagoPa = "999 PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|1 - PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678901|PAGOPA|002|123456789012345678|12345678";
 		bollettino999.AvvisoPagoPa = "0999 5678 9012 3456 123";
 		bollettino999.AutorizCcp = "999 - AUT. DB/xxxx/xxx xxxxx\r\nDEL xx/xx/xxxx";
-		bollettino999.Codeline2Boll = "99999900";
-		bollettino999.Codeline12Boll = "999 - 37892987549"; // CC
+		bollettino999.Codeline2Boll = "29860987";
+		bollettino999.Codeline12Boll = "378929875499"; // CC
 		bollettino999.Codeline1Boll = "999 - 1234 5678 9012 3456 123";
 		bollettino999.Descon60Boll = "999 - Comune del cavolo che ti Pare";	
 		

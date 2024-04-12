@@ -1,7 +1,7 @@
 [{
         "tipoTemplate": "POSTE_",
-        "cutecute": "000P4",
-        "ente": "000P4",
+        "cutecute": "000P6",
+        "ente": "000P6",
         "idFlusso": "123",
         "cBill": "54321",
         "descrizioneEnte": "Comune di Ala di Stura -",
@@ -16,7 +16,7 @@
                 "numero": "20190000050000000003",
                 "tipologiaServizio": "MCA",
                 "descrizioneServizio": "MCA",
-                "importoTotale": "000000000000010",
+                "importoTotale": "29860987",
                 "fatturazioneElettronica": false,
                 "iban": "IT11F0760101200000012085114",
                 "numAvvisoPagoPa": "301205270000002242",
@@ -59,7 +59,7 @@
                 ],
                 "listaAvvisi": [{
                         "dataScadenza": "31012019",
-                        "importo": "000000000000001",
+                        "importo": "29860987",
                         "progressivoBollettino": 1,
                         "numeroAvviso": "301205270000002242",
                         "codiceIUV": "01205270000002242",
@@ -68,7 +68,7 @@
                     },
                     {
                         "dataScadenza": "31012019",
-                        "importo": "000000000000002",
+                        "importo": "000000000000000",
                         "progressivoBollettino": 2,
                         "numeroAvviso": "301205270000002243",
                         "codiceIUV": "01205270000002242",
@@ -77,7 +77,7 @@
                     },
                     {
                         "dataScadenza": "31012019",
-                        "importo": "000000000000003",
+                        "importo": "000000000000000",
                         "progressivoBollettino": 3,
                         "numeroAvviso": "301205270000002244",
                         "codiceIUV": "01205270000002242",
@@ -86,7 +86,7 @@
                     },
                     {
                         "dataScadenza": "31012019",
-                        "importo": "000000000000004",
+                        "importo": "000000000000000",
                         "progressivoBollettino": 4,
                         "numeroAvviso": "301205270000002245",
                         "codiceIUV": "01205270000002242",

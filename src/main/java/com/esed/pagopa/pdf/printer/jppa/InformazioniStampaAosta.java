@@ -3,6 +3,7 @@
  */
 package com.esed.pagopa.pdf.printer.jppa;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -145,8 +146,10 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 			System.out.println("Vengo da archivio");
 			posDeb.setDataMatrix(dataMatrix);
 		}
-		
-		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento)/100);
+
+		BigDecimal importoAosta = new BigDecimal(doc.ImportoDocumento);
+		posDeb.setImporto(importoAosta.divide(BigDecimal.valueOf(100)));
+
 		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
 			System.out.println("Numero documento NULL PosDebitoria");
 			System.out.println("doc.DatiBollettino.get(0).AutorizCcp = " + doc.DatiBollettino.get(0).AutorizCcp);
@@ -303,8 +306,10 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 			System.out.println("Vengo da archivio");
 			posDeb.setDataMatrix(dataMatrix);
 		}
-		
-		posDeb.setImporto(Float.valueOf(bollettino999.Codeline2Boll)/100);
+
+		BigDecimal importoAosta = new BigDecimal(bollettino999.Codeline2Boll);
+		posDeb.setImporto(importoAosta.divide(BigDecimal.valueOf(100)));
+
 		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
 			System.out.println("Numero documento NULL PosDebitoria");
 			System.out.println("doc.DatiBollettino.get(0).AutorizCcp = " + doc.DatiBollettino.get(0).AutorizCcp);
@@ -446,7 +451,8 @@ public class InformazioniStampaAosta implements InformazioniStampaInterface {
 			}
 			
 			posDeb.setCausaleDebitoria(doc.CausaleDocumento);
-			posDeb.setImporto(Float.valueOf(bollettino.Codeline2Boll)/100);
+			BigDecimal importoAosta = new BigDecimal(bollettino.Codeline2Boll);
+			posDeb.setImporto(importoAosta.divide(BigDecimal.valueOf(100)));
 			if(doc.DatiBollettino.get(0).AutorizCcp==null) {
 				System.out.println("Numero documento NULL PosDebitoria");
 				System.out.println("doc.DatiBollettino.get(0).AutorizCcp = " + doc.DatiBollettino.get(0).AutorizCcp);

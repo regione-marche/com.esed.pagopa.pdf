@@ -3,16 +3,14 @@
  */
 package com.esed.pagopa.pdf.printer.jppa;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import com.seda.commons.logger.CustomLoggerManager;
 import com.seda.commons.logger.LoggerWrapper;
@@ -140,11 +138,15 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 			
 			if(doc.CausaleDocumento.contains("\n")) {
 				primaparte = doc.CausaleDocumento.split("\\n");
+
+				posDeb.setCausaleDebitoriaDe(primaparte[0].replaceAll("\\n", "/").trim());
+
+				posDeb.setCausaleDebitoria(primaparte[1].replaceAll("(\\r|\\n)", "/").trim());
+			}else{
+				posDeb.setCausaleDebitoriaDe(doc.CausaleDocumento.trim());
+
+				posDeb.setCausaleDebitoria("");
 			}
-			
-			posDeb.setCausaleDebitoriaDe(primaparte[0].replaceAll("\\n", "/").trim());
-			
-			posDeb.setCausaleDebitoria(primaparte[1].replaceAll("(\\r|\\n)", "/").trim());
 
 		}
 	
@@ -259,8 +261,15 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 			gestioneCausale(doc, posDeb);
 			
 			gestioneDataMatrix(doc, daArchivio, posDeb);
-			
-			posDeb.setImporto(Float.valueOf(doc.ImportoDocumento)/100);
+
+			if(new BigDecimal(doc.ImportoDocumento).signum() == -1) {
+				logger.info("NUmero negativo passato");
+				posDeb.setImporto(new BigDecimal(0));
+			}
+
+		    BigDecimal importo = new BigDecimal(doc.ImportoDocumento);
+			posDeb.setImporto(importo.divide(BigDecimal.valueOf(100)));
+
 			if(doc.DatiBollettino.get(0).AutorizCcp==null) {
 				System.out.println("Numero documento NULL PosDebitoria");
 				System.out.println("doc.DatiBollettino.get(0).AutorizCcp = " + doc.DatiBollettino.get(0).AutorizCcp);
@@ -473,11 +482,11 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 			System.out.println("Vengo da archivio");
 			posDeb.setDataMatrix(dataMatrix);
 		}
-		
-		
-		
-		
-		posDeb.setImporto(Float.valueOf(bollettino999.Codeline2Boll)/100);
+
+
+
+		BigDecimal importoComulativo = new BigDecimal(bollettino999.Codeline2Boll);
+		posDeb.setImporto(importoComulativo.divide(BigDecimal.valueOf(100)));
 		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
 			System.out.println("Numero documento NULL PosDebitoria");
 			System.out.println("doc.DatiBollettino.get(0).AutorizCcp = " + doc.DatiBollettino.get(0).AutorizCcp);
@@ -535,8 +544,10 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 			gestioneCausale(doc, posDeb);
 			
 			gestioneDataMatrix(doc, daArchivio, posDeb);
-			
-			posDeb.setImporto(Float.valueOf(doc.ImportoDocumento)/100);
+
+			BigDecimal importo = new BigDecimal(doc.ImportoDocumento);
+			posDeb.setImporto(importo.divide(BigDecimal.valueOf(100)));
+
 			if(doc.DatiBollettino.get(0).AutorizCcp==null) {
 				System.out.println("Numero documento NULL PosDebitoria");
 				System.out.println("doc.DatiBollettino.get(0).AutorizCcp = " + doc.DatiBollettino.get(0).AutorizCcp);
@@ -618,8 +629,10 @@ public class InformazioniStampaBolzano implements InformazioniStampaInterface {
 			gestioneCausale(doc.CausaleDocumento, posDeb);
 			
 			gestioneDataMatrix(doc, daArchivio, posDeb);
-			
-			posDeb.setImporto(Float.valueOf(doc.ImportoDocumento)/100);
+
+			BigDecimal importo = new BigDecimal(doc.ImportoDocumento);
+			posDeb.setImporto(importo.divide(BigDecimal.valueOf(100)));
+
 			if(doc.DatiBollettino.get(0).AutorizCcp==null) {
 				System.out.println("Numero documento NULL PosDebitoria");
 				System.out.println("doc.DatiBollettino.get(0).AutorizCcp = " + doc.DatiBollettino.get(0).AutorizCcp);

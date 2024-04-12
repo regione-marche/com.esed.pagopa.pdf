@@ -45,11 +45,11 @@ import com.seda.payer.pgec.webservice.ente.source.EnteImplementationStub;
 import it.maggioli.pagopa.jppa.printer.model.StampaBollettinoRisposta;
 
 public class SalvaPDFBolzano {
-	
+
 	protected static final LoggerWrapper logger = CustomLoggerManager.get(SalvaPDFBolzano.class);
-    protected static EnteImplementationStub entePort = null;
-	
-	
+	protected static EnteImplementationStub entePort = null;
+
+
 	public static EnteSearchRequest setEnteSearchRequest(String companyCode,String userCode,String chiaveEnte) {
 		EnteSearchRequest enteSearchRequest = new EnteSearchRequest();
 		enteSearchRequest.setRowsPerPage(0);
@@ -64,15 +64,15 @@ public class SalvaPDFBolzano {
 		enteSearchRequest.setStrDescrUtente("");
 		return enteSearchRequest;
 	}
-	
-	
+
+
 	public static ArrayList<String> getEnti(String companyCode,String userCode,String chiaveEnte){
 		LogUtility.writeLog("******************************************* inizio NodoSpcServer::getEnti");
 		ArrayList <String> arIdCodiceIpa = null;
 		EnteSearchRequest enteSearchRequest = setEnteSearchRequest(companyCode,userCode,chiaveEnte);
 		EnteSearchResponse res = null;
 		try {
-			
+
 			try {
 				res = entePort.getEntes(enteSearchRequest);
 			} catch (Exception e) {
@@ -85,11 +85,11 @@ public class SalvaPDFBolzano {
 				arIdCodiceIpa = new ArrayList<String>();
 				while (crsIpa.next()) {
 					String codiceIpa = crsIpa.getString(11).trim();
-					if (codiceIpa.trim().length()>0) 
+					if (codiceIpa.trim().length()>0)
 						arIdCodiceIpa.add(codiceIpa);
 				}
 			}
-			
+
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -97,94 +97,94 @@ public class SalvaPDFBolzano {
 		LogUtility.writeLog("******************************************* fine NodoSpcServer::getEnti esito: " + (arIdCodiceIpa != null ? arIdCodiceIpa.size() : 0));
 		return arIdCodiceIpa;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	public static byte[] SalvaFile(Flusso flusso,String tipostampa,PropertiesTree propertiesTree) throws Exception {
 		ByteArrayOutputStream baos = null;
 		String passwordJppa = propertiesTree.getProperty(PropKeys.passwordJppa.format("000P6"));
 		String userJppa = propertiesTree.getProperty(PropKeys.utenteJppa.format("000P6"));
 		String urlPrinter = propertiesTree.getProperty(PropKeys.urlprinter.format("000P6"));
-		
+
 		System.out.println("password printer- " + passwordJppa);
 		System.out.println("user printer- " + userJppa);
 		System.out.println("url printer - " + urlPrinter);
-		
+
 		if(tipostampa.equals("Y")) {
 			return stampaJppa(flusso,passwordJppa,userJppa,urlPrinter,tipostampa).getBytes();
 		}
 		else {
-		for (int i = 0; i < flusso.Documentdata.size(); i++) {
-			//ValidaFlusso controlla i dati del flusso, se sono corretti restituisce un array contenente la sequenza
-			//dei numeri progressivi dei bollettini, se il numero di bollettini == zero non si esegue la stampa
-			int[] elencoBollettini = ValidaFlusso.validaFlussoBolzano(flusso.Documentdata.get(i), flusso.TipoStampa);
-			if (elencoBollettini.length < 1) {
-				return null;
-			}
-			//NOTA. Per adesso ï¿½ consentita la stampa solo per avviso con rataunica ==> 2 bollettini 1 e 999
-			if(elencoBollettini.length != 2) {
-				throw new ValidazioneException("Stampa abilitata solo per rata unica");
-			}
-			System.out.println(Arrays.toString(elencoBollettini) + "--------------- ELENCO BOLLETTINI BOLZANO -----------------");
-			if (elencoBollettini.length > 0) {
-				baos = new ByteArrayOutputStream();
-				PdfDocument pdf = new PdfDocument(new PdfWriter(baos));
-				//Creato il documento crea il lettore di asset
-				LeggoAsset asset = new LeggoAsset(pdf, flusso.TipoStampa, flusso.Documentdata.get(i).DatiCreditore.get(0).LogoEnte);
-				//Dimensione e margini del documento
-				Document document = new Document(pdf, PageSize.A4);
-				
-				document.setMargins(0, 0, 0, 0);
-				Bollettino bollettino999 = flusso.Documentdata.get(i).DatiBollettino
-						.stream()
-						.filter(x -> x.ProgressivoBoll == 999)
-						.findFirst()
-						.orElse(null);
-				if (bollettino999 != null && !(flusso.TipoStampa.equals("jppa")))
-					paginaUnBollettino(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, bollettino999, flusso.TipoStampa);
-				else {
-					document.close();
-					throw new ValidazioneException("Manca il bollettino rata unica (n 999)");
+			for (int i = 0; i < flusso.Documentdata.size(); i++) {
+				//ValidaFlusso controlla i dati del flusso, se sono corretti restituisce un array contenente la sequenza
+				//dei numeri progressivi dei bollettini, se il numero di bollettini == zero non si esegue la stampa
+				int[] elencoBollettini = ValidaFlusso.validaFlussoBolzano(flusso.Documentdata.get(i), flusso.TipoStampa);
+				if (elencoBollettini.length < 1) {
+					return null;
 				}
-				//Se i bollettini sono 2 allora non c rateizzazione perche il numero 1 e il 999 entrambi con dati coincidenti
-				//se invece i bollettini sono almeno 3 il 999 contiene la rata unica e gli altri la rateizzazione
-				logger.info("Numero di bollettini nel documento: " + elencoBollettini.length);
-				if (elencoBollettini.length > 2) {
-					for (int j = 0; j < elencoBollettini.length - 1; ) {
-						if (elencoBollettini.length - 1 - j >= 3 && (elencoBollettini.length - 1 - j) != 4 && !(flusso.TipoStampa.equals("jppa"))) {
-							logger.info("chiamato metodo 3 bollettini per pagina");
-							paginaTreBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
-							j += 3;
-							continue;
-						}
-						if (elencoBollettini.length - 1 - j >= 2 && (elencoBollettini.length - 1 - j) % 3 != 0 && !(flusso.TipoStampa.equals("jppa"))) {
-							logger.info("chiamato metodo 2 bollettini per pagina");
-							paginaDueBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
-							j += 2;
-							continue;
-						}
-						if (j < 0)
-							break;
+				//NOTA. Per adesso ? consentita la stampa solo per avviso con rataunica ==> 2 bollettini 1 e 999
+				if(elencoBollettini.length != 2) {
+					throw new ValidazioneException("Stampa abilitata solo per rata unica");
+				}
+				System.out.println(Arrays.toString(elencoBollettini) + "--------------- ELENCO BOLLETTINI BOLZANO -----------------");
+				if (elencoBollettini.length > 0) {
+					baos = new ByteArrayOutputStream();
+					PdfDocument pdf = new PdfDocument(new PdfWriter(baos));
+					//Creato il documento crea il lettore di asset
+					LeggoAsset asset = new LeggoAsset(pdf, flusso.TipoStampa, flusso.Documentdata.get(i).DatiCreditore.get(0).LogoEnte);
+					//Dimensione e margini del documento
+					Document document = new Document(pdf, PageSize.A4);
+
+					document.setMargins(0, 0, 0, 0);
+					Bollettino bollettino999 = flusso.Documentdata.get(i).DatiBollettino
+							.stream()
+							.filter(x -> x.ProgressivoBoll == 999)
+							.findFirst()
+							.orElse(null);
+					if (bollettino999 != null && !(flusso.TipoStampa.equals("jppa")))
+						paginaUnBollettino(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, bollettino999, flusso.TipoStampa);
+					else {
+						document.close();
+						throw new ValidazioneException("Manca il bollettino rata unica (n 999)");
 					}
-				}
-				//Close document
-				pdf.close();
-				document.close();
-			} else
-				throw new ValidazioneException("Mancano i bollettini");
+					//Se i bollettini sono 2 allora non c rateizzazione perche il numero 1 e il 999 entrambi con dati coincidenti
+					//se invece i bollettini sono almeno 3 il 999 contiene la rata unica e gli altri la rateizzazione
+					logger.info("Numero di bollettini nel documento: " + elencoBollettini.length);
+					if (elencoBollettini.length > 2) {
+						for (int j = 0; j < elencoBollettini.length - 1; ) {
+							if (elencoBollettini.length - 1 - j >= 3 && (elencoBollettini.length - 1 - j) != 4 && !(flusso.TipoStampa.equals("jppa"))) {
+								logger.info("chiamato metodo 3 bollettini per pagina");
+								paginaTreBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
+								j += 3;
+								continue;
+							}
+							if (elencoBollettini.length - 1 - j >= 2 && (elencoBollettini.length - 1 - j) % 3 != 0 && !(flusso.TipoStampa.equals("jppa"))) {
+								logger.info("chiamato metodo 2 bollettini per pagina");
+								paginaDueBollettini(pdf.addNewPage(), asset, flusso.Documentdata.get(i), pdf, j);
+								j += 2;
+								continue;
+							}
+							if (j < 0)
+								break;
+						}
+					}
+					//Close document
+					pdf.close();
+					document.close();
+				} else
+					throw new ValidazioneException("Mancano i bollettini");
+			}
+			logger.info("Sto per restituire il bite array del pdf");
+
+			return baos.toByteArray();
 		}
-		logger.info("Sto per restituire il bite array del pdf");
-		
-		return baos.toByteArray();
 	}
-}
-	
+
 	private static String getCodiceIpa(Flusso flusso) throws Exception {
 		String codiceIpa = "";
 		try {
-		  codiceIpa = getEnti(flusso.CodiceEnte, "", "").get(0);
+			codiceIpa = getEnti(flusso.CodiceEnte, "", "").get(0);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -193,19 +193,19 @@ public class SalvaPDFBolzano {
 
 	private static String stampaJppa(Flusso flusso,String pass,String user,String urlPrinter, String tipostampa) throws ValidazioneException {
 		System.out.println("Dentro metodo stampa Jppa");
-		
+
 		StampaPdfJppaPagonet stampa = null;
 		try {
-		 stampa = new StampaPdfJppaPagonet(user,pass,urlPrinter);
-		 System.out.println("Oggetto stampa" + stampa.toString());
+			stampa = new StampaPdfJppaPagonet(user,pass,urlPrinter);
+			System.out.println("Oggetto stampa" + stampa.toString());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		InformazioniStampaInterface info = new InformazioniStampaBolzano();
-		
+
 		LogoBollettino boll = new LogoBollettino();
-		
+
 		StampaBollettinoRisposta res = null;
 
 		ByteArrayOutputStream baos = null;
@@ -233,13 +233,13 @@ public class SalvaPDFBolzano {
 						.findFirst()
 						.orElse(null);
 				if (bollettino999 != null) {
-					
+
 					info.setAvvisauraDto(flusso,flusso.Documentdata.get(i),false,"000P6"); // Informazioni Avvisatura
 					System.out.println("info AvvisaturaDto - " + info.toString());
 					res = stampa.stampaBolpuntuale(info.bollRichiesta(flusso,flusso.Documentdata.get(i),
 							LogoBollettino.getLogoBolzano64(),"000P6",false));
 				}
-			
+
 				//Se i bollettini sono 2 allora non c rateizzazione perche il numero 1 e il 999 entrambi con dati coincidenti
 				//se invece i bollettini sono almeno 3 il 999 contiene la rata unica e gli altri la rateizzazione
 				logger.info("Numero di bollettini nel documento: " + elencoBollettini.length);
@@ -267,14 +267,14 @@ public class SalvaPDFBolzano {
 							break;
 					}
 				}
+			}
 		}
-	}
 		return res.getFileBase64Encoded();
 
-}
+	}
 
 	private static void paginaUnBollettino(PdfPage pageTarget, LeggoAsset asset, Documento documento, PdfDocument pdf, Bollettino bollettino999, String tipoStampa) {
-		boolean bDebug = false; //se == true mostra alcune aree con fill colorato per verificare posizione e dimensione 
+		boolean bDebug = false; //se == true mostra alcune aree con fill colorato per verificare posizione e dimensione
 
 		PdfCanvas pdfCanvas = new PdfCanvas(pageTarget);
 
@@ -352,7 +352,7 @@ public class SalvaPDFBolzano {
 		/*
 		if(sCausaleAppo.indexOf("\\") != -1) {
 			String sCausaleAppo = documento.CausaleDocumento;
-			String[] temp = sCausaleAppo.split("\\"); 
+			String[] temp = sCausaleAppo.split("\\");
 			temp[0] = temp[0].trim().replaceAll("\\s+", " ");
 			temp[1] = temp[1].trim().replaceAll("\\s+", " ");
 			//if (temp[0].length() > 40)
@@ -376,7 +376,7 @@ public class SalvaPDFBolzano {
 					.setFontSize(fca1).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(fca1);
 			oggettoCausaleDECanvas.add(oggettoCausaleDEP);
 			oggettoCausaleDECanvas.close();
-			
+
 			//Causale ITA
 			yca1 = yt + 4;
 			Rectangle oggettoCausaleRectangle = new Rectangle(xca1, yca1, wca1, hca1);
@@ -428,7 +428,7 @@ public class SalvaPDFBolzano {
 				.setFontSize(fa1).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(10);
 		oggettoAltreLingueCanvas.add(oggettoAltreLingueP);
 		oggettoAltreLingueCanvas.close();
-		
+
 		//==========================================================================================================================//
 		// Ente Creditore Background
 		int wtl = 299;
@@ -447,7 +447,7 @@ public class SalvaPDFBolzano {
 		//Ente Creditore
 		Rectangle enteCreditoreRectangle = new Rectangle(x0, y0, w0, h0);
 		Canvas enteCreditoreCanvas = new Canvas(pdfCanvas, enteCreditoreRectangle);
-		Text enteCreditoreText = new Text("KÖRPERSCHAFT / ENTE:").setFont(asset.getTitillium_bold());
+		Text enteCreditoreText = new Text("K?RPERSCHAFT / ENTE:").setFont(asset.getTitillium_bold());
 		Paragraph enteCreditoreP = new Paragraph().add(enteCreditoreText).setFontColor(ColorConstants.WHITE)
 				.setFontSize(10).setMargin(0).setVerticalAlignment(VerticalAlignment.BOTTOM);
 		enteCreditoreCanvas.add(enteCreditoreP);
@@ -477,7 +477,7 @@ public class SalvaPDFBolzano {
 				.setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 		cfEnteCanvas.add(cfEnteP);
 		cfEnteCanvas.close();
-		
+
 		int xt0 = wtl;
 		int wtr = 277;
 		// Destinatario Avviso Background
@@ -535,7 +535,7 @@ public class SalvaPDFBolzano {
 				.setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(f12);
 		enteCreditoreStringCanvas.add(enteCreditoreStringP);
 		enteCreditoreStringCanvas.close();
-		
+
 		//Nome Cognome Destinatario
 		int wa0 = 252; // per allineare DatiAnagrafici
 		int hd1 = 40;
@@ -565,7 +565,7 @@ public class SalvaPDFBolzano {
 		}
 		Canvas settoreEnteCanvas2 = new Canvas(pdfCanvas, settoreEnteRectangle2);
 		//Text settoreEnteText2 = new Text(appo).setFont(asset.getTitillium_regular());
-		//Nota. Se qui va la "Ente Creditore" ITA ==> font deve essere Bold come sopra per "Ente Creditore" DE 
+		//Nota. Se qui va la "Ente Creditore" ITA ==> font deve essere Bold come sopra per "Ente Creditore" DE
 		Text settoreEnteText2 = new Text(appo).setFont(asset.getTitillium_bold());
 		Paragraph settoreEnteP2 = new Paragraph().add(settoreEnteText2).setFontColor(ColorConstants.BLACK).setFontSize(12)
 				.setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
@@ -597,7 +597,7 @@ public class SalvaPDFBolzano {
 		String plocalita = " (" + documento.DatiAnagrafici .get(0).Provincia + ")"; // 2 + 2 + 1 = 5
 		String localita = documento.DatiAnagrafici.get(0).Citta;
 		//Nota. Campo indirizzo con 2 righe di 40 ch cadauno (bUnasolaRigaLocalita == false)
-		//      Ma che consente su una riga il nome della max localitï¿½ italiana che ï¿½ 34 ch (bUnasolaRigaLocalita == true)
+		//      Ma che consente su una riga il nome della max localit? italiana che ? 34 ch (bUnasolaRigaLocalita == true)
 		boolean bUnasolaRigaLocalita = true;
 		int maxLoc = 34;
 		if(bUnasolaRigaLocalita) {
@@ -641,7 +641,7 @@ public class SalvaPDFBolzano {
 				.setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(9);
 		infoEnteCanvas.add(infoEnteP);
 		infoEnteCanvas.close();
-		
+
 		//Numero Verde
 		int xnv = xie + 180;
 		int ynv = yie + 7;
@@ -651,7 +651,7 @@ public class SalvaPDFBolzano {
 		Canvas logoNumeroVerdeCanvas = new Canvas(pdfCanvas, logoNumeroVerdeRectangle);
 		logoNumeroVerdeCanvas.add(asset.getLogo_numeroverde_bolzano().scaleToFit(wnv, hnv));
 		logoNumeroVerdeCanvas.close();
-		
+
 		//====================================================================================================================================================================//
 		//                                                           Sezione QUANTO E QUANDO PAGARE
 		//====================================================================================================================================================================//
@@ -687,7 +687,7 @@ public class SalvaPDFBolzano {
 		int hqqp1 = 12;
 		Rectangle pagamentoRatealeRectangle = new Rectangle(xqqp1a, yqqp1a, wqqp1, hqqp1);
 		Canvas pagamentoRatealeCanvas = new Canvas(pdfCanvas, pagamentoRatealeRectangle);
-		Text pagamentoRatealeText = new Text(documento.DatiBollettino.size() > 2 ? "Sie können auch in raten zahlen" : "")
+		Text pagamentoRatealeText = new Text(documento.DatiBollettino.size() > 2 ? "Sie k?nnen auch in raten zahlen" : "")
 				.setFont(asset.getTitillium_regular());
 		Paragraph pagamentoRatealeP = new Paragraph().add(pagamentoRatealeText).setFontColor(ColorConstants.WHITE)
 				.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
@@ -729,7 +729,7 @@ public class SalvaPDFBolzano {
 		listaCanaliPagamentoCanvas.close();
 
 		//====================================================================================================================================================================//
-		//                                                           1ï¿½ Riga Importo/Data Scadenza/Modalita Pagamento
+		//                                                           1? Riga Importo/Data Scadenza/Modalita Pagamento
 		//====================================================================================================================================================================//
 		int offset2 = offset + 13;
 		int xqqp2 = 51;
@@ -768,7 +768,7 @@ public class SalvaPDFBolzano {
 		if(bDebug)
 			pdfCanvas.saveState().setFillColor(new DeviceRgb(120, 120, 120)).rectangle(euroDataRectangle).fill();
 		euroDataCanvas = new Canvas(pdfCanvas, euroDataRectangle);
-		Text euroDataText2 = new Text("Fälligkeitsdatum").setFont(asset.getTitillium_regular()).setFontSize(f11);
+		Text euroDataText2 = new Text("F?lligkeitsdatum").setFont(asset.getTitillium_regular()).setFontSize(f11);
 		euroDataP = new Paragraph().add(euroDataText2).setFontColor(ColorConstants.BLACK).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 		euroDataCanvas.add(euroDataP);
 		euroDataCanvas.close();
@@ -814,7 +814,7 @@ public class SalvaPDFBolzano {
 		euroDataCanvas.close();
 
 		int offset3 = 15;
-		offset2 += offset3; 
+		offset2 += offset3;
 		//====================================================================================================================================================================//
 		//                                                           2 Riga
 		//====================================================================================================================================================================//
@@ -827,11 +827,11 @@ public class SalvaPDFBolzano {
 			pdfCanvas.saveState().setFillColor(new DeviceRgb(212, 212, 212)).rectangle(importoDescriptionRectangle).fill();
 		Canvas importoDescriptionCanvas = new Canvas(pdfCanvas, importoDescriptionRectangle);
 		//inizio LP PG210070 - 20210806
-		//Text importoDescriptionText = new Text("Der angeführte Betrag könnte sich auf Grund von allfälligen auch teilweisen Annullierungen oder Gutschriften, Verzugsgebühren, Strafen, Zinsen oder anderen Kosten ändern. Der Schalterbeamte, eine App oder Webseite könnten folglich einen anderen Betrag einfordern.").setFont(asset.getTitillium_regular());
+		//Text importoDescriptionText = new Text("Der angef?hrte Betrag k?nnte sich auf Grund von allf?lligen auch teilweisen Annullierungen oder Gutschriften, Verzugsgeb?hren, Strafen, Zinsen oder anderen Kosten ?ndern. Der Schalterbeamte, eine App oder Webseite k?nnten folglich einen anderen Betrag einfordern.").setFont(asset.getTitillium_regular());
 		//Paragraph importoDescriptionP = new Paragraph().add(importoDescriptionText).setFontColor(ColorConstants.BLACK)
 		//        .setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(10);
-		Text importoDescriptionText = new Text("Der angeführte Betrag könnte sich auf Grund von allfälligen auch teilweisen Annullierungen oder Gutschriften, Verzugsgebühren, Strafen, Zinsen oder anderen Kosten ändern. Der Schalterbeamte, eine App oder Webseite könnten folglich einen anderen Betrag einfordern.\r\nMitteilung erstellt in Zusammenarbeit mit").setFont(asset.getTitillium_regular());
-		Text importoDescription2Text = new Text(" Südtiroler Einzugsdienste").setFont(asset.getTitillium_bold());
+		Text importoDescriptionText = new Text("Der angef?hrte Betrag k?nnte sich auf Grund von allf?lligen auch teilweisen Annullierungen oder Gutschriften, Verzugsgeb?hren, Strafen, Zinsen oder anderen Kosten ?ndern. Der Schalterbeamte, eine App oder Webseite k?nnten folglich einen anderen Betrag einfordern.\r\nMitteilung erstellt in Zusammenarbeit mit").setFont(asset.getTitillium_regular());
+		Text importoDescription2Text = new Text(" S?dtiroler Einzugsdienste").setFont(asset.getTitillium_bold());
 		Text importoDescription3Text = new Text(".").setFont(asset.getTitillium_regular());
 		Paragraph importoDescriptionP = new Paragraph().add(importoDescriptionText).add(importoDescription2Text).add(importoDescription3Text).setFontColor(ColorConstants.BLACK)
 				.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(10);
@@ -846,10 +846,10 @@ public class SalvaPDFBolzano {
 			pdfCanvas.saveState().setFillColor(new DeviceRgb(228, 0, 228)).rectangle(importoDescriptionRectangle).fill();
 		importoDescriptionCanvas = new Canvas(pdfCanvas, importoDescriptionRectangle);
 		//inizio LP PG210070 - 20210806
-		//importoDescriptionText = new Text("L'importo è aggiornato automaticamente dal sistema e potrebbe subire variazioni per eventuali sgravi, note di credito, indennità  di mora, sanzioni o interessi, ecc. Un operatore, il sito o l'app che userà  Le potrebbero quindi chiedere una cifra diversa da quella qui indicata.").setFont(asset.getTitillium_regular());
+		//importoDescriptionText = new Text("L'importo ? aggiornato automaticamente dal sistema e potrebbe subire variazioni per eventuali sgravi, note di credito, indennit? di mora, sanzioni o interessi, ecc. Un operatore, il sito o l'app che user? Le potrebbero quindi chiedere una cifra diversa da quella qui indicata.").setFont(asset.getTitillium_regular());
 		//importoDescriptionP = new Paragraph().add(importoDescriptionText).setFontColor(ColorConstants.BLACK)
 		//		.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(10);
-		importoDescriptionText = new Text("L'importo è aggiornato automaticamente dal sistema e potrebbe subire variazioni per eventuali sgravi, note di credito, indennità  di mora, sanzioni o interessi, ecc. Un operatore, il sito o l'app che userà  Le potrebbero quindi chiedere una cifra diversa da quella qui indicata.\r\nAvviso predisposto in collaborazione con").setFont(asset.getTitillium_regular());
+		importoDescriptionText = new Text("L'importo ? aggiornato automaticamente dal sistema e potrebbe subire variazioni per eventuali sgravi, note di credito, indennit? di mora, sanzioni o interessi, ecc. Un operatore, il sito o l'app che user? Le potrebbero quindi chiedere una cifra diversa da quella qui indicata.\r\nAvviso predisposto in collaborazione con").setFont(asset.getTitillium_regular());
 		importoDescription2Text = new Text(" Alto Adige Riscossioni").setFont(asset.getTitillium_bold());
 		importoDescription3Text = new Text(".").setFont(asset.getTitillium_regular());
 		importoDescriptionP = new Paragraph().add(importoDescriptionText).add(importoDescription2Text).add(importoDescription3Text).setFontColor(ColorConstants.BLACK)
@@ -858,7 +858,7 @@ public class SalvaPDFBolzano {
 		importoDescriptionCanvas.add(importoDescriptionP);
 		importoDescriptionCanvas.close();
 
-		offset = offset - 125 + offset3; 
+		offset = offset - 125 + offset3;
 		//inizio LP PG210070 - 20210806
 		offset -= 10;
 		//fine LP PG210070 - 20210806
@@ -872,7 +872,7 @@ public class SalvaPDFBolzano {
 		pdfCanvas.saveState().setFillColor(LeggoAsset.bolzanoBluBollettino).rectangle(dovePagareRectangle2).fill();
 		Canvas dovePagareGrayRectangle2 = new Canvas(pdfCanvas, dovePagareRectangle2);
 		dovePagareGrayRectangle2.close();
-		
+
 		//WO BEZAHLEN? Liste der Zahlungsdienstleister
 		int ydp1 = 568 + offset;
 		int wdp1 = 70;
@@ -962,10 +962,10 @@ public class SalvaPDFBolzano {
 			pdfCanvas.saveState().setFillColor(new DeviceRgb(210, 0, 0)).rectangle(pagaSitoDescriptionRectangle).fill();
 		Canvas pagaSitoDescriptionCanvas = new Canvas(pdfCanvas, pagaSitoDescriptionRectangle);
 		Text pagaSitoDescriptionText = new Text(
-				"de.epays.it," + (tipoStampa.equals("P") ? " der Post,": "") + " Ihrer Bank\r\n" + 
-				"oder anderer Zahlungsdienstleister. Sie können mit\r\n" +
-				"Kreditkarten, Bankkonto oder mit CBILL bezahlen.")
-						.setFont(asset.getTitillium_regular());
+				"de.epays.it," + (tipoStampa.equals("P") ? " der Post,": "") + " Ihrer Bank\r\n" +
+						"oder anderer Zahlungsdienstleister. Sie k?nnen mit\r\n" +
+						"Kreditkarten, Bankkonto oder mit CBILL bezahlen.")
+				.setFont(asset.getTitillium_regular());
 		Paragraph pagaSitoDescriptionP = new Paragraph().add(pagaSitoDescriptionText).setFontColor(ColorConstants.BLACK)
 				.setFontSize(fd).setFixedLeading(fd).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(fd);
 		pagaSitoDescriptionCanvas.add(pagaSitoDescriptionP);
@@ -980,12 +980,12 @@ public class SalvaPDFBolzano {
 				.setFontSize(ft).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(ft);
 		pagaTerritorioCanvas.add(pagaTerritorioP);
 		pagaTerritorioCanvas.close();
-		
+
 		// Paga Territorio Description
 		int wsdp3 = 434 + offset2;
-		String appoT = "bei allen Postämtern, in Banken, Lottoannahmestellen,\r\n" + 
-				       "Tabaktrafiken, beim Bancomat, im Supermarkt. Sie können\r\n" + 
-				       "mit Bargeld, Karten oder Banküberweisung bezahlen."; 
+		String appoT = "bei allen Post?mtern, in Banken, Lottoannahmestellen,\r\n" +
+				"Tabaktrafiken, beim Bancomat, im Supermarkt. Sie k?nnen\r\n" +
+				"mit Bargeld, Karten oder Bank?berweisung bezahlen.";
 		Rectangle pagaTerritorioDescriptionRectangle = new Rectangle(xsdp0, wsdp3, wdpl, hsdp1);
 		Canvas pagaTerritorioDescriptionCanvas = new Canvas(pdfCanvas, pagaTerritorioDescriptionRectangle);//
 		Text pagaTerritorioDescriptionText = new Text(appoT)
@@ -1035,9 +1035,9 @@ public class SalvaPDFBolzano {
 		pagaSitoDescriptionCanvas = new Canvas(pdfCanvas, pagaSitoDescriptionRectangle);
 		pagaSitoDescriptionText = new Text(
 				"it.epays.it," + (tipoStampa.equals("P") ? " di Poste,": "") + " della tua Banca\r\n" +
-				"o degli altri canali di pagamento.\r\n" +
-				"Può pagare con carte, conto corrente o CBILL.")
-						.setFont(asset.getTitillium_regular());
+						"o degli altri canali di pagamento.\r\n" +
+						"Pu? pagare con carte, conto corrente o CBILL.")
+				.setFont(asset.getTitillium_regular());
 		pagaSitoDescriptionP = new Paragraph().add(pagaSitoDescriptionText).setFontColor(ColorConstants.BLACK)
 				.setFontSize(fd).setFixedLeading(fd).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 		pagaSitoDescriptionCanvas.add(pagaSitoDescriptionP);
@@ -1055,7 +1055,7 @@ public class SalvaPDFBolzano {
 		// Paga Territorio Description
 		appoT = "in tutti gli Uffici Postali, in Banca, in Ricevitoria,\r\n" +
 				"dal Tabaccaio, al Bancomat, al Supermercato.\r\n" +
-				"Può pagare in contanti, con carte o conto corrente.";
+				"Pu? pagare in contanti, con carte o conto corrente.";
 		pagaTerritorioDescriptionRectangle = new Rectangle(xddp0, wsdp3, wdpr, hsdp1);
 		pagaTerritorioDescriptionCanvas = new Canvas(pdfCanvas, pagaTerritorioDescriptionRectangle);//
 		pagaTerritorioDescriptionText = new Text(appoT).setFont(asset.getTitillium_regular());
@@ -1064,11 +1064,11 @@ public class SalvaPDFBolzano {
 				.setVerticalAlignment(VerticalAlignment.MIDDLE);
 		pagaTerritorioDescriptionCanvas.add(pagaTerritorioDescriptionP);
 		pagaTerritorioDescriptionCanvas.close();
-		
+
 		offset3 = 28;
 		offset2 = offset + offset3;
 		//====================================================================================================================================================================//
-		//                                                           Bottom Sezione DOVE PAGARE? 
+		//                                                           Bottom Sezione DOVE PAGARE?
 		//====================================================================================================================================================================//
 		// Utilizza Porzione DE
 		int xbdp = 411 + offset2;
@@ -1107,9 +1107,9 @@ public class SalvaPDFBolzano {
 		utilizzaPorzioneCanvas.close();
 
 		offset3 = 27;
-		offset = offset + offset3; 
+		offset = offset + offset3;
 		//====================================================================================================================================================================//
-		//                                                        Sezione BANCHE PAGOPA 
+		//                                                        Sezione BANCHE PAGOPA
 		//====================================================================================================================================================================//
 		// Forbici
 		int xfb = 548;
@@ -1118,7 +1118,7 @@ public class SalvaPDFBolzano {
 		int yfb0 = 386 + offset;
 		int yfb = yfb0 + ht;
 		int wfb0 = 578 - marginleft;
-		
+
 		Rectangle forbiciRectangle = new Rectangle(xfb, yfb, wfb, hfb);
 		if(bDebug)
 			pdfCanvas.saveState().setFillColor(new DeviceRgb(210, 150, 0)).rectangle(forbiciRectangle).fill();
@@ -1131,7 +1131,7 @@ public class SalvaPDFBolzano {
 		pdfCanvas.saveState().setFillColor(LeggoAsset.bolzanoRigaPerForbici).rectangle(bollettinoPostalePaBorderRectangle).fill();
 		Canvas bollettinoPostalePaBorderCanvas = new Canvas(pdfCanvas, bollettinoPostalePaBorderRectangle);
 		bollettinoPostalePaBorderCanvas.close();
-		
+
 		//Banche e Altri Canali Background
 		Rectangle bancheAltriCanaliGrayRectangle = new Rectangle(xt, yfb0, wfb0, ht);
 		pdfCanvas.saveState().setFillColor(LeggoAsset.bolzanoBluBollettino).rectangle(bancheAltriCanaliGrayRectangle).fill();
@@ -1145,7 +1145,7 @@ public class SalvaPDFBolzano {
 		// Banche e Altri Canali
 		Rectangle bancheAltriCanaliRectangle = new Rectangle(xapp, yapp, wtl, happ);
 		Canvas bancheAltriCanaliCanvas = new Canvas(pdfCanvas, bancheAltriCanaliRectangle);
-		Text bancheAltriCanaliText = new Text("BANKEN UND ANDERE KANÄLE - BANCHE E ALTRI CANALI").setFont(asset.getTitillium_bold());
+		Text bancheAltriCanaliText = new Text("BANKEN UND ANDERE KAN?LE - BANCHE E ALTRI CANALI").setFont(asset.getTitillium_bold());
 		Paragraph bancheAltriCanaliP = new Paragraph().add(bancheAltriCanaliText).setFontColor(ColorConstants.WHITE)
 				.setFontSize(10).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 		bancheAltriCanaliCanvas.add(bancheAltriCanaliP);
@@ -1156,7 +1156,7 @@ public class SalvaPDFBolzano {
 		int wrataunica = 213 - marginleft;
 		Rectangle rataUnicaRectangle = new Rectangle(xrataunica, yapp, wrataunica, happ);
 		Canvas rataUnicaCanvas = new Canvas(pdfCanvas, rataUnicaRectangle);
-		Text rataUnicaText1 = new Text("Einzige Rate fällig am / Rata unica entro il").setFont(asset.getTitillium_bold());
+		Text rataUnicaText1 = new Text("Einzige Rate f?llig am / Rata unica entro il").setFont(asset.getTitillium_bold());
 		Paragraph rataUnicaP = new Paragraph().add(rataUnicaText1)
 				.setFontColor(ColorConstants.WHITE).setFontSize(10).setMargin(0)
 				.setVerticalAlignment(VerticalAlignment.MIDDLE);
@@ -1177,9 +1177,9 @@ public class SalvaPDFBolzano {
 		rataUnicadataCanvas.close();
 
 		//====================================================================================================================================================================//
-		//                                                        1ï¿½ Riga Sezione Banche PagoPA
+		//                                                        1? Riga Sezione Banche PagoPA
 		//====================================================================================================================================================================//
-		offset = offset + 24; 
+		offset = offset + 24;
 		//Euro
 		int ftlbeuro = 12;
 		//int xapp1 = 455;
@@ -1225,7 +1225,7 @@ public class SalvaPDFBolzano {
 		int yapp3 = yapp3a + offset;
 		int wapp3 = 119;
 		//Banche Altri Canali Description DE
-		//Hier finden Sie den QR-Code und den CBILL-Code, um über Banken und andere berechtigte Zahlungsdienstleister zu zahlen.
+		//Hier finden Sie den QR-Code und den CBILL-Code, um ?ber Banken und andere berechtigte Zahlungsdienstleister zu zahlen.
 		Rectangle bancheAltriCanaliDescriptionRectangle = new Rectangle(xt, yapp3 - hq, wapp3, hq);
 		if(bDebug)
 			pdfCanvas.saveState().setFillColor(new DeviceRgb(210, 210, 210)).rectangle(bancheAltriCanaliDescriptionRectangle).fill();
@@ -1234,14 +1234,14 @@ public class SalvaPDFBolzano {
 		Text bancheAltriCanaliDescriptionText2 = new Text(" QR-Code ").setFont(asset.getTitillium_bold());
 		Text bancheAltriCanaliDescriptionText3 = new Text("und den ").setFont(asset.getTitillium_regular());
 		Text bancheAltriCanaliDescriptionText4 = new Text(" CBILL-Code").setFont(asset.getTitillium_bold());
-		Text bancheAltriCanaliDescriptionText5 = new Text(", um über Banken und andere berechtigte Zahlungsdienstleister zu zahlen.").setFont(asset.getTitillium_regular());
+		Text bancheAltriCanaliDescriptionText5 = new Text(", um ?ber Banken und andere berechtigte Zahlungsdienstleister zu zahlen.").setFont(asset.getTitillium_regular());
 		Paragraph bancheAltriCanaliDescriptionP = new Paragraph().add(bancheAltriCanaliDescriptionText1)
 				.add(bancheAltriCanaliDescriptionText2).add(bancheAltriCanaliDescriptionText3)
 				.add(bancheAltriCanaliDescriptionText4).add(bancheAltriCanaliDescriptionText5)
 				.setFontColor(ColorConstants.BLACK).setFontSize(fq).setMargin(0).setFixedLeading(fq);
 		bancheAltriCanaliDescriptionCanvas.add(bancheAltriCanaliDescriptionP);
 		bancheAltriCanaliDescriptionCanvas.close();
-		
+
 		int offset5 = offset - hq - (fq + 5) * 3;
 		int yapp4 = yapp3a + offset5;
 		//Banche Altri Canali Description ITA
@@ -1269,7 +1269,7 @@ public class SalvaPDFBolzano {
 		int xqr0 = 177 - offsetX;
 		int yqr0 = 289 + offset;
 		int wqr0 = 70;
-		//QR CODE 
+		//QR CODE
 		Rectangle qRCodeRectangle = new Rectangle(xqr0, yqr0, wqr0, wqr0);
 		Canvas qRCodeCanvas = new Canvas(pdfCanvas, qRCodeRectangle);
 		qRCodeCanvas.add(generaQRCode(bollettino999.BarcodePagoPa, pdf).scaleToFit(70, 70));
@@ -1285,12 +1285,12 @@ public class SalvaPDFBolzano {
 		//Destinatario DE
 		Rectangle destinatarioRectangle = new Rectangle(xdapp0, yapp3, wdapp0, hdapp0);
 		Canvas destinatarioCanvas = new Canvas(pdfCanvas, destinatarioRectangle);
-		Text destinatarioText = new Text("Empfänger").setFont(asset.getTitillium_regular());
+		Text destinatarioText = new Text("Empf?nger").setFont(asset.getTitillium_regular());
 		Paragraph destinatarioPDE = new Paragraph().add(destinatarioText).setFontColor(ColorConstants.BLACK)
 				.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 		destinatarioCanvas.add(destinatarioPDE);
 		destinatarioCanvas.close();
-		
+
 		//Destinatario ITA
 		destinatarioRectangle = new Rectangle(xdapp0, yapp3 - 8, wdapp0, hdapp0);
 		destinatarioCanvas = new Canvas(pdfCanvas, destinatarioRectangle);
@@ -1320,7 +1320,7 @@ public class SalvaPDFBolzano {
 		int wdapp2 = 49;
 		Rectangle destinatarioRectangle2 = new Rectangle(xdapp2, ydapp2, wdapp2, hdapp0);
 		Canvas destinatarioCanvas2 = new Canvas(pdfCanvas, destinatarioRectangle2);
-		Text destinatarioText2 = new Text("Gläubiger").setFont(asset.getTitillium_regular());
+		Text destinatarioText2 = new Text("Gl?ubiger").setFont(asset.getTitillium_regular());
 		Paragraph destinatarioP2 = new Paragraph().add(destinatarioText2).setFontColor(ColorConstants.BLACK)
 				.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 		destinatarioCanvas2.add(destinatarioP2);
@@ -1378,7 +1378,7 @@ public class SalvaPDFBolzano {
 		int ydapp3a = 277 + offset;
 		int wdapp3a = 224  + offsetX;
 		int hdapp3a = (8 + 5) * 3;
-		Rectangle oggettoPagamentoStringRectangle2 = new Rectangle(xdapp3a, ydapp3a, wdapp3a, hdapp3a); 
+		Rectangle oggettoPagamentoStringRectangle2 = new Rectangle(xdapp3a, ydapp3a, wdapp3a, hdapp3a);
 		if(bDebug)
 			pdfCanvas.saveState().setFillColor(new DeviceRgb(0, 210, 10)).rectangle(oggettoPagamentoStringRectangle2).fill();
 		Canvas oggettoPagamentoStringCanvas2 = new Canvas(pdfCanvas, oggettoPagamentoStringRectangle2);
@@ -1387,7 +1387,7 @@ public class SalvaPDFBolzano {
 				.setVerticalAlignment(VerticalAlignment.MIDDLE);
 		oggettoPagamentoStringCanvas2.add(oggettoPagamentoStringP2);
 		oggettoPagamentoStringCanvas2.close();
-		
+
 		//Inzio Righe Coordinate Pagamento
 		offset -= 4;
 		//Codice Cbill DE
@@ -1414,13 +1414,13 @@ public class SalvaPDFBolzano {
 				.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 		codiceAvvisoCanvas.add(codiceAvvisoPDE);
 		codiceAvvisoCanvas.close();
-		
+
 		//Cod. Fiscale Ente Creditore DE
 		int xdapp5 = 475 - offsetX;
 		int wcp2 = 151 + offsetX;
 		Rectangle cfEnteCreditoreRectangle = new Rectangle(xdapp5, ycp0, wcp2, hcp0);
 		Canvas cfEnteCreditoreCanvas = new Canvas(pdfCanvas, cfEnteCreditoreRectangle);
-		Text cfEnteCreditoreText = new Text("St.Nr. der Körperschaft").setFont(asset.getTitillium_regular());
+		Text cfEnteCreditoreText = new Text("St.Nr. der K?rperschaft").setFont(asset.getTitillium_regular());
 		Paragraph cfEnteCreditorePDE = new Paragraph().add(cfEnteCreditoreText).setFontColor(ColorConstants.BLACK)
 				.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 		cfEnteCreditoreCanvas.add(cfEnteCreditorePDE);
@@ -1485,7 +1485,7 @@ public class SalvaPDFBolzano {
 				.setVerticalAlignment(VerticalAlignment.MIDDLE);
 		cfEnteCreditoreStringCanvas.add(cfEnteCreditoreStringP);
 		cfEnteCreditoreStringCanvas.close();
-		
+
 		offset -= 6;
 		if(tipoStampa.equals("P")) {
 			//====================================================================================================================================================================//
@@ -1498,19 +1498,19 @@ public class SalvaPDFBolzano {
 			forbiciCanvas = new Canvas(pdfCanvas, forbiciRectangle);
 			forbiciCanvas.add(asset.getLogo_forbici_grigio().scaleToFit(14, 10));
 			forbiciCanvas.close();
-	
+
 			//Riga per taglio forbici
 			bollettinoPostalePaBorderRectangle = new Rectangle(xt, yfb1, wfb0, 1);
 			pdfCanvas.saveState().setFillColor(LeggoAsset.bolzanoRigaPerForbici).rectangle(bollettinoPostalePaBorderRectangle).fill();
 			bollettinoPostalePaBorderCanvas = new Canvas(pdfCanvas, bollettinoPostalePaBorderRectangle);
 			bollettinoPostalePaBorderCanvas.close();
-	
+
 			//Bollettino Postale PA Background
 			Rectangle bollettinoPostalePaGrayRectangle = new Rectangle(xt, ybpp0, wfb0, ht);
 			pdfCanvas.saveState().setFillColor(LeggoAsset.bolzanoBluBollettino).rectangle(bollettinoPostalePaGrayRectangle).fill();
 			Canvas bollettinoPostalePaGrayCanvas = new Canvas(pdfCanvas, bollettinoPostalePaGrayRectangle);
 			bollettinoPostalePaGrayCanvas.close();
-	
+
 			//Bollettino Postale PA
 			int xbpp0 = marginleft + 9;
 			//int wbpp0 = 115 + 90;
@@ -1524,7 +1524,7 @@ public class SalvaPDFBolzano {
 					.setFontSize(10).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 			bollettinoPostalePaCanvas.add(bollettinoPostalePaP);
 			bollettinoPostalePaCanvas.close();
-	
+
 			int xbpp1 = xbpp0 + wbpp0 + 20;
 			int ybpp2 = ybpp1 + 1;
 			int wlbp0 = 51;
@@ -1543,7 +1543,7 @@ public class SalvaPDFBolzano {
 			Canvas rataUnicaCanvas2 = new Canvas(pdfCanvas, rataUnicaRectangle2);
 			rataUnicaCanvas2.add(rataUnicaP);
 			rataUnicaCanvas2.close();
-	
+
 			//Rata Unica Data
 			int xbpp3 = 513;
 			int ybpp3 = ybpp2 + 2;
@@ -1552,7 +1552,7 @@ public class SalvaPDFBolzano {
 			Canvas rataUnicadataCanvas2 = new Canvas(pdfCanvas, rataUnicadataRectangle2);
 			rataUnicadataCanvas2.add(rataUnicadataP);
 			rataUnicadataCanvas2.close();
-	
+
 			offset += 35 - 4;
 			//====================================================================================================================================================================//
 			//                                                       Lato Sinistro Sezione Bollettino Postale PagoPA
@@ -1567,7 +1567,7 @@ public class SalvaPDFBolzano {
 			Canvas logoPosteitalianeCanvas = new Canvas(pdfCanvas, logoPosteitalianeRectangle);
 			logoPosteitalianeCanvas.add(asset.getLogo_poste_italiane().scaleToFit(wlp, hlp));
 			logoPosteitalianeCanvas.close();
-	
+
 			int xlbp = xt + 10;
 			int ylbp = 154 + offset;
 			int wlbp = 68;
@@ -1577,7 +1577,7 @@ public class SalvaPDFBolzano {
 			Canvas logoBollettinoPostaleCanvas = new Canvas(pdfCanvas, logoBollettinoPostaleRectangle);
 			logoBollettinoPostaleCanvas.add(asset.getLogo_bollettino_postale().scaleToFit(wlbp, hlbp));
 			logoBollettinoPostaleCanvas.close();
-	
+
 			int fp8 = 6;
 			int xp8 = xt + 10;
 			int hp8 = (fp8 + 3) * 5;
@@ -1588,14 +1588,14 @@ public class SalvaPDFBolzano {
 			if(bDebug)
 				pdfCanvas.saveState().setFillColor(new DeviceRgb(222, 222, 222)).rectangle(bollettinoPostaleDescrizioneRectangle).fill();
 			Canvas bollettinoPostaleDescrizioneCanvas = new Canvas(pdfCanvas, bollettinoPostaleDescrizioneRectangle);
-			Text bollettinoPostaleDescrizioneText = new Text("Posterlagschein, in allen Postämtern sowie auf den von Poste Italiane autorisierten physischen oder digitalen Kanälen zahlbar")
+			Text bollettinoPostaleDescrizioneText = new Text("Posterlagschein, in allen Post?mtern sowie auf den von Poste Italiane autorisierten physischen oder digitalen Kan?len zahlbar")
 					.setFont(asset.getTitillium_regular());
 			Paragraph bollettinoPostaleDescrizioneP = new Paragraph().add(bollettinoPostaleDescrizioneText)
 					.setFontColor(ColorConstants.BLACK).setFontSize(fp8).setMargin(0)
 					.setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(fp8);
 			bollettinoPostaleDescrizioneCanvas.add(bollettinoPostaleDescrizioneP);
 			bollettinoPostaleDescrizioneCanvas.close();
-			
+
 			//Bollettino Postale Descrizione ITA
 			bollettinoPostaleDescrizioneRectangle = new Rectangle(xp8, yp8 - 35, wp8, hp8);
 			if(bDebug)
@@ -1608,7 +1608,7 @@ public class SalvaPDFBolzano {
 					.setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(fp8);
 			bollettinoPostaleDescrizioneCanvas.add(bollettinoPostaleDescrizioneP);
 			bollettinoPostaleDescrizioneCanvas.close();
-	
+
 			//Autorizzazione
 			int yp9  = 96 + offset - hp8;
 			int wp9 = 240;
@@ -1628,7 +1628,7 @@ public class SalvaPDFBolzano {
 			//                                                       Lato Destro Sezione Bollettino Postale PagoPA
 			//====================================================================================================================================================================//
 			//====================================================================================================================================================================//
-			//                                                       1ï¿½ Riga Sezione Bollettino Postale PagoPA
+			//                                                       1? Riga Sezione Bollettino Postale PagoPA
 			//====================================================================================================================================================================//
 			//Logo Euro
 			int xle = 180 - offsetX;
@@ -1638,13 +1638,13 @@ public class SalvaPDFBolzano {
 			Canvas logoEuroCanvas = new Canvas(pdfCanvas, logoEuroRectangle);
 			logoEuroCanvas.add(asset.getLogo_euro_bollettino().scaleToFit(wle, wle));
 			logoEuroCanvas.close();
-	
+
 			//Sul CC DE
 			int ftlbnumcc = 8;
 			int xcc0 = 205 - offsetX;
 			int ycc0 = 195 + offset;
 			int wcc0 = 85;
-			Rectangle sulCcRectangle = new Rectangle(xcc0, ycc0, wcc0, h0); 
+			Rectangle sulCcRectangle = new Rectangle(xcc0, ycc0, wcc0, h0);
 			if(bDebug)
 				pdfCanvas.saveState().setFillColor(new DeviceRgb(232, 232, 232)).rectangle(sulCcRectangle).fill();
 			Canvas sulCcCanvas = new Canvas(pdfCanvas, sulCcRectangle);
@@ -1653,7 +1653,7 @@ public class SalvaPDFBolzano {
 					.setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 			sulCcCanvas.add(sulCcP);
 			sulCcCanvas.close();
-			
+
 			//Sul CC ITA
 			sulCcRectangle = new Rectangle(xcc0, ycc0 - 10, wcc0, h0);
 			if(bDebug)
@@ -1664,7 +1664,7 @@ public class SalvaPDFBolzano {
 					.setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 			sulCcCanvas.add(sulCcP);
 			sulCcCanvas.close();
-	
+
 			//Numero CC Postale
 			int ftnumcc = 14;
 			int xnumcc = xcc0 + 85;
@@ -1676,9 +1676,9 @@ public class SalvaPDFBolzano {
 					.setFontSize(ftnumcc).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 			numeroCcPostaleCanvas.add(numeroCcPostaleP);
 			numeroCcPostaleCanvas.close();
-	
+
 			//Euro
-			//int xeur = 455; 
+			//int xeur = 455;
 			int xeur = 425;
 			ycc0 -= 1;
 			int heur = 25;
@@ -1688,9 +1688,9 @@ public class SalvaPDFBolzano {
 			Canvas euroCanvas2 = new Canvas(pdfCanvas, euroRectangle2);
 			euroCanvas2.add(euroP);
 			euroCanvas2.close();
-	
+
 			// Importo
-			//int ximp = 495; 
+			//int ximp = 495;
 			int ximp = 465;
 			ycc0 -= 1;
 			//int himp = 80;
@@ -1713,7 +1713,7 @@ public class SalvaPDFBolzano {
 			Canvas dataMatrixContainerCanvas = new Canvas(pdfCanvas, dataMatrixContainerRectangle);
 			dataMatrixContainerCanvas.add(asset.getData_matrix_container().scaleToFit(93, 93));
 			dataMatrixContainerCanvas.close();
-	
+
 			//Data matrix
 			int xdm1 = xdm0 + 10;
 			int ydm1 = wdm0 + offset;
@@ -1722,9 +1722,9 @@ public class SalvaPDFBolzano {
 			Canvas dataMatrixCanvas = new Canvas(pdfCanvas, dataMatrixRectangle);
 			dataMatrixCanvas.add(generaDataMatrix(bollettino999.QRcodePagoPa, pdf).scaleToFit(74, 74));
 			dataMatrixCanvas.close();
-			
+
 			//====================================================================================================================================================================//
-			//                                                       2ï¿½ Riga Sezione Bollettino Postale PagoPA
+			//                                                       2? Riga Sezione Bollettino Postale PagoPA
 			//====================================================================================================================================================================//
 			//Intestato a DE
 			int xbp0 = 178 - offsetX;
@@ -1738,7 +1738,7 @@ public class SalvaPDFBolzano {
 					.setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 			intestatoACanvas.add(intestatoAP);
 			intestatoACanvas.close();
-			
+
 			//Intestato a
 			intestatoARectangle = new Rectangle(xbp0, ybp0 - 8, wbp0, hbp0);
 			intestatoACanvas = new Canvas(pdfCanvas, intestatoARectangle);
@@ -1747,7 +1747,7 @@ public class SalvaPDFBolzano {
 					.setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 			intestatoACanvas.add(intestatoAP);
 			intestatoACanvas.close();
-	
+
 			// Intestatario CC Postale
 			int xbp1 = 226 - offsetX;
 			int ybp1 = 154 + offset;
@@ -1769,9 +1769,9 @@ public class SalvaPDFBolzano {
 			intestatarioCCPostaleP.setFixedLeading(8);
 			intestatarioCCPostaleCanvas.add(intestatarioCCPostaleP);
 			intestatarioCCPostaleCanvas.close();
-	
+
 			//====================================================================================================================================================================//
-			//                                                       3ï¿½ Riga Sezione Bollettino Postale PagoPA
+			//                                                       3? Riga Sezione Bollettino Postale PagoPA
 			//====================================================================================================================================================================//
 			// Destinatario DE
 			int xbp2 = 178 - offsetX;
@@ -1787,7 +1787,7 @@ public class SalvaPDFBolzano {
 			destinatarioCanvas3 = new Canvas(pdfCanvas, destinatarioRectangle3);
 			destinatarioCanvas3.add(destinatarioP);
 			destinatarioCanvas3.close();
-	
+
 			// Nome Cognome Destinatario
 			int xbp3 = 226 - offsetX;
 			int ybp3 = 122 + offset;
@@ -1804,9 +1804,9 @@ public class SalvaPDFBolzano {
 			nomeCognomeDestinatarioP3.setFixedLeading(8);
 			nomeCognomeDestinatarioCanvas3.add(nomeCognomeDestinatarioP3);
 			nomeCognomeDestinatarioCanvas3.close();
-	
+
 			//====================================================================================================================================================================//
-			//                                                       4ï¿½ Riga Sezione Bollettino Postale PagoPA
+			//                                                       4? Riga Sezione Bollettino Postale PagoPA
 			//====================================================================================================================================================================//
 			offset -= 4;
 			// Oggetto Pagamento DE
@@ -1819,7 +1819,7 @@ public class SalvaPDFBolzano {
 					.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 			oggettoPagamentoCanvas3.add(oggettoPagamentoP3);
 			oggettoPagamentoCanvas3.close();
-			
+
 			// Oggetto Pagamento
 			oggettoPagamentoRectangle3 = new Rectangle(xbp2, ybp4 - 8, wbp4, hbp0);
 			oggettoPagamentoCanvas3 = new Canvas(pdfCanvas, oggettoPagamentoRectangle3);
@@ -1828,7 +1828,7 @@ public class SalvaPDFBolzano {
 					.setFontSize(8).setMargin(0).setVerticalAlignment(VerticalAlignment.MIDDLE);
 			oggettoPagamentoCanvas3.add(oggettoPagamentoP3);
 			oggettoPagamentoCanvas3.close();
-	
+
 			//Oggetto Pagamento String
 			int xbp5 = 254 - offsetX;
 			int ybp5 = 109 + offset;
@@ -1846,9 +1846,9 @@ public class SalvaPDFBolzano {
 					.setVerticalAlignment(VerticalAlignment.MIDDLE).setFixedLeading(8);
 			oggettoPagamentoStringCanvas3.add(oggettoPagamentoStringP3);
 			oggettoPagamentoStringCanvas3.close();
-	
+
 			//====================================================================================================================================================================//
-			//                                                       5ï¿½ Riga Sezione Bollettino Postale PagoPA
+			//                                                       5? Riga Sezione Bollettino Postale PagoPA
 			//====================================================================================================================================================================//
 			//Coordinate pagamento
 			offset -= 5;
@@ -1859,7 +1859,7 @@ public class SalvaPDFBolzano {
 			Canvas codiceAvvisoCanvas2 = new Canvas(pdfCanvas, codiceAvvisoRectangle2);
 			codiceAvvisoCanvas2.add(codiceAvvisoPDE);
 			codiceAvvisoCanvas2.close();
-	
+
 			//Tipo DE
 			int xbp7 = 329 - offsetX;
 			int wbp7 =  15;
@@ -1886,7 +1886,7 @@ public class SalvaPDFBolzano {
 			codiceAvvisoCanvas2 = new Canvas(pdfCanvas, codiceAvvisoRectangle2);
 			codiceAvvisoCanvas2.add(codiceAvvisoP);
 			codiceAvvisoCanvas2.close();
-	
+
 			//Tipo
 			tipoRectangle = new Rectangle(xbp7, ybp6a, wbp7, hbp0);
 			tipoCanvas = new Canvas(pdfCanvas, tipoRectangle);
@@ -1908,7 +1908,7 @@ public class SalvaPDFBolzano {
 			Canvas codiceAvvisoStringCanvas2 = new Canvas(pdfCanvas, codiceAvvisoStringRectangle2);
 			codiceAvvisoStringCanvas2.add(codiceAvvisoStringP);
 			codiceAvvisoStringCanvas2.close();
-	
+
 			//P1
 			int xbp10 = 331 - offsetX;
 			int wbp10 = 13;
@@ -1919,7 +1919,7 @@ public class SalvaPDFBolzano {
 					.setVerticalAlignment(VerticalAlignment.MIDDLE);
 			p1Canvas.add(p1P);
 			p1Canvas.close();
-	
+
 			// Cod. Fiscale Ente Creditore String
 			int wbp11 = 115;
 			Rectangle cfEnteCreditoreStringRectangle2 = new Rectangle(xbp8, ybp9, wbp11, hbp0);
@@ -1927,7 +1927,7 @@ public class SalvaPDFBolzano {
 			cfEnteCreditoreStringCanvas2.add(cfEnteCreditoreStringP);
 			cfEnteCreditoreStringCanvas2.close();
 		}
-	
+
 		boolean bfooter = false;
 		if(bfooter) {
 			//Footer Border
@@ -1936,7 +1936,7 @@ public class SalvaPDFBolzano {
 			Canvas footerBorderCanvas = new Canvas(pdfCanvas, footerBorderRectangle);
 			footerBorderCanvas.close();
 		}
-		
+
 	}
 
 	private static void paginaDueBollettini(PdfPage pageTarget, LeggoAsset asset, Documento documento, PdfDocument pdf, int bollettinoDiPartenza) {
@@ -1960,30 +1960,30 @@ public class SalvaPDFBolzano {
 
 	private static String mettiVirgolaEPuntiAllImportoInCent(String importoSenzaVirgola)
 	{
-		
+
 		BigDecimal bd = new BigDecimal(importoSenzaVirgola).divide(new BigDecimal("100"));
 		String importoConVirgola = formatDecimalNumber(bd);
 		return importoConVirgola;
 	}
-	
+
 	public static String formatDecimalNumber(BigDecimal bdValue)
 	{
 		DecimalFormat dcFormat = getDecimalFormat();
 		bdValue = bdValue.setScale(2, BigDecimal.ROUND_HALF_UP);
-		
+
 		return dcFormat.format(bdValue);
 	}
-	
+
 	public static DecimalFormat getDecimalFormat()
 	{
-		DecimalFormatSymbols symbols = new DecimalFormatSymbols(); 
+		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
 		symbols.setDecimalSeparator(',');
 		symbols.setGroupingSeparator('.');
 
 		DecimalFormat dcFormat = new DecimalFormat("###,##0.00", symbols);
 		return dcFormat;
 	}
-	
+
 	public static String formatNumAvviso(String numAvviso)
 	{
 		if(numAvviso.length() == 18) {
@@ -1995,14 +1995,14 @@ public class SalvaPDFBolzano {
 			}
 			String codAutFormattato = formattatore.toString();
 			if(codAutFormattato.charAt(codAutFormattato.length()-1) == separatore) codAutFormattato = codAutFormattato.substring(0, codAutFormattato.length()-1);
-	
+
 			return codAutFormattato;
 		}
 		return numAvviso;
 	}
-	
+
 	/*
-	public static String truncDesc(String desc, int maxDesc) 
+	public static String truncDesc(String desc, int maxDesc)
 	{
 		String ret = desc;
 		if(desc.length() > maxDesc) {

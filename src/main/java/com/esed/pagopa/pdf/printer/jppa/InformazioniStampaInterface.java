@@ -1,5 +1,6 @@
 package com.esed.pagopa.pdf.printer.jppa;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.List;
 
@@ -127,7 +128,7 @@ public interface InformazioniStampaInterface {
 		//posDeb.setCausaleDebitoriaDe("");
 		posDeb.setCausaleDebitoria(doc.CausaleDocumento);
 	}
-		posDeb.setImporto(Float.valueOf(doc.ImportoDocumento)/100);
+		posDeb.setImporto(new BigDecimal(0));
 		if(doc.DatiBollettino.get(0).AutorizCcp==null) {
 			System.out.println("Numero documento NULL PosDebitoria");
 			System.out.println("doc.DatiBollettino.get(0).AutorizCcp = " + doc.DatiBollettino.get(0).AutorizCcp);
@@ -183,10 +184,8 @@ public interface InformazioniStampaInterface {
 	
 	/**
 	 * Bolzano999
-	 * @param boll999
 	 * @param flusso
 	 * @param doc
-	 * @param logo64
 	 * @param cutecute
 	 * @return
 	 */
